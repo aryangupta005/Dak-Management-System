@@ -1,13 +1,22 @@
 /*Backgrounds*/
-.login-bg{background-image:url(../image/login_bg.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
-.welcome-bg{background-image:url(../image/bgg20.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
-.initiate-bg{background-image:url(../image/bgg61.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
-.draft-bg{background-image:url(../image/bgg181.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
-.inbox-bg{background-image:url(../image/bgg151.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
-.outbox-bg{background-image:url(../image/bgg21.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
-.track-bg{background-image:url(../image/bg11.jpeg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
-.view-bg{background-image:url(../image/bggg2.png); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
-.close-bg{background-image:url(../image/bgg81.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
+.login-bg{
+    background-image:url(../image/login_bg.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
+.welcome-bg{
+    background-image:url(../image/bgg20.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
+.initiate-bg{
+    background-image:url(../image/bgg61.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
+.draft-bg{
+    background-image:url(../image/bgg181.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover}
+.inbox-bg{
+    background-image:url(../image/bgg151.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover}
+.outbox-bg{
+    background-image:url(../image/bgg21.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover}
+.track-bg{
+    background-image:url(../image/bg11.jpeg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
+.view-bg{
+    background-image:url(../image/bggg2.png); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
+.close-bg{
+    background-image:url(../image/bgg81.jpg); background-repeat:no-repeat; -webkit-backgroundsize:cover; -moz-background-size:cover; -0-background-size:cover; background-size:cover;}
 .header-bg-dark{background-color:#343a40;}
 body{ margin:0;}
 /*Footer*/
