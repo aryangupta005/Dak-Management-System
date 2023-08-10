@@ -130,11 +130,11 @@ Search by reply(YES/NO):
  </tr>-->
 </thead>
 <tbody id="myTable">
-<?php $sql="SELECT file_track.*, files.*, initr.name as initiatorname, e_group.g_name, desig.name as designame,
+<?php $sql="SELECT file_track.*, daks.*, initr.name as initiatorname, e_group.g_name, desig.name as designame,
 project.proj_name, sendr.name as sender_name
-FROM ( ( ( ( ( ( file_track left JOIN files on file_track.f_id = files.f_id ) left JOIN employee as initr ON files.e_id = initr.e_id ) left JOIN e_group ON initr.group_id = e_group.id ) left JOIN desig ON initr.desig_id = desig.id ) left JOIN project ON
-files.proj_id = project.id ) left JOIN employee as sendr ON file_track.sender_id = sendr.e_id )
-where file_track.receiver_id = ".$_SESSION['userid']." and file_track.ft_action = 0 and files.f_status = 1 ORDER BY
+FROM ( ( ( ( ( ( file_track left JOIN daks on file_track.f_id = daks.dak_id ) left JOIN employee as initr ON daks.e_id = initr.e_id ) left JOIN e_group ON initr.group_id = e_group.id ) left JOIN desig ON initr.desig_id = desig.id ) left JOIN project ON
+daks.proj_id = project.id ) left JOIN employee as sendr ON file_track.sender_id = sendr.e_id )
+where file_track.receiver_id = ".$_SESSION['userid']." and file_track.ft_action = 0 and daks.f_status = 1 ORDER BY
 file_track.sender_timestamp DESC";
 $result = mysqli_query($conn, $sql);
 $i=1;
@@ -142,19 +142,19 @@ while ($row = mysqli_fetch_array($result)) {
 ?>
 <tr>
  <td align="center"> <?php //echo "$i" ;?></td>
- <td><?php echo date('d-m-Y h:i A', strtotime($row["sender_timestamp"])); ?></td>
+ <td><?php echo $row["sender"]; ?></td>
  <td><?php echo $row["category"]; ?></td> <!-- siddharth -->
- <td><?php echo $row["letter_mode"]; ?></td> <!-- siddharth -->
- <td><?php echo $row["letter_date"]; ?></td> <!-- siddharth -->
- <td><?php echo $row["letter_subject"]; ?></td> <!-- siddharth -->
- <td><?php echo $row["uploaded_file_name"]; ?></td> <!-- siddharth --> <td><?php echo $row["sender_name"]; ?></td> <!-- siddharth -->
- <td><?php echo $row ["letter_marked_to"]; ?></td> <!-- siddharth -->
+ <td><?php echo $row["dak_id"]; ?></td> <!-- siddharth -->
+ <td><?php echo $row["org_id"]; ?></td> <!-- siddharth -->
+ <td><?php echo $row["description"]; ?></td> <!-- siddharth -->
+ <td><?php echo $row["file_name"]; ?></td> <!-- siddharth --> <td><?php echo $row["sender_name"]; ?></td> <!-- siddharth -->
+ <td><?php echo $row ["mark_date"]; ?></td> <!-- siddharth -->
  <td><?php echo $row ["remark_type"]; ?></td> <!-- siddharth -->
  <td><?php echo $row ["reply_type"]; ?></td> <!-- siddharth -->
- <td><?php echo $row [
+ <td><?php echo $row ["f_remark"]; ?></td>
 
- <td> <?php echo $row["proj_name"] ;?></td>
- <td><?php echo $row["file_name"]; ?></td>
+ <td><?php echo $row["mark"] ;?></td>
+ <td><?php echo $row["replied_action"]; ?></td>
  <td><?php echo $row["initiatorname"]. ',<br>' .$row["designame"]. ',<br>'
 .$row["g_name"] ; ?></td>
 
@@ -164,12 +164,12 @@ while ($row = mysqli_fetch_array($result)) {
 
 
  <?php if($row["ft_status"]==0) {?> <td align="center"> <button class="ini-button"
-id="myButton" onclick ="location.href='inbox.php?ftid=<?php echo $row['ft_id']."&fileid=".$row['f_id'];?>'"> ACK
+id="myButton" onclick ="location.href='inbox.php?ftid=<?php echo $row['ft_id']."&fileid=".$row['dak_id'];?>'"> ACK
 </button> </td> <?php } else { echo '<td>'.date('d-m-Y h:i A', strtotime($row["receiver_timestamp"])).'</td>'; }?>
 
  <?php if($row["ft_status"]==0) { echo '<td> Not Acknowledged </td>'; } else { ?> <td
 align="center"> <button class="ini-button" id="myButton" onclick ="location.href='view.php?ftid=<?php echo
-$row['ft_id']."&fileid=".$row['f_id']."&page=inbox";?>'"> VIEW </button> </td> <?php } ?>
+$row['ft_id']."&fileid=".$row['dak_id']."&page=inbox";?>'"> VIEW </button> </td> <?php } ?>
 </tr>
 <?php
 $i++;

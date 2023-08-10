@@ -48,11 +48,11 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin']!=true){
  </tr>
 </thead>
 <tbody id="myTable">
-<?php $sql="SELECT file_track.*, files.*, initr.name as initiatorname, e_group.g_name, desig.name as designame,
-project.proj_name, receiver.name as receiver_name FROM ( ( ( ( ( ( file_track left JOIN files on file_track.f_id = files.f_id ) left JOIN employee as initr ON files.e_id = initr.e_id ) left JOIN e_group ON initr.group_id = e_group.id ) left JOIN desig
-ON initr.desig_id = desig.id ) left JOIN project ON files.proj_id = project.id ) left JOIN employee as receiver ON
+<?php $sql="SELECT file_track.*, daks.*, initr.name as initiatorname, e_group.g_name, desig.name as designame,
+project.proj_name, receiver.name as receiver_name FROM ( ( ( ( ( ( file_track left JOIN daks on file_track.f_id = daks.dak_id ) left JOIN employee as initr ON daks.e_id = initr.e_id ) left JOIN e_group ON initr.group_id = e_group.id ) left JOIN desig
+ON initr.desig_id = desig.id ) left JOIN project ON daks.proj_id = project.id ) left JOIN employee as receiver ON
 file_track.receiver_id = receiver.e_id )
-where file_track.sender_id = ".$_SESSION['userid']." and files.f_status = 1 order by file_track.sender_timestamp DESC";$result = mysqli_query($conn, $sql);
+where file_track.sender_id = ".$_SESSION['userid']." and daks.f_status = 1 order by file_track.sender_timestamp DESC";$result = mysqli_query($conn, $sql);
 $i=1;
  while($row = mysqli_fetch_array($result)) {
 ?>
@@ -69,7 +69,7 @@ $i=1;
  <td><?php echo $row["docket_no"];?></td>
  <td><?php echo date('d-m-Y h:i A', strtotime($row["sender_timestamp"])) ; ?></td>
  <td align="center"> <button class="ini-button" id="myButton" onclick
-="location.href='view.php?ftid=<?php echo $row['ft_id']."&fileid=".$row['f_id']."&page=outbox";?>'">VIEW</button></td>
+="location.href='view.php?ftid=<?php echo $row['ft_id']."&fileid=".$row['dak_id']."&page=outbox";?>'">VIEW</button></td>
  </tr>
  <?php $i++;
  } ?>

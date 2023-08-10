@@ -1,20 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.4
--- http://www.phpmyadmin.net
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 16, 2023 at 05:03 AM
--- Server version: 5.5.28-log
--- PHP Version: 5.4.9
+-- Host: 127.0.0.1
+-- Generation Time: Aug 10, 2023 at 08:15 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `fts`
@@ -26,12 +27,11 @@ SET time_zone = "+00:00";
 -- Table structure for table `bidding_mode`
 --
 
-CREATE TABLE IF NOT EXISTS `bidding_mode` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `bidding_mode` (
+  `id` int(6) NOT NULL,
   `bid_mode` varchar(500) DEFAULT NULL,
-  `portal_id` int(6) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `portal_id` int(6) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `bidding_mode`
@@ -55,19 +55,764 @@ INSERT INTO `bidding_mode` (`id`, `bid_mode`, `portal_id`) VALUES
 -- Table structure for table `category`
 --
 
-CREATE TABLE IF NOT EXISTS `category` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `cat_name` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+CREATE TABLE `category` (
+  `id` int(6) NOT NULL,
+  `cat_name` varchar(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`id`, `cat_name`) VALUES
-(1, 'PROJECT'),
-(2, 'BUILD UP');
+(1, 'MARKED'),
+(2, 'REPLIED');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `daks`
+--
+
+CREATE TABLE `daks` (
+  `sender` varchar(100) NOT NULL,
+  `dak_id` int(6) NOT NULL,
+  `e_id` int(6) DEFAULT NULL,
+  `file_name` varchar(500) DEFAULT NULL,
+  `docket_no` varchar(100) DEFAULT NULL,
+  `file_num` varchar(200) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
+  `quantity` int(20) DEFAULT NULL,
+  `total_cost` int(20) DEFAULT NULL,
+  `cat_id` int(6) DEFAULT NULL,
+  `org_id` varchar(400) NOT NULL,
+  `proj_id` int(6) DEFAULT NULL,
+  `port_id` int(6) DEFAULT NULL,
+  `bid_id` int(6) DEFAULT NULL,
+  `fin_id` int(6) DEFAULT NULL,
+  `f_remark` varchar(1024) DEFAULT NULL,
+  `f_status` int(1) NOT NULL DEFAULT 0,
+  `mark_to_ad` datetime DEFAULT NULL,
+  `reply_type` varchar(100) NOT NULL,
+  `replied_action` varchar(400) NOT NULL,
+  `mark_to_mmg` datetime DEFAULT NULL,
+  `is_created` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `daks`
+--
+
+INSERT INTO `daks` (`sender`, `dak_id`, `e_id`, `file_name`, `docket_no`, `file_num`, `description`, `quantity`, `total_cost`, `cat_id`, `org_id`, `proj_id`, `port_id`, `bid_id`, `fin_id`, `f_remark`, `f_status`, `mark_to_ad`, `reply_type`, `replied_action`, `mark_to_mmg`, `is_created`) VALUES
+('', 16, 248, 'Video Conferencing System', NULL, NULL, 'Two nos. of video conferencing setup for DRONA & Internet  Network', 2, 2905854, 2, '', 1, 1, 5, 1, 'Draft', 0, NULL, '', '', NULL, '2022-01-04 06:14:28'),
+('', 17, 79, 'CMC of UV-Vis Spectrophotometer (Model- LAMBDA -650S) For 3 years', 'EnSG/2021-2022/17', 'CFEES/22EVS041/BU/PAC/202/21-22', 'Under Build up', 1, 677340, 2, '', 1, 2, 1, 1, '', 1, '2022-01-04 14:38:48', '', '', NULL, '2022-01-04 09:05:18'),
+('', 18, 75, 'Powder X-ray Diffractometer', 'EnSG/2021-2022/18', 'CFEES/20EVS096/BU/OBM/DB/104/20-21', 'Powder X-Ray Diffractometer (XRD) will be used for phase identification of a powder crystalline material. It also provides information on unit cell dimension which is necessary for characterization in materials development. ', 1, 12324672, 2, '', 1, 2, 5, 1, 'File has to be processed for GTE as 20% local content was unavailable when Open Tender was floated. ', 1, '2022-01-04 15:31:35', '', '', NULL, '2022-01-04 09:58:00'),
+('', 19, 79, 'Procurement of Nanometer aerosol sampler', 'EnSG/2021-2022/19', NULL, 'Under project Capital\r\nERAF- ST/19-20/CFE-38', 1, 1514786, 1, '', 7, 2, 5, 1, 'follow up with firms for local content regarding   and TCEC to be held', 0, NULL, '', '', NULL, '2022-01-05 05:12:18'),
+('', 20, 196, 'Color Multifunctional Printer', 'QRS&IT/2021-2022/20', 'CFEES/22QAG002/BU/GEM/038/21-22 dt. 21-06-2021', 'Centralised procurement for Color MFP', 8, 2799360, 2, '', 1, 1, 5, 1, 'current status- bid opened on 30-11-21. no bid received', 1, '2022-01-05 10:45:03', '', '', NULL, '2022-01-05 05:14:32'),
+('', 21, 196, 'Black and White MFP', 'QRS&IT/2021-2022/21', 'CFEES/22QAG011/BU/GeM/071/21-22', 'Centralised Procurement of Black & White MFPs', 7, 2089521, 2, '', 1, 1, 5, 1, 'current status- bid opened on 16/12/21. no bid received', 1, '2022-01-05 10:48:38', '', '', NULL, '2022-01-05 05:18:22'),
+('', 22, 196, 'CAMC of IT Hardware Items', 'QRS&IT/2021-2022/22', 'CFEES/22QAG014/BU/GEM/129/21-22', 'CAMC of IT Hardware Items (Computer, Printer, UPS etc)', 1, 2744444, 2, '', 1, 1, 5, 1, 'for necessary action', 1, '2022-01-05 10:52:51', '', '', NULL, '2022-01-05 05:22:21'),
+('', 23, 80, 'Procurement of Foam Analyzer', 'FC&HB/2021-2022/23', 'CFEES/22FCP022/P/OT/066/21-22', 'File No.: CFEES/22FCP022/P/OT/066/21-22 dt 28/07/21\r\nBid No.: CFEES/22ATT028/FCP&HB/21-22/042 dated 22 Sep 2021', 1, 5453000, 1, '', 6, 2, 5, 1, 'At TCEC minutes preparation stage', 1, '2022-01-05 11:21:23', '', '', NULL, '2022-01-05 05:48:12'),
+('', 24, 80, 'Ethyl Alcohol (Ethanol) 500ml 99.9%', 'FC&HB/2021-2022/24', 'CFEES/22FCP026/P/GEM/070/21-22', 'File No. CFEES/22FCP026/P/GeM/070/21-22\r\nBid No.: GEM/2021/B/1678611 dated 29/11/2021', 200, 65000, 1, '', 6, 1, 5, 1, 'TCEC stage (CSB preparation)', 1, '2022-01-05 11:28:09', '', '', NULL, '2022-01-05 05:57:30'),
+('', 25, 80, 'Ultrasonic Cleaner', 'FC&HB/2021-2022/25', 'CFEES/2FCP128/P/GEM/231/20-21', 'File No. : CFEES/21FCP128/P/GeM/231/20-21 dated 15/03/2021\r\nBid No.: GEM/2021/B/1698829 dt 25/11/2021 (third time bidding)', 1, 126000, 1, '', 6, 1, 5, 1, 'TCEC (CSB preparation)', 1, '2022-01-05 11:32:57', '', '', NULL, '2022-01-05 06:02:39'),
+('', 26, 80, 'Toxicity Study of AFFF Sample', 'FC&HB/2021-2022/26', 'CFEES/22FCP081/SBM/P/214/21-22', '(from IITR, CSIR)', 4, 5900000, 1, '', 6, 2, 2, 1, 'DSC observations reply', 1, '2022-01-05 11:35:45', '', '', NULL, '2022-01-05 06:05:27'),
+('', 27, 60, 'Refilling of Hydrogen and Zero Air Gas', 'FC&HB/2021-2022/27', 'CFEES/22FCP036/P/GEM/268/21-22', '', 42, 13020, 1, '', 6, 1, 5, 1, 'TCEC Stage', 1, '2022-01-05 12:02:36', '', '', NULL, '2022-01-05 06:31:24'),
+('', 28, 60, 'Emulsion Stability Analyzer', 'FC&HB/2021-2022/28', 'CFEES/20FCP151/P/GT/DB/010/20-21', 'Demand No. 20FCP151, Demand Date: 25 Feb 2020, File No. CFEES/20FCP151/P/Global/DB/010/20-21', 1, 3999996, 1, '', 6, 2, 5, 1, 'TCEC Stage', 1, '2022-01-05 12:34:49', '', '', NULL, '2022-01-05 07:03:28'),
+('', 29, 251, 'Purchase of Glacial Acetic Acid, Purity 99% or above- 6 Litres Through GeM', 'EnSG/2021-2022/29', 'CFEES/22EVS030/BU/GEM/211/21-22', '', 6, 4104, 2, '', 1, 1, 8, 1, '', 1, '2022-01-05 14:55:04', '', '', NULL, '2022-01-05 09:23:30'),
+('', 30, 79, 'Procurement of aluminium and boron nanopowder', 'EnSG/2021-2022/30', 'CFEES/22EVS006/P/LT/52/21-22', '', 1, 924000, 1, '', 7, 2, 5, 1, 'for CSB draft preparing', 1, '2022-01-20 12:19:22', '', '', NULL, '2022-01-05 09:59:23'),
+('', 31, 40, '24-Port Managed Network Switch', 'QRS&IT/2021-2022/31', 'CFEES/22QAG021/BU/GEM/141/21-22', 'Procurement of 4 Nos. of managed 24 port switch for DRONA, under build-up.', 4, 700000, 2, '', 1, 1, 5, 1, '', 1, '2022-01-05 16:30:59', '', '', NULL, '2022-01-05 10:59:40'),
+('', 32, 248, 'Video Conferencing System', 'QRS&IT/2021-2022/32', 'CFEES/22QAG004/GeM/117/21-22', '', 1, 2905854, 2, '', 1, 1, 5, 1, '', 1, '2022-01-05 16:50:32', '', '', NULL, '2022-01-05 11:14:55'),
+('', 33, 248, 'All in one computer', 'QRS&IT/2021-2022/33', 'CFEES/21QAG036/BU/GEM/227/20-21', '', 85, 9133250, 2, '', 1, 1, 5, 1, '', 1, '2022-01-05 16:50:08', '', '', NULL, '2022-01-05 11:16:53'),
+('', 34, 248, 'UPS BATTERY(BUY BACK)', 'QRS&IT/2021-2022/34', 'CFEES/22QAG005/BU/GeM/182/21-22  dt. 07-01-2022', '', 32, 162944, 2, '', 1, 1, 5, 1, '', 1, '2022-01-05 16:49:57', '', '', NULL, '2022-01-05 11:18:54'),
+('', 36, 79, 'Procurement of Minimum Ignition Energy (MIE) Apparatus with fume hood', 'EnSG/2021-2022/36', 'CFEES/21EVS021/P/OT/090/21-22', '', 1, 13599996, 1, '', 7, 2, 1, 1, '', 1, '2022-01-06 11:10:43', '', '', NULL, '2022-01-06 05:26:05'),
+('', 37, 79, 'Procurement of Automated Colony Counter', 'EnSG/2021-2022/37', 'CFEES/22EVS027/P/GEM/279/21-22', '', 1, 407096, 1, '', 7, 1, 8, 1, '', 1, '2022-01-06 11:10:31', '', '', NULL, '2022-01-06 05:28:10'),
+('', 38, 79, 'Procurement of Scanning Mobility Particle Sizer Spectrometer', 'EnSG/2021-2022/38', 'CFEES/21EVS002/P/OBM/DB/180/2021', '', 1, 9136223, 1, '', 7, 2, 5, 1, '', 1, '2022-01-06 11:10:17', '', '', NULL, '2022-01-06 05:32:09'),
+('', 39, 79, 'Procurement of Bench Top Incinerator with Gas Detection', 'EnSG/2021-2022/39', 'CFEES/21EVS005/P/DB/LBM/138/2021', '', 1, 1308193, 1, '', 7, 1, 6, 1, '', 1, '2022-01-06 11:10:06', '', '', NULL, '2022-01-06 05:35:50'),
+('', 40, 60, 'Diaphragm Vacuum Pump with digital Vacuum Controller', 'FC&HB/2021-2022/40', 'CFEES/21FCP094/P/OT/217/2021', 'Demand No. 21FCP094, Demand Date: 04 Jan 2021, File No. CFEES/21FCP094/P/OT/217/20-21', 2, 890000, 1, '', 6, 2, 5, 1, '', 1, '2022-01-06 11:17:10', '', '', NULL, '2022-01-06 05:45:03'),
+('', 41, 79, 'Out Sourcing of Services for Unskilled Man power (03 Nos.) for the Project ERAF', 'EnSG/2021-2022/41', NULL, '', 2, 1628686, 1, '', 7, 2, 5, 1, '', 1, '2022-01-06 15:32:12', '', '', NULL, '2022-01-06 05:53:45'),
+('', 42, 77, 'AMC Simultaneous Thermogravimetric Analyser(TG/DTA)', NULL, NULL, 'Two years AMC for Perkin Elmer model Diamond TG-DTA system ,Vendor: M/s Perkin Elemer (India) Pvt Ltd Delhi', 1, 199716, 2, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-01-06 05:55:22'),
+('', 43, 77, 'AMC Simultaneous Thermogravimetric Analyser(TG/DTA)', 'PC&M/2021-2022/43', 'CFEES/22PCM011/BU/PAC/260/21-22', 'Two year AMC for perkin Elemer Diamond TG-DTA', 1, 199716, 2, '', 1, 1, 1, 1, '', 1, '2022-01-06 11:33:27', '', '', NULL, '2022-01-06 05:57:00'),
+('', 45, 77, 'AMC for Rheometer', 'PC&M/2021-2022/45', 'CFEES/22/PCM017/BU/PAC/138/21-22', '', 1, 327096, 2, '', 1, 2, 1, 1, '', 1, '2022-01-06 11:50:41', '', '', NULL, '2022-01-06 06:19:38'),
+('', 46, 97, 'Manual Aerosol Fire Extinguisher, DSPA make, 300 g AFC (2 Nos.)', 'FC&HB/2021-2022/46', 'CFEES/21FCP087/P/PAC/067/20-21', 'CFEES/21FCHB/P/PAC/067/20-21', 2, 78000, 1, '', 8, 1, 1, 1, 'TCEC Stage ', 1, '2022-01-06 12:04:02', '', '', NULL, '2022-01-06 06:21:09'),
+('', 47, 238, 'Models 1. HPWMFSS ( Qty 2)   & MFFS (Qty 2 )', 'FSEG/2021-2022/47', NULL, '', 4, 354000, 2, '', 1, 3, 8, 1, '', 1, '2022-01-06 17:23:06', '', '', NULL, '2022-01-06 06:26:34'),
+('', 48, 97, 'Hot air Oven ', 'FC&HB/2021-2022/48', 'CFEES/21FCP089/P/GEM/170/2020', 'Demand No. 21FCP089 dated 17th Dec. 2020\r\nFile No. CFEES/21FCP089/P/GeM/170 dated 31.12.2020\r\n', 1, 355124, 1, '', 8, 1, 5, 1, 'At TCEC Stage ', 2, '2022-01-06 12:11:11', '', '', NULL, '2022-01-06 06:40:01'),
+('', 49, 72, 'Acid gas Sampling System ', 'FC&HB/2021-2022/49', 'CFEES/22FCP023/BU/LPC/065', 'Demand No. 22FCP023 dated 26th Jul 2021\r\nFile No. CFEES/22FCP023/BU/LPC/065/21-22 dated 28/07/21 ', 1, 198238, 1, '', 1, 3, 9, 1, 'Draft S.O. vetting done and file sent to Head MMG for further necessary action', 1, '2022-01-06 12:30:03', '', '', NULL, '2022-01-06 06:53:15'),
+('', 50, 79, 'AMC of High Temperature and High Pressure Sustaining Reactor', 'EnSG/2021-2022/50', 'CFEES/21EVS015/B/PAC/20-21', '', 0, 206500, 2, '', 1, 2, 1, 1, 'vetting of AMC Contract ', 1, '2022-01-06 15:29:48', '', '', NULL, '2022-01-06 06:53:43'),
+('', 51, 79, 'Spare parts of High Temperature and High Pressure Sustaining Reactor', 'EnSG/2021-2022/51', 'CFEES/21EVS008/B/PAC/225/20-21 08.03.21', '', 7, 199788, 2, '', 1, 2, 2, 1, 'SO placed', 1, '2022-01-06 15:33:47', '', '', NULL, '2022-01-06 06:56:41'),
+('', 52, 79, 'AMC of Zeta Particle Size Analyzer', 'EnSG/2021-2022/52', 'CFEES/21EVS023/P/013/21-22', '', 3, 148949, 2, '', 1, 2, 3, 1, '', 1, '2022-01-06 15:30:28', '', '', NULL, '2022-01-06 06:58:10'),
+('', 53, 72, 'Thermal Imager ', 'FC&HB/2021-2022/53', NULL, 'Demand No. 21FCP079 dated 24th Nov. 2020\r\nFile No. CFEES/21FCP079/P/GEM/157/20-21 dated 09/12/20', 1, 499999, 1, '', 8, 1, 5, 1, 'Draft TCEC minutes and CSB prepared. File Sent for further necessary action. ', 1, '2022-01-06 12:31:26', '', '', NULL, '2022-01-06 06:58:42'),
+('', 54, 79, 'Reaction Vessel for Fire suppressing Gel', 'EnSG/2021-2022/54', 'CFEES/21EVS027/BU/LPC/236/20-21', '', 1, 225750, 2, '', 1, 3, 9, 1, 'Pre inspection \r\nDP 17 Jan, 2022', 1, '2022-01-06 15:36:29', '', '', NULL, '2022-01-06 07:02:41'),
+('', 55, 79, 'CARS Contract :', 'EnSG/2021-2022/55', NULL, '', 2, 5490000, 1, '', 7, 5, 2, 1, '3rd Installment from July to October is due', 1, '2022-01-06 15:33:20', '', '', NULL, '2022-01-06 07:06:45'),
+('', 56, 79, 'Procurement of Spares of Ultra sonic bath with cooling', 'EnSG/2021-2022/56', NULL, '', 4, 242808, 2, '', 1, 2, 3, 1, '', 1, '2022-01-06 15:35:19', '', '', NULL, '2022-01-06 07:11:12'),
+('', 57, 72, 'Testing of Fire Detection and Suppression System as per AIS 135:2016 (Total 10 tests)', 'FC&HB/2021-2022/57', 'CFEES/22FCP030/BU/ST/91/21-22', 'Demand No. 22FCP030 dated 19th Aug 2021\r\nFile No. CFEES/22FCP030/BU/ST/91/21-22 dated 01/09/21', 1, 666748, 2, '', 1, 2, 2, 2, 'File sent to Head MMG for processing the case for advance payment', 1, '2022-01-06 12:53:23', '', '', NULL, '2022-01-06 07:23:06'),
+('', 58, 72, 'Gyratory Sieve Shaker ', 'FC&HB/2021-2022/58', 'CFEES/21FCP014/P/GEM/078/20-21', 'Demand No. 21FCP014 dated 13th Jul 2020\r\nFile No. CFEES/21FCP014/P/GEM/078/20-21 ', 1, 80000, 1, '', 8, 1, 5, 1, 'TCEC Minutes duly approved by Chairman TCEC. File sent to Head MMG for further necessary action. ', 1, '2022-01-06 14:09:05', '', '', NULL, '2022-01-06 08:38:31'),
+('', 59, 28, 'CAMC for Gel Permeation Chromatography system ', 'PC&M/2021-2022/59', 'CFEES/22PCM014/BU/ST/136/21-22', '', 1, 1451400, 2, '', 1, 2, 2, 1, '', 1, '2022-01-06 15:18:10', '', '', NULL, '2022-01-06 09:47:47'),
+('', 60, 28, 'Humidity Test Chamber', 'PC&M/2021-2022/60', 'CFEES/21PCM025/BU/GEM/220/20-21', '', 1, 118999, 2, '', 1, 1, 5, 1, '', 2, '2022-01-06 15:20:02', '', '', NULL, '2022-01-06 09:49:48'),
+('', 61, 79, 'Procurement of Desktop Computer', 'EnSG/2021-2022/61', 'CFEES/22EVS024/P/GeM/157/21-22', '', 4, 363820, 1, '', 7, 1, 8, 1, '', 1, '2022-01-06 15:36:11', '', '', NULL, '2022-01-06 09:58:39'),
+('', 62, 79, 'Procurement of water for Chromatography', NULL, NULL, '', 40, 22629, 1, '', 7, 1, 7, 1, '', 0, NULL, '', '', NULL, '2022-01-06 10:17:20'),
+('', 63, 73, 'AMC of CHNS-O, Elemental Analyzer ', 'EnSG/2021-2022/63', 'CFEES/22EVS017/BU/PAC/21-22 dt 30-9-21', '', 1, 165097, 2, '', 1, 2, 1, 1, '', 1, '2022-01-06 16:17:41', '', '', NULL, '2022-01-06 10:45:11'),
+('', 64, 84, 'Development Contract for Fire Detection and Control System for Aircraft', 'FSEG/2021-2022/64', 'CFEES/21FAS006/P/OT/195/20-21', '', 1, 18600000, 1, '', 10, 2, 5, 1, '', 1, '2022-01-06 17:32:00', '', '', NULL, '2022-01-06 11:56:36'),
+('', 65, 84, 'Development Contract for Fire Extinguishing System for Aircraft', 'FSEG/2021-2022/65', 'CFEES/21FAS005/P/OBM/206/20-21', '', 1, 19600000, 1, '', 10, 2, 5, 1, '', 1, '2022-01-06 17:32:12', '', '', NULL, '2022-01-06 11:57:53'),
+('', 66, 84, 'Mixed Signal Digital Storage Oscilloscope', 'FSEG/2021-2022/66', 'CFEES/22FAS005/P/GEM/075/21-22', '', 1, 1500000, 1, '', 10, 1, 8, 1, '', 1, '2022-01-06 17:32:22', '', '', NULL, '2022-01-06 12:00:11'),
+('', 67, 84, 'Workstation', 'FSEG/2021-2022/67', 'CFEES/21FAS008/P/GEM/221/20-21', '', 1, 1500000, 1, '', 10, 1, 5, 1, '', 2, '2022-01-06 17:32:37', '', '', NULL, '2022-01-06 12:01:00'),
+('', 68, 84, 'Thermal Response Testing System for Linear Thermal Detector', 'FSEG/2021-2022/68', 'CFEES/22FAS008/P/LPC/173/21-22', '', 1, 144900, 1, '', 10, 3, 9, 1, '', 1, '2022-01-06 17:34:57', '', '', NULL, '2022-01-06 12:04:32'),
+('', 69, 82, 'Principal Consultancy for Demilitarisation Plant of Capacity 300 MT per annum', 'SARC/2021-2022/69', NULL, 'File No. CFEES/22SRC001/P/Open/003/21-22OT', 1, 43660000, 1, '', 9, 2, 5, 1, 'With User for CNC Minutes', 1, '2022-01-06 17:42:15', '', '', NULL, '2022-01-06 12:10:19'),
+('', 70, 82, 'Development Qualification and Installation of Demilitarisation Plant of Capacity 300 MT per annum', 'SARC/2021-2022/70', 'CFEES/21SRC005/P/OBM/TSB/143/20-21', '', 1, 1732100000, 1, '', 9, 2, 5, 1, 'With user for TCEC', 1, '2022-01-06 17:44:06', '', '', NULL, '2022-01-06 12:13:42'),
+('', 71, 244, 'Development of Advanced Instant Fire Detection and Suppression System(AIFDSS) for Future Armoured Fighting Vehicles', 'FSEG/2021-2022/71', 'CFEES/22FAS001/P/ST/047/21-22', '', 1, 38705772, 1, '', 11, 2, 2, 1, '', 1, '2022-01-07 10:00:35', '', '', NULL, '2022-01-07 04:28:30'),
+('', 72, 244, 'Development of Advanced IFDSS for FAFVs', NULL, NULL, '', 1, 38705772, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-01-07 04:29:40'),
+('', 73, 192, 'Job Contract for Solid Waste Recycling program at CFEES', 'QRS&IT/2021-2022/73', 'CFEES/22QAG029/B/GeM/184/21-22', '', 12, 495600, 2, '', 1, 1, 5, 1, 'Submitted for further necessary action ', 1, '2022-01-07 10:03:46', '', '', NULL, '2022-01-07 04:33:18'),
+('', 74, 79, 'Procurement of water for Chromatography', NULL, NULL, '', 1, 22640, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-01-07 04:59:59'),
+('', 75, 79, 'Procurement of water for Chromatography', NULL, NULL, '', 1, 22640, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-01-07 05:00:59'),
+('', 76, 124, 'Hiring of Wet Canteen Services at CFEES', 'MMG/2021-2022/76', 'CFEES/22MMG008/Misc/GeM/180/21-22', 'Demand initiated iunder Misc budget', 1, 2910145, 2, '', 1, 1, 5, 1, 'Put up to IFA office for Admin Approval by Sr Dy IFA(R&D)', 1, '2022-01-07 10:33:48', '', '', NULL, '2022-01-07 05:00:59'),
+('', 77, 79, 'Procurement of water for Chromatography', 'EnSG/2021-2022/77', 'CFEES/22EVS038/P?GeM/197/21-22', '', 1, 22640, 1, '', 7, 1, 7, 1, '', 1, '2022-01-07 10:36:26', '', '', NULL, '2022-01-07 05:05:15'),
+('', 78, 124, 'Hiring of Data Entry Operator', 'MMG/2021-2022/78', 'CFEES/22MMG007/Misc/GeM/181/21-22', 'Hiring of 21Nos. DEO \r\n Demand intitated under Misc. Budget ', 1, 7392926, 2, '', 1, 1, 5, 1, 'Put up to IFA office for Admin approval by Sr.Dy IFA(R&D)', 1, '2022-01-07 10:39:44', '', '', NULL, '2022-01-07 05:08:58'),
+('', 79, 28, 'THERMAL PROTECTIVE PERFORMANCE TESTER  WITH ACCESSORIES', 'PC&M/2021-2022/79', 'CFEES/22PCM002/GC/GEM/50/21-22', '', 1, 3156500, 2, '', 1, 2, 5, 1, '', 1, '2022-01-07 10:58:17', '', '', NULL, '2022-01-07 05:24:52'),
+('', 80, 118, 'Vibrometer', 'MS&ESRG/2021-2022/80', 'CFEES/21ERG030/P/GEM/240/20-21', 'Procurement File', 10, 4600000, 1, '', 4, 2, 2, 1, 'File for TCEC signature\r\n', 1, '2022-01-07 11:31:17', '', '', NULL, '2022-01-07 05:28:18'),
+('', 81, 118, 'Digital Transreciver', 'MS&ESRG/2021-2022/81', 'CFEES/21ERG007/P/DB/PAC/093/20-21', 'Pruchase of Digital transreciver system', 1, 1300000, 1, '', 4, 1, 5, 1, 'SO placed part supply received', 1, '2022-01-07 11:08:28', '', '', NULL, '2022-01-07 05:37:56'),
+('', 89, 217, 'Wiper', 'WORKS/2021-2022/89', 'CFEES/22WRK016/MISC/GEM/188/21-22', '', 40, 5560, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:23:00', '', '', NULL, '2022-01-10 10:39:02'),
+('', 90, 217, 'Phool Broom ', 'WORKS/2021-2022/90', 'CFEES/22WRK014/MISC/GEM/190/21-22', '', 100, 10900, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:11:34', '', '', NULL, '2022-01-10 10:40:16'),
+('', 83, 118, 'Fabrication of Mobile command control vehicle', 'MS&ESRG/2021-2022/83', 'CFEES/21ERG025/P/OBM/DB/179/20-21', 'File at TCEC stage', 1, 4900000, 1, '', 5, 1, 5, 1, 'File at User End for CNC approval', 1, '2022-01-07 11:31:04', '', '', NULL, '2022-01-07 05:59:12'),
+('', 84, 118, 'Force sensor', 'MS&ESRG/2021-2022/84', 'CFEES/21ERG009/P/SBM/161/20-21', 'Procurment file ', 5, 1419000, 1, '', 5, 2, 2, 1, 'SO placed ', 1, '2022-01-07 11:42:59', '', '', NULL, '2022-01-07 06:12:35'),
+('', 85, 24, 'Accelerometer', 'MS&ESRG/2021-2022/85', NULL, 'Procurement file', 100, 7553000, 1, '', 4, 2, 6, 1, 'TCEC stage', 1, '2022-01-07 12:31:30', '', '', NULL, '2022-01-07 07:01:10'),
+('', 86, 96, '5 GHz Wireless video Transmitter and 5 GHz Wireless video receiver with sector Antenna 90/120 with mounting kit.', 'MS&ESRG/2021-2022/86', 'CFEES/22ERG021/P/LPC/110/21-22', 'CFEES/22ERG021/P/LPC/110/21-22 DT 22/09/21', 4, 132750, 1, '', 4, 1, 9, 1, 'Supply Order vetted', 1, '2022-01-07 15:48:09', '', '', NULL, '2022-01-07 10:16:45'),
+('', 87, 96, 'Network Video Recorder', 'MS&ESRG/2021-2022/87', 'CFEES/22ERG028/BU/GEM/172/21-22 dated 14/12/2021', 'CFEES/22ERG028/BU/GEM/172/21-22  dt 14 DEC 2021', 1, 16123, 2, '', 1, 1, 8, 1, 'Inspection done ', 1, '2022-01-07 15:55:59', '', '', NULL, '2022-01-07 10:24:42'),
+('', 88, 200, 'Charge Amplifier for dust explosion chamber', 'EnSG/2021-2022/88', 'CFEES/21FCP026/BU/PAC/098/20-21', '', 1, 190050, 2, '', 1, 2, 1, 1, 'The file is being returned after completion of inspection. ', 1, '2022-01-07 17:17:17', '', '', NULL, '2022-01-07 11:46:33'),
+('', 91, 217, 'Coconut Broom', 'WORKS/2021-2022/91', 'CFEES/22WRK015/MISC/GEM/189/21-22', '', 100, 12000, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:22:33', '', '', NULL, '2022-01-10 10:42:44'),
+('', 92, 217, 'Duster Cotton', 'WORKS/2021-2022/92', 'CFEES/22WRK013/MISC/GEM/186/21-22', '', 100, 5000, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:21:44', '', '', NULL, '2022-01-10 10:44:33'),
+('', 93, 217, 'Colin Spray', 'WORKS/2021-2022/93', 'CFEES/22WRK019/MISC/GEM/191/21-22 12.1.22', '', 100, 6000, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:21:28', '', '', NULL, '2022-01-10 10:45:15'),
+('', 94, 217, 'Duster Yellow', 'WORKS/2021-2022/94', 'CFEES/22WRK013/MISC/GEM/186/21-22', '', 100, 6600, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:21:02', '', '', NULL, '2022-01-10 10:45:56'),
+('', 95, 217, 'Cobweb Brush', 'WORKS/2021-2022/95', 'CFEES/22WRK018/MISC/GEM/193/21-22', '', 30, 3360, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:20:38', '', '', NULL, '2022-01-10 10:46:30'),
+('', 96, 217, 'Detergent Surfacta', 'WORKS/2021-2022/96', 'CFEES/22WRK020/MISC/GEM/192/21-22', '', 60, 3000, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:19:59', '', '', NULL, '2022-01-10 10:47:46'),
+('', 97, 217, 'Toilet Brush', 'WORKS/2021-2022/97', 'CFEES/22WRK012/MIsc/GeM/187/21-22', '', 50, 6250, 2, '', 1, 1, 7, 1, '', 1, '2022-01-10 16:19:36', '', '', NULL, '2022-01-10 10:48:27'),
+('', 98, 71, 'Five Year CMC (2021-2026) for LC-MS/MS Instrument', 'QRS&IT/2021-2022/98', 'CFEES/22QAG028/BU/ST/200/21-22', '', 1, 5041668, 2, '', 1, 2, 2, 1, '', 1, '2022-01-10 16:42:48', '', '', NULL, '2022-01-10 11:09:08'),
+('', 99, 73, 'Procurement of Double Distillation Water Unit', 'EnSG/2021-2022/99', 'CFEES/22EVS033/B/GEM/195/21-22 DATED 13/1/22', '', 1, 26500, 1, '', 7, 1, 7, 1, '', 1, '2022-01-11 11:54:02', '', '', NULL, '2022-01-11 06:22:49'),
+('', 100, 124, 'UPS 3 KVA', 'MMG/2021-2022/100', 'CFEES/22MMG007/BU/GeM/076/21-22', '', 1, 93000, 2, '', 1, 1, 8, 1, 'File Put up to Head MMG for after Inspection', 1, '2022-01-11 11:54:42', '', '', NULL, '2022-01-11 06:24:10'),
+('', 101, 200, 'Single Stage Pressure Regulator', 'EnSG/2021-2022/101', 'CFEES/22EVS040/BU/GEM/201/21-22', 'Case for GeM procurement ', 1, 28000, 2, '', 1, 1, 7, 1, 'This regulator of 20kg/cm2 output pressure is required for use in experiments of dust explosion chamber.', 1, '2022-01-11 16:08:06', '', '', NULL, '2022-01-11 10:21:30'),
+('', 102, 75, 'Xenon Weather Test Chamber', 'EnSG/2021-2022/102', 'CFEES/22EVS014/C/OT/111/21-22', 'During various R&D activities, the developed materials need to be tested for alteration in their physico-chemical properties and stability after exposure to environmental conditions of light, temperature and humidity. In laboratory these real time environmental conditions can be achieved using a Xenon Arc based Weather Test Chamber as it uses premium sunlight simulation (according to CIE85 Reference Sun), proper temperature & humidity control and spray system.', 1, 7704930, 2, '', 1, 2, 5, 1, '', 1, '2022-01-11 16:00:26', '', '', NULL, '2022-01-11 10:27:26'),
+('', 103, 39, 'Gas chromatography Syringe ', 'FC&HB/2021-2022/103', 'CFEES/22FCP069/P/GEM/198/21-22', 'Demand No. 22FCP069', 7, 19732, 1, '', 6, 1, 7, 1, '', 1, '2022-01-11 16:45:54', '', '', NULL, '2022-01-11 11:14:46'),
+('', 104, 250, 'Carbon Paper', 'MMG/2021-2022/104', 'CFEES/22MMG050/Misc/GeM/170/21-22 dt. 13-12-21', '', 40, 8800, 2, '', 1, 1, 7, 1, 'Put up for Head MMG for Inspection Committee ', 1, '2022-01-12 10:45:04', '', '', NULL, '2022-01-12 05:13:33'),
+('', 105, 24, 'Internet leased line to CFEES site, Borkhedi Nagpur', 'MS&ESRG/2021-2022/105', 'CFEES/22ERG49/BU/ST/199/21-22', 'File initiated on 03/12/2021', 1, 601800, 2, '', 1, 2, 2, 1, 'DSC held on 15 Dec 2021. DSC recommendation has been incorporated & sent to Head MMG  on 12 Jan 2022 for further necessary action.', 1, '2022-01-12 12:33:00', '', '', NULL, '2022-01-12 07:00:32'),
+('', 106, 82, 'Hiring of Skilled (02)/unskilled (02) manpower for the Project DEMIL', 'SARC/2021-2022/106', 'CFEES/22SRC005/P/GEM/179/21-22', '', 24, 2645000, 1, '', 9, 1, 5, 1, '', 1, '2022-01-12 14:38:02', '', '', NULL, '2022-01-12 09:03:16'),
+('', 107, 48, 'Linear Thermal Detector', 'FSEG/2021-2022/107', 'CFEES/22FAS010/BU/ST/242/21-22', '', 10, 283500, 2, '', 1, 2, 2, 1, '', 1, '2022-01-12 17:01:47', '', '', NULL, '2022-01-12 11:30:51'),
+('', 108, 79, 'Procurement of nanometer aerosole sampler ', 'EnSG/2021-2022/108', 'CFEES/21EVS024/P/07/193/20-21 03.02.21', '', 1, 1514786, 1, '', 7, 2, 5, 1, '', 1, '2022-01-12 17:22:51', '', '', NULL, '2022-01-12 11:52:34'),
+('', 109, 79, 'Procurement of single channel micropipette throgh gem', 'EnSG/2021-2022/109', 'CFEES/22EVS036/P/GeM/204/21-22', '', 1, 33795, 1, '', 7, 1, 1, 1, '', 1, '2022-01-13 10:30:30', '', '', NULL, '2022-01-13 04:59:57'),
+('', 110, 250, 'Glass Tumblers', 'MMG/2021-2022/110', 'CFEES/22MMG054/MISC/GEM/166/21-22', '', 400, 7797, 2, '', 1, 1, 7, 1, 'File put for Inspection ', 1, '2022-01-13 15:41:39', '', '', NULL, '2022-01-13 10:03:22'),
+('', 111, 72, 'Fire Detection and Actiation System', 'FC&HB/2021-2022/111', 'CFEES/22FCP034/P/OT/085/21-22 26.8.21', 'CFEES/22FCP034/P/OT/085/21-22', 1, 1850560, 1, '', 8, 2, 5, 1, 'Draft TCEC minutes (Re-tender)', 1, '2022-01-13 16:29:28', '', '', NULL, '2022-01-13 10:52:12'),
+('', 112, 72, 'Insulation tester', 'FC&HB/2021-2022/112', 'CFEES/21FCP124/P/GEM/224/20-21 08.03.21', 'CFEES/21FCP/24/P/GeM/224/20-21', 1, 70000, 1, '', 8, 3, 9, 1, '', 1, '2022-01-13 16:28:50', '', '', NULL, '2022-01-13 10:54:46'),
+('', 113, 72, 'Water quality nalyzer', 'FC&HB/2021-2022/113', 'CFEES/22FCP003/BU/GEM/004/21-22 12.04.21', 'CFEES/22FCP003/BU/Gem/004/21-22', 1, 294531, 1, '', 1, 3, 9, 1, '', 1, '2022-01-13 16:28:03', '', '', NULL, '2022-01-13 10:56:21'),
+('', 114, 250, 'Single Punch', 'MMG/2021-2022/114', 'CFEES/22MMG049/Misc/GEM/164/21-22', '', 200, 15167, 2, '', 1, 1, 7, 1, '', 1, '2022-01-14 10:38:42', '', '', NULL, '2022-01-14 05:08:15'),
+('', 115, 96, 'Portable Sand Bore Hole Drilling Machine ', 'MS&ESRG/2021-2022/115', 'CFEES/22ERG036/P/LPC/147/21-22', 'CFEES/22ERG036/P/LPC/147/21-22 dt 15/11/21', 1, 116560, 1, '', 4, 3, 9, 1, 'LPC recommendations Prepared and put up for further neccessry action', 1, '2022-01-14 10:46:32', '', '', NULL, '2022-01-14 05:15:51'),
+('', 116, 224, 'PROCUREMENT OF UPS SYSTEM FOR SDC PILKHUWA UNDER THE PROJECT', 'TFA/2021-2022/116', 'CFEES/22TFA019/P/GEM/160/21-22', '', 4, 18200, 1, '', 3, 1, 7, 1, '', 1, '2022-01-14 15:51:31', '', '', NULL, '2022-01-14 10:20:36'),
+('', 117, 224, 'PROCUREMENT OF DESKTOP COMPUTER SYSTEM FOR SDC PILUKHWA, UNDER THE PROJECT', 'TFA/2021-2022/117', 'CFEES/22TFA007/P/GEM/73/21-22', '', 6, 432000, 1, '', 3, 1, 5, 1, '', 1, '2022-01-14 15:58:14', '', '', NULL, '2022-01-14 10:27:44'),
+('', 118, 224, 'SETTING OF DOOR', 'TFA/2021-2022/118', NULL, '', 1, 1000, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-01-14 10:29:53'),
+('', 119, 60, 'Hiring of Unskillid Manpower', 'FC&HB/2021-2022/119', 'CFEES/22FCP056/P/GEM/148/21-22', 'File No. CFEES.22FCP056/P/GeM/148/21-22', 4, 1688472, 1, '', 6, 1, 5, 1, 'CSB and Draft TCEC Min. Prepared, Submitted for TCEC', 1, '2022-01-17 10:39:51', '', '', NULL, '2022-01-14 12:23:50'),
+('', 120, 79, 'Benchtop Multiparameter pH meter with fluroide ion selective electrode', 'EnSG/2021-2022/120', 'CFEES/22EVS037/P/GEM/135/22-23', '', 1, 280000, 1, '', 7, 1, 8, 1, '', 1, '2022-01-17 14:39:52', '', '', NULL, '2022-01-17 09:07:25'),
+('', 121, 60, 'Karl Fischer Titrator', 'FC&HB/2021-2022/121', 'CFEES/23FCP045/BU/OBM/075/22-23', '', 1, 2029505, 2, '', 1, 1, 5, 1, '', 1, '2022-01-21 16:53:02', '', '', NULL, '2022-01-17 09:48:03'),
+('', 122, 42, 'Oscilloscope-500 MHz, 4 Channel', 'MS&ESRG/2021-2022/122', 'CFEES/22ERG001/P/GeM/21-22', '', 5, 6318900, 1, '', 4, 1, 5, 1, 'TCEC was held on 26-08-2021', 1, '2022-01-17 15:35:10', '', '', NULL, '2022-01-17 10:00:00'),
+('', 123, 42, 'Oscilloscope-500 MHz, 4 Channel', 'MS&ESRG/2021-2022/123', NULL, '', 5, 4588647, 1, '', 4, 1, 5, 1, '', 0, NULL, '', '', NULL, '2022-01-17 10:03:43'),
+('', 124, 42, 'Online UPS 5 KVA', 'MS&ESRG/2021-2022/124', 'CFEES/22ERG017/BU/GEM/074/21-22 DTD 12.8.21', '', 2, 310000, 1, '', 4, 1, 5, 1, '', 1, '2022-01-18 11:31:13', '', '', NULL, '2022-01-18 06:00:36'),
+('', 125, 124, 'Multifunction Machine', 'MMG/2021-2022/125', 'CFEES/22MMG063/B/GEM/196/21-22', '', 1, 48097, 2, '', 1, 1, 8, 1, '', 1, '2022-01-18 11:48:21', '', '', NULL, '2022-01-18 06:17:09'),
+('', 126, 77, 'Design and Development of Fire Entry Suit and Structural Fire fighting Suit', 'PC&M/2021-2022/126', 'CFEES/21PCM001/BU/ST/DB/009/20-21', 'Development contract for developing fire entry suits ( 6 Nos) and structural fire fighting suit (4 Nos).  ', 10, 7800000, 2, '', 1, 2, 2, 1, '', 1, '2022-01-18 12:48:24', '', '', NULL, '2022-01-18 07:16:46'),
+('', 127, 75, 'AMC for DRIFT Spectrometer', 'EnSG/2021-2022/127', 'CFEES/19EVS/B/AMC/050/18-19', 'CFEES has procured a Diffuse Reflectance Infra-red Spectrometer with Fourier Transform (i.e. DRIFT spectrometer) costing US$ 126819.00 (INR approximately Rs. 70 lakhs) vide CFEES Supply Order no. CFEES/ESG/P/GT/07/11-12 dated 23/01/2012. The equipment is being utilized for detailed characterization of different solid/liquid chemical compounds by scanning the vibrational spectra of these compounds. In order to properly maintain the instrument regularly by factory trained engineers, an AMC of DRIF', 3, 720745, 2, '', 1, 2, 1, 1, 'As the present AMC is being completed on 31st July, 2022 and to smoothly run and utilize the instrument it is proposed to take up a fresh Annual Maintenance Contract of the DRIFT spectrometer from the Indian representative of its OEM. ', 1, '2022-01-18 12:55:06', '', '', NULL, '2022-01-18 07:22:00'),
+('', 128, 72, 'Simulated Squib ', 'FC&HB/2021-2022/128', 'CFEES/22FCP017/P/SWOD/045/21-22', 'Simulated Squib\r\nFile No. CFEES/22FCP017/P/SWOD/045/21-22 dated 28/06/2021\r\nDemand No. 22FCP017 dated 25th June 2021', 800, 342816, 1, '', 8, 4, 2, 1, 'Inspection has been completed. Put up to Head MMG for further necessary action please.', 1, '2022-01-19 09:44:42', '', '', NULL, '2022-01-19 04:13:20'),
+('', 129, 196, 'Sophos Firewall License Renewal', 'QRS&IT/2021-2022/129', 'CFEES/22QAG010/BU/GEM/064/21-22', 'Sophos Firewall License Renewal for 03 years', 1, 779990, 2, '', 1, 1, 1, 1, 'for review of final TCEC minutes and CST', 1, '2022-01-19 10:44:01', '', '', NULL, '2022-01-19 05:13:41'),
+('', 130, 97, 'Fine Dust aerosol Spectrometer ', 'FC&HB/2021-2022/130', 'CFEES/22FCP014/P/0T/034/21-22', 'Fine Dust Aerosol Spectrometer \r\nFile No. :CFEES/22FCP014/P/OT/034/21-22\r\nDemand No. 22FCP014 dated 9 June 2021', 1, 2833342, 1, '', 8, 2, 5, 1, 'TCEC Minutes approved by Chairman TCEC. File is with Head MMG for further necessary action. ', 1, '2022-01-19 10:55:19', '', '', NULL, '2022-01-19 05:21:52'),
+('', 131, 72, 'Development contract on CAFES', 'FC&HB/2021-2022/131', 'CFEES/21FCP132/P/OT/234/20-21', 'CFEES/21FCP132/P/OT/234/20-21', 1, 2899850, 1, '', 8, 2, 5, 1, '', 1, '2022-01-19 17:25:12', '', '', NULL, '2022-01-19 11:54:29'),
+('', 132, 80, 'Tensiometer', 'FC&HB/2021-2022/132', 'CFEES/22FCP050/CC/O&M/152/21-22 ', 'CFEES/22FCP050/GC/OBM/152/21-22 dt 23/11/21', 1, 4712920, 2, '', 1, 2, 5, 1, 'at DSC stage (for retendering)', 1, '2022-01-19 17:39:26', '', '', NULL, '2022-01-19 12:08:54'),
+('', 133, 250, 'NYLON LAPTOP BAG', 'MMG/2021-2022/133', 'CFEES/22TFA023/BU/GeM/163/21-22', '', 45, 22455, 2, '', 1, 1, 7, 1, 'CARC, GEMC BILL & CRV Action taken put for Bill control Sh Shubhash', 1, '2022-01-20 15:54:41', '', '', NULL, '2022-01-20 10:23:26'),
+('', 134, 250, 'Double Punch', 'MMG/2021-2022/134', 'CFEES/22MMG048/Misc/GeM/165/21-22', '', 125, 13069, 2, '', 1, 1, 7, 1, 'For Inspection', 1, '2022-01-20 16:58:58', '', '', NULL, '2022-01-20 10:34:13'),
+('', 135, 250, 'Dustbin', 'MMG/2021-2022/135', 'CFEES/22MMG055/Misc/GeM/167/21-22', '', 90, 5850, 2, '', 1, 1, 7, 1, 'For Inspection', 1, '2022-01-20 16:58:46', '', '', NULL, '2022-01-20 10:35:23'),
+('', 136, 70, 'Hiring of Transport at CFEES Project Site Borkhedi in Nagpur', 'MS&ESRG/2021-2022/136', 'CFEES/22ERG055/BU/GEM/210/21-22', '', 2, 1000000, 1, '', 4, 1, 5, 1, 'case is put up for further necessary action', 1, '2022-01-20 16:48:40', '', '', NULL, '2022-01-20 11:17:47'),
+('', 137, 250, 'Towel', 'MMG/2021-2022/137', 'CFEES/22MMG051/Misc/GeM/168/21-22', '', 35, 12232, 2, '', 1, 1, 7, 1, 'For Inspection', 1, '2022-01-20 16:58:36', '', '', NULL, '2022-01-20 11:28:06'),
+('', 138, 77, 'Refrigator', 'PC&M/2021-2022/138', 'CFEES/21PCM017/BU/GEM/135/20-21', '', 2, 56000, 1, '', 1, 1, 5, 1, '', 1, '2022-01-21 09:37:48', '', '', NULL, '2022-01-21 04:07:26'),
+('', 139, 77, 'Development of Moisture Barrier Laminates for Structural Fire Fighting Suit', 'PC&M/2021-2022/139', 'CFEES/21PCM026/BU/OT/196/20-21', '', 6, 1776788, 2, '', 1, 2, 5, 1, '', 1, '2022-01-21 09:41:59', '', '', NULL, '2022-01-21 04:11:08'),
+('', 140, 158, 'Emergency Rescue Tender', 'TFA/2021-2022/140', NULL, '', 1, 10350000, 1, '', 3, 1, 5, 1, '', 1, '2022-01-21 10:33:07', '', '', NULL, '2022-01-21 05:01:53'),
+('', 141, 158, 'EPBAX', 'TFA/2021-2022/141', 'CFEES/22TFA017/GEM/137/21-22', '', 2, 908408, 2, '', 3, 1, 8, 1, '', 1, '2022-01-21 10:42:59', '', '', NULL, '2022-01-21 05:08:04'),
+('', 142, 158, 'Fire Training Simulator', 'TFA/2021-2022/142', 'CFEES/18TFA047/P/OT/BU/103/18-19', '', 1, 10675000, 1, '', 3, 1, 8, 1, '', 1, '2022-01-21 10:42:36', '', '', NULL, '2022-01-21 05:10:13'),
+('', 143, 253, 'Procurement of Scanner', 'MMG/2021-2022/143', 'CFEES/22MMG045/B/GEM/149/21-22', '', 1, 23999, 2, '', 1, 1, 7, 1, '', 1, '2022-01-21 14:23:15', '', '', NULL, '2022-01-21 08:52:26'),
+('', 144, 249, '10 X BINOCULAR', 'SECURITY/2021-2022/144', NULL, 'GEM DEMAND  ', 3, 21969, 2, '', 1, 1, 8, 1, 'FOR FURTHER NA', 1, '2022-01-28 09:42:30', '', '', NULL, '2022-01-21 09:33:53'),
+('', 145, 191, '10 X BINOCULAR', NULL, NULL, '', 3, 21969, 2, '', 1, 1, 8, 1, '', 0, NULL, '', '', NULL, '2022-01-21 10:08:14'),
+('', 146, 191, '10 X BINOCULAR', 'SECURITY/2021-2022/146', NULL, '', 3, 21969, 1, '', 1, 1, 1, 1, '', 1, '2022-01-21 15:39:18', '', '', NULL, '2022-01-21 10:08:47'),
+('', 147, 87, 'xyz', NULL, NULL, 'abc', 1, 2, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-01-21 10:19:11'),
+('', 148, 87, 'fchb/cfees/bpds/01', NULL, NULL, '', 1, 2, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-01-21 10:19:55'),
+('', 149, 87, 'xyz', NULL, NULL, 'abc', 1, 2, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-01-21 10:20:27'),
+('', 150, 60, 'Procurement of Labwares', 'FC&HB/2021-2022/150', NULL, 'Demand no. 22FCP067, Dated: 30 Dec 2021', 49, 387620, 1, '', 6, 1, 5, 1, '', 1, '2022-01-24 15:30:36', '', '', NULL, '2022-01-21 11:19:38'),
+('', 151, 60, 'Procurement of Glasswares', 'FC&HB/2021-2022/151', NULL, 'Demand No. 22FCP068, Dated: 30 Dec 2021', 83, 473917, 1, '', 6, 1, 5, 1, '', 1, '2022-01-24 15:30:25', '', '', NULL, '2022-01-21 11:22:02'),
+('', 152, 158, 'LAN Infrastructure for SDC Pilkhuwa', 'TFA/2021-2022/152', 'CFEES/22TFA020/GC/GEM/159/21-22', '', 1, 5878551, 2, '', 1, 1, 8, 1, '', 1, '2022-01-21 17:48:06', '', '', NULL, '2022-01-21 12:17:31'),
+('', 153, 250, 'Electronic Weighing Scale (Load Capacity 2000kg)', 'MMG/2021-2022/153', 'CFEES/21FCP108/BU/GEM/029/21-22', '', 2, 97200, 2, '', 1, 1, 8, 1, 'For Inspection Of Store (Gem)', 1, '2022-01-24 10:42:28', '', '', NULL, '2022-01-24 05:11:46'),
+('', 154, 124, 'FSMA of Xerox Machine Model B 7035', 'MMG/2021-2022/154', 'CFEES/22MMG064/BU/ST/203/21-22', '1 year FSMA of 3 Nos (Qty). of Xerox Machine', 1, 53100, 2, '', 1, 2, 2, 1, '', 1, '2022-01-24 12:01:48', '', '', NULL, '2022-01-24 06:31:25'),
+('', 155, 250, 'Service Book', 'MMG/2021-2022/155', 'CFEES/22MMG037/Misc/GEM/131/21-22', '', 100, 15000, 2, '', 1, 1, 7, 1, 'RIN Document Complete File put up for Inspection ', 1, '2022-01-24 12:03:26', '', '', NULL, '2022-01-24 06:33:07'),
+('', 156, 250, 'SOAP', 'MMG/2021-2022/156', 'CFEES/22MMG066/Misc/GeM/205/21-22', '', 500, 15000, 2, '', 1, 1, 7, 1, 'File put for Demand Approval and Financial Sanction Approval ', 1, '2022-01-24 14:35:15', '', '', NULL, '2022-01-24 08:54:37'),
+('', 157, 250, 'Liquid Vaporizer Inscticide for Mosquitoes', 'MMG/2021-2022/157', 'CFEES/22MMG069/Misc/GeM/208/21-22', '', 200, 20000, 2, '', 1, 1, 7, 1, 'Fire Put for Demand Approval and Financial Approval ', 1, '2022-01-24 14:35:05', '', '', NULL, '2022-01-24 08:56:36'),
+('', 158, 250, 'Soap Case', 'MMG/2021-2022/158', 'CFEES/22MMG067/Misc/GeM/206//21-22', '', 200, 19800, 2, '', 1, 1, 7, 1, 'File put for Demand Approval and Financial Approval ', 1, '2022-01-24 14:34:54', '', '', NULL, '2022-01-24 08:57:50'),
+('', 159, 250, 'Insecticidal Space Spray ', 'MMG/2021-2022/159', 'CFEES/22MMG068/Misc/GeM/207/21-22', '', 200, 24000, 2, '', 1, 1, 7, 1, 'File put for Demand Approval and Financial Approval ', 1, '2022-01-24 14:34:42', '', '', NULL, '2022-01-24 08:59:22'),
+('', 160, 80, 'MAGNETIC STIRRER', 'FC&HB/2021-2022/160', 'CFEES/22FCP073/P/GEM/272/21-22', '', 4, 323000, 1, '', 6, 1, 8, 1, '', 1, '2022-01-24 15:30:42', '', '', NULL, '2022-01-24 10:00:11'),
+('', 161, 196, 'AMC for operational cum technical support for DRONA, Internet LAN and network infrastructure', 'QRS&IT/2021-2022/161', 'CFEES/22QAG030/BU/LT/241/21-22', 'AMC for operational cum technical support for DRONA, Internet LAN and network infrastructure', 1, 1278176, 2, '', 1, 2, 6, 1, 'for necessary action', 1, '2022-01-24 15:37:11', '', '', NULL, '2022-01-24 10:06:49'),
+('', 162, 254, 'Printer', 'ADMIN/2021-2022/162', NULL, 'CFEES/22ADM007/BU/GeM/178/21-22', 5, 150000, 2, '', 1, 1, 1, 1, 'MMG DISPATCH', 0, NULL, '', '', NULL, '2022-01-24 10:47:22'),
+('', 163, 254, 'CFEES/22ADM007/BU/GeM/178/21-22', 'ADMIN/2021-2022/163', 'CFEES/22ADM007/BU/GEM/178/21-22', 'Printer', 5, 150000, 2, '', 1, 1, 8, 1, 'MMG DISPATCH', 1, '2022-01-24 16:20:07', '', '', NULL, '2022-01-24 10:48:38'),
+('', 164, 75, 'AMC for Gas Chromatograph', 'EnSG/2021-2022/164', 'CFEES/19EVS019/B/ST/104/18-19', 'S. O. was placed on 26-12-2018 for 03 years AMC period starting from 01-01-2019 to 31-12-2021.', 3, 159300, 2, '', 1, 2, 1, 1, 'Job completion certificate for the period 01-07-2021 to 31-12-2021 has been attached with the file.', 1, '2022-01-25 10:23:31', '', '', NULL, '2022-01-25 04:53:07'),
+('', 165, 250, 'Envelope', 'MMG/2021-2022/165', 'CFEES/22MMG053/Misc/GeM/171/21-22', '', 25, 12375, 2, '', 1, 1, 7, 1, 'File put up for CRV posted ledger.', 1, '2022-01-25 10:52:23', '', '', NULL, '2022-01-25 05:19:21'),
+('', 166, 51, 'FSEG', 'FSEG/2021-2022/166', NULL, '', 1, 2612, 2, '', 1, 1, 7, 1, '', 0, NULL, '', '', NULL, '2022-01-25 05:43:29'),
+('', 167, 51, 'HP Officejet CC656AA Cartridge', 'FSEG/2021-2022/167', 'CFEES/22FAS011/B/GeM/183/21-22', '', 1, 2612, 1, '', 1, 1, 1, 1, '', 1, '2022-01-25 11:17:12', '', '', NULL, '2022-01-25 05:45:25'),
+('', 168, 224, 'repair of fire tender', 'TFA/2021-2022/168', 'CFEES/22TFA016/BU/LPC/98/21-22', '', 1, 100466, 2, '', 1, 3, 9, 1, 'vendors letter for DP extension is attached.  ', 1, '2022-01-25 12:02:25', '', '', NULL, '2022-01-25 06:31:35'),
+('', 169, 218, 'Statement of case for sanction of additional amount for payment of arrears due to revision of wages of cleaning staff', NULL, NULL, '', 1, 5621220, 2, '', 1, 1, 5, 1, '', 0, NULL, '', '', NULL, '2022-01-25 06:35:54'),
+('', 170, 217, 'Statement of case for sanction of additional amount for payment of arrears due to revision of wages to cleaning staff', 'WORKS/2021-2022/170', NULL, '', 1, 5621220, 2, '', 1, 1, 5, 1, '', 1, '2022-01-25 12:16:16', '', '', NULL, '2022-01-25 06:45:02'),
+('', 171, 224, 'PROCUREMENT OF 48 V E-RICKSHAWS FOR CARRYING GOODS', 'TFA/2021-2022/171', 'CFEES/22TFA021/GC/GEM/161/21-22', '', 1, 230000, 2, '', 1, 1, 5, 1, '', 1, '2022-01-25 12:17:26', '', '', NULL, '2022-01-25 06:46:09'),
+('', 172, 224, 'HIRING OF ECURITY STAFF AT SDC', 'TFA/2021-2022/172', 'CFEES/21TFA017/Misc/LBM/132/20-21/Extension', '', 45, 39123354, 2, '', 1, 1, 5, 1, '', 1, '2022-01-25 12:20:17', '', '', NULL, '2022-01-25 06:48:55'),
+('', 173, 191, 'SMART CARD RE-TRANSFER PRINTER', 'SECURITY/2021-2022/173', 'CFEES/21SEC015/BU/GEM/211/20-21', '', 1, 499000, 2, '', 1, 1, 2, 1, 'TCEC', 1, '2022-01-25 13:06:51', '', '', NULL, '2022-01-25 07:30:28'),
+('', 174, 191, 'DISPLAY UNIT (SMART TELEVISION 65 INCH LED)', 'SECURITY/2021-2022/174', 'CFEES/22SEC002/B/GEM/275/21-22', '', 1, 164490, 2, '', 1, 1, 2, 1, 'TCEC', 1, '2022-01-25 13:06:33', '', '', NULL, '2022-01-25 07:33:08'),
+('', 175, 84, 'Printer Cartridge', 'FSEG/2021-2022/175', 'CFEES/22FAS009/BU/GEM/177/21-22', 'Procurement of Printer Cartride', 2, 13298, 2, '', 1, 1, 7, 1, '', 1, '2022-01-25 15:22:17', '', '', NULL, '2022-01-25 09:51:26'),
+('', 176, 77, 'Laboratory Items', 'PC&M/2021-2022/176', NULL, '', 6, 41563, 2, '', 1, 1, 5, 1, '', 1, '2022-01-25 16:24:18', '', '', NULL, '2022-01-25 10:53:44'),
+('', 177, 250, 'Procurement of UPS system for SDC PILKHUWA', 'MMG/2021-2022/177', 'CFEES/22TFA019/P/GeM/160/21-22', '', 4, 18200, 1, '', 3, 1, 7, 1, 'CRAC, Gem Bill & CRV Action taken put for Bill control Sh Subhash ', 1, '2022-01-27 10:31:59', '', '', NULL, '2022-01-27 05:01:17'),
+('', 178, 196, 'EPABX extension', 'QRS&IT/2021-2022/178', NULL, 'EPABX extension from 1st march 2022 to 31st august 2022', 1, 76526, 2, '', 1, 2, 2, 1, 'for necessary action', 1, '2022-01-27 12:07:57', '', '', NULL, '2022-01-27 06:37:40'),
+('', 179, 57, 'Propane Gas Cylinders', 'QRS&IT/2021-2022/179', 'CFEES/22QAG019/P/LPC/142/21-22', 'Propane Gas Cylinders', 7, 184270, 1, '', 2, 3, 9, 1, '', 1, '2022-01-27 12:22:36', '', '', NULL, '2022-01-27 06:49:17'),
+('', 180, 163, 'Extension of Hiring of Manpower under FIRSTE Project', 'QRS&IT/2021-2022/180', NULL, '', 3, 83298, 1, '', 2, 1, 5, 1, 'Hiring of Manpower', 1, '2022-01-27 12:19:56', '', '', NULL, '2022-01-27 06:49:24'),
+('', 181, 80, 'CFEES/21FCP085/P/GeM/186/20-21', 'FC&HB/2021-2022/181', NULL, 'Electronic Weighing Balance', 1, 220500, 1, '', 6, 1, 5, 1, 'TCEC approval stage', 1, '2022-01-27 12:50:10', '', '', NULL, '2022-01-27 07:19:45'),
+('', 182, 77, 'Refill of Nitrogen gas through GEM', 'PC&M/2021-2022/182', 'CFEES/22PCM018/BU/GeM/154/21-22', '', 35, 14700, 2, '', 1, 1, 1, 1, '', 1, '2022-01-27 14:12:00', '', '', NULL, '2022-01-27 08:41:42'),
+('', 183, 32, 'Fire Test Chamber 10 m3', 'FC&HB/2021-2022/183', 'CFEES/22FCP002/P/LPC/009/21-22', '', 1, 238875, 1, '', 8, 3, 9, 1, '', 1, '2022-01-27 15:06:09', '', '', NULL, '2022-01-27 09:26:37'),
+('', 184, 125, 'Procurement of Toner cartidgefor Xerox Versalink B7035', 'TCP&HR/2021-2022/184', 'CFEES/24TCP001/BU/GEM/013/23-24', '', 1, 9380, 2, '', 1, 1, 1, 1, '', 1, '2022-01-27 15:07:26', '', '', NULL, '2022-01-27 09:33:38'),
+('', 185, 79, 'Procurement of High Quality water purification system (type1 & type 2) ', 'EnSG/2021-2022/185', 'CFEES/22EVS043/P/GEM/243/21-22', '', 1, 855000, 1, '', 7, 1, 5, 1, '', 1, '2022-01-27 15:42:13', '', '', NULL, '2022-01-27 10:08:27'),
+('', 186, 224, 'Servicing of Hydraulic platform chasis', 'TFA/2021-2022/186', NULL, '', 1, 128131, 1, '', 3, 3, 1, 1, '', 1, '2022-01-28 15:04:43', '', '', NULL, '2022-01-28 09:34:13'),
+('', 187, 224, 'HIRING OF CLEANING STAFF FOR SDC ', 'TFA/2021-2022/187', 'CFEES/21TFA014/MISC/GEM/133/20-21', '', 23, 4126023, 1, '', 3, 1, 1, 1, '', 1, '2022-01-28 15:17:42', '', '', NULL, '2022-01-28 09:46:35'),
+('', 188, 224, 'soc of conservancy services', 'TFA/2021-2022/188', 'CFEES/22TFA024/MISC/GEM/209/21-22', '', 24, 3925866, 2, '', 1, 1, 5, 1, '', 1, '2022-01-28 15:55:42', '', '', NULL, '2022-01-28 10:25:11'),
+('', 189, 233, 'Procurement of 305 GSM 100 % Cotton Fabrics Suits and 230 GSM 93 % mAramid/5%pAramid/2% Anti-stat fabric Suit', 'QRS&IT/2021-2022/189', 'CFEES/QAG013/P/ST/125/21-22', 'Procurement of Fire Suits for FTMS Testing', 1, 171423, 1, '', 2, 1, 2, 1, '', 1, '2022-01-31 10:36:16', '', '', NULL, '2022-01-31 05:03:38'),
+('', 190, 233, 'Flame Test Manikin System', 'QRS&IT/2021-2022/190', 'CFEES/QAG/P/ST/DB/80/17-18', '', 1, 63291547, 1, '', 2, 2, 5, 1, '', 1, '2022-01-31 11:33:11', '', '', NULL, '2022-01-31 05:58:18'),
+('', 191, 75, 'Annual Maintenance Contract (AMC) for Gas Chromatograph (GC) ', 'EnSG/2021-2022/191', 'CFEES/22EVS026/BU/PAC/090/22-23', '03 Years AMC of Gas Chromatograph (GC) is required for smooth functioning of the instrument.', 3, 180540, 2, '', 1, 2, 1, 1, 'Putup for necessary action and approval pleaee..', 1, '2022-01-31 14:52:04', '', '', NULL, '2022-01-31 05:59:19'),
+('', 192, 217, 'Bamboo Broom - sweeping broom with bamboo strips ', 'WORKS/2021-2022/192', 'CFEES/22WRK023/MISC/GEM/274/21-22', '', 100, 16000, 2, '', 1, 1, 7, 1, '', 1, '2022-01-31 12:18:43', '', '', NULL, '2022-01-31 06:43:26'),
+('', 193, 217, 'Toilet Cleaner', 'WORKS/2021-2022/193', 'CFEES/22WRK021/MISC/GEM/233/21-22', '', 100, 11000, 2, '', 1, 1, 7, 1, '', 1, '2022-01-31 12:18:19', '', '', NULL, '2022-01-31 06:44:30'),
+('', 194, 217, 'Floor Cleaner', 'WORKS/2021-2022/194', NULL, '', 60, 27000, 2, '', 1, 1, 7, 1, '', 1, '2022-01-31 12:17:57', '', '', NULL, '2022-01-31 06:45:22'),
+('', 195, 217, 'Naphthalene Balls', 'WORKS/2021-2022/195', NULL, '', 100, 15000, 2, '', 1, 1, 7, 1, '', 1, '2022-01-31 12:17:22', '', '', NULL, '2022-01-31 06:46:02'),
+('', 196, 97, 'Temperature Measurement with data storage falicity ', 'FC&HB/2021-2022/196', 'CFEES/22FCP020/P/LPC/059/21-22', 'File No. CFEES/22FCP020/P/LPC/059/21-22 dated 20/07/2021', 1, 65000, 1, '', 8, 3, 9, 1, 'Item Received, Inspection Required', 1, '2022-01-31 14:30:17', '', '', NULL, '2022-01-31 08:59:27'),
+('', 197, 80, 'Solvents', 'FC&HB/2021-2022/197', 'CFEES/22FCP027/P/GEM/072/21-22', 'CFEES/22FCP027/P/GeM/072/21-22 dt 09 Aug 2021\r\nBOQ mode (open Bid)', 10, 543909, 1, '', 6, 1, 5, 1, 'Draft TCEC prepared, TCEC to be done', 1, '2022-01-31 15:57:15', '', '', NULL, '2022-01-31 10:26:19'),
+('', 198, 250, 'Keyboard', 'MMG/2021-2022/198', 'CFEES/22MMG057/BU/GEM/175/21-22', '', 30, 18089, 2, '', 1, 1, 7, 1, 'For Bill control', 1, '2022-02-01 12:43:37', '', '', NULL, '2022-02-01 07:12:42'),
+('', 199, 79, 'Procurement of Aluminium Foil through Gem under project (ERAF)', 'EnSG/2021-2022/199', 'CFEES/22EVS045/P/GEM/254/21-22', '', 30, 24000, 1, '', 7, 1, 7, 1, '', 1, '2022-02-01 12:50:34', '', '', NULL, '2022-02-01 07:19:47'),
+('', 200, 70, 'Hiring of Transport at Borkhedi Nagpur upto 31 jan 2022', 'MS&ESRG/2021-2022/200', 'CFEES/ESRG/P/OT/DB/17/17-18', '', 1, 1148614, 1, '', 4, 2, 5, 1, '', 1, '2022-02-01 14:48:21', '', '', NULL, '2022-02-01 09:17:35'),
+('', 201, 217, 'Hiring of Cleaning Staff for CFEES', 'WORKS/2021-2022/201', 'CFEES/22WRK09/BU/GEM/158/21-22', '', 1, 5400768, 2, '', 1, 1, 8, 1, '', 1, '2022-02-01 14:50:46', '', '', NULL, '2022-02-01 09:19:43'),
+('', 202, 217, 'Bathroom Cleaning Brush ', 'WORKS/2021-2022/202', NULL, '', 50, 6250, 1, '', 1, 1, 7, 1, '', 1, '2022-02-01 14:52:05', '', '', NULL, '2022-02-01 09:21:38'),
+('', 203, 61, 'centifugal water pump (2 nos.)', 'FSEG/2021-2022/203', 'CFEES/22ATG024/BU/GEM/176/21-22', 'CFEES/22/ATG024/BU/GEM/176/21-22/22/12/2021', 2, 11701, 2, '', 1, 1, 2, 1, '', 1, '2022-02-01 15:05:04', '', '', NULL, '2022-02-01 09:34:19'),
+('', 204, 250, 'Transparents Tape', 'MMG/2021-2022/204', 'CFEES/22MMG052/MISC/GEM/169/21-22', '', 300, 6000, 2, '', 1, 1, 7, 1, 'For Gem Inspection ', 1, '2022-02-01 15:04:44', '', '', NULL, '2022-02-01 09:34:20'),
+('', 205, 163, 'ANSYS HPC PACK TECS/AMC with upgrade', 'QRS&IT/2021-2022/205', 'CFEES/21QAG032/P/PAC/228/20-21', 'AMC of ANSYS HPC pack', 1, 1150500, 1, '', 2, 2, 1, 1, '', 1, '2022-02-01 15:50:38', '', '', NULL, '2022-02-01 10:20:12'),
+('', 206, 80, 'Electronic Weighing Scale', 'FC&HB/2021-2022/206', 'CFEES/21FCP085/P/GEM/186/20-21', 'CFEES/21FCP085/P/GeM/186/20-21 dated 25/01/2021', 1, 220500, 1, '', 6, 1, 5, 1, 'Final TCEC minutes & CSB submitted for approval', 1, '2022-02-02 17:37:43', '', '', NULL, '2022-02-02 12:07:23'),
+('', 207, 80, 'Development contract for Fluorosurfactant and AFFF formulations ', 'FC&HB/2021-2022/207', 'CFEES/22FCP076/P/OT/230/21-22', 'Scope of work attached', 1, 10970460, 1, '', 6, 2, 5, 1, 'DSC sheet & RFP to be issued', 1, '2022-02-03 10:25:20', '', '', NULL, '2022-02-03 04:54:56'),
+('', 208, 244, 'Black Cartridge(Q2613A)', NULL, NULL, '', 1, 4480, 2, '', 1, 1, 7, 1, '', 0, NULL, '', '', NULL, '2022-02-03 04:57:47'),
+('', 209, 244, 'Black Cartridge(Q2613A)', NULL, NULL, '', 1, 4480, 2, '', 1, 1, 7, 1, '', 0, NULL, '', '', NULL, '2022-02-03 04:58:18'),
+('', 210, 244, 'Black Cartridge(Q2613A)', NULL, NULL, '', 1, 4480, 2, '', 1, 1, 7, 1, '', 0, NULL, '', '', NULL, '2022-02-03 05:00:58'),
+('', 211, 244, 'Black Cartridge(Q2613A)', 'FSEG/2021-2022/211', 'CFEES/22FAS012/BU/GEM/213/21-22', '', 1, 4480, 2, '', 1, 1, 7, 1, '', 1, '2022-02-03 10:32:03', '', '', NULL, '2022-02-03 05:01:30'),
+('', 212, 32, 'Cutting of Halon cylinders for disposal as Scrap', 'FC&HB/2021-2022/212', 'CFEES/22FCP075/BU/LPC/08/22-23', '', 125, 147500, 2, '', 1, 3, 9, 1, '', 1, '2022-02-03 14:53:18', '', '', NULL, '2022-02-03 09:22:12'),
+('', 213, 77, 'GST concession Certificate', 'PC&M/2021-2022/213', NULL, '', 2, 2938, 2, '', 1, 2, 1, 1, '', 1, '2022-02-03 15:12:29', '', '', NULL, '2022-02-03 09:42:09'),
+('', 214, 87, 'Gas Analyzer System (Lab mass spectrometer for fire supression analysis)', 'FC&HB/2021-2022/214', NULL, 'CFEES/FCP/081/BU/OT/DB/259/18-19 dated 22/02/2019\r\nSO No.  CFEES/21AT0033/FCP/20-21/CMS-II/070 dated 3/11/20', 1, 21420000, 1, '', 1, 2, 5, 1, 'Inspection completed & submitted to MMG', 1, '2022-02-03 15:26:56', '', '', NULL, '2022-02-03 09:56:24'),
+('', 215, 79, 'Hindi workshop', 'EnSG/2021-2022/215', 'CFEES/22HCL003/Misc/GeM/220/21-22', '', 40, 10000, 2, '', 1, 1, 7, 1, '', 1, '2022-02-03 16:24:13', '', '', NULL, '2022-02-03 10:53:57'),
+('', 216, 250, 'FILE COVER', 'MMG/2021-2022/216', 'CFEES/22MMG074/MISC/GEM/217/21-22', '', 1000, 20000, 2, '', 1, 1, 7, 1, '', 1, '2022-02-03 16:45:21', '', '', NULL, '2022-02-03 11:14:59'),
+('', 217, 250, 'Permanent Marker', 'MMG/2021-2022/217', 'CFEES/22MMG070/MISC/GEM/216/21-22', '', 500, 10000, 2, '', 1, 1, 7, 1, '', 1, '2022-02-03 16:46:18', '', '', NULL, '2022-02-03 11:16:01'),
+('', 218, 250, 'Photocopy Paper A4 Size', 'MMG/2021-2022/218', 'CFEES/22MMG072/BU/GEM/219/21-22', '', 570, 176700, 2, '', 1, 1, 8, 1, '', 1, '2022-02-03 16:47:30', '', '', NULL, '2022-02-03 11:17:16'),
+('', 219, 250, 'Rubber Stamp', 'MMG/2021-2022/219', 'CFEES/22MMG073/MISC/GEM/218/21-22', '', 12, 4560, 2, '', 1, 1, 7, 1, '', 1, '2022-02-03 16:48:37', '', '', NULL, '2022-02-03 11:18:08'),
+('', 220, 224, 'LOGBOOK FOR VEHICLE', 'TFA/2021-2022/220', 'CFEES/22TFA026/MISC/GEM/12/21-22', '', 20, 4600, 2, '', 1, 1, 1, 1, '', 1, '2022-02-04 10:20:17', '', '', NULL, '2022-02-04 04:49:53'),
+('', 221, 77, '5 KVA and 3 KVA online UPS', 'PC&M/2021-2022/221', 'CFEES/22PCM034/BU/GEM/229/21-22', '', 2, 265000, 2, '', 1, 1, 6, 1, '', 1, '2022-02-04 11:24:08', '', '', NULL, '2022-02-04 05:53:44'),
+('', 222, 80, 'Chemicals (13 Nos.)', 'FC&HB/2021-2022/222', 'CFEES/21FCP091/P/GEM/243/21-22', 'GEM Bid No. GeM/2021/B/1804382', 13, 72493, 1, '', 6, 1, 5, 1, 'Final TCEC Minutes', 1, '2022-02-04 14:23:09', '', '', NULL, '2022-02-04 08:52:42'),
+('', 223, 61, '40 cubic meter nitrogen gas', 'FSEG/2021-2022/223', NULL, '', 40, 22000, 2, '', 1, 1, 2, 1, 'Reprocess case on direct purchase through GEM', 1, '2022-02-07 10:35:29', '', '', NULL, '2022-02-07 05:04:41');
+INSERT INTO `daks` (`sender`, `dak_id`, `e_id`, `file_name`, `docket_no`, `file_num`, `description`, `quantity`, `total_cost`, `cat_id`, `org_id`, `proj_id`, `port_id`, `bid_id`, `fin_id`, `f_remark`, `f_status`, `mark_to_ad`, `reply_type`, `replied_action`, `mark_to_mmg`, `is_created`) VALUES
+('', 224, 104, 'Release of Instalment for CARS awarded to Andhra University', 'FC&HB/2021-2022/224', 'CFEES/FCP/B/CAR/008/18-19', 'For release of second instalment of CARS', 1, 2504250, 2, '', 1, 5, 11, 1, '', 1, '2022-02-07 15:33:48', '', '', NULL, '2022-02-07 10:03:17'),
+('', 226, 80, 'Bubble Pressure Tensiometer', 'FC&HB/2021-2022/226', 'CFEES/22FCP045/P/OT/99/21-22', 'CFEES/22FCP045/P/OT/99/21-22 dated 16/09/21', 1, 3600000, 1, '', 6, 2, 5, 1, 'Draft TCEC &CSB submitted', 1, '2022-02-08 11:51:30', '', '', NULL, '2022-02-08 06:21:02'),
+('', 227, 80, 'Deep Freezer', 'FC&HB/2021-2022/227', 'CFEES/22FCP018/P/GEM/55/21-22', 'CFEES/22FCP018/P/GeM/55/21-22', 1, 355585, 1, '', 6, 1, 8, 1, 'Recommended for DP extension up to 20 Feb 2022 (Initial DP 22 Jan 2022)', 1, '2022-02-08 11:58:06', '', '', NULL, '2022-02-08 06:27:39'),
+('', 228, 77, 'Servicing ,Lubrication and calibration of textile equipments', 'PC&M/2021-2022/228', 'CFEES/22PCM023/BU/ST/234/21-22', '', 20, 581769, 1, '', 1, 2, 2, 1, '', 1, '2022-02-08 12:00:40', '', '', NULL, '2022-02-08 06:29:58'),
+('', 229, 250, 'Cartridge 388', 'MMG/2021-2022/229', 'CFEES/22MMG077/BU/Gem/221/21-22', '', 46, 250884, 2, '', 1, 1, 8, 1, 'For Approval ', 1, '2022-02-08 15:34:42', '', '', NULL, '2022-02-08 10:03:48'),
+('', 230, 224, 'HIRING OF TRANSPORT FOR SKILL DEVELOPMENT CENTRE PILKHUWA', 'TFA/2021-2022/230', NULL, '', 1, 660000, 1, '', 1, 1, 5, 1, '', 1, '2022-02-08 16:07:38', '', '', NULL, '2022-02-08 10:35:36'),
+('', 231, 88, 'BRASS COATED MICRO STEEL FIBRE', 'MS&ESRG/2021-2022/231', 'CFEES/22ERG032/P/LPC/132/21-22', 'CFEES/22ERG032/P/LPC/132/21-22 dt:26/10/2021', 2001, 430500, 1, '', 4, 3, 9, 1, '', 1, '2022-02-09 09:54:05', '', '', NULL, '2022-02-08 11:26:44'),
+('', 232, 250, 'Requirement of Laptop', 'MMG/2021-2022/232', NULL, '', 1, 1, 2, '', 1, 1, 2, 1, '', 1, '2022-02-09 10:27:07', '', '', NULL, '2022-02-09 04:56:28'),
+('', 233, 217, 'Naphthalene Balls', 'WORKS/2021-2022/233', 'CFEES/22WRK024/MISC/GEM/269/21-22', '', 90, 23400, 2, '', 1, 1, 7, 1, '', 1, '2022-02-09 11:42:36', '', '', NULL, '2022-02-09 06:11:40'),
+('', 234, 217, 'Cartridge for HP office Jet Pro 8600', 'WORKS/2021-2022/234', 'CFEES/22WRK025/MISC/GEM/267/21-22', '', 4, 16287, 2, '', 1, 1, 7, 1, '', 1, '2022-02-09 11:44:00', '', '', NULL, '2022-02-09 06:13:38'),
+('', 235, 77, 'SCAN COIL Assy EVO EX PCBA EO', 'PC&M/2021-2022/235', 'CFEES/22PCM009/BU/PAC/96/21-22', '', 3, 678544, 2, '', 1, 2, 3, 1, '', 1, '2022-02-10 12:17:19', '', '', NULL, '2022-02-10 06:46:06'),
+('', 236, 250, 'Telephone Instrument', 'MMG/2021-2022/236', NULL, '', 15, 23985, 2, '', 1, 1, 7, 1, '', 1, '2022-02-11 10:41:43', '', '', NULL, '2022-02-11 05:10:41'),
+('', 237, 250, 'Mouse', 'MMG/2021-2022/237', NULL, '', 55, 24750, 2, '', 1, 1, 7, 1, '', 1, '2022-02-11 10:41:33', '', '', NULL, '2022-02-11 05:11:14'),
+('', 238, 191, '10X BINOCULAR', 'SECURITY/2021-2022/238', NULL, '', 3, 21969, 2, '', 1, 1, 2, 1, '', 2, '2022-02-11 12:01:46', '', '', NULL, '2022-02-11 06:30:28'),
+('', 239, 124, 'Hiring of Staff for  Wet Canteen Services at CFEES', 'MMG/2021-2022/239', 'CFEES/21MSG001/Misc/Gem/214/20-21', '', 1, 2816977, 2, '', 1, 1, 1, 1, 'Put up for Sanction of Additional Amount fro payment of arrears', 1, '2022-02-11 12:07:34', '', '', NULL, '2022-02-11 06:37:07'),
+('', 240, 124, 'Hiring of Data Entry Operator', 'MMG/2021-2022/240', 'CFEES/21MMG095/Misc/Gem/219/20-21', '', 1, 7157419, 2, '', 1, 1, 1, 1, 'Put up for Financial Concurrence for additional amount due to revision of minimum wages', 1, '2022-02-11 12:10:25', '', '', NULL, '2022-02-11 06:40:06'),
+('', 241, 110, 'Sweating Guarded Hot Plate (SGHP)', 'PC&M/2021-2022/241', 'CFEES/FCPC/B/ST/DB/73/16-17', '', 1, 7442571, 2, '', 1, 2, 5, 1, '', 1, '2022-02-11 12:12:13', '', '', NULL, '2022-02-11 06:41:14'),
+('', 242, 250, 'Reimbursement of expenditure for purchase of brief case/ Hand Bag/ Official Bag/ Ladies Purse', 'MMG/2021-2022/242', NULL, '', 1, 94400, 2, '', 1, 1, 7, 1, '', 1, '2022-02-11 16:01:00', '', '', NULL, '2022-02-11 10:30:46'),
+('', 243, 224, 'major repair work: TFFL MK-IV', 'TFA/2021-2022/243', NULL, '', 1, 1237230, 2, '', 1, 2, 6, 1, '', 1, '2022-02-14 10:25:49', '', '', NULL, '2022-02-14 04:54:56'),
+('', 244, 79, 'Procurement of Hydrogen Peroxide ', 'EnSG/2021-2022/244', 'CFEES/22EVS049/P/GEM/266/21-22', '', 30, 12600, 1, '', 7, 1, 7, 1, '', 1, '2022-02-15 10:28:41', '', '', NULL, '2022-02-15 04:58:12'),
+('', 245, 124, 'Multifunction Machine', 'MMG/2021-2022/245', 'CFEES/22MMG076/BU/GEM/215/21-22', '', 5, 339350, 2, '', 1, 1, 8, 1, '', 1, '2022-02-15 11:29:23', '', '', NULL, '2022-02-15 05:57:54'),
+('', 246, 125, 'Approval & Sanction for slogan & Poster competition in CFEES in the occasion of National Safety week 2022', 'TCP&HR/2021-2022/246', NULL, '', 0, 10200, 1, '', 1, 4, 1, 1, '', 1, '2022-02-15 16:53:40', '', '', NULL, '2022-02-15 10:14:24'),
+('', 247, 250, 'Laptop Reimbursement Bill ', 'MMG/2021-2022/247', NULL, '', 1, 94400, 2, '', 1, 1, 7, 1, '', 1, '2022-02-15 16:27:44', '', '', NULL, '2022-02-15 10:57:27'),
+('', 248, 191, 'X-RAY BAGGAGE SCANNER ', 'SECURITY/2021-2022/248', 'CFEES/22SEC005/BU/GEM/060/21-22', '', 1, 2000000, 2, '', 1, 1, 1, 1, '', 1, '2022-02-16 11:15:37', '', '', NULL, '2022-02-16 05:44:53'),
+('', 249, 32, 'Fire test chamber of 100m3', NULL, NULL, '', 1, 924000, 1, '', 8, 2, 5, 1, '', 0, NULL, '', '', NULL, '2022-02-17 09:49:58'),
+('', 250, 32, 'Fire test chamber of 100m3', 'FC&HB/2021-2022/250', 'CFEES/21FCP053/P/OBM/131/20-21', '', 1, 924000, 1, '', 8, 2, 5, 1, '', 1, '2022-02-17 15:30:55', '', '', NULL, '2022-02-17 09:59:34'),
+('', 251, 97, 'Manual Aerosol Fire Extinguisher, SEAARA make, 1000 g AFC (2 Nos. )', 'FC&HB/2021-2022/251', 'CFEES/21FCHB/P/PAC/065/20-21', 'Manual Aerosol Fire Extinguisher, SEAARA make, 1000 g AFC (2 Nos.) ', 2, 139227, 1, '', 8, 1, 1, 1, 'Validity extended by vendor till 31-03-2022, put up for further action please', 2, '2022-02-18 17:33:06', '', '', NULL, '2022-02-18 12:02:36'),
+('', 252, 80, 'REFRACTOMETER', 'FC&HB/2021-2022/252', NULL, '', 1, 32000, 1, '', 6, 1, 7, 1, 'Duly filled Demand submitted for further processing', 1, '2022-02-22 12:40:41', '', '', NULL, '2022-02-22 07:10:05'),
+('', 253, 80, 'Rotary Evaporator', 'FC&HB/2021-2022/253', 'CFEES/22FCP038/P/GEM/092/21-22', 'CFEES/22FCP038/P/Gem/092/21-22 dated 3 Sep 2021', 2, 1494000, 1, '', 6, 1, 5, 1, 'Draft TCEC & CSB prepared', 1, '2022-02-22 14:34:28', '', '', NULL, '2022-02-22 09:04:04'),
+('', 254, 224, 'AIR CRASH FIRE TENDER ', 'TFA/2021-2022/254', NULL, '', 1, 35577500, 1, '', 3, 1, 5, 1, '', 1, '2022-02-23 10:45:54', '', '', NULL, '2022-02-23 05:14:36'),
+('', 255, 206, 'PROCUREMENT OF TOC & TNb ANALYZER', 'QRS&IT/2021-2022/255', 'CFEES/QAG009/GC/OT/35/22-23', '', 1, 4800000, 2, '', 1, 2, 5, 1, '', 1, '2022-02-23 15:08:52', '', '', NULL, '2022-02-23 09:37:06'),
+('', 256, 191, 'CAMC of X - Ray Baggage Systum', 'SECURITY/2021-2022/256', 'CFEES/23SEC009/BU/PAC/052/22-23', 'For Demand creation', 1, 782753, 2, '', 1, 2, 2, 1, 'for demand creation ', 1, '2022-02-25 17:04:07', '', '', NULL, '2022-02-25 11:33:40'),
+('', 257, 250, 'Paper Weight', 'MMG/2021-2022/257', NULL, '', 200, 9800, 2, '', 1, 1, 7, 1, '', 1, '2022-02-28 15:29:52', '', '', NULL, '2022-02-28 09:49:21'),
+('', 258, 250, 'Toner NPG-51', 'MMG/2021-2022/258', NULL, '', 5, 15441, 2, '', 1, 1, 7, 1, '', 1, '2022-02-28 15:29:40', '', '', NULL, '2022-02-28 09:59:06'),
+('', 259, 192, 'Autoclave', NULL, NULL, '', 2, 500000, 2, '', 1, 1, 8, 1, '', 0, NULL, '', '', NULL, '2022-03-02 05:56:27'),
+('', 260, 192, 'Autoclave', 'QRS&IT/2021-2022/260', 'CFEES/23QAG026/P/GEM/115/22-23', '', 2, 500000, 2, '', 1, 1, 8, 1, '', 1, '2022-03-02 11:28:10', '', '', NULL, '2022-03-02 05:56:55'),
+('', 261, 232, 'Refurbisment of high Pressure Air Compressor', NULL, NULL, '', 1, 985094, 2, '', 1, 2, 3, 1, '', 0, NULL, '', '', NULL, '2022-03-02 11:06:19'),
+('', 262, 40, 'AMC for operational cum technical support for DRONA Internet LANs and Network infrastructure (Extension)', 'QRS&IT/2021-2022/262', 'CFEES/21QAG/035/BYU/LT/189/20-21', '', 1, 73465, 2, '', 1, 3, 6, 1, '', 1, '2022-03-02 17:14:12', '', '', NULL, '2022-03-02 11:43:19'),
+('', 263, 200, 'Procurement of Chemical', 'EnSG/2021-2022/263', 'CFEES/21FCP130/P/GEM/031/21-22', 'Procurement of Chemical on Cash Purchase through GeM', 24, 11640, 2, '', 1, 1, 5, 1, 'The chemical is required for work planned in task.', 1, '2022-03-03 16:02:39', '', '', NULL, '2022-03-03 10:31:19'),
+('', 264, 80, 'Sodium Sulphide, 500g', 'FC&HB/2021-2022/264', 'CFEES/22FCP086/P/GEM/247/21-22', '', 20, 13740, 1, '', 6, 1, 7, 1, '', 1, '2022-03-03 16:56:30', '', '', NULL, '2022-03-03 11:25:41'),
+('', 265, 77, 'Firefite Lithex Fire extinguisher of 2 liter capacity ', 'PC&M/2021-2022/265', 'CFEES/22PCM037/B/GEM/273/22-23', '', 2, 21000, 2, '', 1, 1, 2, 1, '', 1, '2022-03-11 15:32:54', '', '', NULL, '2022-03-04 07:09:07'),
+('', 266, 199, 'E- book (vasudha)', 'HINDI CELL/2021-2022/266', NULL, '', 1, 25000, 2, '', 1, 1, 7, 1, '', 1, '2022-03-04 14:55:29', '', '', NULL, '2022-03-04 09:25:03'),
+('', 267, 217, 'Statement of case for extension of contract: Hiring of cleaning staff at CFEES complex Delhi', 'WORKS/2021-2022/267', 'CFEES/21WRK013/MISC/GEM/194/20-21', '', 19, 1350192, 2, '', 1, 1, 7, 1, '', 1, '2022-03-04 17:11:37', '', '', NULL, '2022-03-04 11:41:00'),
+('', 268, 250, 'FEVICOL', 'MMG/2021-2022/268', NULL, '', 350, 6230, 2, '', 1, 1, 7, 1, '', 1, '2022-03-07 11:03:41', '', '', NULL, '2022-03-07 05:33:25'),
+('', 269, 250, 'STAPLER PIN ', 'MMG/2021-2022/269', 'CFEES/22MMG082/MISC/GEM/224/21-22', '', 1000, 13750, 2, '', 1, 1, 7, 1, '', 1, '2022-03-07 11:25:05', '', '', NULL, '2022-03-07 05:54:49'),
+('', 270, 61, 'Job work of unskilled manpower ( 03 nos.)', 'FSEG/2021-2022/270', NULL, 'Under Gaganyaan Activity No. (DW-19310140023)', 1, 947520, 1, '', 12, 1, 1, 1, '', 1, '2022-03-07 12:00:57', '', '', NULL, '2022-03-07 06:29:56'),
+('', 271, 250, 'Laboratory Items Part-IInd', 'MMG/2021-2022/271', 'CFEES/22PCM025,029, 030,032/BU/GEM/236,238,239,240/21-22', '', 200, 50000, 2, '', 1, 1, 7, 1, '', 1, '2022-03-07 12:40:33', '', '', NULL, '2022-03-07 07:10:02'),
+('', 272, 84, 'Procurement of LCD Monitor Through GeM', 'FSEG/2021-2022/272', NULL, '', 1, 22450, 2, '', 1, 1, 7, 1, '', 1, '2022-03-07 14:32:22', '', '', NULL, '2022-03-07 09:01:27'),
+('', 273, 72, 'Laptop', 'FC&HB/2021-2022/273', 'CFEES/21FCP/109/B/GEM/210/20-21', 'Laptop ', 1, 48000, 1, '', 1, 1, 5, 1, '', 1, '2022-03-07 17:35:00', '', '', NULL, '2022-03-07 12:04:02'),
+('', 274, 249, '10X BINOCULAR', 'SECURITY/2021-2022/274', NULL, '', 3, 21969, 2, '', 1, 1, 2, 1, '', 1, '2022-03-09 11:10:42', '', '', NULL, '2022-03-09 05:40:08'),
+('', 275, 250, 'Green tag', 'MMG/2021-2022/275', NULL, '', 160, 10400, 2, '', 1, 1, 7, 1, '', 1, '2022-03-10 12:47:51', '', '', NULL, '2022-03-10 07:17:20'),
+('', 276, 250, 'Green tag', 'MMG/2021-2022/276', NULL, '', 160, 10400, 2, '', 1, 1, 7, 1, '', 1, '2022-03-10 12:50:34', '', '', NULL, '2022-03-10 07:20:19'),
+('', 277, 250, 'Laptop Reimbursement (Mrs. Monika Grover, SPS)', 'MMG/2021-2022/277', NULL, 'Laptop Bill (Mrs. Monika Grover, SPS)', 1, 94400, 2, '', 1, 1, 7, 1, '', 1, '2022-03-10 14:45:16', '', '', NULL, '2022-03-10 09:14:07'),
+('', 278, 250, 'LAPTOP BILL', 'MMG/2021-2022/278', NULL, '', 1, 97000, 2, '', 1, 1, 7, 1, '', 2, '2022-03-10 15:09:50', '', '', NULL, '2022-03-10 09:39:18'),
+('', 279, 238, 'Cancellation of Supply order no. CFEES/22AT0048/ATG/21-22/CMS-II/051 dated 26 Nov 21', 'FSEG/2021-2022/279', NULL, 'Cancellation of Supply order no. CFEES/22AT0048/ATG/21-22/CMS-II/051 dated 26 Nov 21 placed on M/s Kingsway Service Station ', 18000, 1617660, 2, '', 1, 1, 2, 1, '', 1, '2022-03-11 16:04:54', '', '', NULL, '2022-03-11 10:34:17'),
+('', 280, 75, 'Annual Maintenance Contract (AMC) for DRIFT (Spectrometer) ', 'EnSG/2021-2022/280', 'CFEES/23ENS042/BU/PAC/212/22-23', 'CFEES has procured a Diffuse Reflectance Infra-red Spectrometer with Fourier Transform (i.e. DRIFT spectrometer) costing US$ 126819.00 (INR approximately Rs. 70 lakhs) vide S.O. dated 23/01/2012 to meet the requirements of MoD establishments and MoD users for characterisation of samples generated during various R&D activities. The equipment is being utilized for detailed characterization of different solid/liquid chemical compounds by scanning the vibrational spectra of these compounds. As the p', 3, 551792, 2, '', 1, 2, 1, 1, 'Minutes ofCERC of the case has been signed on 10-03-2022. ', 1, '2022-03-14 11:55:22', '', '', NULL, '2022-03-14 05:21:12'),
+('', 281, 125, 'CFEES/ESRG/BR/CARS/Reapprtn/20-21', 'TCP&HR/2021-2022/281', NULL, '', 1, 0, 1, '', 1, 5, 11, 1, '', 1, '2022-03-14 15:38:03', '', '', NULL, '2022-03-14 10:06:30'),
+('', 282, 250, 'Stapler Pin (Small)', 'MMG/2021-2022/282', NULL, '', 1600, 9600, 2, '', 1, 1, 7, 1, '', 1, '2022-03-15 12:24:46', '', '', NULL, '2022-03-15 06:54:24'),
+('', 283, 77, 'Fabrication of Economical Emergency Escape chute', 'PC&M/2021-2022/283', NULL, '', 1, 1108800, 2, '', 1, 2, 2, 1, '', 1, '2022-03-15 16:16:29', '', '', NULL, '2022-03-15 10:46:04'),
+('', 284, 157, 'Refurbishment and re-commissioning of compressor', 'FSEG/2021-2022/284', 'CFEES/22ATG026/BU/PAC/249/21-22', '', 1, 1162411, 2, '', 1, 2, 1, 1, '', 1, '2022-03-21 11:34:18', '', '', NULL, '2022-03-21 06:02:54'),
+('', 285, 259, 'UPS', 'AIR FORCE CELL/2021-2022/285', 'CFEES/22SRC008/BU/GEM/256/21-22', 'CFEES/22SRC008/BU/GeM/256/21-22', 1, 24320, 2, '', 1, 1, 7, 1, '', 1, '2022-03-21 16:35:34', '', '', NULL, '2022-03-21 11:04:51'),
+('', 286, 259, 'Printer', 'AIR FORCE CELL/2021-2022/286', 'CFEES/22SRC007/BU/GEM/257/21-22', 'CFEES/22SRC007/BU/GeM/257/21-22', 1, 27997, 2, '', 1, 1, 7, 1, '', 1, '2022-03-21 16:37:19', '', '', NULL, '2022-03-21 11:06:52'),
+('', 287, 259, 'Paper shredding ', 'AIR FORCE CELL/2021-2022/287', 'CFEES/22SRC006/BU/Gem/258/21-22', 'CFEES/22SRC010/BU/GeM/258/21-22', 2, 19780, 2, '', 1, 1, 7, 1, '', 1, '2022-03-21 16:39:26', '', '', NULL, '2022-03-21 11:09:10'),
+('', 288, 259, 'Desktop Computer', 'AIR FORCE CELL/2021-2022/288', 'CFEES/22SRC006/BU/GEM/255/21-22', 'CFEES/22SRC006/BU/GeM/255/21-22', 1, 91641, 2, '', 1, 1, 8, 1, '', 1, '2022-03-21 16:41:12', '', '', NULL, '2022-03-21 11:10:59'),
+('', 289, 259, 'Mouse pad', 'AIR FORCE CELL/2021-2022/289', 'CFEES/22SRC009/VU/GEM/259/21-22', 'CFEES/22SRC009/BU/GeM/259/21-22', 4, 400, 2, '', 1, 1, 7, 1, '', 1, '2022-03-21 16:42:34', '', '', NULL, '2022-03-21 11:12:20'),
+('', 290, 40, 'Renewal of Cyberoam CR100iNG Upgrade to XGS2100 with 3Yrs. License', 'QRS&IT/2021-2022/290', 'CFEES/23QAG004/BU/GEM/025/22-23', 'Renewal of Cyberoam CR100iNG Upgrade to XGS2100 with 3Yrs. License', 1, 655586, 2, '', 1, 1, 3, 1, '', 1, '2022-03-22 17:06:54', '', '', NULL, '2022-03-22 11:32:49'),
+('', 291, 40, 'Polycom Wired Omni-Directional Microphone', 'QRS&IT/2021-2022/291', 'CFEES/22QAG017/BU/GEM/101/22-23', 'Polycom Wired Omni-Directional Microphone', 1, 60000, 2, '', 1, 1, 1, 1, '', 1, '2022-03-22 17:06:36', '', '', NULL, '2022-03-22 11:35:41'),
+('', 292, 249, 'CAMC OF X-RAY BAGGAGE SYSTEM', 'SECURITY/2021-2022/292', 'CFEES/22SEC005/BU/GEM/060/21-22', '', 1, 782753, 2, '', 1, 1, 2, 1, '', 1, '2022-03-23 09:45:18', '', '', NULL, '2022-03-23 04:14:31'),
+('', 293, 250, 'CDEC AND EDEC RECORD', 'MMG/2021-2022/293', NULL, '', 1, 1, 2, '', 1, 1, 7, 1, '', 1, '2022-03-23 11:02:25', '', '', NULL, '2022-03-23 05:31:17'),
+('', 294, 79, 'Procurement of Lyophiliser System on Repeat order Basis', 'EnSG/2021-2022/294', NULL, '', 1, 1074000, 2, '', 1, 2, 5, 1, '', 1, '2022-03-23 11:35:07', '', '', NULL, '2022-03-23 06:04:07'),
+('', 295, 77, 'HP 126A color toner cartridges (Through GeM)', 'PC&M/2021-2022/295', 'CFEES/22PCM041/BU/GEM/270/21-22', 'HP 126A color toner cartridges (cyan, yellow, magenta and black)', 1, 20281, 2, '', 1, 1, 7, 1, '', 1, '2022-03-24 11:54:51', '', '', NULL, '2022-03-24 06:21:41'),
+('', 296, 77, 'Memento for Fire Entry suit', 'PC&M/2021-2022/296', 'CFEES/22PCM040/BU/LPC/265/21-22', 'Memento of Fire Entry suit for handing over by Secretary ', 5, 73577, 2, '', 1, 3, 9, 1, '', 1, '2022-03-25 10:51:41', '', '', NULL, '2022-03-25 05:20:33'),
+('', 297, 70, 'Black Cartridge (Drum Make and Model No.: RICOH and MP 3554 S)', 'MS&ESRG/2021-2022/297', 'CFEES/22ERG062/BU/GEM/271/21-22', '', 1, 8367, 2, '', 1, 1, 8, 1, '', 1, '2022-03-30 12:42:04', '', '', NULL, '2022-03-30 07:10:47'),
+('', 298, 96, 'CCTV Camera', 'MS&ESRG/2021-2022/298', NULL, '', 10, 46000, 1, '', 4, 1, 8, 1, '', 1, '2022-03-31 14:52:25', '', '', NULL, '2022-03-31 09:21:45'),
+('', 299, 96, 'Paper/ Abstract for HEMCE', 'MS&ESRG/2021-2022/299', NULL, '', 1, 1, 1, '', 1, 1, 1, 1, '', 1, '2022-03-31 15:15:46', '', '', NULL, '2022-03-31 09:45:22'),
+('', 300, 250, 'Keyboard ', 'MMG/2021-2022/300', 'CFEES/22MMG088/BU/GEM/251/21-22', '', 30, 23310, 2, '', 1, 1, 7, 1, '', 1, '2022-04-01 10:46:36', '', '', NULL, '2022-04-01 05:15:59'),
+('', 301, 77, 'memto for fire entry suit', 'PC&M/2021-2022/301', NULL, '', 5, 62345, 2, '', 1, 3, 9, 1, '', 1, '2022-04-01 12:01:33', '', '', NULL, '2022-04-01 06:29:54'),
+('', 302, 80, 'WATER QUALITY ANALYZER', 'FC&HB/2021-2022/302', 'CFEES/21FCP023/P/GEM/095/20-21', 'CFEES/21FCP023/P/GEM/095/20-21', 1, 280000, 1, '', 6, 1, 5, 1, '', 1, '2022-04-01 15:59:06', '', '', NULL, '2022-04-01 10:28:28'),
+('', 303, 157, 'OXYGEN ENRICHMENT TEST FACILITY', 'FSEG/2021-2022/303', NULL, 'OXYGEN ENRICHMENT TEST FACILITY', 1, 855750, 1, '', 12, 3, 9, 1, '', 1, '2022-04-01 16:07:24', '', '', NULL, '2022-04-01 10:36:23'),
+('', 304, 24, 'TNT (Serviceable)', 'MS&ESRG/2021-2022/304', 'CFEES/23ERG024/BU/ST/058/22-23', '', 5000, 1722800, 1, '', 4, 2, 2, 1, 'put up for further necessary action .', 1, '2022-04-04 15:43:39', '', '', NULL, '2022-04-04 10:12:44'),
+('', 305, 125, 'Proposal for Re-approval & Re-sanction of Specal Course on ', 'TCP&HR/2022-2023/305', NULL, '', -1, 70000, 1, '', 1, 1, 1, 2, '', 1, '2022-04-06 11:46:16', '', '', NULL, '2022-04-06 05:35:38'),
+('', 306, 253, 'Registration of firm in r/o M/s Saitech System PVt Ltd.', NULL, NULL, '', 1, 0, 2, '', 1, 2, 6, 2, '', 0, NULL, '', '', NULL, '2022-04-06 08:56:05'),
+('', 307, 253, 'Registration of firm in r/o M/s Saitech System PVt Ltd.', NULL, NULL, '', 1, 0, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-04-06 08:56:48'),
+('', 308, 250, 'Water Jug', 'MMG/2022-2023/308', 'CFEES/22MMG085/MISC/GEM/264/21-22', '', 25, 22250, 2, '', 1, 1, 7, 2, '', 1, '2022-04-06 15:50:52', '', '', NULL, '2022-04-06 10:20:28'),
+('', 309, 224, 'Stored Pressure Portable Fire Extinguisher', 'TFA/2021-2022/309', 'CFEES/21TFA028/P/GEM/35/21-22', '', 1, 929841, 1, '', 3, 1, 1, 1, '', 1, '2022-04-07 16:23:03', '', '', NULL, '2022-04-07 10:48:38'),
+('', 310, 224, 'Stored Pressure Portable Fire Extinguisher', 'TFA/2021-2022/310', NULL, '', 1, 929841, 1, '', 3, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-04-07 10:52:12'),
+('', 311, 28, 'Laboratory Items Part-IInd', 'MMG/2021-2022/311', 'CFEES/22PCM030/BU/GEM/239/21-22', '', 10, 548, 2, '', 1, 1, 7, 1, '', 1, '2022-04-08 15:41:18', '', '', NULL, '2022-04-08 10:10:54'),
+('', 312, 206, 'Procurement of LC-MS/MS ION Trap', 'QRS&IT/2021-2022/312', NULL, '', 1, 14562992, 1, '', 1, 1, 4, 1, '', 1, '2022-04-13 11:49:01', '', '', NULL, '2022-04-13 06:18:15'),
+('', 313, 248, 'data centre establishment', 'QRS&IT/2022-2023/313', 'CFEES/23QAG020/GC/GEM/18/22-23', '', 1, 4850000, 2, '', 1, 1, 5, 2, '', 1, '2022-04-18 17:16:11', '', '', NULL, '2022-04-18 11:45:17'),
+('', 314, 60, 'Procurement of UPS Battries ', 'FC&HB/2022-2023/314', 'CFEES/23FCP010/BU/GEM/07/22-23', 'Demand No. 23FCP010, Dated 11-April-2022', 15, 39975, 2, '', 1, 1, 8, 2, '', 1, '2022-04-20 13:57:11', '', '', NULL, '2022-04-20 08:26:26'),
+('', 315, 250, 'Register', 'MMG/2021-2022/315', 'CFEES/22MMG090/MISC/GEM/252/21-22', '', 80, 11200, 2, '', 1, 1, 7, 1, '', 1, '2022-04-21 11:31:18', '', '', NULL, '2022-04-21 06:00:43'),
+('', 316, 250, 'Sharpner', 'MMG/2021-2022/316', 'CFEES/22MMG092/MISC/GEM/261/21-22', '', 2000, 6960, 2, '', 1, 1, 7, 1, '', 1, '2022-04-21 11:32:49', '', '', NULL, '2022-04-21 06:02:30'),
+('', 317, 250, 'GEL PEN', 'MMG/2021-2022/317', 'CFEES/22MMG089/MISC/GEM/253/21-22', '', 400, 18225, 2, '', 1, 1, 7, 1, '', 1, '2022-04-21 16:30:43', '', '', NULL, '2022-04-21 11:00:14'),
+('', 318, 224, 'Procurement of Batteries for Hydraulic Platform', NULL, NULL, '', 2, 28314, 2, '', 1, 1, 8, 1, '', 0, NULL, '', '', NULL, '2022-04-21 11:24:50'),
+('', 319, 158, 'Procurement of Batteries for Hydraulic Platform', 'TFA/2021-2022/319', 'CFEES/23TFA001/BU/GEM/03/22-23', '', 2, 28314, 2, '', 1, 1, 8, 1, '', 1, '2022-04-21 16:58:01', '', '', NULL, '2022-04-21 11:27:36'),
+('', 320, 80, 'CFEES/19FCP079/BU/OBM/DB/80/19-20 dt 10.07.19', 'FC&HB/2021-2022/320', NULL, 'Toxicity determination in r/o NOAEL & LOAEL study of compounds CFE-HA-3FI & CFE-HA-5FI', 1, 29440000, 2, '', 1, 2, 5, 1, 'Note submitted for closure', 1, '2022-04-26 16:55:46', '', '', NULL, '2022-04-26 11:25:17'),
+('', 321, 60, 'Procurement of Nitrogen gas ( 42 Cubic meter )', NULL, NULL, '', 42, 12588, 1, '', 6, 1, 2, 1, 'NO', 0, NULL, '', '', NULL, '2022-04-26 11:57:36'),
+('', 322, 60, 'Procurement of Nitrogen Gas', 'FC&HB/2022-2023/322', 'CFEES/23FCP014/P/GEM/06/22-23', '', 42, 12588, 1, '', 6, 1, 7, 2, '', 1, '2022-04-27 10:50:06', '', '', NULL, '2022-04-27 05:19:18'),
+('', 323, 45, 'Demand for purchase of Digital Signature Certificate ', 'ADMIN/2022-2023/323', 'CFEES/22ADM002/BU/GeM/04/22-23', 'Demand for purchase of Digital Signature Certificate ', 1, 1750, 2, '', 1, 1, 2, 2, 'Demand for purchase of Digital Signature Certificate ', 1, '2022-04-27 14:48:54', '', '', NULL, '2022-04-27 09:17:58'),
+('', 324, 260, 'Motherboard repair HP INA601WTC6', 'ADMIN/2021-2022/324', NULL, '', 1, 3363, 2, '', 1, 3, 9, 1, 'Submitted for persual.', 1, '2022-04-28 16:13:13', '', '', NULL, '2022-04-28 10:41:00'),
+('', 325, 260, 'Motherboard repair HP INA601WTC6Motherboard repair HP INA601WTC6', NULL, NULL, '', 1, 3363, 2, '', 1, 3, 9, 2, '', 0, NULL, '', '', NULL, '2022-04-28 10:44:42'),
+('', 326, 260, 'Motherboard repair HP INA601WTC6', NULL, NULL, '', 1, 3363, 2, '', 1, 3, 9, 2, '', 0, NULL, '', '', NULL, '2022-04-28 10:45:16'),
+('', 327, 60, 'Procurement of Labware and Consumables', 'FC&HB/2022-2023/327', 'CFEES/23FACP012/P/GEM047/22-23', 'Demand No : 23FCP012, Date : 25 April 2022', 49, 530450, 1, '', 6, 1, 5, 2, '', 1, '2022-04-28 16:39:32', '', '', NULL, '2022-04-28 11:08:40'),
+('', 328, 250, 'Soap', 'MMG/2022-2023/328', 'CFEES/22MMG066/MISC/GEM/205/21-22', '', 200, 9000, 2, '', 1, 1, 7, 2, 'Approval for re-order on gem', 1, '2022-04-29 14:43:02', '', '', NULL, '2022-04-29 09:12:42'),
+('', 329, 250, 'Highlighter', 'MMG/2021-2022/329', 'CFEES/22MMG091/MISC/GEM/263/21-22', '', 700, 8769, 2, '', 1, 1, 7, 1, '', 1, '2022-05-04 16:02:35', '', '', NULL, '2022-05-04 10:32:02'),
+('', 330, 183, '2000 lb Bomb Casing Assembly', 'MS&ESRG/2021-2022/330', 'CFEES/20ERG044/P/OBM/DB/155/19-20', '', 6, 10994778, 1, '', 4, 2, 5, 1, '', 1, '2022-05-09 10:48:09', '', '', NULL, '2022-05-09 05:17:33'),
+('', 331, 80, 'Glass Screw Cap Laboratory vials', 'FC&HB/2022-2023/331', 'CFEES/23FCP016/P/GEM/22/22-23', '', 15, 27750, 1, '', 6, 1, 7, 2, '', 1, '2022-05-12 09:56:48', '', '', NULL, '2022-05-12 04:26:22'),
+('', 332, 84, 'Procurement of Lead Acid Batteries Through GeM', 'FSEG/2022-2023/332', 'CFEES/23FAS003/BU/GEM/05/22-23', '', 2, 19550, 2, '', 1, 1, 7, 2, '', 1, '2022-05-17 14:48:41', '', '', NULL, '2022-05-17 09:17:59'),
+('', 333, 250, 'Glass Cleaner', 'MMG/2022-2023/333', 'CFEES/23MMG002/MISC/GEM/02/22-23', '', 190, 24700, 2, '', 1, 1, 7, 2, '', 1, '2022-05-17 15:16:53', '', '', NULL, '2022-05-17 09:46:26'),
+('', 334, 250, 'FE Allocation', 'MMG/2021-2022/334', 'CFEES/06229/FEALLOC/MMG', '', 1, 4043105, 1, '', 1, 3, 1, 1, '', 1, '2022-05-18 10:36:43', '', '', NULL, '2022-05-18 05:06:29'),
+('', 335, 191, 'SOC: SANCTION FOR HIRING OF DGR (MoD)  ', 'SECURITY/2021-2022/335', 'CFEES/20SEC026/MISC/CBM/DB/265/19-20', '', 12, 15372616, 2, '', 1, 2, 6, 1, '', 1, '2022-05-19 16:40:43', '', '', NULL, '2022-05-19 11:09:43'),
+('', 336, 250, 'REUMBURSEMENT OF LAPTOP', 'MMG/2022-2023/336', NULL, '', 1, 97970, 2, '', 1, 1, 7, 2, '', 1, '2022-05-24 11:37:34', '', '', NULL, '2022-05-24 06:06:57'),
+('', 337, 250, 'Cartridge 278', 'MMG/2022-2023/337', 'CFEES/23MMG001/MISC/GEM/01/22-23', '', 13, 97032, 2, '', 1, 1, 8, 2, '', 2, '2022-05-25 11:53:27', '', '', NULL, '2022-05-25 06:23:00'),
+('', 338, 80, 'Laser Printer', 'FC&HB/2022-2023/338', 'CFEES/23FCP019/P/GEM/032/22-23', 'MFM', 1, 18007, 1, '', 6, 1, 7, 2, '', 1, '2022-05-25 15:54:06', '', '', NULL, '2022-05-25 10:23:36'),
+('', 339, 190, '6 Nos of 2000 lb Bomb Casing (PART FILE)', 'MMG/2021-2022/339', 'CFEES/20ERG044/P/OBM/DB/155/19-20/PART FILE', '', 6, 10994778, 1, '', 4, 2, 5, 1, '', 1, '2022-05-27 14:57:24', '', '', NULL, '2022-05-27 09:26:52'),
+('', 340, 191, 'PROCUREMENT OF WORK STATION', 'SECURITY/2021-2022/340', 'CFEES/23SEC010/BU/GEM/057/22-23', '', 2, 320820, 2, '', 1, 1, 5, 1, '', 1, '2022-05-27 16:20:57', '', '', NULL, '2022-05-27 10:50:10'),
+('', 341, 96, 'CCTV Camera (IP Camera)', 'MS&ESRG/2022-2023/341', 'CFEES/23ERG013/P/GEM/26/22-23', '', 4, 48800, 1, '', 4, 1, 5, 2, 'Put up for further necessary action', 1, '2022-05-31 12:16:31', '', '', NULL, '2022-05-31 06:43:46'),
+('', 342, 191, 'READJUSTMENT CCTV NETWORK UPGRADATION ', 'SECURITY/2021-2022/342', 'CFEES/22SEC013/BU/OT/145/21-22', '', 1, 2580837, 2, '', 1, 1, 5, 1, '', 1, '2022-05-31 16:22:50', '', '', NULL, '2022-05-31 10:51:23'),
+('', 343, 253, 'Industry Partner Registration (M/s Choupari System (I) Pvt Ltd)', 'MMG/2022-2023/343', 'CFEES/06205/VRC/MMG/22-23(m/s Technowares system ', 'Registration in respect of Choupari System (I) Pvt Ltd.', 1, -2, 1, '', 1, 1, 1, 2, '', 1, '2022-06-02 16:52:25', '', '', NULL, '2022-06-02 09:35:58'),
+('', 344, 253, 'CFEES/06205/VRC/MMG/22-23', 'MMG/2021-2022/344', 'CFEES/06205/VRC/MMG/22-23 ', 'Registration in respect of M/s Technoware System India Pvt Ltd. ', 1, 1, 1, '', 1, 1, 1, 1, '', 1, '2022-06-02 16:52:12', '', '', NULL, '2022-06-02 09:37:32'),
+('', 345, 253, 'CFEES/06205/VRC/MMG/22-23/CWI', 'MMG/2022-2023/345', 'CFEES/06205/VRC/MMG/22-23 ', 'Registration in r/o M/s Computer Ware India Pvt Ltd', 1, -3, 1, '', 1, 1, 1, 2, '', 1, '2022-06-02 16:51:56', '', '', NULL, '2022-06-02 09:43:31'),
+('', 346, 250, 'Cartridge 278', 'MMG/2022-2023/346', 'CFEES/23MMG001/MISC/GEM/01/22-23', '', 13, 97032, 2, '', 1, 1, 2, 2, '', 1, '2022-06-03 14:28:13', '', '', NULL, '2022-06-03 08:57:57'),
+('', 347, 79, 'PROCUREMENT OF ULTRA-SONIC BATH SONICATER', 'EnSG/2021-2022/347', 'CFEES/23ENS011/P/GEM/038/22-23', '', 1, 156500, 1, '', 7, 1, 9, 1, '', 1, '2022-06-07 11:54:02', '', '', NULL, '2022-06-07 06:22:08'),
+('', 348, 183, 'Hiring of Cleaning Staff at CFEES Blast Test Range, Borkhedi, Nagpur', 'MS&ESRG/2022-2023/348', 'CFEES/23ERG015/MISC/GEM/23/22-23', '', 1, 3212874, 2, '', 1, 1, 5, 2, '', 1, '2022-06-08 11:34:39', '', '', NULL, '2022-06-08 06:03:52'),
+('', 349, 32, 'High Temperature pressure sensors', 'FC&HB/2022-2023/349', 'CFEES/23FCP020/P/ST/040/ DT 13-07-2022', '', 4, 1098504, 1, '', 8, 2, 3, 2, '', 1, '2022-06-08 15:47:51', '', '', NULL, '2022-06-08 10:09:01'),
+('', 350, 72, 'procurement of Enviromental Chamber ', 'FC&HB/2022-2023/350', 'CFEES/23FCP023/P/GEM/071/22-23', 'Procurement of Environmental Chamber ', 1, 400000, 1, '', 8, 1, 8, 2, '', 1, '2022-06-10 12:52:05', '', '', NULL, '2022-06-10 07:20:47'),
+('', 351, 72, 'procurement of Gas analyser', 'FC&HB/2022-2023/351', 'CFEES/23FCP022/P/GEM/103/22-23', 'procurement of Gas analyser', 1, 300000, 1, '', 8, 1, 8, 2, '', 1, '2022-06-10 12:53:33', '', '', NULL, '2022-06-10 07:23:18'),
+('', 352, 217, 'Laser printer (Multifunction Machine)', 'WORKS/2021-2022/352', 'CFEES/23WRK003/BU/GEM/24/22-23', '', 1, 64852, 1, '', 1, 1, 7, 1, '', 1, '2022-06-10 16:31:51', '', '', NULL, '2022-06-10 11:01:27'),
+('', 353, 124, 'Onsite Technical support ( IMMS)', 'MMG/2022-2023/353', 'CFEES/23MMG004/BU/ST/13/22-23', '', 12, 992970, 2, '', 1, 2, 2, 2, '', 1, '2022-06-13 09:58:24', '', '', NULL, '2022-06-13 04:20:00'),
+('', 354, 250, 'Air Freshener', 'MMG/2022-2023/354', 'CFEES/23MMG005/MISC/GEM/11/22-23', '', 125, 24875, 2, '', 1, 1, 7, 2, '', 1, '2022-06-20 11:33:40', '', '', NULL, '2022-06-20 06:03:16'),
+('', 355, 250, 'Pencil', 'MMG/2022-2023/355', 'CFEES/23MMG006/Misc/GeM/10/22-23', '', 3000, 21000, 2, '', 1, 1, 7, 2, '', 1, '2022-06-20 11:34:48', '', '', NULL, '2022-06-20 06:04:33'),
+('', 356, 250, 'Flag Tri Colour', 'MMG/2022-2023/356', 'CFEES/23MMG07/MISC/GEM/09/22-23', '', 500, 45, 2, '', 1, 1, 7, 2, '', 1, '2022-06-20 11:35:43', '', '', NULL, '2022-06-20 06:05:28'),
+('', 357, 250, 'Damper', 'MMG/2022-2023/357', NULL, '', 300, 24000, 2, '', 1, 1, 7, 2, '', 1, '2022-06-20 11:36:34', '', '', NULL, '2022-06-20 06:06:17'),
+('', 358, 250, 'Eraser', 'MMG/2022-2023/358', 'CFEES/23MMG011/MISC/GEM/16/22-23', '', 3000, 21000, 2, '', 1, 1, 7, 2, '', 1, '2022-06-20 11:37:32', '', '', NULL, '2022-06-20 06:07:11'),
+('', 359, 250, 'Noting Sheet Pad', 'MMG/2022-2023/359', 'CFEES/23MMG010/MISC/GEM/15/22-23', '', 100, 25000, 2, '', 1, 1, 7, 2, '', 1, '2022-06-20 11:38:23', '', '', NULL, '2022-06-20 06:08:11'),
+('', 360, 60, 'Glasswares', 'FC&HB/2022-2023/360', 'CFEES/23FCP030/P/GEM/028/22-23', 'Demand No. 23FCP030, Dated: 20 Jun 2022', 83, 507367, 1, '', 6, 1, 5, 2, '', 1, '2022-06-22 15:36:21', '', '', NULL, '2022-06-22 10:05:09'),
+('', 361, 191, 'CCTV SURVEILANCE SYSTEM FOR PILKHUWA', 'SECURITY/2021-2022/361', NULL, '', 1, 16450750, 2, '', 1, 1, 5, 1, '', 1, '2022-06-22 15:56:31', '', '', NULL, '2022-06-22 10:26:03'),
+('', 362, 191, 'ACCESS CONTROL SYSTEM FOR P[ILKHUWA', 'SECURITY/2021-2022/362', NULL, '', 1, 11336567, 2, '', 1, 1, 5, 1, '', 1, '2022-06-22 15:59:31', '', '', NULL, '2022-06-22 10:29:05'),
+('', 363, 163, 'TONER (FIRSTE)', 'QRS&IT/2022-2023/363', 'CFEES/23QAG011/B/GEM/026/22-23', 'Toner for TOSHIBA estudio3018A', 2, 27560, 1, '', 2, 1, 8, 2, '', 1, '2022-06-22 16:51:56', '', '', NULL, '2022-06-22 11:21:23'),
+('', 364, 96, 'CCTV Camera (Non IP Camera)', 'MS&ESRG/2022-2023/364', 'CFEES/23ERG014/P/GEM/027/22-23', '', 5, 22123, 1, '', 4, 1, 5, 2, 'For further necessary action', 1, '2022-06-27 14:57:48', '', '', NULL, '2022-06-27 09:27:00'),
+('', 365, 217, 'SoC for extension of contract: Hiring of Cleaning Staff at CFEES Complex, Delhi', 'WORKS/2021-2022/365', 'CFEES/21WRK013/MISC/GEM/194/20-21', '', 1, 1452975, 2, '', 1, 1, 7, 1, '', 1, '2022-06-27 16:09:57', '', '', NULL, '2022-06-27 10:38:41'),
+('', 366, 28, 'Banner with HD printing', 'PC&M/2022-2023/366', 'CFEES/PCM003/BU/GEM/21/22-23', 'Banner printing for Dehradun exhibition', 4, 10177, 2, '', 1, 1, 7, 2, '', 1, '2022-06-28 16:34:18', '', '', NULL, '2022-06-28 11:03:32'),
+('', 367, 80, 'CMC for 400MHz NMR for five years', 'FC&HB/2022-2023/367', 'CFEES/20FCP122/BU/ST/266/19-20', 'CFEES/20FCP122/BU/ST/266/19-20 dt 02/03/2020\r\nTotal SO Cost: Rs12809891/- (for 5 Years)', 1, 2561978, 2, '', 1, 2, 2, 2, 'Half yearly payment', 1, '2022-06-30 09:31:23', '', '', NULL, '2022-06-30 04:00:54'),
+('', 368, 79, 'Procurement of Chemical Oxygen Demand (COD) digesting Unit thorugh GeM', 'EnSG/2021-2022/368', 'CFEES/ENS015/P/GEM/033/22-23', '', 1, 160000, 1, '', 7, 1, 8, 1, '', 1, '2022-07-05 15:55:07', '', '', NULL, '2022-07-05 10:24:45'),
+('', 369, 80, 'Contract for supply of high purity liquid nitrogen (LN2)', 'FC&HB/2022-2023/369', 'CFEES/23FCP031/BU/GEM/066/22-23', 'supply of high purity liquid nitrogen (LN2) For 400MHz NMR for 3 years', 1, 1188000, 2, '', 1, 1, 5, 2, '', 1, '2022-07-05 17:44:59', '', '', NULL, '2022-07-05 12:14:29'),
+('', 370, 250, 'Pencil Cell', 'MMG/2022-2023/370', NULL, '', 1300, 23400, 2, '', 1, 1, 7, 2, '', 1, '2022-07-06 11:36:40', '', '', NULL, '2022-07-06 06:05:11'),
+('', 371, 77, 'KELL Wooden Cribs', 'PC&M/2022-2023/371', 'CFEES/23PCM006/B/LPC/029/22-23', '', 10, 112100, 2, '', 1, 2, 9, 2, '', 1, '2022-07-06 12:07:55', '', '', NULL, '2022-07-06 06:37:20'),
+('', 372, 158, 'CCTV SURVEILLANCE & ACCESS CONTROL SYSTEM FOR SDC PILKHUWA', 'TFA/2021-2022/372', 'CFEES/23TFA011/GC/LT/062/22-23', '', 2, 46685915, 2, '', 1, 3, 6, 1, '', 1, '2022-07-06 14:22:16', '', '', NULL, '2022-07-06 08:51:52'),
+('', 373, 259, '1000 GB SATA HD HARD DISK DRIVE (DEMAND NO. CFEES/23SRC003/B/GEM/031/22-23 DT 8 JUL 22', NULL, NULL, 'HARD DISK DRIVE (PROCUREMENT THROUGH GEM) ', -1, 7499, 2, '', 1, 1, 9, 2, '', 0, NULL, '', '', NULL, '2022-07-08 06:24:15'),
+('', 374, 77, ' 3.7 V Rechargeable Lithium-ion battery through GEM', 'PC&M/2022-2023/374', 'CFEES/23PCM011/BU/GEM/036/22-23', '', 60, 21600, 2, '', 1, 1, 7, 2, '', 1, '2022-07-08 12:13:27', '', '', NULL, '2022-07-08 06:42:26'),
+('', 375, 76, 'Chemical Oxygen Demand  (COD) Digesting Unit through GeM', NULL, NULL, '', 1, 160000, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-07-08 07:41:29'),
+('', 376, 76, 'Chemical Oxygen Demand  (COD) Digesting Unit through GeM', NULL, NULL, '', 1, 160000, 1, '', 1, 1, 1, 1, 'Director secretary', 0, NULL, '', '', NULL, '2022-07-08 11:29:08'),
+('', 377, 76, 'Chemical Oxygen Demand  (COD) Digesting Unit through GeM', NULL, NULL, '', 1, 160000, 1, '', 1, 1, 1, 1, 'Director\r\n', 0, NULL, '', '', NULL, '2022-07-08 11:31:56'),
+('', 378, 76, 'Chemical Oxygen Demand  (COD) Digesting Unit through GeM', NULL, NULL, '', 1, 160000, 1, '', 1, 1, 1, 1, '', 0, NULL, '', '', NULL, '2022-07-08 11:34:26'),
+('', 379, 259, '1000 GB SATA HD HARD DISK DRIVE (DEMAND NO. CFEES/23SRC003/B/GEM/031/22-23 DT 8 JUL 22', NULL, NULL, '', 1, 7500, 1, '', 1, 1, 1, 2, '', 0, NULL, '', '', NULL, '2022-07-11 05:18:09'),
+('', 380, 77, 'Hydrogen peroxide(30%) solution', 'PC&M/2021-2022/380', 'CFEES/23PCM013/BU/GEM/045/22-23', '', 35, 22400, 2, '', 1, 1, 7, 1, '', 1, '2022-07-12 15:14:56', '', '', NULL, '2022-07-12 09:44:29'),
+('', 381, 250, 'Emporium Trophy', 'MMG/2022-2023/381', 'CFEES/23MMG017/MISC/GEM/034/22-23', '', 20, 40000, 2, '', 1, 1, 8, 2, '', 1, '2022-07-12 16:19:24', '', '', NULL, '2022-07-12 10:49:05'),
+('', 382, 250, 'Duster', 'MMG/2021-2022/382', 'CFEES/23MMG015/Misc/GeM/032/22-23', '', 400, 24000, 2, '', 1, 1, 7, 2, '', 1, '2022-07-13 16:13:45', '', '', NULL, '2022-07-13 10:43:15'),
+('', 384, 244, 'CMRC of Development Fabrication and Testing of AIFDSS', 'FSEG/2022-2023/384', NULL, 'CMRC of Development Fabrication and Testing of AIFDSS', 1, 38703952, 1, '', 11, 2, 2, 2, '', 1, '2022-07-13 16:48:50', '', '', NULL, '2022-07-13 11:06:42'),
+('', 385, 110, 'CMRC for Devlopment contract for moisture barrier laminates for structural fire fighting suits', 'PC&M/2022-2023/385', NULL, '', 1, 1950002, 2, '', 1, 2, 5, 2, '', 1, '2022-07-14 09:59:33', '', '', NULL, '2022-07-13 11:55:49'),
+('', 386, 77, 'Fire fite Lithex Fire Extinguisher', 'PC&M/2022-2023/386', NULL, '', 6, 192000, 2, '', 1, 1, 1, 2, '', 2, '2022-07-14 14:41:53', '', '', NULL, '2022-07-14 09:07:50'),
+('', 387, 77, 'Developmental contract for Aqueous Clay Mineral Dispersion (ACD)', 'PC&M/2022-2023/387', 'CFEES/23PCM007/BU/OBM/064/22-23', '', 1, 1516300, 2, '', 1, 2, 5, 2, '', 1, '2022-07-14 14:41:38', '', '', NULL, '2022-07-14 09:10:11'),
+('', 388, 79, 'UPS', 'EnSG/2021-2022/388', 'CFEES/23ENS018/P/GEM/082/22-23', '', 4, 99200, 1, '', 7, 1, 8, 1, '', 1, '2022-07-15 11:39:07', '', '', NULL, '2022-07-15 06:08:43'),
+('', 389, 71, 'procurement of Safety Goggles', 'QRS&IT/2021-2022/389', 'CFEES/23QAG031/BU/GEM/044/22-233', '', 20, 8000, 2, '', 1, 1, 8, 1, '', 1, '2022-07-18 09:51:08', '', '', NULL, '2022-07-18 04:20:29'),
+('', 390, 71, 'Procurement of Hand Gloves', 'QRS&IT/2021-2022/390', 'CFEES/23QAG032/BU/GEM/046/22-23', '', 200, 15000, 2, '', 1, 1, 8, 1, '', 1, '2022-07-18 09:53:56', '', '', NULL, '2022-07-18 04:23:31'),
+('', 391, 192, 'First Aid Box', 'QRS&IT/2022-2023/391', 'CFEES/22QAG028/B/GEM/048', '', 15, 22500, 2, '', 1, 1, 8, 2, '', 1, '2022-07-18 10:25:28', '', '', NULL, '2022-07-18 04:37:22'),
+('', 392, 192, 'orbital shaker', 'QRS&IT/2022-2023/392', 'CFEES/23QAG029/P/GEM/120/22-23', '', 1, 392400, 2, '', 1, 1, 8, 2, '', 1, '2022-07-18 11:00:42', '', '', NULL, '2022-07-18 05:30:18'),
+('', 393, 191, '10 PORT Gigabit Smart Managed PoE Switch', 'SECURITY/2022-2023/393', 'CFEES/23SEC014/B/LPC/049/22-23', '', 6, 176400, 2, '', 1, 3, 1, 2, '', 1, '2022-07-18 12:01:44', '', '', NULL, '2022-07-18 06:30:26'),
+('', 394, 200, 'Job work for Modification and Reactivation of Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System', 'EnSG/2022-2023/394', NULL, 'It is proposed to undertake a development work of with M/s Cease fire Industries Pvt. Ltd. who developed and installed the existing system in 2020', 1, 97885, 2, '', 1, 1, 2, 2, '', 1, '2022-07-18 17:03:38', '', '', NULL, '2022-07-18 11:33:05'),
+('', 395, 77, 'Developmental contract for Aqueous Clay Mineral Dispersion (ACD)', NULL, NULL, '', 1, 1516300, 2, '', 1, 2, 5, 2, '', 0, NULL, '', '', NULL, '2022-07-20 05:44:47'),
+('', 396, 77, 'Acrylic Acid', 'PC&M/2022-2023/396', 'CFEES/23PCM014/BU/Gem/059/22-23 ', '', 10, 11180, 2, '', 1, 1, 5, 2, '', 1, '2022-07-20 15:35:47', '', '', NULL, '2022-07-20 06:38:30'),
+('', 397, 77, 'Acrylic Acid', NULL, NULL, '', 10, 11180, 2, '', 1, 1, 7, 2, '', 0, NULL, '', '', NULL, '2022-07-20 10:04:02'),
+('', 398, 250, 'Cartridge 278', 'MMG/2022-2023/398', 'CFEES/23MMG016/B/GEM/043/22-23', '', 4, 22000, 2, '', 1, 1, 7, 2, '', 1, '2022-07-20 15:38:26', '', '', NULL, '2022-07-20 10:08:13'),
+('', 399, 96, 'Ethernet PoE Switch with 2 Gigabiy UPlink', 'MS&ESRG/2022-2023/399', 'CFEES/23ERG022/P/GEM/050/22-23', '', 2, 19600, 1, '', 4, 1, 7, 2, '', 1, '2022-07-22 10:28:53', '', '', NULL, '2022-07-22 04:58:16'),
+('', 400, 191, 'NATIONAL FLAG', 'SECURITY/2022-2023/400', 'CFEES/23SEC012/BU/GEM/051/22-23', '', 5, 14240, 2, '', 1, 1, 5, 2, '', 1, '2022-07-25 12:56:16', '', '', NULL, '2022-07-25 07:25:27'),
+('', 401, 80, 'BOD Incubator', 'FC&HB/2022-2023/401', 'CFEES/23FCP042/P//GEM/061/22-23', '', 1, 261000, 1, '', 6, 1, 8, 2, '', 1, '2022-07-28 09:59:13', '', '', NULL, '2022-07-28 04:26:57'),
+('', 402, 80, 'Deuterated Solvents', 'FC&HB/2022-2023/402', 'CFEES/23FCP033/P/LPC/056/22-23', '', 3, 246148, 1, '', 6, 3, 9, 2, '', 1, '2022-07-28 09:59:02', '', '', NULL, '2022-07-28 04:27:45'),
+('', 403, 80, 'Digital Conductivity Meter', 'FC&HB/2022-2023/403', 'CFEES/23FCP040/P/GEM/053/22-23', '', 1, 75000, 1, '', 6, 1, 8, 2, '', 1, '2022-07-28 09:58:50', '', '', NULL, '2022-07-28 04:28:28'),
+('', 404, 191, 'soc SANCTION FOR EXTENSION OF CONTRACT M/S NARINDER PAL SINGH TAPRIAL SECURITY AGENCY', 'SECURITY/2022-2023/404', 'CFEES/22SEC003/MISC/LT/068/21-22', '', 1, 15372924, 2, '', 1, 2, 7, 2, '', 1, '2022-07-28 11:36:48', '', '', NULL, '2022-07-28 06:06:15'),
+('', 405, 200, 'Job work on Refurbishement of  Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System', 'EnSG/2021-2022/405', NULL, '', 1, 97885, 2, '', 1, 1, 1, 1, '', 1, '2022-07-28 15:14:40', '', '', NULL, '2022-07-28 09:44:16'),
+('', 406, 200, 'Job work on Refurbishement of Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System', 'EnSG/2022-2023/406', NULL, 'Job work on Refurbishement of Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System', 1, 97885, 2, '', 1, 3, 7, 2, 'Job work on Refurbishement of Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System required for demostration and fire studies at Pilkhuwa', 1, '2022-07-28 15:23:16', '', '', NULL, '2022-07-28 09:52:45'),
+('', 407, 39, 'Procurement of Double Distilation Water Apparatus', 'FC&HB/2022-2023/407', 'CFEES/23FCP037/P/GEM/081/22-23', '23FCP037', 1, 140380, 1, '', 6, 1, 8, 2, 'Process the case', 1, '2022-07-29 10:54:23', '', '', NULL, '2022-07-29 05:10:50'),
+('', 408, 224, 'procurement of Refilling of LPG Gas Cylinder for Simulator ', 'TFA/2021-2022/408', NULL, '', 3, 241920, 2, '', 1, 1, 9, 2, '', 1, '2022-08-01 17:42:27', '', '', NULL, '2022-08-01 11:47:36'),
+('', 409, 224, 'CNC of Hazmat Vehicle ', 'TFA/2022-2023/409', 'CFEES/23TFA013/BU/ST/159/22-23', '', 1, 11400000, 2, '', 1, 2, 2, 2, '', 1, '2022-08-01 17:42:44', '', '', NULL, '2022-08-01 11:57:21'),
+('', 410, 224, 'Procurement of AMC for Fire Training Simulator at SDC Pilkhuwa', 'TFA/2021-2022/410', NULL, '', 1, 11728180, 2, '', 1, 2, 2, 1, '', 1, '2022-08-01 17:43:01', '', '', NULL, '2022-08-01 12:03:14'),
+('', 411, 224, 'Hydraulic Platform', 'TFA/2021-2022/411', 'CFEES/23TFA008/BU/ST/130/22-23', '', 1, 15198400, 2, '', 1, 2, 2, 1, '', 1, '2022-08-01 17:43:57', '', '', NULL, '2022-08-01 12:07:12'),
+('', 412, 224, 'Emergency Rescue Tender ', 'TFA/2022-2023/412', NULL, '', 1, 450000, 2, '', 1, 2, 2, 2, '', 1, '2022-08-01 17:44:12', '', '', NULL, '2022-08-01 12:10:12'),
+('', 413, 217, 'Approval for Re-Imbursement of Residential Mobile Bill', 'WORKS/2021-2022/413', NULL, '', 1, 0, 2, '', 1, 1, 7, 1, '', 1, '2022-08-02 15:46:25', '', '', NULL, '2022-08-02 10:16:03'),
+('', 414, 40, 'EPABX CAMC', 'QRS&IT/2022-2023/414', 'CFEES/23QAG007/BU/ST/068/22-23', '', 1, 153052, 2, '', 1, 2, 2, 2, '', 1, '2022-08-02 16:06:44', '', '', NULL, '2022-08-02 10:34:54'),
+('', 415, 28, 'N,N-Dimethylformamide anhydrous, 500ml', 'PC&M/2021-2022/415', NULL, '', 8, 453, 1, '', 1, 1, 1, 1, '', 1, '2022-10-28 10:32:51', '', '', NULL, '2022-08-03 06:18:42'),
+('', 416, 261, 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI', 'MT/2022-2023/416', NULL, 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI as replacement of Maruti Gypsy BA No. 03B086225W authorised against vehicles authorised under RE', 1, 993398, 2, '', 1, 1, 7, 2, '', 1, '2022-08-03 16:31:22', '', '', NULL, '2022-08-03 10:58:24'),
+('', 417, 250, 'NOTE PAD', 'MMG/2021-2022/417', 'CFEES/22MMG022/MISC/GEM/055/22-23', ' ', 600, 24000, 1, '', 1, 1, 7, 1, '', 1, '2022-08-04 11:36:24', '', '', NULL, '2022-08-04 06:05:54'),
+('', 418, 250, 'STALER BIG ', 'MMG/2021-2022/418', 'CFEES/23MMG024/MISC/GEM/054/22-23', '', 50, 14450, 2, '', 1, 1, 7, 1, '', 1, '2022-08-04 16:02:22', '', '', NULL, '2022-08-04 10:31:59'),
+('', 419, 261, 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI', 'MT/2022-2023/419', 'CFEES/23MTG001/GC/GEM/102/22-23', 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI as replacement of Maruti Gypsy BA No. 03B086225W authorised against vehicles authorised under RE ', 1, 993398, 2, '', 1, 1, 1, 2, '', 1, '2022-08-05 11:50:58', '', '', NULL, '2022-08-05 06:20:06'),
+('', 420, 261, 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI', 'MT/2022-2023/420', 'CFEES/23MTG001/GC/GEM/102/22-23', 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI as replacement of Maruti Gypsy BA No. 03B086225W authorised against vehicles authorised under RE ', 1, 993398, 2, '', 1, 1, 7, 2, '', 1, '2022-08-08 10:29:42', '', '', NULL, '2022-08-08 04:58:14'),
+('', 421, 77, 'Refill of Nitrogen gas', 'PC&M/2021-2022/421', 'CFEES/23PCM016/BU/GEM/060/22-23', '', 7, 20580, 2, '', 1, 1, 7, 1, '', 2, '2022-08-10 10:12:52', '', '', NULL, '2022-08-10 04:42:27'),
+('', 422, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', NULL, NULL, '', 1, 304405, 1, '', 7, 1, 8, 2, '', 0, NULL, '', '', NULL, '2022-08-12 04:28:03'),
+('', 423, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', NULL, NULL, '', 1, 304405, 1, '', 7, 1, 8, 2, '', 0, NULL, '', '', NULL, '2022-08-12 04:43:22'),
+('', 424, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', NULL, NULL, '', 1, 304405, 1, '', 7, 1, 8, 2, '', 0, NULL, '', '', NULL, '2022-08-12 04:45:02'),
+('', 425, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', NULL, NULL, '', 1, 304405, 1, '', 7, 1, 8, 2, '', 0, NULL, '', '', NULL, '2022-08-12 04:46:35'),
+('', 426, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', 'EnSG/2022-2023/426', 'CFEES/23ENS024/P/GEM/063/22-23', '', 1, 304405, 1, '', 7, 1, 8, 2, '', 1, '2022-08-12 10:24:16', '', '', NULL, '2022-08-12 04:52:29'),
+('', 427, 77, 'AVD FIRE EXTINGUISHER', 'PC&M/2021-2022/427', 'CFEES/23PCM017/BU/LPC/065/22-23', '', 6, 191400, 2, '', 1, 3, 9, 1, '', 1, '2022-08-17 09:39:29', '', '', NULL, '2022-08-17 04:09:03'),
+('', 428, 261, 'Procurement of Diesel and Unleaded Petrol for MT vehicles', 'MT/2022-2023/428', 'CFEES/23MTG007/BU/ST/069/22-23', '', 1, 999136, 2, '', 1, 3, 2, 2, '', 1, '2022-08-22 10:35:51', '', '', NULL, '2022-08-22 05:04:55'),
+('', 429, 224, 'procurement of Photo Frames for SDC Pilkhuwa', 'TFA/2022-2023/429', NULL, '', 15, 33000, 2, '', 1, 1, 2, 2, '', 1, '2022-08-24 11:42:50', '', '', NULL, '2022-08-24 06:11:58'),
+('', 430, 158, 'BOREWELL RESCUE SYSTEM', 'TFA/2022-2023/430', NULL, '', 1, 4508272, 2, '', 1, 2, 2, 2, '', 1, '2022-08-24 15:52:44', '', '', NULL, '2022-08-24 10:22:19'),
+('', 431, 32, 'Halon Tonners Stacking system', 'FC&HB/2022-2023/431', NULL, '', 1, 2808750, 2, '', 1, 2, 5, 2, '', 1, '2022-09-09 15:54:46', '', '', NULL, '2022-08-26 05:11:50'),
+('', 432, 32, 'Halon Tonners Stacking system', 'FC&HB/2022-2023/432', 'CFEES/23FCP028/GC/DBM/123/22-23', '', 1, 2808750, 2, '', 1, 2, 5, 2, '', 1, '2022-08-26 10:50:32', '', '', NULL, '2022-08-26 05:19:23'),
+('', 433, 80, 'Ethyl Acetate', 'FC&HB/2022-2023/433', 'CFEES/22FCP026/P/GEM/070/21-22', '', 20, 70600, 1, '', 6, 1, 8, 2, 'For processing through GeM', 1, '2022-08-29 10:55:47', '', '', NULL, '2022-08-29 05:25:00'),
+('', 434, 250, 'Scanner', 'MMG/2022-2023/434', 'CFEES/23MMG028/BU/GEM/067/22-23', '', 1, 24006, 2, '', 1, 1, 7, 2, '', 1, '2022-08-30 12:19:59', '', '', NULL, '2022-08-30 06:49:42'),
+('', 435, 80, 'Fluorochemicals (Raw Materials)', 'FC&HB/2022-2023/435', 'CFEES/23FCP054/P/LPC/072/22-23', '', 2, 249268, 1, '', 6, 3, 9, 2, '', 1, '2022-09-02 10:40:33', '', '', NULL, '2022-09-02 05:10:12'),
+('', 436, 259, '1000 GB SATA HD HARD DISK DRIVE (DEMAND NO. CFEES/23SRC003/B/GEM/031/22-23 DT 8 JUL 22', 'AIR FORCE CELL/2022-2023/436', 'CFEES/23SRC003/B/GEM/031/22-23', 'DEMAND 1000 GB SATA HD DISK DRIVE', 1, 7500, 2, '', 1, 1, 7, 2, 'DEMAND ', 1, '2022-09-05 15:22:44', '', '', NULL, '2022-09-05 09:52:04'),
+('', 437, 250, 'PEN STAND', 'MMG/2022-2023/437', 'CFEES/23MMG027/MISC/GEM/070/22-23', '', 16, 24880, 2, '', 1, 1, 7, 2, '', 1, '2022-09-06 10:14:57', '', '', NULL, '2022-09-06 04:44:32'),
+('', 438, 32, 'Fabrication of portable polycarbonate chamber 1m3 and cylindrical test vessel 0.49m3', 'FC&HB/2022-2023/438', 'CFEES/23FCP049/P/LPC/083/22-23', '', 1, 216530, 2, '', 1, 3, 9, 2, '', 1, '2022-09-09 15:52:48', '', '', NULL, '2022-09-09 10:21:20'),
+('', 439, 250, 'GEL PEN', 'MMG/2022-2023/439', 'CFEES/23MMG033/MISC/GEM/074/22-23', '', 350, 22750, 2, '', 1, 1, 7, 2, '', 1, '2022-09-12 12:48:54', '', '', NULL, '2022-09-12 07:17:43'),
+('', 440, 250, 'File Cover', 'MMG/2022-2023/440', 'CFEES/23MMG032/MISC/GEM/073/22-23', '', 800, 20000, 2, '', 1, 1, 7, 2, '', 1, '2022-09-12 12:49:50', '', '', NULL, '2022-09-12 07:19:37'),
+('', 441, 196, 'Antivirus (420 Nos. Licences) by repeat order', 'QRS&IT/2022-2023/441', NULL, 'Centralized procurement of Antivirus licences through repeat order ', 420, 0, 2, '', 1, 1, 1, 2, '', 1, '2022-09-14 16:51:45', '', '', NULL, '2022-09-14 11:18:45'),
+('', 442, 80, 'Supply of High Purity Liquid Nitrogen ', 'FC&HB/2022-2023/442', 'CFEES/23FCP060/BU/GEM/088/22-23', 'Supply of High Purity Liquid Nitrogen (Direct purchase through geM)', 166, 24900, 2, '', 1, 1, 7, 2, '', 1, '2022-09-15 09:51:08', '', '', NULL, '2022-09-15 04:20:46'),
+('', 443, 60, 'Recirculating Chiller', 'FC&HB/2022-2023/443', 'CFEES/23FCP061/P/GEM/095/22-23', 'Demand No.: 23FCP061, Dated:14 Sep 2022', 1, 335405, 1, '', 6, 1, 8, 2, '', 1, '2022-09-15 12:20:25', '', '', NULL, '2022-09-15 06:49:39'),
+('', 444, 217, 'Polypropylene Waste Container & Accessories', 'WORKS/2022-2023/444', 'CFEES/23WRK007/MISC/GEM/087/22-23', '', 10, 15000, 2, '', 1, 1, 7, 2, '', 1, '2022-09-15 12:43:30', '', '', NULL, '2022-09-15 07:13:04'),
+('', 445, 110, 'Servicing and calibration', 'PC&M/2022-2023/445', 'CFEES/23PCM020/BU/LPC/125/22-23', 'Servicing and calibration of textile equipment', 1, 60888, 2, '', 1, 3, 9, 2, '', 1, '2022-09-15 17:21:48', '', '', NULL, '2022-09-15 11:51:18'),
+('', 446, 162, 'brass Coated Micro Steel fibre', 'MS&ESRG/2022-2023/446', 'CFEES/23ERG029/P/LPC/086/22-23', '', 600, 145140, 1, '', 4, 3, 9, 2, '', 1, '2022-09-19 10:43:20', '', '', NULL, '2022-09-19 05:12:31'),
+('', 447, 94, 'A5 Pamphlets', 'FSEG/2022-2023/447', 'CFEES/23FAS013/MISC/GEM/085/22-23', '', 45, 15750, 2, '', 1, 1, 7, 2, 'Required for Def Expo 2022', 1, '2022-09-19 12:22:43', '', '', NULL, '2022-09-19 06:50:36'),
+('', 448, 249, 'SOC: SANCTION FOR HIRING OF DGR (MoD)', 'SECURITY/2022-2023/448', 'CFEES/23SEC022/MISC/LT/DGR/107/22-23', '', 12, 15372616, 2, '', 1, 2, 6, 2, 'Case initiated on 18/05/2022 and put for  clarification of procurement mode ', 1, '2022-09-19 17:01:00', '', '', NULL, '2022-09-19 11:30:32'),
+('', 449, 217, 'Shifting of store and equipment', 'WORKS/2022-2023/449', NULL, '', 1, 4200, 2, '', 1, 1, 7, 2, '', 1, '2022-09-20 15:11:06', '', '', NULL, '2022-09-20 09:40:50'),
+('', 450, 250, 'A4 Photocopy Paper', 'MMG/2022-2023/450', 'CCFEES/23MMG037/BU/GEM/104/22-23', '', 600, 213000, 2, '', 1, 1, 8, 2, '', 1, '2022-09-23 12:48:51', '', '', NULL, '2022-09-23 07:14:32'),
+('', 451, 250, 'Mouse', 'MMG/2022-2023/451', 'CFEES/23MMG040/BU/GEM/092/22-23', '', 41, 24559, 2, '', 1, 1, 7, 2, '', 1, '2022-09-23 12:48:41', '', '', NULL, '2022-09-23 07:15:07'),
+('', 452, 250, 'Extension Board ', 'MMG/2022-2023/452', 'CFEES/23MMG038/BU/GEM/084/22-23', '', 50, 72500, 2, '', 1, 1, 8, 2, '', 1, '2022-09-23 12:48:31', '', '', NULL, '2022-09-23 07:15:57'),
+('', 453, 250, 'Telephone Instrument ', 'MMG/2022-2023/453', 'CFEES/23MMG039/BU/GEM/091/22-23', '', 14, 24486, 2, '', 1, 1, 7, 2, '', 1, '2022-09-23 12:48:21', '', '', NULL, '2022-09-23 07:16:41'),
+('', 454, 250, 'SCANNER', 'MMG/2021-2022/454', NULL, '', 1, 24006, 2, '', 1, 1, 7, 1, '', 1, '2022-09-23 16:30:59', '', '', NULL, '2022-09-23 10:52:26');
+INSERT INTO `daks` (`sender`, `dak_id`, `e_id`, `file_name`, `docket_no`, `file_num`, `description`, `quantity`, `total_cost`, `cat_id`, `org_id`, `proj_id`, `port_id`, `bid_id`, `fin_id`, `f_remark`, `f_status`, `mark_to_ad`, `reply_type`, `replied_action`, `mark_to_mmg`, `is_created`) VALUES
+('', 455, 217, 'Statement of caser for sanction of additional amount for payment of arrears due to revision of wages to cleaning staff', 'WORKS/2022-2023/455', NULL, '', 1, 62489, 2, '', 1, 1, 7, 2, '', 1, '2022-09-26 11:15:37', '', '', NULL, '2022-09-26 05:44:50'),
+('', 456, 213, 'Laserjet Printer', 'FSEG/2022-2023/456', 'CFEES/23FAS012/BU/GEM/099/22-23', '', 1, 33000, 2, '', 1, 1, 7, 2, '', 1, '2022-09-26 12:36:06', '', '', NULL, '2022-09-26 07:02:29'),
+('', 457, 32, 'Fabrication of fire pan and wood crib etc.', NULL, NULL, '', 1, 217120, 1, '', 8, 3, 9, 2, '', 0, NULL, '', '', NULL, '2022-09-26 09:59:56'),
+('', 458, 32, 'Fabrication of fire pan and wood crib etc.', 'FC&HB/2022-2023/458', 'CFEES/23FCP052/P/LPC/112/22-23', '', 1, 217120, 1, '', 8, 3, 9, 2, '', 1, '2022-09-26 15:31:38', '', '', NULL, '2022-09-26 09:59:57'),
+('', 459, 247, 'Extension of AMC for DRONA internet LAN and Network Infrastructure', 'QRS&IT/2021-2022/459', 'CFEES/21QAG/035/BU/LT/189/20-21', '3 months Extension of AMC for DRONA internet LAN and Network Infrastructure', 1, 220395, 2, '', 1, 2, 6, 1, '', 1, '2022-09-27 15:30:12', '', '', NULL, '2022-09-27 09:59:36'),
+('', 460, 174, 'Anti personnel Mine Cable (Firing Cable)', 'MS&ESRG/2021-2022/460', 'CFEES/23ERG028/P/ST/106/22-23', '', 5, 221840, 1, '', 4, 2, 2, 1, 'Case for procurement of Anti Personnel Mine Cable (firing cable) is placed opposite for FNA.\r\n\r\n\r\n', 1, '2022-09-28 10:34:53', '', '', NULL, '2022-09-28 05:02:15'),
+('', 461, 192, 'job contract for solid waste recycling program ', 'QRS&IT/2022-2023/461', 'CFEES/23QAG040/BU/LPC/110/22-23', 'solid waste recycling program', 12, 254880, 2, '', 1, 3, 9, 2, '', 1, '2022-09-28 11:28:58', '', '', NULL, '2022-09-28 05:10:00'),
+('', 462, 192, 'job contract for solid waste recycling program ', 'QRS&IT/2022-2023/462', NULL, 'solid waste recycling program', 12, 254878, 2, '', 1, 3, 9, 2, '', 1, '2022-09-28 10:41:03', '', '', NULL, '2022-09-28 05:10:01'),
+('', 463, 57, 'Toner T-5018P', 'QRS&IT/2022-2023/463', 'CFEES/23QAG041/BU/GEM/100/22-23', 'Toner T-5018P for 3018A Machine', 2, 27560, 2, '', 1, 1, 7, 2, '', 1, '2022-09-28 12:31:12', '', '', NULL, '2022-09-28 06:59:17'),
+('', 464, 60, 'Servicing of Karl Fischer Titrator', 'FC&HB/2021-2022/464', NULL, '', 1, 40710, 2, '', 1, 2, 2, 1, '', 1, '2022-09-29 11:25:06', '', '', NULL, '2022-09-29 05:54:35'),
+('', 465, 250, 'Fan Heater', 'MMG/2022-2023/465', 'CFEES/23MMG043/BU/GEM/094/22-23', '', 50, 144400, 2, '', 1, 1, 8, 2, '', 1, '2022-09-29 15:25:55', '', '', NULL, '2022-09-29 09:55:22'),
+('', 466, 192, 'HP Laserjet Printer 1320 Cartridge Q5949A', 'QRS&IT/2022-2023/466', 'CFEES/23QAG043/BU/GEM/105/22-23', '', 2, 19030, 2, '', 1, 1, 7, 2, '', 1, '2022-10-03 10:36:05', '', '', NULL, '2022-10-03 05:05:44'),
+('', 467, 80, 'testing instruments (Viscometers and specific gravity bottle) for AFFF', 'FC&HB/2022-2023/467', 'CFEES/23FCP064/P/LPC/111/22-23', '', 3, 190050, 1, '', 6, 3, 9, 2, '', 1, '2022-10-03 11:14:51', '', '', NULL, '2022-10-03 05:42:27'),
+('', 468, 80, 'testing instruments (Viscometers and specific gravity bottle) for AFFF', 'FC&HB/2022-2023/468', 'CFEES/23FCP064/P/LPC/111/22-23', '', 3, 190050, 1, '', 1, 1, 1, 2, 'Cancelled because case initiated in project EKO-FOAM', 1, '2022-11-23 11:51:52', '', '', NULL, '2022-10-03 05:42:59'),
+('', 469, 200, 'Hand Held digitalmulti meter', 'EnSG/2021-2022/469', NULL, '', 1, 43000, 2, '', 1, 1, 8, 1, '', 1, '2022-10-04 12:25:40', '', '', NULL, '2022-10-04 06:53:49'),
+('', 470, 60, 'Hexane', 'FC&HB/2021-2022/470', 'CFEES/23FCP065/P/GEM/109/22-23', 'Demand No. 23FCP065, dated: 04/10/2022', 4, 51300, 1, '', 6, 1, 8, 1, '', 1, '2022-10-06 10:37:53', '', '', NULL, '2022-10-06 05:07:34'),
+('', 471, 40, 'Procurement of Printer Cartridge of HP LaserJet Pro M202DW(CC388AC)', 'QRS&IT/2021-2022/471', 'CFEES/23QAG045/BU/GEM/117/22-23', '', 4, 21564, 2, '', 1, 1, 5, 1, '', 2, '2022-10-07 12:47:40', '', '', NULL, '2022-10-07 07:16:43'),
+('', 472, 261, 'Procurement of Tyres (Tubeless) for Veh BA No. 15B117265L', 'MT/2022-2023/472', 'CFEES/23MTG010/BU/GEM/108/22-23', '', 4, 31960, 2, '', 1, 1, 2, 2, '', 1, '2022-10-10 13:49:37', '', '', NULL, '2022-10-10 08:17:25'),
+('', 473, 192, 'Laminar Air Flow Cabinet', 'QRS&IT/2022-2023/473', 'CFEES/23QAG046/P/GEM/122/22-23 ', '', 1, 290000, 1, '', 13, 1, 8, 2, '', 1, '2022-10-17 15:07:38', '', '', NULL, '2022-10-17 09:37:05'),
+('', 474, 200, 'Hand Held Digital Multimeter', 'EnSG/2022-2023/474', 'CFEES/23ENS037/BU/GEM/119/22-23', '', 1, 43000, 2, '', 1, 1, 8, 2, '', 1, '2022-10-19 14:23:39', '', '', NULL, '2022-10-19 08:52:55'),
+('', 475, 192, 'Ziplock Bags', 'QRS&IT/2022-2023/475', 'CFEES/23QAG047/P/GEM/113/22-23', '', 5, 5000, 1, '', 13, 1, 7, 2, '', 1, '2022-10-21 12:21:34', '', '', NULL, '2022-10-21 06:51:13'),
+('', 476, 192, 'Khurpi', 'QRS&IT/2022-2023/476', 'CFEES/23QAG048/P/GEM/114/22-23', '', 5, 2250, 1, '', 13, 1, 7, 2, '', 1, '2022-10-21 12:23:18', '', '', NULL, '2022-10-21 06:52:56'),
+('', 477, 250, 'Certridge 278AC 23MMG044', 'MMG/2021-2022/477', 'CFEES/23MMG044/BU/GEM/097/22-23', '', 4, 20881, 2, '', 1, 1, 7, 1, '', 1, '2022-10-21 15:29:50', '', '', NULL, '2022-10-21 09:59:16'),
+('', 478, 250, 'Tissue Paper 23MMG045', 'MMG/2021-2022/478', 'CFEES/23MMG045/MISC/GEM/116/22-23', '', 300, 22500, 2, '', 1, 1, 7, 1, '', 1, '2022-10-28 10:04:10', '', '', NULL, '2022-10-28 04:33:53'),
+('', 479, 28, '500GB Hard Disk Drive', 'PC&M/2022-2023/479', 'CFEES/23PCM022/BU/GEM/118/22-23', '', 1, 8500, 2, '', 1, 1, 8, 2, '', 1, '2022-10-28 10:32:34', '', '', NULL, '2022-10-28 05:00:33'),
+('', 480, 265, 'UPS', 'AIR FORCE CELL/2021-2022/480', 'CFEES/22SRC008/BU/GEM/256/21-22', 'CFEES/22SRC008/BU/GeM/256/21-22', 1, 25750, 2, '', 1, 1, 7, 1, '', 1, '2022-10-31 16:01:25', '', '', NULL, '2022-10-31 10:30:38'),
+('', 481, 250, '23MMG041 Toner Q2612AC', 'MMG/2022-2023/481', NULL, '', 4, 19177, 2, '', 1, 1, 7, 2, '', 1, '2022-11-01 11:09:00', '', '', NULL, '2022-11-01 05:38:40'),
+('', 482, 192, 'Aluminum Foil', 'QRS&IT/2022-2023/482', 'CFEES/23QAG049/P/GEM/121/22-23', '', 30, 15750, 1, '', 13, 1, 7, 2, '', 1, '2022-11-01 12:29:42', '', '', NULL, '2022-11-01 06:59:14'),
+('', 483, 191, 'CAMC of Access Control System ', 'SECURITY/2022-2023/483', 'CFEES/20SEC024/BU/ST/180/19-20', '', 1, 1385674, 2, '', 1, 2, 1, 2, '', 1, '2022-11-02 09:56:52', '', '', NULL, '2022-11-02 04:26:19'),
+('', 484, 250, 'Cartridge 388AC 23MMG042', 'MMG/2022-2023/484', 'CFEES/23MMG042/BU/GEM/096/22-23', '', 30, 114960, 2, '', 1, 1, 8, 2, '', 1, '2022-11-04 09:57:13', '', '', NULL, '2022-11-04 04:26:55'),
+('', 485, 261, 'Procurement of Tyres (Tubeless) for vehicle BA No. 15B117265L', 'MT/2022-2023/485', NULL, '', 4, 31960, 2, '', 1, 1, 2, 2, '', 1, '2022-11-04 10:14:03', '', '', NULL, '2022-11-04 04:38:29'),
+('', 486, 261, 'Procurement of Tyres (Tubeless) for vehicle BA No. 15B117266H', 'MT/2022-2023/486', NULL, '', 4, 31960, 2, '', 1, 1, 2, 2, '', 1, '2022-11-04 10:32:29', '', '', NULL, '2022-11-04 05:01:39'),
+('', 487, 261, 'Procurement of Battery 12V/35Ah for vehicle BA No. 17B125314Y', 'MT/2022-2023/487', NULL, '', 1, 3000, 2, '', 1, 1, 2, 2, '', 1, '2022-11-04 15:23:34', '', '', NULL, '2022-11-04 09:14:34'),
+('', 488, 115, 'Multifunction Machine', 'MS&ESRG/2022-2023/488', 'CFEES/23MMG030/BU/GEM/076/22-23', '', 3, 95475, 2, '', 1, 1, 5, 2, '', 1, '2022-11-07 12:17:17', '', '', NULL, '2022-11-07 06:46:01'),
+('', 489, 192, 'Tissue Paper  Roll ', 'QRS&IT/2022-2023/489', 'CFEES/23QAG053/P/GEM/127/22-23', '', 125, 10625, 1, '', 13, 1, 7, 2, '', 1, '2022-11-09 09:18:02', '', '', NULL, '2022-11-09 03:47:32'),
+('', 490, 192, 'Labels', 'QRS&IT/2022-2023/490', 'CFEES/23QAG054/P/GEM/128/22-23', '', 50, 4000, 1, '', 13, 1, 7, 2, '', 1, '2022-11-09 09:19:34', '', '', NULL, '2022-11-09 03:49:05'),
+('', 491, 192, 'Ultrapure Water Purification System', 'QRS&IT/2022-2023/491', 'CFEES/23QAG052/P/GEM/126/22-23', '', 1, 500000, 1, '', 13, 1, 8, 2, '', 1, '2022-11-09 09:21:14', '', '', NULL, '2022-11-09 03:50:58'),
+('', 492, 234, 'Desktop Computer with UPS', 'QRS&IT/2022-2023/492', 'CFEES/23QAG056/NBU/GEM/173/22-23', '', 136, 15508600, 2, '', 1, 1, 5, 2, '', 1, '2022-11-09 15:29:22', '', '', NULL, '2022-11-09 09:56:56'),
+('', 493, 79, 'CASE FOR EXTENSION OF HUMAN RESOURCE OUTSOURCHING SERVICE ( MTS) FOR A PERIOD OF 06 MONTHS', 'EnSG/2022-2023/493', NULL, '', 3, 1632515, 1, '', 7, 1, 5, 2, '', 1, '2022-11-09 16:12:37', '', '', NULL, '2022-11-09 10:42:12'),
+('', 494, 174, 'Local Area Networking for N/W Devices', 'MS&ESRG/2022-2023/494', NULL, '', 1, 54010, 2, '', 1, 3, 9, 2, '', 1, '2022-11-10 10:07:27', '', '', NULL, '2022-11-10 04:36:52'),
+('', 495, 124, 'DEMAND FOR TONNER 23MMG036', 'MMG/2022-2023/495', NULL, 'CARTRIDGE HP CC388AC', 2, 10782, 2, '', 1, 1, 7, 2, '', 1, '2022-11-10 15:55:09', '', '', NULL, '2022-11-10 10:23:42'),
+('', 496, 261, 'Procurement of Battery 12V/35Ah for vehicle BA No. 17B125314Y', 'MT/2022-2023/496', 'CFEES/23MTG017/BU/GEM/202/22-23', '', 1, 3000, 2, '', 1, 3, 2, 2, '', 1, '2022-11-10 16:51:28', '', '', NULL, '2022-11-10 11:18:39'),
+('', 497, 261, 'Procurement of Tyres (Tubeless) for vehicle BA No. 15B117265L', 'MT/2022-2023/497', NULL, '', 4, 31960, 2, '', 1, 1, 2, 2, '', 1, '2022-11-11 10:59:12', '', '', NULL, '2022-11-11 05:28:29'),
+('', 498, 261, 'Procurement of Tyres (Tubeless) for vehicle BA No. 15B117266H', 'MT/2022-2023/498', 'CFEES/23MTG012/BU/GEM/129/22-23', '', 4, 31960, 2, '', 1, 1, 2, 2, '', 1, '2022-11-14 11:01:41', '', '', NULL, '2022-11-14 05:31:19'),
+('', 499, 249, 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY GUARD FEMALE (LADY SEARCHER) EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 'SECURITY/2021-2022/499', 'CFEES/23SEC029/MISC/GEM/139/22-23', 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY GUARD FEMALE (LADY SEARCHER) EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 2, 692367, 1, '', 1, 1, 6, 1, '', 1, '2022-11-15 16:35:02', '', '', NULL, '2022-11-15 11:04:35'),
+('', 500, 249, 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY PERSONNEL EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 'SECURITY/2021-2022/500', 'CFEES/22/SEC003/MISC/LT/068/21-22', 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY PERSONNEL EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 1, 30533828, 1, '', 1, 1, 6, 1, '', 1, '2022-11-15 16:37:59', '', '', NULL, '2022-11-15 11:07:42'),
+('', 501, 249, 'SOC FOR SANTION FOR HIRING OF SERVICES OF TWO (02) LADY SEARCHER (SECURITY GUARD FEMALE) FOR SECURITY AND SURVEILLANCE AT CFEES CAMPUS', 'SECURITY/2021-2022/501', 'CFEES/23SEC029/MISC/GEM/136/22-23', 'SOC FOR SANTION FOR HIRING OF SERVICES OF TWO (02) LADY SEARCHER (SECURITY GUARD FEMALE) FOR SECURITY AND SURVEILLANCE AT CFEES CAMPUS', 1, 698496, 1, '', 1, 1, 6, 1, '', 1, '2022-11-16 11:52:31', '', '', NULL, '2022-11-16 06:22:10'),
+('', 502, 32, 'Desktop LCD monitor', NULL, NULL, '', 2, 19200, 2, '', 1, 1, 7, 2, '', 0, NULL, '', '', NULL, '2022-11-16 09:55:49'),
+('', 503, 32, 'Desktop LCD monitor', 'FC&HB/2021-2022/503', 'CFEES/23FCP067/BU/GEM/133/22-23', '', 2, 19200, 2, '', 1, 1, 7, 1, '', 1, '2022-11-16 15:29:33', '', '', NULL, '2022-11-16 09:58:30'),
+('', 504, 87, 'Electronic Weighing Scale, Capacity 30 Kg', 'FC&HB/2021-2022/504', 'CFEES/23FCP069/BU/GEM/132/22-23', '', 3, 17370, 2, '', 1, 1, 7, 1, '', 1, '2022-11-16 15:42:10', '', '', NULL, '2022-11-16 10:10:33'),
+('', 505, 250, 'A3 photo copier Paper', 'MMG/2022-2023/505', 'CFEES/23MMG021/MISC/GEM/124/22-23', '', 15, 10500, 2, '', 1, 1, 7, 2, '', 1, '2022-11-18 12:33:07', '', '', NULL, '2022-11-18 07:02:36'),
+('', 506, 76, 'procurement of alumina tube, alumina boat, alumina tray & quartz plate through LPG under project ERAF (Project no. ST/ 19-20/CFE-38)', 'EnSG/2022-2023/506', 'CFEES/23ENS033/P/LPC/140/22-23', '', 1, 66021, 1, '', 7, 3, 9, 2, '', 1, '2022-11-18 16:23:03', '', '', NULL, '2022-11-18 10:52:01'),
+('', 507, 79, 'Procurement of glass petri plates through GeM', 'EnSG/2022-2023/507', 'CFEES/23ENS045/P/GEM/138/22-23', '', 1, 24840, 1, '', 7, 1, 5, 2, '', 1, '2022-11-18 16:44:11', '', '', NULL, '2022-11-18 11:09:26'),
+('', 508, 250, 'Cartridge 278AC 23MMG044', 'MMG/2022-2023/508', NULL, '', 4, 20881, 2, '', 1, 1, 7, 2, '', 1, '2022-11-21 12:30:23', '', '', NULL, '2022-11-21 06:58:15'),
+('', 509, 250, 'Cartridge 388AC 23MMG036', 'MMG/2022-2023/509', 'CFEES/23MMG036/BU/GEM/089/22-23', '', 2, 7657, 2, '', 1, 1, 7, 2, '', 1, '2022-11-21 12:30:14', '', '', NULL, '2022-11-21 06:59:11'),
+('', 510, 124, 'Multifunction Machine Demand No 23MMG046', 'MMG/2022-2023/510', 'CFEES/23MMG046/BU/GEM/137/22-23', 'Multifunction Machine', 4, 499254, 2, '', 1, 1, 8, 2, '', 1, '2022-11-22 14:48:49', '', '', NULL, '2022-11-22 09:18:34'),
+('', 511, 261, 'Procurement of Multifunctional Machine', 'MT/2022-2023/511', NULL, '', 1, 160232, 2, '', 1, 1, 2, 2, '', 1, '2022-11-22 16:52:14', '', '', NULL, '2022-11-22 11:21:32'),
+('', 512, 80, 'Supply of High Purity Liquid Nitrogen ', 'FC&HB/2022-2023/512', 'CFEES/23FCP070/BU/GEM/171/22-23', '', 166, 24900, 2, '', 1, 1, 7, 2, '', 2, '2022-11-23 11:52:04', '', '', NULL, '2022-11-23 06:21:10'),
+('', 513, 249, 'Procurement for Digital Signature Certificate Token (DSC)', NULL, NULL, 'For Approval of Demand ', 1, 3500, 2, '', 1, 1, 1, 2, 'OC Troops, CFEES is required for DSC publication of Part - II', 0, NULL, '', '', NULL, '2022-11-23 11:26:11'),
+('', 514, 249, 'Procurement for Digital Signature Certificate Token (DSC)', 'SECURITY/2022-2023/514', 'CFEES/23SEC027/BU/GEM/160/22-23', 'Procurement for Digital Signature Certificate Token (DSC)', 1, 3500, 2, '', 1, 1, 1, 2, '', 1, '2022-11-24 10:26:55', '', '', NULL, '2022-11-24 04:56:19'),
+('', 515, 60, 'Dichloromethane', 'FC&HB/2022-2023/515', 'CFEES/23FCP078/P/GEM/151/22-23', 'Demand No. 23FCP078, Dated: 23Nov22', 20, 22960, 1, '', 6, 1, 7, 2, '', 1, '2022-11-24 12:01:03', '', '', NULL, '2022-11-24 06:27:13'),
+('', 516, 60, 'Statement of case for revision of minimum wages', 'FC&HB/2022-2023/516', 'CFEES/22FCP056/P/GEM/148/21-22', '', 4, 48871, 1, '', 6, 1, 5, 2, '', 1, '2022-11-24 12:00:39', '', '', NULL, '2022-11-24 06:30:06'),
+('', 517, 196, 'Renewal of Antivirus', 'QRS&IT/2022-2023/517', 'CFEES/23QAG058/BU/GEM/253/22-23', 'Renewal of Escan antivirus through GeM', 400, 128000, 2, '', 1, 1, 1, 2, '', 1, '2022-11-25 10:32:58', '', '', NULL, '2022-11-25 05:02:29'),
+('', 518, 192, 'Micropipette (10-100)', 'QRS&IT/2022-2023/518', 'CFEES/23QAG060/P/GEM/153/22-23', '', 1, 17110, 1, '', 13, 1, 7, 2, '', 1, '2022-11-28 10:28:24', '', '', NULL, '2022-11-28 04:57:57'),
+('', 519, 192, 'Micropipete (100-1000)', 'QRS&IT/2022-2023/519', 'CFEES/23QAG061/P/GEM/174/22-23', '', 1, 20000, 1, '', 13, 1, 7, 2, '', 1, '2022-11-28 10:30:08', '', '', NULL, '2022-11-28 04:59:26'),
+('', 520, 192, 'Micropipette (0.5-5mL)', 'QRS&IT/2022-2023/520', 'CFEES/23QAG063/P/GEM/148/22-23', '', 1, 17000, 1, '', 13, 1, 7, 2, '', 1, '2022-11-28 10:35:28', '', '', NULL, '2022-11-28 05:00:58'),
+('', 521, 192, 'Analytical Semi Micro Balance', 'QRS&IT/2022-2023/521', 'CFEES/23QAG064/P/GEM/146/22-23', '', 1, 307000, 1, '', 13, 1, 8, 2, '', 1, '2022-11-28 10:35:41', '', '', NULL, '2022-11-28 05:03:09'),
+('', 522, 192, 'Vortex Mixer', 'QRS&IT/2022-2023/522', 'CFEES/23QAG066/P/GEM/147/22-23', '', 1, 11692, 1, '', 13, 1, 7, 2, '', 1, '2022-11-28 10:35:52', '', '', NULL, '2022-11-28 05:03:59'),
+('', 523, 250, 'Cartridge 278 23MMG051', 'MMG/2022-2023/523', 'CFEES/23MMG051/BU/GEM/144/22-23', '', 3, 19395, 2, '', 1, 1, 7, 2, '', 1, '2022-11-29 13:01:22', '', '', NULL, '2022-11-29 07:26:42'),
+('', 524, 250, 'Ball Pen 23MMG052', 'MMG/2022-2023/524', NULL, '', 1900, 24700, 2, '', 1, 1, 7, 2, '', 1, '2022-11-29 13:01:13', '', '', NULL, '2022-11-29 07:27:32'),
+('', 525, 250, 'Envelope 23MMG050', 'MMG/2022-2023/525', 'CFEES/23MMG050/MISC/GEM/143/22-23', '', 85, 22355, 2, '', 1, 1, 7, 2, '', 1, '2022-11-29 13:00:32', '', '', NULL, '2022-11-29 07:28:25'),
+('', 526, 250, 'RUBBER STAMP 23MMG049', 'MMG/2022-2023/526', 'CFEES/23MMG049/MISC/GEM/142/22-23', '', 10, 3730, 2, '', 1, 1, 7, 2, '', 1, '2022-11-29 13:00:22', '', '', NULL, '2022-11-29 07:29:08'),
+('', 527, 250, 'NAME PLATE 23MMG048', 'MMG/2022-2023/527', 'CFEES/23MMG048/MISC/GEM/141/22-23', '', 10, 14690, 2, '', 1, 1, 7, 2, '', 1, '2022-11-29 13:00:12', '', '', NULL, '2022-11-29 07:29:50'),
+('', 528, 80, 'Dissolved Oxygen Meter', 'FC&HB/2022-2023/528', 'CFEES/23FCP080/P/GEM/189/22-23', '', 1, 150000, 1, '', 6, 1, 8, 2, '', 1, '2022-11-29 14:35:38', '', '', NULL, '2022-11-29 09:03:52'),
+('', 529, 80, 'Multifunction Machine', 'FC&HB/2022-2023/529', 'CFEES/23FCP079/P/GEM/255/22-23', '', 1, 258843, 1, '', 6, 1, 8, 2, '', 1, '2022-11-29 14:35:26', '', '', NULL, '2022-11-29 09:05:06'),
+('', 530, 73, 'Procurement of spare Parts of Gas Chromatograph (GC) Brand-N6659680 Clarus 680, on proprietary through buildup', 'EnSG/2021-2022/530', 'CFEES/23ENS041/B/PAC/243/22-23', '', 5, 406174, 1, '', 1, 4, 1, 1, '', 1, '2022-11-29 14:57:18', '', '', NULL, '2022-11-29 09:27:01'),
+('', 531, 79, 'Procurement of Multifunction machine/ Printer', 'EnSG/2021-2022/531', NULL, '', 3, 165000, 1, '', 7, 1, 5, 1, '', 1, '2022-12-02 12:37:38', '', '', NULL, '2022-12-02 06:38:44'),
+('', 532, 192, 'Wash Bottle', 'QRS&IT/2022-2023/532', 'CFEES/23QAG067/P/GEM/149/22-23', '', 15, 1200, 1, '', 13, 1, 7, 2, '', 1, '2022-12-02 12:40:11', '', '', NULL, '2022-12-02 07:08:40'),
+('', 533, 192, 'Ultrasonicator', 'QRS&IT/2022-2023/533', 'CFEES/23QAG068/P/GEM/152/22-23', '', 1, 50000, 1, '', 13, 1, 8, 2, '', 1, '2022-12-02 12:41:52', '', '', NULL, '2022-12-02 07:11:36'),
+('', 534, 124, 'Digital Copier Machine', 'MMG/2022-2023/534', 'CFEES/23MMG046/BU/GEM/137/22-23', '', 4, 500000, 2, '', 1, 1, 8, 2, '', 1, '2022-12-02 15:23:15', '', '', NULL, '2022-12-02 09:52:22'),
+('', 535, 79, 'procurement of refrigerated Micro  Centrifuge through GeM', 'EnSG/2022-2023/535', 'CFEES/23ENS048/P/GEM/162/22-23', '', 1, 22116, 1, '', 7, 1, 5, 2, '', 1, '2022-12-05 10:25:32', '', '', NULL, '2022-12-05 04:54:12'),
+('', 536, 192, 'Hot Air Oven', 'QRS&IT/2021-2022/536', 'CFEES/23QAG069/P/GEM/165/22-23', '', 1, 55000, 1, '', 13, 1, 8, 2, '', 1, '2022-12-06 12:12:27', '', '', NULL, '2022-12-06 06:41:06'),
+('', 537, 192, 'Magnetic Stirrer', 'QRS&IT/2022-2023/537', 'CFEES/23QAG071/P/GEM/166/22-23', '', 1, 10266, 1, '', 13, 1, 8, 2, '', 1, '2022-12-06 12:12:40', '', '', NULL, '2022-12-06 06:41:57'),
+('', 538, 84, 'HP LaserJet Toner Cartridge 30A', NULL, NULL, '', 2, 12932, 2, '', 1, 1, 7, 1, '', 0, NULL, '', '', NULL, '2022-12-06 10:18:48'),
+('', 539, 84, 'HP LaserJet Toner Cartridge 30A', 'FSEG/2021-2022/539', 'CFEES/23FAS025/BU/GEM/168/22-23', '', 2, 12932, 1, '', 1, 1, 7, 1, '', 1, '2022-12-06 15:49:52', '', '', NULL, '2022-12-06 10:19:22'),
+('', 540, 261, 'Procurement of Motor Cycle Hero Super Splendor DISC Self CAST BS6', 'MT/2022-2023/540', 'CFEES/23MTG014/BU/GEM/167/22-23', '', 1, 73366, 2, '', 1, 1, 7, 2, '', 1, '2022-12-06 16:01:13', '', '', NULL, '2022-12-06 10:30:04'),
+('', 541, 79, 'Procurement of Potassium Dichromate through gem', 'EnSG/2021-2022/541', 'CFEES/23ENS050/P/GEM/170/22-23', '', 10, 12100, 1, '', 7, 1, 5, 1, '', 1, '2022-12-07 15:43:21', '', '', NULL, '2022-12-07 10:12:57'),
+('', 542, 79, 'Silver sulphate', 'EnSG/2021-2022/542', 'CFEES/23ENS049/P/GEM/169/22-23', '', 3, 20130, 1, '', 7, 1, 5, 1, '', 1, '2022-12-08 15:21:22', '', '', NULL, '2022-12-08 09:49:24'),
+('', 543, 61, 'Shifting and Refurbishment of atomizer and sprinkler characterization facility', 'FSEG/2022-2023/543', NULL, '', 1, 188800, 2, '', 1, 3, 9, 2, '', 1, '2022-12-08 15:24:36', '', '', NULL, '2022-12-08 09:53:35'),
+('', 544, 234, 'Extension of AMC for DRONA internet LAN & Network infrastructure 2022-2023', 'QRS&IT/2022-2023/544', NULL, '', 1, 220397, 2, '', 1, 2, 6, 2, '', 1, '2022-12-09 10:31:51', '', '', NULL, '2022-12-09 05:00:48'),
+('', 545, 248, 'Smart rack solution with relocation of existing servers and networking items(as per annexure 2,3,4,5,7)', 'QRS&IT/2022-2023/545', 'CFEES/23QAG020/GC/GEM/18/22-23', 'for establishment of data center in CFEES', 1, 4661000, 2, '', 1, 1, 5, 2, '', 1, '2022-12-09 11:30:48', '', '', NULL, '2022-12-09 06:00:24'),
+('', 546, 79, 'Laboratory Refrigerator', 'EnSG/2022-2023/546', 'CFEES/23ENS056/P/GEM/172/22-23', '', 1, 435800, 1, '', 7, 1, 5, 2, '', 1, '2022-12-14 16:29:28', '', '', NULL, '2022-12-14 10:57:36'),
+('', 547, 224, 'Procurement of Qty - 04 Work Computer Work Stations for SDC Pilkhuwa', 'TFA/2021-2022/547', 'CFEES/23TFA018/BU/GEM/232/22-23', '', 4, 357800, 2, '', 1, 1, 5, 1, '', 1, '2022-12-15 10:40:54', '', '', NULL, '2022-12-15 05:08:41'),
+('', 548, 249, 'SOC FOR EXTENTION OF CONTRACT FOR SERVICES OF TWO SECURITY GUARD FEMALE AT CFEES CAMPUS DELHI', 'SECURITY/2022-2023/548', NULL, 'SOC FOR EXTENTION OF CONTRACT FOR SERVICES OF TWO SECURITY GUARD FEMALE AT CFEES CAMPUS DELHI', 2, 350736, 2, '', 1, 1, 1, 2, '', 1, '2022-12-15 12:54:53', '', '', NULL, '2022-12-15 07:24:19'),
+('', 549, 79, 'Printers', 'EnSG/2021-2022/549', 'CFEES/23ENS055/P/GEM/175/22-23', '', 3, 74370, 1, '', 7, 1, 5, 1, '', 1, '2022-12-16 11:12:16', '', '', NULL, '2022-12-16 05:42:02'),
+('', 550, 77, 'Tissue roll', 'PC&M/2021-2022/550', 'CFEES/23PCM027/BU/GEM/177/22-23', '', 100, 5000, 2, '', 1, 1, 7, 1, '', 1, '2022-12-16 15:09:18', '', '', NULL, '2022-12-16 09:38:57'),
+('', 551, 77, 'Anhydrous Denatured Ethanol', 'PC&M/2021-2022/551', 'CFEES/23PCM026/BU/GEM/176/22-23', '', 20, 6000, 2, '', 1, 1, 7, 1, '', 1, '2022-12-16 15:11:20', '', '', NULL, '2022-12-16 09:40:37'),
+('', 552, 224, 'Job work on refurbishment of bus passenger compartment fire detection & water mist fire suppression system', 'TFA/2021-2022/552', 'CFEES/23TFA019/BU/LPC/183/22-23', '', 1, 134520, 1, '', 1, 3, 2, 1, '', 1, '2022-12-19 11:09:20', '', '', NULL, '2022-12-19 05:38:19'),
+('', 553, 77, '50 kg load cell and NX controller', 'PC&M/2021-2022/553', 'CFEES/23PCM025/BU/LPC/238/22-23', '', 2, 174635, 2, '', 1, 2, 2, 1, '', 1, '2022-12-20 14:49:58', '', '', NULL, '2022-12-20 09:18:58'),
+('', 554, 217, '400ml Spray insecticide for Mosquitoes & 400ml Spray insecticide for cockroaches', 'WORKS/2022-2023/554', 'CFEES/23WRK010/MISC/GEM/192/22-23', '', 200, 47400, 2, '', 1, 1, 7, 2, '', 1, '2022-12-22 16:49:38', '', '', NULL, '2022-12-22 11:17:43'),
+('', 555, 217, 'Dustbin 10 liter foot operated and disposable bag', 'WORKS/2022-2023/555', 'CFEES/23WRK009/MISC/GEM/185/22-23', '', 150, 53000, 2, '', 1, 1, 7, 2, '', 1, '2022-12-22 16:55:49', '', '', NULL, '2022-12-22 11:25:34'),
+('', 556, 174, 'Networking Devices', 'MS&ESRG/2022-2023/556', 'CFEES/23ERG037/BU/GEM/182/22-23', '', 6, 83150, 2, '', 1, 1, 8, 2, '', 1, '2022-12-23 10:34:38', '', '', NULL, '2022-12-23 05:04:09'),
+('', 557, 249, '(03) DISPLAY UNIT (SMART TELEVISION 108CM LED)', 'SECURITY/2021-2022/557', 'CFEES/23SEC031/BU/GEM/241/22-23', '(03) DISPLAY UNIT (SMART TELEVISION 108CM LED)', 3, 186000, 2, '', 1, 1, 1, 1, '', 1, '2022-12-23 12:43:11', '', '', NULL, '2022-12-23 07:12:51'),
+('', 558, 192, 'Solvents and Chemicals LCMS Grade', 'QRS&IT/2022-2023/558', 'CFEES/23QAG073/P/LPC/181/22-23', '', 8, 481610, 1, '', 13, 3, 9, 2, '', 1, '2022-12-23 16:02:01', '', '', NULL, '2022-12-23 08:40:41'),
+('', 559, 79, 'Ferroin Indicator solution ', 'EnSG/2021-2022/559', 'CFEES/23EVS058/P/GEM/187/22-23', '', 1, 1060, 1, '', 7, 1, 5, 1, '', 1, '2022-12-26 15:40:12', '', '', NULL, '2022-12-26 10:03:36'),
+('', 560, 79, 'Mercuric sulphate (0.25kg)', 'EnSG/2021-2022/560', 'CFEES/23ENS057/P/GEM/186/22-23', '', 1, 15250, 1, '', 7, 1, 5, 1, '', 1, '2022-12-26 15:40:06', '', '', NULL, '2022-12-26 10:06:54'),
+('', 561, 79, 'wash bottles', 'EnSG/2021-2022/561', 'CFEES/23ENS059/P/GEM/190/22-23', '', 25, 3025, 1, '', 1, 1, 5, 1, '', 1, '2022-12-26 15:39:57', '', '', NULL, '2022-12-26 10:09:34'),
+('', 562, 40, 'CAMC for Operational cum technical support for DRONA, Internet LANs and Network Infrastructure', 'QRS&IT/2021-2022/562', 'CFEES/23QAG072/BU/GEM/218/22-23', 'AMC for LAN Infrastructure', 1, 2183236, 2, '', 1, 1, 5, 2, '', 1, '2022-12-28 15:07:19', '', '', NULL, '2022-12-28 09:36:52'),
+('', 563, 224, 'CAMC OF ACFT', 'TFA/2022-2023/563', NULL, '', 1, 4165800, 2, '', 1, 3, 1, 2, '', 1, '2022-12-29 11:44:02', '', '', NULL, '2022-12-29 06:12:45'),
+('', 564, 76, 'Procurement of 20-Litre Twin Compartment Trolley mounted Sol Gel Delivery System with Air Compressor', 'EnSG/2022-2023/564', 'CFEES/23ENS061/BU/LPC/188/22-23', '', 1, 118000, 2, '', 1, 3, 9, 2, '', 1, '2022-12-30 10:44:51', '', '', NULL, '2022-12-30 05:14:06'),
+('', 565, 249, 'AMC OF SHARP DIGITAL PHOTOCOPIER MACHINE MODEL- SHARP AR-5620V', 'SECURITY/2022-2023/565', NULL, 'AMC OF SHARP DIGITAL PHOTOCOPIER MACHINE MODEL- SHARP AR-5620V INSTALLED IN SECURITY', 3, 135000, 2, '', 1, 1, 5, 2, '', 1, '2023-01-02 11:04:28', '', '', NULL, '2023-01-02 05:34:05'),
+('', 566, 162, 'Ultra High Performance Fibres Reinforcement Concrete Slab', 'MS&ESRG/2021-2022/566', NULL, '', 1, 5402338, 1, '', 4, 2, 2, 1, '', 1, '2023-01-03 16:56:22', '', '', NULL, '2023-01-03 11:26:11'),
+('', 567, 161, 'Benchtop LCR meter', 'FSEG/2021-2022/567', NULL, '', 1, 785372, 1, '', 10, 1, 8, 1, 'The item is required for testing in the project', 1, '2023-01-05 11:44:38', '', '', NULL, '2023-01-05 06:14:03'),
+('', 568, 124, 'Desktop Computer', 'MMG/2021-2022/568', 'CFEES/23MMG034/BU/GEM/077/22-23', '', 5, 467500, 2, '', 1, 1, 8, 1, '', 1, '2023-01-06 11:19:09', '', '', NULL, '2023-01-06 05:48:15'),
+('', 569, 124, 'Desktop Computer', NULL, NULL, '', 5, 467500, 2, '', 1, 1, 8, 2, '', 0, NULL, '', '', NULL, '2023-01-06 05:48:49'),
+('', 570, 217, 'AMC of Sharp Digital Photocopier Machine Model Sharp AR-5620V Serial No. 3301489Y', 'WORKS/2022-2023/570', NULL, '', 1, 135000, 2, '', 1, 1, 7, 2, '', 1, '2023-01-10 10:54:51', '', '', NULL, '2023-01-10 05:23:52'),
+('', 571, 192, 'Muffle Furnace', 'QRS&IT/2022-2023/571', 'CFEES/23QAG070/P/GEM/197/22-23', '', 1, 99998, 1, '', 13, 1, 1, 2, '', 1, '2023-01-10 11:44:13', '', '', NULL, '2023-01-10 06:13:26'),
+('', 572, 192, 'Autoclave Bags', 'QRS&IT/2022-2023/572', 'CFEES/23QAG075/P/GEM/200/22-23', '', 260, 14560, 1, '', 13, 1, 7, 2, '', 1, '2023-01-10 14:56:02', '', '', NULL, '2023-01-10 09:25:55'),
+('', 573, 79, 'aluminium foil', 'EnSG/2022-2023/573', 'CFEES/23QAG049/P/GEM/121/22-23', '', 55, 24750, 1, '', 7, 1, 5, 2, '', 1, '2023-01-10 16:08:48', '', '', NULL, '2023-01-10 10:37:19'),
+('', 574, 79, 'procurement of surgical face mask through GeM under project -ERAF', NULL, NULL, '', 3000, 24000, 1, '', 7, 1, 5, 2, '', 0, NULL, '', '', NULL, '2023-01-11 06:53:58'),
+('', 575, 79, 'procurement of surgical face mask through GeM under project -ERAF', 'EnSG/2022-2023/575', 'CFEES/23ENS062/P/GEM/214/22-23', '', 3000, 24000, 1, '', 7, 1, 5, 2, '', 1, '2023-01-11 12:28:40', '', '', NULL, '2023-01-11 06:58:20'),
+('', 576, 79, 'Laboratory glassware bottels', 'EnSG/2022-2023/576', 'CFEES/23ENS067/P/GEM/216/22-23', '', 148, 22500, 1, '', 7, 1, 5, 2, '', 1, '2023-01-11 16:40:36', '', '', NULL, '2023-01-11 11:10:21'),
+('', 577, 217, 'Conservancy Items Demand No. 23WRK012', 'WORKS/2022-2023/577', 'CFEES/23WRK012/MISC/GEM/210/22-23', '', 5, 109925, 2, '', 1, 1, 7, 2, '', 1, '2023-01-12 16:24:23', '', '', NULL, '2023-01-12 10:54:08'),
+('', 578, 192, 'Non Woven Disposable Wipes', 'QRS&IT/2022-2023/578', 'CFEES/23QAG077/P/GEM/203/22-23', '', 50, 5000, 1, '', 13, 1, 7, 2, '', 1, '2023-01-13 12:16:12', '', '', NULL, '2023-01-13 06:45:45'),
+('', 579, 79, 'procurement of N95 Face Mask (without valve) through GeM under project ERAF', 'EnSG/2022-2023/579', 'CFEES/23ENS064/P/GEM/217/22-23', '', 250, 24750, 1, '', 7, 1, 5, 2, '', 1, '2023-01-16 11:50:00', '', '', NULL, '2023-01-16 06:19:07'),
+('', 580, 250, 'Toner Cartridge CE278AC', 'MMG/2022-2023/580', 'CFEES/23MMG072/BU/GEM/198/22-23', '', 3, 19128, 2, '', 1, 1, 7, 2, '', 1, '2023-01-16 12:00:53', '', '', NULL, '2023-01-16 06:30:41'),
+('', 581, 250, 'Toner Catridge CC388', 'MMG/2022-2023/581', 'CFEES/23MMG064/BU/GEM/179/22-23', '', 6, 24498, 1, '', 1, 1, 7, 2, '', 1, '2023-01-16 12:02:49', '', '', NULL, '2023-01-16 06:32:38'),
+('', 582, 250, 'Toner Cartridge HP Q2612AC', 'MMG/2022-2023/582', 'CFEES/23MMG073/BU/GEM/199/22-23', '', 4, 22680, 2, '', 1, 1, 7, 2, '', 1, '2023-01-16 12:04:40', '', '', NULL, '2023-01-16 06:34:25'),
+('', 583, 80, 'Microprocessor Controlled Magnetic Stirrer (1000ml)', 'FC&HB/2022-2023/583', 'CFEES/23FCP088/P/GEM/262/22-23', '', 1, 24800, 1, '', 6, 1, 7, 2, '', 1, '2023-01-16 15:04:18', '', '', NULL, '2023-01-16 09:33:59'),
+('', 584, 251, 'Purchase of 500GB Hard Disc Drive', NULL, NULL, '', 1, 2499, 2, '', 1, 1, 8, 2, '', 0, NULL, '', '', NULL, '2023-01-17 04:41:00'),
+('', 585, 251, 'Purchase of 500GB Hard Disc Drive', 'EnSG/2022-2023/585', 'CFEES/23ENS066/BU/GEM/244/22-23', '', 1, 2499, 2, '', 1, 1, 8, 2, '', 1, '2023-01-17 10:25:29', '', '', NULL, '2023-01-17 04:51:38'),
+('', 586, 250, 'Scale 23MMG069', 'MMG/2022-2023/586', NULL, '', 240, 24000, 2, '', 1, 1, 7, 2, '', 1, '2023-01-17 12:17:47', '', '', NULL, '2023-01-17 06:47:24'),
+('', 587, 250, 'Note Pad 23MMG068', 'MMG/2022-2023/587', 'CFEES/23MMG068/MISC/GEM/194/22-23', '', 250, 22500, 2, '', 1, 1, 7, 2, '', 1, '2023-01-17 12:19:32', '', '', NULL, '2023-01-17 06:49:19'),
+('', 588, 250, 'Register 23MMG070', 'MMG/2022-2023/588', 'CFEES/23MMG070/MISC/GEM/196/22-23', '', 300, 75000, 2, '', 1, 1, 7, 2, '', 1, '2023-01-17 12:20:43', '', '', NULL, '2023-01-17 06:50:32'),
+('', 589, 250, 'Green Tag 23MMG066', 'MMG/2022-2023/589', 'CFEES/23MMG066/MISC/GEM/193/22-23', '', 250, 22500, 2, '', 1, 1, 7, 2, '', 1, '2023-01-17 12:21:35', '', '', NULL, '2023-01-17 06:51:28'),
+('', 590, 79, 'autoclave', 'EnSG/2022-2023/590', 'CFEES/23ENS065/P/GEM/204/22-23', '', 1, 185000, 1, '', 7, 1, 5, 2, '', 1, '2023-01-17 16:04:31', '', '', NULL, '2023-01-17 10:26:15'),
+('', 591, 79, 'Weighing Balance with Licensed Software', 'EnSG/2022-2023/591', 'CFEES/23ENS070/P/GEM/205/22-23', '', -1, 390000, 1, '', 7, 1, 5, 2, '', 1, '2023-01-17 16:03:14', '', '', NULL, '2023-01-17 10:30:08'),
+('', 592, 79, 'Glass Burettes', 'EnSG/2022-2023/592', 'CFEES/23ENS068/P/GEM/209/22-23', '', 15, 22020, 1, '', 7, 1, 5, 2, '', 1, '2023-01-17 16:43:09', '', '', NULL, '2023-01-17 11:09:14'),
+('', 593, 79, 'Burettes stand', 'EnSG/2021-2022/593', 'CFEES/23ENS069/P/GEM/208/22-23', '', 15, 6750, 1, '', 7, 1, 5, 1, '', 1, '2023-01-17 16:43:03', '', '', NULL, '2023-01-17 11:12:44'),
+('', 594, 80, 'Acetone, 2.5 Ltr.', 'FC&HB/2022-2023/594', 'CFEES/23FCP090/P/GEM/206/22-23', '', 40, 62120, 1, '', 6, 1, 7, 2, '', 1, '2023-01-17 17:25:30', '', '', NULL, '2023-01-17 11:53:34'),
+('', 595, 80, 'HPLC Grade Methanol, 2.5L Pack Size', 'FC&HB/2022-2023/595', 'CFEES/23FCP089/P/GEM/207/22-23', '', 20, 20000, 1, '', 6, 1, 7, 2, '', 1, '2023-01-17 17:25:14', '', '', NULL, '2023-01-17 11:54:59'),
+('', 596, 217, 'Cleaning Items (Demand No. WRK013', 'WORKS/2022-2023/596', 'CFEES/23WRK013/MISC/GEM/234/22-23', '', 8, 76610, 2, '', 1, 1, 7, 2, '', 1, '2023-01-19 10:48:18', '', '', NULL, '2023-01-19 05:10:13'),
+('', 597, 125, 'Procurement of Xerox Versalink Tober Cartridge', 'TCP&HR/2021-2022/597', 'CFEES/23TCP009/BU/GEM/231/22-33', '', 1, 24000, 2, '', 1, 1, 1, 1, '', 1, '2023-01-23 12:36:42', '', '', NULL, '2023-01-23 07:03:47'),
+('', 598, 125, 'Procurement of Pribter cartidge 388AC', 'TCP&HR/2021-2022/598', NULL, '', 1, 7500, 2, '', 1, 1, 1, 1, '', 1, '2023-01-23 12:36:34', '', '', NULL, '2023-01-23 07:05:44'),
+('', 599, 57, 'Photo frame with printout', 'QRS&IT/2022-2023/599', NULL, '', 14, 5808, 2, '', 1, 1, 7, 2, '', 1, '2023-01-24 12:33:15', '', '', NULL, '2023-01-24 07:02:23'),
+('', 600, 60, 'AMC for Gas chromatograph', 'FC&HB/2021-2022/600', 'CFEES/FCPCE/BU/ST/132/17-18', 'Demand No 18FCP064, dated 19 Dec 2017', 1, 84000, 2, '', 1, 2, 2, 1, 'Pre FTS file', 1, '2023-01-24 16:10:57', '', '', NULL, '2023-01-24 10:40:28'),
+('', 601, 71, 'Refrigerated Incubator Shaker', 'QRS&IT/2022-2023/601', NULL, '', 1, 537100, 1, '', 13, 1, 8, 2, '', 1, '2023-01-24 16:55:22', '', '', NULL, '2023-01-24 11:25:02'),
+('', 602, 39, 'Procurement of Refilling Nitrogen gas cylindrs, 7c.M.( 10 Nos.)', 'FC&HB/2022-2023/602', 'CFEES/23FCP093/P/GEM/226/22-23', '', 70, 24500, 1, '', 6, 1, 1, 2, '', 1, '2023-01-25 11:17:13', '', '', NULL, '2023-01-25 05:41:56'),
+('', 603, 60, 'Digital Density Meter', 'FC&HB/2022-2023/603', 'CFEES/23FCP110/P/GEM/272/22-23', '', 1, 2957200, 1, '', 14, 1, 5, 2, '', 1, '2023-01-25 11:58:54', '', '', NULL, '2023-01-25 06:28:30'),
+('', 604, 79, 'Microwave oven', 'EnSG/2022-2023/604', 'CFEES/23ENS072/P/GEM/222/22-23', '', 1, 23999, 1, '', 7, 1, 5, 2, '', 1, '2023-01-30 10:21:17', '', '', NULL, '2023-01-30 04:50:25'),
+('', 605, 60, 'Desktop Computer', 'FC&HB/2022-2023/605', 'CFEES/23FCP094/P/GEM/242/22-23', 'Demand No 23FCP094', 1, 109606, 1, '', 6, 1, 7, 2, '', 1, '2023-02-03 11:43:37', '', '', NULL, '2023-02-03 06:13:24'),
+('', 606, 161, 'workstation', 'FSEG/2021-2022/606', 'CFEES/23FAS033/P/GEM/004/23-24', '', 2, 1049506, 1, '', 11, 1, 8, 1, '', 1, '2023-02-06 17:29:26', '', '', NULL, '2023-02-06 11:49:12'),
+('', 607, 125, 'CFEES/TCP/SoC/Cartridge CF277A', 'TCP&HR/2021-2022/607', NULL, 'Procurement of Toner cartridge CF277A', 2, 20000, 2, '', 1, 1, 1, 1, '', 1, '2023-02-07 12:28:26', '', '', NULL, '2023-02-07 06:58:05'),
+('', 608, 79, 'Chemical Stronge Cabinet', 'EnSG/2022-2023/608', 'CFEES/23ENS074/P/GEM/251/22-23', '', 6, 150000, 1, '', 7, 1, 8, 2, '', 1, '2023-02-08 10:19:41', '', '', NULL, '2023-02-08 04:49:27'),
+('', 609, 253, 'CFEES/23MMG077/MISC/GeM/219/22-23', 'MMG/2022-2023/609', '	CFEES/23MMG077/MISC/GeM/219/22-23', 'File Cover', 1000, 25000, 2, '', 1, 1, 7, 2, '', 1, '2023-02-08 14:32:50', '', '', NULL, '2023-02-08 09:01:59'),
+('', 610, 253, 'CFEES/23MMG076/MISC/GeM/220/22-23', 'MMG/2022-2023/610', 'CFEES/23MMG076/MISC/GeM/220/22-23', 'Hand Towel', 100, 24900, 2, '', 1, 1, 7, 2, '', 1, '2023-02-08 14:35:06', '', '', NULL, '2023-02-08 09:04:13'),
+('', 611, 80, 'Cloud and Pour Point apparatus', 'FC&HB/2022-2023/611', 'CFEES/23FCP092/P/GEM/223/22-23', '', 1, 198000, 1, '', 6, 1, 8, 2, '', 1, '2023-02-09 10:37:36', '', '', NULL, '2023-02-09 05:07:22'),
+('', 612, 87, 'Glass Reactor System', 'FC&HB/2022-2023/612', 'CFEES/23FCP096/P/OT/265/22-23', 'Demand No. 23FCP096 dated 27/01/2023', 1, 19400000, 1, '', 14, 2, 5, 2, '', 1, '2023-02-09 16:09:13', '', '', NULL, '2023-02-09 10:37:53'),
+('', 613, 217, 'Tricycle or Rickshaw', 'WORKS/2022-2023/613', 'CFEES/23WRK014/MISC/GEM/246/22-23', '', 1, 24500, 2, '', 1, 1, 7, 2, '', 1, '2023-02-10 15:33:02', '', '', NULL, '2023-02-10 10:02:42'),
+('', 614, 224, 'CAMC OF AIR CRASH FIRE TENDER', 'TFA/2021-2022/614', NULL, '', 1, 4346000, 2, '', 1, 2, 2, 1, '', 1, '2023-02-13 15:15:41', '', '', NULL, '2023-02-13 09:45:20'),
+('', 615, 250, 'Electric Kettle 23MMG075', 'MMG/2022-2023/615', NULL, '', 15, 27750, 2, '', 1, 1, 7, 2, '', 1, '2023-02-14 10:10:19', '', '', NULL, '2023-02-14 04:39:51'),
+('', 616, 249, 'CAMC of Access Control System', 'SECURITY/2022-2023/616', NULL, 'CAMC of Access Control System file put up ', 3, 1872795, 2, '', 1, 1, 1, 2, 'MMG', 1, '2023-02-15 14:36:12', '', '', NULL, '2023-02-15 09:05:55'),
+('', 617, 161, 'Multi Function Machine', 'FSEG/2022-2023/617', 'CFEES/23FAS032/P/GEM/002/23-24', '', 1, 346092, 1, '', 10, 1, 8, 2, '', 1, '2023-02-16 11:04:25', '', '', NULL, '2023-02-16 05:33:19'),
+('', 618, 77, 'Polyurea coating for Fuel tanks', 'PC&M/2022-2023/618', NULL, '', 2, 49560, 2, '', 1, 2, 2, 2, '', 1, '2023-02-16 11:53:28', '', '', NULL, '2023-02-16 06:23:13'),
+('', 619, 79, 'Online UPS (10KVA) with Battery Buckup', 'EnSG/2022-2023/619', 'CFEES/23ENS075/P/GEM/233/22-23', '', 1, 280000, 1, '', 7, 1, 5, 2, '', 1, '2023-02-17 12:19:23', '', '', NULL, '2023-02-17 06:48:53'),
+('', 620, 174, 'Transportation of Explosives from Khadki to borkhedi Nagpur', 'MS&ESRG/2022-2023/620', 'CFEES/23ERG042/P/GEM/254/22-23', '', 1, 75000, 1, '', 4, 1, 7, 2, 'Put up for further necessary action.', 1, '2023-02-17 14:27:49', '', '', NULL, '2023-02-17 08:57:07'),
+('', 621, 75, 'Gas Sampling Manifold', 'EnSG/2022-2023/621', 'CFEES/23ENS073/BU/LPC/247/22-23', 'There is an imperative requirement of a Gas Sampling Manifold for sampling and collection of different components of fire effluents. Such sampling is crucial to study (both qualitatively & quantitatively) the fire parameters and effluents of different kind of materials being used by services so that the impact of such effluents on environment can be estimated. ', 1, 496780, 2, '', 1, 3, 9, 2, 'Put up for approval please.', 1, '2023-02-17 14:39:19', '', '', NULL, '2023-02-17 09:08:49'),
+('', 622, 192, 'Chemicals (NaClO and KNO3)', 'QRS&IT/2022-2023/622', 'CFEES/23QAG084/P/GEM/245/22-23', '', 7, 5755, 1, '', 13, 1, 1, 2, '', 1, '2023-02-21 15:54:13', '', '', NULL, '2023-02-21 10:23:53'),
+('', 623, 265, 'DEMAND SRC017/2023 REPAIR OF HP PRODESK COMPUTER SL. NO. INA815XLOD', NULL, NULL, 'DEMAND SRC017/2023 REPAIR OF HP PRODESK COMPUTER SL. NO. INA815XLOD', 1, 4850, 2, '', 1, 3, 1, 2, '', 0, NULL, '', '', NULL, '2023-03-02 04:16:17'),
+('', 624, 265, 'DEMAND SRC017/2023 REPAIR OF HP PRODESK COMPUTER SL. NO. INA815XLOD', 'AIR FORCE CELL/2022-2023/624', NULL, 'DEMAND SRC017/2023 REPAIR OF HP PRODESK COMPUTER SL. NO. INA815XLOD', 1, 4850, 2, '', 1, 3, 9, 2, 'Forwarded for approval', 1, '2023-03-06 11:15:16', '', '', NULL, '2023-03-02 04:19:36'),
+('', 625, 75, 'Standard Solutions of Fire Effluents ', 'EnSG/2021-2022/625', 'CFEES/23ENS0833/BU/LPC/252/22-23', 'Standards are required for qualitative & quantitative determination of fire effluents. The items may be procured as revenue items in INR, under Build Up through LPC (Major Head 2080, Minor Head 110 and Head Code 856/01). ', 4, 241421, 2, '', 1, 3, 9, 1, 'Necessary documents have been placed in file. Put up for approval please.', 1, '2023-03-02 10:17:17', '', '', NULL, '2023-03-02 04:46:48'),
+('', 626, 247, '24 Port Managed Network Switch', 'QRS&IT/2022-2023/626', NULL, '', 3, 494999, 2, '', 1, 1, 5, 2, '', 1, '2023-03-02 16:09:00', '', '', NULL, '2023-03-02 10:37:51'),
+('', 627, 192, 'Plastic Sampling Bottle (1000 & 250 ml)', 'QRS&IT/2022-2023/627', 'CFEES/223QAG088/P/GEM/248/22-23', '', 100, 10750, 1, '', 13, 1, 7, 2, '', 1, '2023-03-03 10:22:18', '', '', NULL, '2023-03-03 04:51:49'),
+('', 628, 79, 'laboratory incubator', 'EnSG/2022-2023/628', 'CFEES/23ENS079/P/GEM/267/22-23', '', 1, 300000, 1, '', 7, 1, 5, 2, '', 1, '2023-03-03 11:20:33', '', '', NULL, '2023-03-03 05:40:17'),
+('', 629, 79, 'Multifuction Machine', 'EnSG/2022-2023/629', 'CFEES/23ENS084/P/GEM/263/22-23', '', 2, 494404, 1, '', 7, 1, 5, 2, '', 1, '2023-03-03 11:20:27', '', '', NULL, '2023-03-03 05:42:28'),
+('', 630, 79, 'Shaker Incubator', 'EnSG/2022-2023/630', 'CFEES/23ENS078/P/GEM/249/22-23', '', 2, 400000, 1, '', 7, 1, 5, 2, '', 1, '2023-03-03 11:20:20', '', '', NULL, '2023-03-03 05:44:22'),
+('', 631, 79, 'Spreader', 'EnSG/2022-2023/631', NULL, '', 100, 4602, 1, '', 7, 1, 5, 2, '', 1, '2023-03-03 11:20:14', '', '', NULL, '2023-03-03 05:48:16'),
+('', 632, 250, 'Toner Cartridge Q2612AC 23MMG080', 'MMG/2022-2023/632', 'CFEES/23MMG080/MISC/GEM/237/22-23', '', 10, 4240, 2, '', 1, 1, 7, 2, '', 1, '2023-03-03 12:12:40', '', '', NULL, '2023-03-03 06:39:17'),
+('', 633, 250, 'Toner Cartridge 278AC 23MMG079', 'MMG/2022-2023/633', 'CFEES/23MMG079/MISC/GEM/236/22-23', '', 10, 4340, 2, '', 1, 1, 7, 2, '', 1, '2023-03-03 12:12:36', '', '', NULL, '2023-03-03 06:40:24'),
+('', 634, 250, 'Toner Cartridge 388AC 23MMG078', 'MMG/2022-2023/634', 'CFEES/23MMG078/MISC/GEM/235/22-23', '', 50, 21800, 2, '', 1, 1, 7, 2, '', 1, '2023-03-03 12:12:31', '', '', NULL, '2023-03-03 06:42:15'),
+('', 635, 79, 'Disposal surgical rubber gloves', 'EnSG/2022-2023/635', 'CFEES/23ENS082/P/GEM/250/22-23', '', 2900, 24360, 1, '', 7, 1, 5, 2, '', 1, '2023-03-06 15:03:07', '', '', NULL, '2023-03-06 09:32:42'),
+('', 636, 79, 'Paraflim Rolls (12nos)', 'EnSG/2022-2023/636', 'CFEES/23ENS085/P/GEM/261/22-23', '', 12, 24024, 1, '', 7, 1, 5, 2, '', 1, '2023-03-06 15:10:57', '', '', NULL, '2023-03-06 09:40:42'),
+('', 637, 71, 'Development Contract for Bioformulation for remediation of explosives', 'QRS&IT/2022-2023/637', 'CFEES/23QAG087/P/OT/012/23-24', '', 1, 9000000, 1, '', 13, 3, 5, 2, '', 1, '2023-03-13 12:09:50', '', '', NULL, '2023-03-13 06:39:25'),
+('', 638, 224, 'REPAIR OF HP 406 G1 MT BUSINESS PC MOTHER BOARD (INA601WTFW)', NULL, NULL, '', 1, 13629, 2, '', 1, 1, 1, 2, '', 0, NULL, '', '', NULL, '2023-03-13 06:55:45'),
+('', 639, 224, 'REPAIR OF HP 406 G1 MT BUSINESS PC MOTHER BOARD (INA601WTFW)', 'TFA/2022-2023/639', NULL, 'REPAIR OF HP 406 G1 MT BUSINESS PC MOTHER BOARD (INA601WTFW)', 1, 13629, 2, '', 1, 3, 7, 2, '', 1, '2023-03-13 12:29:42', '', '', NULL, '2023-03-13 06:59:09'),
+('', 640, 174, 'PSU along with Hocl', NULL, NULL, '', 12, 3825560, 2, '', 1, 2, 2, 1, '', 0, NULL, '', '', NULL, '2023-03-14 06:12:03'),
+('', 641, 233, 'Photo Frame', 'QRS&IT/2022-2023/641', NULL, '', 6, 6584, 2, '', 1, 1, 7, 2, '', 1, '2023-03-15 10:18:12', '', '', NULL, '2023-03-15 04:47:09'),
+('', 642, 96, 'Photo Frames', 'MS&ESRG/2022-2023/642', 'CFEES/23ERG043/P/GEM/264/22-23', '', 11, 24200, 1, '', 4, 1, 7, 2, '', 1, '2023-03-17 11:10:08', '', '', NULL, '2023-03-17 05:39:43'),
+('', 643, 71, 'Incubated and Refrigerated Stackable Shaker', 'QRS&IT/2022-2023/643', NULL, '', 1, 1591819, 1, '', 13, 1, 2, 2, '', 1, '2023-03-17 17:11:23', '', '', NULL, '2023-03-17 11:41:16'),
+('', 644, 79, 'Borosile glass beaker', 'EnSG/2022-2023/644', 'CFEES/23ENS086/P/GEM/269/22-23', '', 50, 20000, 1, '', 7, 1, 5, 2, '', 1, '2023-03-21 10:26:10', '', '', NULL, '2023-03-21 04:55:55'),
+('', 645, 250, 'Toner Cartridge CF277A 23MMG086', 'MMG/2022-2023/645', 'CFEES/23MMG086/MISC/GEM/259/22-23', '', 15, 15750, 2, '', 1, 1, 7, 2, '', 1, '2023-03-21 16:10:21', '', '', NULL, '2023-03-21 10:39:46'),
+('', 646, 250, 'Xerox Paper A4', 'MMG/2022-2023/646', 'CFEES/23MMG084/MISC/GEM/258/22-23', '', 600, 189000, 2, '', 1, 1, 7, 2, '', 1, '2023-03-21 16:11:37', '', '', NULL, '2023-03-21 10:41:23'),
+('', 647, 250, 'Stamp Pad 23MMG083', 'MMG/2022-2023/647', 'CFEES/23MMG083/MISC/GEM/257/22-23', '', 40, 2520, 2, '', 1, 1, 7, 2, '', 1, '2023-03-21 16:12:35', '', '', NULL, '2023-03-21 10:42:27'),
+('', 648, 250, 'GLUE STICK 23MMG082', 'MMG/2022-2023/648', 'CFEES/23MMG082/MISC/GEM/256/22-23', '', 300, 7500, 2, '', 1, 1, 7, 2, '', 1, '2023-03-21 16:13:33', '', '', NULL, '2023-03-21 10:43:26'),
+('', 649, 79, 'Motor vortex Mixrers', 'EnSG/2022-2023/649', 'CFEES/23ENS080/P/GEM/271/22-23', '', 1, 38500, 1, '', 7, 1, 5, 2, '', 1, '2023-03-21 17:07:36', '', '', NULL, '2023-03-21 11:34:45'),
+('', 650, 79, 'self adhesive Label ', 'EnSG/2022-2023/650', NULL, '', 50, 15000, 1, '', 7, 1, 5, 2, '', 1, '2023-03-21 17:07:13', '', '', NULL, '2023-03-21 11:36:07'),
+('', 651, 125, 'Procurement DRUM Cartridge of Xerox Versalink B7035', 'TCP&HR/2022-2023/651', 'CFEES/23TCP009/BU/GEM/231/22-23', '', 1, 39576, 2, '', 1, 1, 1, 2, '', 1, '2023-03-28 12:16:09', '', '', NULL, '2023-03-28 06:44:38'),
+('', 652, 80, 'Procurement of Chemicals (tetrabromobisphenol etc.)', 'FC&HB/2022-2023/652', 'CFEES/23FCP08/P/LPC/270/22-23', '', 16, 175396, 1, '', 14, 3, 9, 2, '', 1, '2023-03-31 11:07:16', '', '', NULL, '2023-03-31 05:37:01'),
+('', 653, 60, 'Hiring of Unskilled Manpower (NGHA)', 'FC&HB/2022-2023/653', 'CFEES/23FCP109/P/GEM/007/23-24', '23FCP109', 4, 3723552, 1, '', 14, 1, 5, 2, '', 1, '2023-04-03 11:19:37', '', '', NULL, '2023-04-03 05:49:07'),
+('', 654, 250, 'Toner Cartridge NGP - 51 23MMG087', 'MMG/2022-2023/654', 'CFEES/23MMG087/MISC/GEM/266/22-23', '', 5, 16700, 2, '', 1, 1, 7, 2, '', 1, '2023-04-03 12:19:19', '', '', NULL, '2023-04-03 06:49:09'),
+('', 655, 61, 'Multifunction (Photocopier) Machine', 'FSEG/2022-2023/655', NULL, '', 1, 247169, 2, '', 1, 1, 8, 2, '', 1, '2023-04-05 13:36:23', '', '', NULL, '2023-04-05 08:05:31'),
+('', 656, 80, 'Toxicity Determination in r/o NOAEL & LOAEL Study', 'FC&HB/2022-2023/656', NULL, '', 2, 33200000, 1, '', 14, 2, 2, 2, '', 1, '2023-04-05 15:49:01', '', '', NULL, '2023-04-05 10:18:44'),
+('', 657, 79, 'Payment of Arrears of unskilled manpower of EnSG', 'EnSG/2021-2022/657', NULL, '', 3, 68141, 1, '', 7, 1, 1, 1, '', 1, '2023-04-13 12:32:25', '', '', NULL, '2023-04-13 07:02:16'),
+('', 658, 192, 'LCMS Grade Solvent/Chemicals', 'QRS&IT/2021-2022/658', 'CFEES/23QAG073/P/LPC/23-24', '', 8, 270455, 1, '', 13, 3, 9, 2, '', 1, '2023-04-13 15:49:54', '', '', NULL, '2023-04-13 10:19:17'),
+('', 659, 192, 'LCMS Grade Solvent/Chemicals', NULL, NULL, '', 8, 270455, 1, '', 13, 3, 9, 2, '', 0, NULL, '', '', NULL, '2023-04-13 10:22:30'),
+('', 660, 250, 'Hand Towel 23MMG076', 'MMG/2022-2023/660', 'CFEES/23MMG076/MISC/GEM/220/22-23', '', 100, 12000, 2, '', 1, 1, 8, 2, '', 1, '2023-04-17 15:19:11', '', '', NULL, '2023-04-17 09:48:56'),
+('', 661, 124, 'CFEES/24MMG001/BU/GeM/001/23-24', NULL, NULL, 'HARD DISK', 1, 21500, 2, '', 1, 1, 7, 1, '', 0, NULL, '', '', NULL, '2023-04-17 09:50:13'),
+('', 662, 124, 'CFEES/24MMG001/BU/GeM/001/23-24', 'MMG/2021-2022/662', 'CFEES/24MMG001/BU/GEM/001/23-24', 'HARD DISK', 1, 21500, 2, '', 1, 1, 7, 1, '', 1, '2023-04-17 15:23:38', '', '', NULL, '2023-04-17 09:53:11'),
+('', 663, 77, 'Refill Of Nitrogen Gas through GeM', 'PC&M/2021-2022/663', 'CFEES/24PCM001/BU/GEM/006/23-24', '', 6, 17640, 2, '', 1, 1, 7, 1, '', 1, '2023-04-17 16:55:50', '', '', NULL, '2023-04-17 11:25:39'),
+('', 664, 60, 'Procurement of Fourier Transform Infrared ( FTIR ) Spectrophotometer', 'FC&HB/2022-2023/664', NULL, 'Demand no  23FCP104 dated 20 Feb 2023', 1, 3688680, 1, '', 14, 1, 5, 2, '', 1, '2023-04-18 12:14:20', '', '', NULL, '2023-04-18 06:42:59'),
+('', 665, 75, 'Online UPS (10 KVA) with Battery Backup', 'EnSG/2021-2022/665', NULL, 'Online UPS (10 KVA) with Battery Backup is required for uninterrupted and stabilized power supply to different instruments in Room No. 10 (N.B.)', 1, 575000, 2, '', 1, 1, 8, 1, 'Put up for approval please.', 1, '2023-04-24 10:50:08', '', '', NULL, '2023-04-24 05:19:47'),
+('', 666, 163, 'Deep freezer', 'QRS&IT/2022-2023/666', NULL, '', 1, 1050000, 1, '', 13, 1, 5, 2, '', 1, '2023-04-24 11:40:24', '', '', NULL, '2023-04-24 06:09:57'),
+('', 667, 250, 'File Cover ', 'MMG/2022-2023/667', 'CFEES/23MMG077/MISC/GEM/219/22-23', '', 1000, 25000, 1, '', 1, 1, 7, 2, '', 1, '2023-04-24 12:27:15', '', '', NULL, '2023-04-24 06:57:04'),
+('', 668, 224, 'Procurement of Name Plates ', 'TFA/2022-2023/668', NULL, '', 20, 24960, 2, '', 1, 1, 6, 2, '', 1, '2023-04-24 14:49:23', '', '', NULL, '2023-04-24 09:18:53'),
+('', 669, 124, 'Hiring of Data Entry Operator', 'MMG/2021-2022/669', 'CFEES/22MMG007/MISC/GEM/181', 'Hiring of Data Entry Operator 2022 to 2023', 21, 7091746, 2, '', 1, 1, 5, 1, '', 1, '2023-04-25 11:06:39', '', '', NULL, '2023-04-25 05:35:17'),
+('', 670, 77, 'AMC of Scanning Electron Microscope', 'PC&M/2021-2022/670', 'CFEES/20EVS048/BU/ST/206/19-20', '', 1, 885000, 2, '', 1, 2, 2, 1, '', 1, '2023-04-25 12:16:35', '', '', NULL, '2023-04-25 06:46:05'),
+('', 671, 249, 'SoC: Sanction for Hiring of Services of Two (02) Security Guard Female (Lady Searcher) For Security and Surveillance at CFEES Campus', NULL, NULL, 'Bill Processing ', 1, 116913, 2, '', 1, 1, 6, 1, 'Forwarding Bills from  01/02/2023 to 31/03/2023', 0, NULL, '', '', NULL, '2023-04-25 06:47:53'),
+('', 672, 249, 'SOC FOR SANTION FOR HIRING OF SERVICES OF TWO (02) LADY SEARCHER (SECURITY GUARD FEMALE) FOR SECURITY AND SURVEILLANCE AT CFEES CAMPUS', 'SECURITY/2022-2023/672', 'CFEES/22SEC008/MISC/GEM/079/21-22', 'Forwarding Bill', 1, 116913, 2, '', 1, 1, 5, 2, 'Forwarding Bill from 01/02/2023 to 31/03/2023', 1, '2023-04-25 12:23:25', '', '', NULL, '2023-04-25 06:52:33'),
+('', 673, 84, 'CMRC for Fire Extinguishing System of AFPS for Aircraft', 'FSEG/2021-2022/673', NULL, '', 1, 13098000, 1, '', 10, 2, 5, 1, '', 1, '2023-04-26 10:12:16', '', '', NULL, '2023-04-26 04:41:37'),
+('', 674, 218, 'CAMC for photo Copier Machine (Works Division + Security Division)', 'WORKS/2022-2023/674', NULL, 'CFEES/23WRK011/Misc/GeM/260/22-23 dt. 22/03/2023', 2, 270000, 2, '', 1, 1, 7, 2, '', 1, '2023-04-26 11:48:02', '', '', NULL, '2023-04-26 06:16:54'),
+('', 675, 249, 'DIGITAL PHOTOCOPIER MACHINE', 'SECURITY/2022-2023/675', NULL, 'DIGITAL PHOTOCOPIER MACHINE', 1, 183000, 2, '', 1, 1, 5, 2, '', 1, '2023-04-27 11:34:27', '', '', NULL, '2023-04-27 06:03:50'),
+('', 676, 251, 'Procurement of 8 No of Kel Wooden Crib (500mm x 500mm x500mm)', 'EnSG/2022-2023/676', NULL, '', 8, 94400, 2, '', 1, 3, 9, 2, '', 1, '2023-04-27 15:21:30', '', '', NULL, '2023-04-27 09:08:18'),
+('', 677, 79, 'Hiring of Manpower MTS  (Part-2)', 'EnSG/2022-2023/677', 'CFEES/20EVS077/P/GEM/258/19-20', '', 3, 2178696, 1, '', 7, 1, 5, 2, '', 1, '2023-05-03 10:20:56', '', '', NULL, '2023-05-03 04:50:34'),
+('', 678, 244, 'Multi function machine', 'FSEG/2022-2023/678', 'CFEES/24FAS001/P/GEM/005/23-24', '', 2, 380242, 1, '', 11, 1, 7, 2, '', 1, '2023-05-03 12:30:41', '', '', NULL, '2023-05-03 06:59:43'),
+('', 679, 251, 'Purchase of Chemicals', 'EnSG/2022-2023/679', 'CFEES/24ENS007/BU/GEM/014/23-24', '', 3, 21550, 2, '', 1, 1, 9, 2, '', 1, '2023-05-03 12:37:47', '', '', NULL, '2023-05-03 07:06:39'),
+('', 680, 192, 'Crucible (15 mL)', 'QRS&IT/2022-2023/680', 'CFEES/24QAG001/P/GEM/009/23-24', '', 12, 9600, 1, '', 13, 1, 7, 2, '', 1, '2023-05-03 14:34:37', '', '', NULL, '2023-05-03 08:02:04'),
+('', 681, 192, 'Solid Phase Extraction Unit', 'QRS&IT/2022-2023/681', 'CFEES/24QAG002/P/GEM/022/23-24', '', 1, 64998, 1, '', 13, 1, 8, 2, '', 1, '2023-05-03 14:34:32', '', '', NULL, '2023-05-03 08:02:52'),
+('', 682, 192, 'Test Tubes', 'QRS&IT/2022-2023/682', 'CFEES/24QAG003/P//GEM/015/23-24', '', 100, 5000, 1, '', 13, 1, 7, 2, '', 1, '2023-05-03 14:34:28', '', '', NULL, '2023-05-03 08:03:27'),
+('', 683, 192, 'Petri Dish (Glass)', 'QRS&IT/2022-2023/683', 'CFEES/24QAG004/P/GEM/010/23-24', '', 100, 4500, 1, '', 13, 1, 7, 2, '', 1, '2023-05-03 14:34:23', '', '', NULL, '2023-05-03 08:04:14');
+INSERT INTO `daks` (`sender`, `dak_id`, `e_id`, `file_name`, `docket_no`, `file_num`, `description`, `quantity`, `total_cost`, `cat_id`, `org_id`, `proj_id`, `port_id`, `bid_id`, `fin_id`, `f_remark`, `f_status`, `mark_to_ad`, `reply_type`, `replied_action`, `mark_to_mmg`, `is_created`) VALUES
+('', 684, 192, 'Agar', 'QRS&IT/2022-2023/684', 'CFEES/24QAG005/P/GEM/018/23-24', '', 9, 39600, 1, '', 13, 1, 7, 2, '', 1, '2023-05-03 14:34:18', '', '', NULL, '2023-05-03 08:04:52'),
+('', 685, 124, 'Hiring of Wet Canteen Services Based on Employee Welfare Model', 'MMG/2021-2022/685', 'CFEES/24WET001/MISC/GEM/003/23-24', 'Hiring of Wet Canteen Services Based on Employee Welfare Model for Two Year', 1, 7660570, 2, '', 1, 1, 5, 1, '', 1, '2023-05-03 15:00:02', '', '', NULL, '2023-05-03 09:28:57'),
+('', 686, 84, 'CMRC for Fire Detection & Control System of AFPS for Aircraft', 'FSEG/2021-2022/686', 'CFEES/21FAS006/P/OT/195/20-21', '', 1, 18656980, 1, '', 10, 2, 5, 1, '', 1, '2023-05-08 11:12:40', '', '', NULL, '2023-05-08 05:41:52'),
+('', 687, 192, 'Hiring of unskilled manpower 02 nos.', 'QRS&IT/2022-2023/687', NULL, '', 24, 1231488, 1, '', 13, 1, 8, 2, '', 1, '2023-05-08 16:23:43', '', '', NULL, '2023-05-08 10:52:58'),
+('', 688, 32, 'Calibration gases', 'FC&HB/2022-2023/688', NULL, '', 8, 133340, 2, '', 1, 3, 9, 2, '', 1, '2023-05-10 16:54:05', '', '', NULL, '2023-05-10 11:17:55'),
+('', 689, 192, 'Orbital Shaker', 'QRS&IT/2022-2023/689', 'CFEES/24QAG009/P/GEM/017/23-24', '', 2, 360000, 1, '', 13, 1, 8, 2, '', 1, '2023-05-11 10:05:23', '', '', NULL, '2023-05-11 04:35:00'),
+('', 690, 192, 'Syringe Filter 0.22 micrometer', 'QRS&IT/2022-2023/690', NULL, '', 5, 25125, 1, '', 13, 1, 8, 2, '', 1, '2023-05-11 10:23:43', '', '', NULL, '2023-05-11 04:53:22'),
+('', 691, 250, 'Plastic Sampling Bottle 250ML Duplicate File ', 'MMG/2021-2022/691', 'CFEES/23QAG088/P/GEM/248/22-23', '', 50, 2124, 2, '', 1, 1, 7, 1, '', 1, '2023-05-12 14:52:40', '', '', NULL, '2023-05-12 09:22:21'),
+('', 692, 79, 'Cartridge', 'EnSG/2022-2023/692', NULL, '', 3, 15000, 1, '', 7, 1, 5, 2, '', 1, '2023-05-16 14:43:13', '', '', NULL, '2023-05-16 09:12:42'),
+('', 693, 72, 'Unskilled manpower', 'FC&HB/2022-2023/693', 'CFEES/21FCP009/P/DB/GEM/80/20-21', '', 2, 1085794, 1, '', 8, 1, 5, 2, 'Final bill submission to DCDA', 1, '2023-05-16 15:47:01', '', '', NULL, '2023-05-16 10:15:53'),
+('', 694, 218, 'Cleaning White Floor Duster ', 'WORKS/2021-2022/694', 'CFEES/23WRK013/MISC/GEM/027/23-24', '', 200, 2180, 2, '', 1, 1, 7, 2, '', 1, '2023-05-24 10:45:21', '', '', NULL, '2023-05-24 05:14:17'),
+('', 695, 250, 'Toner cartridge 388A 24MMG004', 'MMG/2022-2023/695', 'CFEES/24MMG004/MISC/GEM/016/23-24', '', 80, 64000, 2, '', 1, 1, 7, 2, '', 1, '2023-05-24 14:41:11', '', '', NULL, '2023-05-24 09:10:46'),
+('', 696, 250, 'Networking Devices Duplicate File (Ethernet Patch Cord 3mtr)', 'MMG/2022-2023/696', NULL, '', 20, 2280, 2, '', 1, 1, 7, 2, '', 1, '2023-05-25 11:55:02', '', '', NULL, '2023-05-25 06:24:49'),
+('', 697, 250, 'Pen Stand 24MMG006', 'MMG/2022-2023/697', NULL, '', 20, 23100, 2, '', 1, 1, 7, 2, '', 1, '2023-05-25 16:41:56', '', '', NULL, '2023-05-25 11:11:50'),
+('', 698, 250, 'Noting Sheet 24MMG005', 'MMG/2022-2023/698', NULL, '', 100, 13500, 2, '', 1, 1, 7, 2, '', 1, '2023-05-25 16:42:45', '', '', NULL, '2023-05-25 11:12:40'),
+('', 699, 218, 'Statement of case for sanction of additional amount for payment of arreas due to revision of wages to cleaning staff', 'WORKS/2022-2023/699', 'CFEES/21WRK013/MISC/GEM/194/20-21', '', 1, 56494, 2, '', 1, 1, 7, 2, '', 1, '2023-05-26 11:58:34', '', '', NULL, '2023-05-26 06:26:17'),
+('', 700, 218, 'Statement of case for hiring of cleaning staff at CFEES (06-10-2023 to 05-10-2024)', 'WORKS/2022-2023/700', NULL, '', 1, 6673070, 2, '', 1, 1, 7, 2, '', 1, '2023-05-26 15:12:37', '', '', NULL, '2023-05-26 09:41:59'),
+('', 701, 250, 'Duster 100 Nos Duplicate File 23WRK013', 'MMG/2022-2023/701', 'CFEES/23WRK013/MISC/GEM/026/23-24', '', 100, 850, 2, '', 1, 1, 7, 2, '', 1, '2023-05-29 11:55:56', '', '', NULL, '2023-05-29 06:25:47'),
+('', 702, 250, 'TONER NPG-51 23MMG087', 'MMG/2022-2023/702', NULL, '', 5, 15900, 2, '', 1, 1, 7, 2, '', 1, '2023-05-31 11:34:17', '', '', NULL, '2023-05-31 06:04:10'),
+('', 703, 192, 'Web Camera', 'QRS&IT/2022-2023/703', 'CFEES/24QAG010/BU/GEM/025/23-24', '', 8, 59960, 2, '', 1, 1, 7, 2, '', 1, '2023-06-01 16:41:26', '', '', NULL, '2023-06-01 11:11:04'),
+('', 704, 39, 'Procurement of HOT air oven through GeM under the project NGHA', 'FC&HB/2022-2023/704', NULL, ' Project no:  S &  T(A) 22-23/CFE-44', 1, 130000, 1, '', 14, 1, 8, 2, 'Correct Financial year should be 2023-24', 1, '2023-06-02 15:41:04', '', '', NULL, '2023-06-02 10:09:46'),
+('', 705, 261, 'Procurement of Diesel & Petrol for MT vehicles', 'MT/2022-2023/705', NULL, '', 9500, 1286630, 2, '', 1, 3, 2, 2, '', 1, '2023-06-02 16:11:15', '', '', NULL, '2023-06-02 10:34:41'),
+('', 706, 77, 'Thermal Protective Performance Tseter', 'PC&M/2022-2023/706', NULL, '', 1, 7500000, 2, '', 1, 2, 5, 2, '', 1, '2023-06-05 11:34:39', '', '', NULL, '2023-06-05 06:00:45'),
+('', 707, 77, 'Simultaneous Thermogravimetric Analyser', 'PC&M/2022-2023/707', NULL, '', 1, 7500000, 2, '', 1, 2, 5, 2, '', 1, '2023-06-05 11:33:06', '', '', NULL, '2023-06-05 06:02:17'),
+('', 708, 79, 'Blotting Paper', 'EnSG/2022-2023/708', NULL, '', 10, 30000, 1, '', 7, 1, 5, 2, '', 1, '2023-06-07 15:55:11', '', '', NULL, '2023-06-07 10:22:10'),
+('', 709, 249, 'RFID Based Vehicle Sticker', 'SECURITY/2022-2023/709', NULL, 'RFID Based Vehicle Sticker', 700, 14455, 2, '', 1, 3, 9, 2, 'Cash Purchase', 1, '2023-06-08 11:28:12', '', '', NULL, '2023-06-08 05:57:31'),
+('', 710, 174, 'Multifunction Machine', 'MS&ESRG/2022-2023/710', NULL, '', 2, 477420, 1, '', 4, 1, 8, 2, 'File placed opposite to process the case on GeM', 1, '2023-06-08 15:53:35', '', '', NULL, '2023-06-08 10:21:26'),
+('', 711, 250, 'Napthelene Balls Duplicate File 23WRK013', 'MMG/2022-2023/711', NULL, '', 100, 3500, 2, '', 1, 1, 7, 2, '', 1, '2023-06-08 16:02:05', '', '', NULL, '2023-06-08 10:31:56'),
+('', 712, 250, 'Cartridge 278 24MMG007', 'MMG/2022-2023/712', 'CFEES/24MMG007/MISC/GEM/024/23-24', '', 30, 45000, 2, '', 1, 1, 8, 2, '', 1, '2023-06-09 11:35:14', '', '', NULL, '2023-06-09 06:04:56'),
+('', 713, 250, 'Chemical (Naclo & KNo3) 23QAG084 Duplicate File ', 'MMG/2022-2023/713', NULL, '', 5, 7535, 2, '', 1, 1, 7, 2, '', 1, '2023-06-12 10:59:15', '', '', NULL, '2023-06-12 05:29:05'),
+('', 714, 206, 'CARS-Studies on microbial community Dynamics during Pilot/Field Scale Bioremediation o Explosive-VIT Bill 15L', 'QRS&IT/2022-2023/714', NULL, 'VIT Bill 15L', 1, 1500000, 1, '', 13, 5, 11, 2, 'Payment of CARS (15 Lakh)', 1, '2023-06-13 11:55:29', '', '', NULL, '2023-06-13 06:24:43'),
+('', 715, 261, 'Procurement of Loaders ( E-Rickshaw for carrying Goods)', 'MT/2022-2023/715', NULL, '', 4, 580000, 2, '', 1, 1, 5, 2, '', 1, '2023-06-14 13:00:28', '', '', NULL, '2023-06-14 07:29:55'),
+('', 716, 192, 'Parafilm', 'QRS&IT/2022-2023/716', NULL, '', 5, 23500, 1, '', 13, 1, 7, 2, '', 1, '2023-06-15 10:30:12', '', '', NULL, '2023-06-15 04:59:59'),
+('', 738, 192, 'Interactive Panel (75 inch)', 'QRS&IT/2022-2023/738', NULL, '', 1, 355000, 1, '', 13, 1, 8, 2, '', 1, '2023-07-10 11:54:54', '', '', NULL, '2023-07-10 06:23:42'),
+('', 739, 247, 'Repair of Network Switches', 'QRS&IT/2022-2023/739', NULL, 'Repair of Network Switches', 9, 291460, 2, '', 1, 3, 9, 2, 'Financial Year 2023-24', 1, '2023-07-10 16:58:47', '', '', NULL, '2023-07-10 11:28:25'),
+('', 740, 233, 'CFD Analysis study of heat flux and temperature profile over Manikin', 'QRS&IT/2022-2023/740', NULL, '', 1, 949900, 2, '', 1, 1, 7, 2, '', 1, '2023-07-11 11:41:18', '', '', NULL, '2023-07-11 06:10:45'),
+('', 741, 97, 'CMRC for Development of CAFES ', 'FC&HB/2021-2022/741', NULL, 'CMRC for Development of CAFES ', 2, 1593000, 1, '', 8, 2, 5, 1, '', 1, '2023-07-11 15:12:27', '', '', NULL, '2023-07-11 09:42:10'),
+('', 742, 71, 'Job Work on maintenance of pilot scale soil bioremediation site', 'QRS&IT/2022-2023/742', NULL, '', 1, 962880, 1, '', 13, 3, 6, 2, '', 1, '2023-07-13 11:38:41', '', '', NULL, '2023-07-13 06:07:44'),
+('', 743, 249, 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY PERSONNEL EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 'SECURITY/2022-2023/743', NULL, '', 2, 956655, 2, '', 1, 1, 1, 2, 'Statement of case for sanction of additional amount for payment of arrears to security personnel employed at CFEES Campus.', 1, '2023-07-13 14:49:38', '', '', NULL, '2023-07-13 09:18:40'),
+('', 744, 249, 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY PERSONNEL EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 'SECURITY/2022-2023/744', NULL, '', 2, 956655, 2, '', 1, 1, 1, 2, 'Statement of case for sanction of additional amount for payment of arrears to security personnel employed at CFEES Campus.', 1, '2023-07-13 14:49:51', '', '', NULL, '2023-07-13 09:19:00'),
+('', 745, 250, 'Tape 24MMG020', 'MMG/2022-2023/745', NULL, '', 200, 11000, 2, '', 1, 1, 7, 2, '', 1, '2023-07-18 11:19:43', '', '', NULL, '2023-07-18 05:49:34'),
+('', 746, 250, 'Cartridge 2612AC 24MMG021', 'MMG/2022-2023/746', NULL, '', 12, 12000, 2, '', 1, 1, 7, 2, '', 1, '2023-07-18 11:20:55', '', '', NULL, '2023-07-18 05:50:50'),
+('', 747, 250, 'TOWEL (BIG) 24MMG019', 'MMG/2022-2023/747', NULL, '', 40, 24000, 2, '', 1, 1, 7, 2, '', 1, '2023-07-18 11:22:55', '', '', NULL, '2023-07-18 05:52:28');
 
 -- --------------------------------------------------------
 
@@ -75,51 +820,50 @@ INSERT INTO `category` (`id`, `cat_name`) VALUES
 -- Table structure for table `desig`
 --
 
-CREATE TABLE IF NOT EXISTS `desig` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `desig` (
+  `id` int(4) NOT NULL,
   `name` varchar(50) NOT NULL,
   `desig_fullname` varchar(50) NOT NULL,
-  `is_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_deleted` enum('yes','no') NOT NULL DEFAULT 'no',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=84 ;
+  `is_created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `is_deleted` enum('yes','no') NOT NULL DEFAULT 'no'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `desig`
 --
 
 INSERT INTO `desig` (`id`, `name`, `desig_fullname`, `is_created`, `is_deleted`) VALUES
-(1, 'Sc ''H''', 'Scientist ''H''', '2019-10-03 09:36:55', 'no'),
-(2, 'Sc ''G''', 'Scientist ''G''', '2019-10-03 09:36:55', 'no'),
-(3, 'Sc ''F''', 'Scientist ''F''', '2019-10-03 09:36:55', 'no'),
-(4, 'Sc ''E''', 'Scientist ''E''', '2019-10-03 09:36:55', 'no'),
-(5, 'Sc ''D''', 'Scientist ''D''', '2019-10-03 09:36:55', 'no'),
-(6, 'Sc ''C''', 'Scientist ''C''', '2019-10-03 09:36:55', 'no'),
-(7, 'Sc ''B''', 'Scientist ''B''', '2019-10-03 09:36:55', 'no'),
-(8, 'TO ''D''', 'Technical Officer ''D''', '2019-10-03 09:36:55', 'no'),
-(9, 'TO ''C''', 'Technical Officer ''C''', '2019-10-03 09:36:55', 'no'),
-(10, 'TO ''B''', 'Technical Officer ''B''', '2019-10-03 09:36:55', 'no'),
-(11, 'TO ''A''', 'Technical Officer ''A''', '2019-10-03 09:36:56', 'no'),
+(1, 'Sc \'H\'', 'Scientist \'H\'', '2019-10-03 09:36:55', 'no'),
+(2, 'Sc \'G\'', 'Scientist \'G\'', '2019-10-03 09:36:55', 'no'),
+(3, 'Sc \'F\'', 'Scientist \'F\'', '2019-10-03 09:36:55', 'no'),
+(4, 'Sc \'E\'', 'Scientist \'E\'', '2019-10-03 09:36:55', 'no'),
+(5, 'Sc \'D\'', 'Scientist \'D\'', '2019-10-03 09:36:55', 'no'),
+(6, 'Sc \'C\'', 'Scientist \'C\'', '2019-10-03 09:36:55', 'no'),
+(7, 'Sc \'B\'', 'Scientist \'B\'', '2019-10-03 09:36:55', 'no'),
+(8, 'TO \'D\'', 'Technical Officer \'D\'', '2019-10-03 09:36:55', 'no'),
+(9, 'TO \'C\'', 'Technical Officer \'C\'', '2019-10-03 09:36:55', 'no'),
+(10, 'TO \'B\'', 'Technical Officer \'B\'', '2019-10-03 09:36:55', 'no'),
+(11, 'TO \'A\'', 'Technical Officer \'A\'', '2019-10-03 09:36:56', 'no'),
 (12, 'TO', 'Technical Officer', '2019-10-03 09:36:56', 'no'),
-(13, 'STA ''B''', 'Senior Technical Assistant ''B''', '2019-10-03 09:36:56', 'no'),
-(14, 'TA ''B''', 'Technical Assistant ''B''', '2019-10-03 09:36:56', 'no'),
-(15, 'TECH ''C''', 'Technician ''C''', '2019-10-03 09:36:56', 'no'),
-(16, 'TECH ''B''', 'Technician ''B''', '2019-10-03 09:36:56', 'no'),
-(17, 'TECH ''A''', 'Technician ''A''', '2019-10-03 09:36:56', 'no'),
+(13, 'STA \'B\'', 'Senior Technical Assistant \'B\'', '2019-10-03 09:36:56', 'no'),
+(14, 'TA \'B\'', 'Technical Assistant \'B\'', '2019-10-03 09:36:56', 'no'),
+(15, 'TECH \'C\'', 'Technician \'C\'', '2019-10-03 09:36:56', 'no'),
+(16, 'TECH \'B\'', 'Technician \'B\'', '2019-10-03 09:36:56', 'no'),
+(17, 'TECH \'A\'', 'Technician \'A\'', '2019-10-03 09:36:56', 'no'),
 (18, 'JD', 'Joint Director', '2019-10-03 09:36:56', 'no'),
 (19, 'CAO', 'Chief Admin Officer', '2019-10-03 09:36:56', 'no'),
 (20, 'Sr. Admin Officer-I', 'Senior Admin Officer-I', '2019-10-03 09:36:56', 'no'),
 (21, 'Sr. Admin Officer-II', 'Senior Admin Officer-II', '2019-10-03 09:36:56', 'no'),
 (22, 'Admin Officer', 'Admin Officer', '2019-10-03 09:36:56', 'no'),
 (23, 'Sr. Admin Assistant', 'Sr. Admin Assistant', '2019-10-03 09:36:56', 'no'),
-(24, 'AA ''B''', 'Admin Assistant ''B''', '2019-10-03 09:36:56', 'no'),
-(25, 'AA ''A''', 'Admin Assistant ''A''', '2019-10-03 09:36:56', 'no'),
+(24, 'AA \'B\'', 'Admin Assistant \'B\'', '2019-10-03 09:36:56', 'no'),
+(25, 'AA \'A\'', 'Admin Assistant \'A\'', '2019-10-03 09:36:56', 'no'),
 (26, 'SSO-I', 'Senior Store Officer-I', '2019-10-03 09:36:56', 'no'),
 (27, 'SSO-II', 'Senior Store Officer-II', '2019-10-03 09:36:56', 'no'),
 (28, 'Store Officer', 'Store Officer', '2019-10-03 09:36:56', 'no'),
 (29, 'Sr. SA', 'Senior Store Assistant', '2019-10-03 09:36:56', 'no'),
-(30, 'SA ''B''', 'Store Assistant ''B''', '2019-10-03 09:36:56', 'no'),
-(31, 'SA ''A''', 'Store Assistant ''A''', '2019-10-03 09:36:56', 'no'),
+(30, 'SA \'B\'', 'Store Assistant \'B\'', '2019-10-03 09:36:56', 'no'),
+(31, 'SA \'A\'', 'Store Assistant \'A\'', '2019-10-03 09:36:56', 'no'),
 (32, 'Sr. PS', 'Senior Private Secretary', '2019-10-03 09:36:56', 'no'),
 (33, 'PS', 'Private Secretary', '2019-10-03 09:36:56', 'no'),
 (34, 'Stenographer-I', 'Stenographer-I', '2019-10-03 09:36:56', 'no'),
@@ -129,22 +873,22 @@ INSERT INTO `desig` (`id`, `name`, `desig_fullname`, `is_created`, `is_deleted`)
 (38, 'Account Officer', 'Account Officer', '2019-10-03 09:36:56', 'no'),
 (39, 'Accountant', 'Accountant', '2019-10-03 09:36:57', 'no'),
 (40, 'Sr. Security Assistant', 'Senior Security Assistant', '2019-10-03 09:36:57', 'no'),
-(41, 'Security Assistant ''C''', 'Security Assistant ''C''', '2019-10-03 09:36:57', 'no'),
-(42, 'Security Assistant ''B''', 'Security Assistant ''B''', '2019-10-03 09:36:57', 'no'),
-(43, 'Security Assistant ''A''', 'Security Assistant ''A''', '2019-10-03 09:36:57', 'no'),
-(44, 'Vehicle Operator ''D''', 'Vehicle Operator ''D''', '2019-10-03 09:36:57', 'no'),
-(45, 'Vehicle Operator ''C''', 'Vehicle Operator ''C''', '2019-10-03 09:36:57', 'no'),
-(46, 'Vehicle Operator ''B''', 'Vehicle Operator ''B''', '2019-10-03 09:36:57', 'no'),
-(47, 'Vehicle Operator ''A''', 'Vehicle Operator ''A''', '2019-10-03 09:36:57', 'no'),
+(41, 'Security Assistant \'C\'', 'Security Assistant \'C\'', '2019-10-03 09:36:57', 'no'),
+(42, 'Security Assistant \'B\'', 'Security Assistant \'B\'', '2019-10-03 09:36:57', 'no'),
+(43, 'Security Assistant \'A\'', 'Security Assistant \'A\'', '2019-10-03 09:36:57', 'no'),
+(44, 'Vehicle Operator \'D\'', 'Vehicle Operator \'D\'', '2019-10-03 09:36:57', 'no'),
+(45, 'Vehicle Operator \'C\'', 'Vehicle Operator \'C\'', '2019-10-03 09:36:57', 'no'),
+(46, 'Vehicle Operator \'B\'', 'Vehicle Operator \'B\'', '2019-10-03 09:36:57', 'no'),
+(47, 'Vehicle Operator \'A\'', 'Vehicle Operator \'A\'', '2019-10-03 09:36:57', 'no'),
 (48, 'DDFO', 'Deputy Divisional Fire Officer', '2019-10-03 09:36:57', 'no'),
 (49, 'ADFO', 'Assistant Divisional Fire Officer', '2019-10-03 09:36:57', 'no'),
 (50, 'Station Officer', 'Station Officer', '2019-10-03 09:36:57', 'no'),
 (51, 'Leading Fireman', 'Leading Fireman', '2019-10-03 09:36:57', 'no'),
 (52, 'Fireman', 'Fireman', '2019-10-03 09:36:57', 'no'),
-(53, 'Fire Engine Driver ''D''', 'Fire Engine Driver ''D''', '2019-10-03 09:36:57', 'no'),
-(54, 'Fire Engine Driver ''C''', 'Fire Engine Driver ''C''', '2019-10-03 09:36:57', 'no'),
-(55, 'Fire Engine Driver ''B''', 'Fire Engine Driver ''B''', '2019-10-03 09:36:57', 'no'),
-(56, 'Fire Engine Driver ''A''', 'Fire Engine Driver ''A''', '2019-10-03 09:36:57', 'no'),
+(53, 'Fire Engine Driver \'D\'', 'Fire Engine Driver \'D\'', '2019-10-03 09:36:57', 'no'),
+(54, 'Fire Engine Driver \'C\'', 'Fire Engine Driver \'C\'', '2019-10-03 09:36:57', 'no'),
+(55, 'Fire Engine Driver \'B\'', 'Fire Engine Driver \'B\'', '2019-10-03 09:36:57', 'no'),
+(56, 'Fire Engine Driver \'A\'', 'Fire Engine Driver \'A\'', '2019-10-03 09:36:57', 'no'),
 (57, 'Senior Translator', 'Senior Translator', '2019-10-03 09:36:57', 'no'),
 (58, 'ALS-I', 'Attendant Lab Service-I', '2019-10-03 09:36:57', 'no'),
 (59, 'ALS-II', 'Attendant Lab Service-II', '2019-10-03 09:36:57', 'no'),
@@ -179,8 +923,8 @@ INSERT INTO `desig` (`id`, `name`, `desig_fullname`, `is_created`, `is_deleted`)
 -- Table structure for table `employee`
 --
 
-CREATE TABLE IF NOT EXISTS `employee` (
-  `e_id` int(50) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `employee` (
+  `e_id` int(50) NOT NULL,
   `name` varchar(50) DEFAULT NULL,
   `group_id` int(11) DEFAULT NULL,
   `desig_id` int(6) DEFAULT NULL,
@@ -188,9 +932,8 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `emp_type` enum('Permanent','Temporary') DEFAULT NULL,
-  `status` int(1) DEFAULT '1',
-  PRIMARY KEY (`e_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=268 ;
+  `status` int(1) DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `employee`
@@ -469,16 +1212,15 @@ INSERT INTO `employee` (`e_id`, `name`, `group_id`, `desig_id`, `role_id`, `user
 -- Table structure for table `e_group`
 --
 
-CREATE TABLE IF NOT EXISTS `e_group` (
-  `id` tinyint(4) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `e_group` (
+  `id` tinyint(4) NOT NULL,
   `g_name` varchar(15) NOT NULL,
   `fullname` varchar(100) NOT NULL,
   `gh_id` int(6) NOT NULL,
   `ad_id` int(5) NOT NULL,
-  `is_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_deleted` enum('yes','no') NOT NULL DEFAULT 'no',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+  `is_created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `is_deleted` enum('yes','no') NOT NULL DEFAULT 'no'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `e_group`
@@ -510,754 +1252,21 @@ INSERT INTO `e_group` (`id`, `g_name`, `fullname`, `gh_id`, `ad_id`, `is_created
 -- --------------------------------------------------------
 
 --
--- Table structure for table `files`
---
-
-CREATE TABLE IF NOT EXISTS `files` (
-  `f_id` int(6) NOT NULL AUTO_INCREMENT,
-  `e_id` int(6) DEFAULT NULL,
-  `file_name` varchar(500) DEFAULT NULL,
-  `docket_no` varchar(100) DEFAULT NULL,
-  `file_num` varchar(200) DEFAULT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `quantity` int(20) DEFAULT NULL,
-  `total_cost` int(20) DEFAULT NULL,
-  `cat_id` int(6) DEFAULT NULL,
-  `proj_id` int(6) DEFAULT NULL,
-  `port_id` int(6) DEFAULT NULL,
-  `bid_id` int(6) DEFAULT NULL,
-  `fin_id` int(6) DEFAULT NULL,
-  `f_remark` varchar(1024) DEFAULT NULL,
-  `f_status` int(1) NOT NULL DEFAULT '0',
-  `mark_to_ad` datetime DEFAULT NULL,
-  `mark_to_mmg` datetime DEFAULT NULL,
-  `is_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`f_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=717 ;
-
---
--- Dumping data for table `files`
---
-
-INSERT INTO `files` (`f_id`, `e_id`, `file_name`, `docket_no`, `file_num`, `description`, `quantity`, `total_cost`, `cat_id`, `proj_id`, `port_id`, `bid_id`, `fin_id`, `f_remark`, `f_status`, `mark_to_ad`, `mark_to_mmg`, `is_created`) VALUES
-(16, 248, 'Video Conferencing System', NULL, NULL, 'Two nos. of video conferencing setup for DRONA & Internet  Network', 2, 2905854, 2, 1, 1, 5, 1, 'Draft', 0, NULL, NULL, '2022-01-04 06:14:28'),
-(17, 79, 'CMC of UV-Vis Spectrophotometer (Model- LAMBDA -650S) For 3 years', 'EnSG/2021-2022/17', 'CFEES/22EVS041/BU/PAC/202/21-22', 'Under Build up', 1, 677340, 2, 1, 2, 1, 1, '', 1, '2022-01-04 14:38:48', NULL, '2022-01-04 09:05:18'),
-(18, 75, 'Powder X-ray Diffractometer', 'EnSG/2021-2022/18', 'CFEES/20EVS096/BU/OBM/DB/104/20-21', 'Powder X-Ray Diffractometer (XRD) will be used for phase identification of a powder crystalline material. It also provides information on unit cell dimension which is necessary for characterization in materials development. ', 1, 12324672, 2, 1, 2, 5, 1, 'File has to be processed for GTE as 20% local content was unavailable when Open Tender was floated. ', 1, '2022-01-04 15:31:35', NULL, '2022-01-04 09:58:00'),
-(19, 79, 'Procurement of Nanometer aerosol sampler', 'EnSG/2021-2022/19', NULL, 'Under project Capital\r\nERAF- ST/19-20/CFE-38', 1, 1514786, 1, 7, 2, 5, 1, 'follow up with firms for local content regarding   and TCEC to be held', 0, NULL, NULL, '2022-01-05 05:12:18'),
-(20, 196, 'Color Multifunctional Printer', 'QRS&IT/2021-2022/20', 'CFEES/22QAG002/BU/GEM/038/21-22 dt. 21-06-2021', 'Centralised procurement for Color MFP', 8, 2799360, 2, 1, 1, 5, 1, 'current status- bid opened on 30-11-21. no bid received', 1, '2022-01-05 10:45:03', NULL, '2022-01-05 05:14:32'),
-(21, 196, 'Black and White MFP', 'QRS&IT/2021-2022/21', 'CFEES/22QAG011/BU/GeM/071/21-22', 'Centralised Procurement of Black & White MFPs', 7, 2089521, 2, 1, 1, 5, 1, 'current status- bid opened on 16/12/21. no bid received', 1, '2022-01-05 10:48:38', NULL, '2022-01-05 05:18:22'),
-(22, 196, 'CAMC of IT Hardware Items', 'QRS&IT/2021-2022/22', 'CFEES/22QAG014/BU/GEM/129/21-22', 'CAMC of IT Hardware Items (Computer, Printer, UPS etc)', 1, 2744444, 2, 1, 1, 5, 1, 'for necessary action', 1, '2022-01-05 10:52:51', NULL, '2022-01-05 05:22:21'),
-(23, 80, 'Procurement of Foam Analyzer', 'FC&HB/2021-2022/23', 'CFEES/22FCP022/P/OT/066/21-22', 'File No.: CFEES/22FCP022/P/OT/066/21-22 dt 28/07/21\r\nBid No.: CFEES/22ATT028/FCP&HB/21-22/042 dated 22 Sep 2021', 1, 5453000, 1, 6, 2, 5, 1, 'At TCEC minutes preparation stage', 1, '2022-01-05 11:21:23', NULL, '2022-01-05 05:48:12'),
-(24, 80, 'Ethyl Alcohol (Ethanol) 500ml 99.9%', 'FC&HB/2021-2022/24', 'CFEES/22FCP026/P/GEM/070/21-22', 'File No. CFEES/22FCP026/P/GeM/070/21-22\r\nBid No.: GEM/2021/B/1678611 dated 29/11/2021', 200, 65000, 1, 6, 1, 5, 1, 'TCEC stage (CSB preparation)', 1, '2022-01-05 11:28:09', NULL, '2022-01-05 05:57:30'),
-(25, 80, 'Ultrasonic Cleaner', 'FC&HB/2021-2022/25', 'CFEES/2FCP128/P/GEM/231/20-21', 'File No. : CFEES/21FCP128/P/GeM/231/20-21 dated 15/03/2021\r\nBid No.: GEM/2021/B/1698829 dt 25/11/2021 (third time bidding)', 1, 126000, 1, 6, 1, 5, 1, 'TCEC (CSB preparation)', 1, '2022-01-05 11:32:57', NULL, '2022-01-05 06:02:39'),
-(26, 80, 'Toxicity Study of AFFF Sample', 'FC&HB/2021-2022/26', 'CFEES/22FCP081/SBM/P/214/21-22', '(from IITR, CSIR)', 4, 5900000, 1, 6, 2, 2, 1, 'DSC observations reply', 1, '2022-01-05 11:35:45', NULL, '2022-01-05 06:05:27'),
-(27, 60, 'Refilling of Hydrogen and Zero Air Gas', 'FC&HB/2021-2022/27', 'CFEES/22FCP036/P/GEM/268/21-22', '', 42, 13020, 1, 6, 1, 5, 1, 'TCEC Stage', 1, '2022-01-05 12:02:36', NULL, '2022-01-05 06:31:24'),
-(28, 60, 'Emulsion Stability Analyzer', 'FC&HB/2021-2022/28', 'CFEES/20FCP151/P/GT/DB/010/20-21', 'Demand No. 20FCP151, Demand Date: 25 Feb 2020, File No. CFEES/20FCP151/P/Global/DB/010/20-21', 1, 3999996, 1, 6, 2, 5, 1, 'TCEC Stage', 1, '2022-01-05 12:34:49', NULL, '2022-01-05 07:03:28'),
-(29, 251, 'Purchase of Glacial Acetic Acid, Purity 99% or above- 6 Litres Through GeM', 'EnSG/2021-2022/29', 'CFEES/22EVS030/BU/GEM/211/21-22', '', 6, 4104, 2, 1, 1, 8, 1, '', 1, '2022-01-05 14:55:04', NULL, '2022-01-05 09:23:30'),
-(30, 79, 'Procurement of aluminium and boron nanopowder', 'EnSG/2021-2022/30', 'CFEES/22EVS006/P/LT/52/21-22', '', 1, 924000, 1, 7, 2, 5, 1, 'for CSB draft preparing', 1, '2022-01-20 12:19:22', NULL, '2022-01-05 09:59:23'),
-(31, 40, '24-Port Managed Network Switch', 'QRS&IT/2021-2022/31', 'CFEES/22QAG021/BU/GEM/141/21-22', 'Procurement of 4 Nos. of managed 24 port switch for DRONA, under build-up.', 4, 700000, 2, 1, 1, 5, 1, '', 1, '2022-01-05 16:30:59', NULL, '2022-01-05 10:59:40'),
-(32, 248, 'Video Conferencing System', 'QRS&IT/2021-2022/32', 'CFEES/22QAG004/GeM/117/21-22', '', 1, 2905854, 2, 1, 1, 5, 1, '', 1, '2022-01-05 16:50:32', NULL, '2022-01-05 11:14:55'),
-(33, 248, 'All in one computer', 'QRS&IT/2021-2022/33', 'CFEES/21QAG036/BU/GEM/227/20-21', '', 85, 9133250, 2, 1, 1, 5, 1, '', 1, '2022-01-05 16:50:08', NULL, '2022-01-05 11:16:53'),
-(34, 248, 'UPS BATTERY(BUY BACK)', 'QRS&IT/2021-2022/34', 'CFEES/22QAG005/BU/GeM/182/21-22  dt. 07-01-2022', '', 32, 162944, 2, 1, 1, 5, 1, '', 1, '2022-01-05 16:49:57', NULL, '2022-01-05 11:18:54'),
-(36, 79, 'Procurement of Minimum Ignition Energy (MIE) Apparatus with fume hood', 'EnSG/2021-2022/36', 'CFEES/21EVS021/P/OT/090/21-22', '', 1, 13599996, 1, 7, 2, 1, 1, '', 1, '2022-01-06 11:10:43', NULL, '2022-01-06 05:26:05'),
-(37, 79, 'Procurement of Automated Colony Counter', 'EnSG/2021-2022/37', 'CFEES/22EVS027/P/GEM/279/21-22', '', 1, 407096, 1, 7, 1, 8, 1, '', 1, '2022-01-06 11:10:31', NULL, '2022-01-06 05:28:10'),
-(38, 79, 'Procurement of Scanning Mobility Particle Sizer Spectrometer', 'EnSG/2021-2022/38', 'CFEES/21EVS002/P/OBM/DB/180/2021', '', 1, 9136223, 1, 7, 2, 5, 1, '', 1, '2022-01-06 11:10:17', NULL, '2022-01-06 05:32:09'),
-(39, 79, 'Procurement of Bench Top Incinerator with Gas Detection', 'EnSG/2021-2022/39', 'CFEES/21EVS005/P/DB/LBM/138/2021', '', 1, 1308193, 1, 7, 1, 6, 1, '', 1, '2022-01-06 11:10:06', NULL, '2022-01-06 05:35:50'),
-(40, 60, 'Diaphragm Vacuum Pump with digital Vacuum Controller', 'FC&HB/2021-2022/40', 'CFEES/21FCP094/P/OT/217/2021', 'Demand No. 21FCP094, Demand Date: 04 Jan 2021, File No. CFEES/21FCP094/P/OT/217/20-21', 2, 890000, 1, 6, 2, 5, 1, '', 1, '2022-01-06 11:17:10', NULL, '2022-01-06 05:45:03'),
-(41, 79, 'Out Sourcing of Services for Unskilled Man power (03 Nos.) for the Project ERAF', 'EnSG/2021-2022/41', NULL, '', 2, 1628686, 1, 7, 2, 5, 1, '', 1, '2022-01-06 15:32:12', NULL, '2022-01-06 05:53:45'),
-(42, 77, 'AMC Simultaneous Thermogravimetric Analyser(TG/DTA)', NULL, NULL, 'Two years AMC for Perkin Elmer model Diamond TG-DTA system ,Vendor: M/s Perkin Elemer (India) Pvt Ltd Delhi', 1, 199716, 2, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-01-06 05:55:22'),
-(43, 77, 'AMC Simultaneous Thermogravimetric Analyser(TG/DTA)', 'PC&M/2021-2022/43', 'CFEES/22PCM011/BU/PAC/260/21-22', 'Two year AMC for perkin Elemer Diamond TG-DTA', 1, 199716, 2, 1, 1, 1, 1, '', 1, '2022-01-06 11:33:27', NULL, '2022-01-06 05:57:00'),
-(45, 77, 'AMC for Rheometer', 'PC&M/2021-2022/45', 'CFEES/22/PCM017/BU/PAC/138/21-22', '', 1, 327096, 2, 1, 2, 1, 1, '', 1, '2022-01-06 11:50:41', NULL, '2022-01-06 06:19:38'),
-(46, 97, 'Manual Aerosol Fire Extinguisher, DSPA make, 300 g AFC (2 Nos.)', 'FC&HB/2021-2022/46', 'CFEES/21FCP087/P/PAC/067/20-21', 'CFEES/21FCHB/P/PAC/067/20-21', 2, 78000, 1, 8, 1, 1, 1, 'TCEC Stage ', 1, '2022-01-06 12:04:02', NULL, '2022-01-06 06:21:09'),
-(47, 238, 'Models 1. HPWMFSS ( Qty 2)   & MFFS (Qty 2 )', 'FSEG/2021-2022/47', NULL, '', 4, 354000, 2, 1, 3, 8, 1, '', 1, '2022-01-06 17:23:06', NULL, '2022-01-06 06:26:34'),
-(48, 97, 'Hot air Oven ', 'FC&HB/2021-2022/48', 'CFEES/21FCP089/P/GEM/170/2020', 'Demand No. 21FCP089 dated 17th Dec. 2020\r\nFile No. CFEES/21FCP089/P/GeM/170 dated 31.12.2020\r\n', 1, 355124, 1, 8, 1, 5, 1, 'At TCEC Stage ', 2, '2022-01-06 12:11:11', NULL, '2022-01-06 06:40:01'),
-(49, 72, 'Acid gas Sampling System ', 'FC&HB/2021-2022/49', 'CFEES/22FCP023/BU/LPC/065', 'Demand No. 22FCP023 dated 26th Jul 2021\r\nFile No. CFEES/22FCP023/BU/LPC/065/21-22 dated 28/07/21 ', 1, 198238, 1, 1, 3, 9, 1, 'Draft S.O. vetting done and file sent to Head MMG for further necessary action', 1, '2022-01-06 12:30:03', NULL, '2022-01-06 06:53:15'),
-(50, 79, 'AMC of High Temperature and High Pressure Sustaining Reactor', 'EnSG/2021-2022/50', 'CFEES/21EVS015/B/PAC/20-21', '', 0, 206500, 2, 1, 2, 1, 1, 'vetting of AMC Contract ', 1, '2022-01-06 15:29:48', NULL, '2022-01-06 06:53:43'),
-(51, 79, 'Spare parts of High Temperature and High Pressure Sustaining Reactor', 'EnSG/2021-2022/51', 'CFEES/21EVS008/B/PAC/225/20-21 08.03.21', '', 7, 199788, 2, 1, 2, 2, 1, 'SO placed', 1, '2022-01-06 15:33:47', NULL, '2022-01-06 06:56:41'),
-(52, 79, 'AMC of Zeta Particle Size Analyzer', 'EnSG/2021-2022/52', 'CFEES/21EVS023/P/013/21-22', '', 3, 148949, 2, 1, 2, 3, 1, '', 1, '2022-01-06 15:30:28', NULL, '2022-01-06 06:58:10'),
-(53, 72, 'Thermal Imager ', 'FC&HB/2021-2022/53', NULL, 'Demand No. 21FCP079 dated 24th Nov. 2020\r\nFile No. CFEES/21FCP079/P/GEM/157/20-21 dated 09/12/20', 1, 499999, 1, 8, 1, 5, 1, 'Draft TCEC minutes and CSB prepared. File Sent for further necessary action. ', 1, '2022-01-06 12:31:26', NULL, '2022-01-06 06:58:42'),
-(54, 79, 'Reaction Vessel for Fire suppressing Gel', 'EnSG/2021-2022/54', 'CFEES/21EVS027/BU/LPC/236/20-21', '', 1, 225750, 2, 1, 3, 9, 1, 'Pre inspection \r\nDP 17 Jan, 2022', 1, '2022-01-06 15:36:29', NULL, '2022-01-06 07:02:41'),
-(55, 79, 'CARS Contract :', 'EnSG/2021-2022/55', NULL, '', 2, 5490000, 1, 7, 5, 2, 1, '3rd Installment from July to October is due', 1, '2022-01-06 15:33:20', NULL, '2022-01-06 07:06:45'),
-(56, 79, 'Procurement of Spares of Ultra sonic bath with cooling', 'EnSG/2021-2022/56', NULL, '', 4, 242808, 2, 1, 2, 3, 1, '', 1, '2022-01-06 15:35:19', NULL, '2022-01-06 07:11:12'),
-(57, 72, 'Testing of Fire Detection and Suppression System as per AIS 135:2016 (Total 10 tests)', 'FC&HB/2021-2022/57', 'CFEES/22FCP030/BU/ST/91/21-22', 'Demand No. 22FCP030 dated 19th Aug 2021\r\nFile No. CFEES/22FCP030/BU/ST/91/21-22 dated 01/09/21', 1, 666748, 2, 1, 2, 2, 2, 'File sent to Head MMG for processing the case for advance payment', 1, '2022-01-06 12:53:23', NULL, '2022-01-06 07:23:06'),
-(58, 72, 'Gyratory Sieve Shaker ', 'FC&HB/2021-2022/58', 'CFEES/21FCP014/P/GEM/078/20-21', 'Demand No. 21FCP014 dated 13th Jul 2020\r\nFile No. CFEES/21FCP014/P/GEM/078/20-21 ', 1, 80000, 1, 8, 1, 5, 1, 'TCEC Minutes duly approved by Chairman TCEC. File sent to Head MMG for further necessary action. ', 1, '2022-01-06 14:09:05', NULL, '2022-01-06 08:38:31'),
-(59, 28, 'CAMC for Gel Permeation Chromatography system ', 'PC&M/2021-2022/59', 'CFEES/22PCM014/BU/ST/136/21-22', '', 1, 1451400, 2, 1, 2, 2, 1, '', 1, '2022-01-06 15:18:10', NULL, '2022-01-06 09:47:47'),
-(60, 28, 'Humidity Test Chamber', 'PC&M/2021-2022/60', 'CFEES/21PCM025/BU/GEM/220/20-21', '', 1, 118999, 2, 1, 1, 5, 1, '', 2, '2022-01-06 15:20:02', NULL, '2022-01-06 09:49:48'),
-(61, 79, 'Procurement of Desktop Computer', 'EnSG/2021-2022/61', 'CFEES/22EVS024/P/GeM/157/21-22', '', 4, 363820, 1, 7, 1, 8, 1, '', 1, '2022-01-06 15:36:11', NULL, '2022-01-06 09:58:39'),
-(62, 79, 'Procurement of water for Chromatography', NULL, NULL, '', 40, 22629, 1, 7, 1, 7, 1, '', 0, NULL, NULL, '2022-01-06 10:17:20'),
-(63, 73, 'AMC of CHNS-O, Elemental Analyzer ', 'EnSG/2021-2022/63', 'CFEES/22EVS017/BU/PAC/21-22 dt 30-9-21', '', 1, 165097, 2, 1, 2, 1, 1, '', 1, '2022-01-06 16:17:41', NULL, '2022-01-06 10:45:11'),
-(64, 84, 'Development Contract for Fire Detection and Control System for Aircraft', 'FSEG/2021-2022/64', 'CFEES/21FAS006/P/OT/195/20-21', '', 1, 18600000, 1, 10, 2, 5, 1, '', 1, '2022-01-06 17:32:00', NULL, '2022-01-06 11:56:36'),
-(65, 84, 'Development Contract for Fire Extinguishing System for Aircraft', 'FSEG/2021-2022/65', 'CFEES/21FAS005/P/OBM/206/20-21', '', 1, 19600000, 1, 10, 2, 5, 1, '', 1, '2022-01-06 17:32:12', NULL, '2022-01-06 11:57:53'),
-(66, 84, 'Mixed Signal Digital Storage Oscilloscope', 'FSEG/2021-2022/66', 'CFEES/22FAS005/P/GEM/075/21-22', '', 1, 1500000, 1, 10, 1, 8, 1, '', 1, '2022-01-06 17:32:22', NULL, '2022-01-06 12:00:11'),
-(67, 84, 'Workstation', 'FSEG/2021-2022/67', 'CFEES/21FAS008/P/GEM/221/20-21', '', 1, 1500000, 1, 10, 1, 5, 1, '', 2, '2022-01-06 17:32:37', NULL, '2022-01-06 12:01:00'),
-(68, 84, 'Thermal Response Testing System for Linear Thermal Detector', 'FSEG/2021-2022/68', 'CFEES/22FAS008/P/LPC/173/21-22', '', 1, 144900, 1, 10, 3, 9, 1, '', 1, '2022-01-06 17:34:57', NULL, '2022-01-06 12:04:32'),
-(69, 82, 'Principal Consultancy for Demilitarisation Plant of Capacity 300 MT per annum', 'SARC/2021-2022/69', NULL, 'File No. CFEES/22SRC001/P/Open/003/21-22OT', 1, 43660000, 1, 9, 2, 5, 1, 'With User for CNC Minutes', 1, '2022-01-06 17:42:15', NULL, '2022-01-06 12:10:19'),
-(70, 82, 'Development Qualification and Installation of Demilitarisation Plant of Capacity 300 MT per annum', 'SARC/2021-2022/70', 'CFEES/21SRC005/P/OBM/TSB/143/20-21', '', 1, 1732100000, 1, 9, 2, 5, 1, 'With user for TCEC', 1, '2022-01-06 17:44:06', NULL, '2022-01-06 12:13:42'),
-(71, 244, 'Development of Advanced Instant Fire Detection and Suppression System(AIFDSS) for Future Armoured Fighting Vehicles', 'FSEG/2021-2022/71', 'CFEES/22FAS001/P/ST/047/21-22', '', 1, 38705772, 1, 11, 2, 2, 1, '', 1, '2022-01-07 10:00:35', NULL, '2022-01-07 04:28:30'),
-(72, 244, 'Development of Advanced IFDSS for FAFVs', NULL, NULL, '', 1, 38705772, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-01-07 04:29:40'),
-(73, 192, 'Job Contract for Solid Waste Recycling program at CFEES', 'QRS&IT/2021-2022/73', 'CFEES/22QAG029/B/GeM/184/21-22', '', 12, 495600, 2, 1, 1, 5, 1, 'Submitted for further necessary action ', 1, '2022-01-07 10:03:46', NULL, '2022-01-07 04:33:18'),
-(74, 79, 'Procurement of water for Chromatography', NULL, NULL, '', 1, 22640, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-01-07 04:59:59'),
-(75, 79, 'Procurement of water for Chromatography', NULL, NULL, '', 1, 22640, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-01-07 05:00:59'),
-(76, 124, 'Hiring of Wet Canteen Services at CFEES', 'MMG/2021-2022/76', 'CFEES/22MMG008/Misc/GeM/180/21-22', 'Demand initiated iunder Misc budget', 1, 2910145, 2, 1, 1, 5, 1, 'Put up to IFA office for Admin Approval by Sr Dy IFA(R&D)', 1, '2022-01-07 10:33:48', NULL, '2022-01-07 05:00:59'),
-(77, 79, 'Procurement of water for Chromatography', 'EnSG/2021-2022/77', 'CFEES/22EVS038/P?GeM/197/21-22', '', 1, 22640, 1, 7, 1, 7, 1, '', 1, '2022-01-07 10:36:26', NULL, '2022-01-07 05:05:15'),
-(78, 124, 'Hiring of Data Entry Operator', 'MMG/2021-2022/78', 'CFEES/22MMG007/Misc/GeM/181/21-22', 'Hiring of 21Nos. DEO \r\n Demand intitated under Misc. Budget ', 1, 7392926, 2, 1, 1, 5, 1, 'Put up to IFA office for Admin approval by Sr.Dy IFA(R&D)', 1, '2022-01-07 10:39:44', NULL, '2022-01-07 05:08:58'),
-(79, 28, 'THERMAL PROTECTIVE PERFORMANCE TESTER  WITH ACCESSORIES', 'PC&M/2021-2022/79', 'CFEES/22PCM002/GC/GEM/50/21-22', '', 1, 3156500, 2, 1, 2, 5, 1, '', 1, '2022-01-07 10:58:17', NULL, '2022-01-07 05:24:52'),
-(80, 118, 'Vibrometer', 'MS&ESRG/2021-2022/80', 'CFEES/21ERG030/P/GEM/240/20-21', 'Procurement File', 10, 4600000, 1, 4, 2, 2, 1, 'File for TCEC signature\r\n', 1, '2022-01-07 11:31:17', NULL, '2022-01-07 05:28:18'),
-(81, 118, 'Digital Transreciver', 'MS&ESRG/2021-2022/81', 'CFEES/21ERG007/P/DB/PAC/093/20-21', 'Pruchase of Digital transreciver system', 1, 1300000, 1, 4, 1, 5, 1, 'SO placed part supply received', 1, '2022-01-07 11:08:28', NULL, '2022-01-07 05:37:56'),
-(89, 217, 'Wiper', 'WORKS/2021-2022/89', 'CFEES/22WRK016/MISC/GEM/188/21-22', '', 40, 5560, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:23:00', NULL, '2022-01-10 10:39:02'),
-(90, 217, 'Phool Broom ', 'WORKS/2021-2022/90', 'CFEES/22WRK014/MISC/GEM/190/21-22', '', 100, 10900, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:11:34', NULL, '2022-01-10 10:40:16'),
-(83, 118, 'Fabrication of Mobile command control vehicle', 'MS&ESRG/2021-2022/83', 'CFEES/21ERG025/P/OBM/DB/179/20-21', 'File at TCEC stage', 1, 4900000, 1, 5, 1, 5, 1, 'File at User End for CNC approval', 1, '2022-01-07 11:31:04', NULL, '2022-01-07 05:59:12'),
-(84, 118, 'Force sensor', 'MS&ESRG/2021-2022/84', 'CFEES/21ERG009/P/SBM/161/20-21', 'Procurment file ', 5, 1419000, 1, 5, 2, 2, 1, 'SO placed ', 1, '2022-01-07 11:42:59', NULL, '2022-01-07 06:12:35'),
-(85, 24, 'Accelerometer', 'MS&ESRG/2021-2022/85', NULL, 'Procurement file', 100, 7553000, 1, 4, 2, 6, 1, 'TCEC stage', 1, '2022-01-07 12:31:30', NULL, '2022-01-07 07:01:10'),
-(86, 96, '5 GHz Wireless video Transmitter and 5 GHz Wireless video receiver with sector Antenna 90/120 with mounting kit.', 'MS&ESRG/2021-2022/86', 'CFEES/22ERG021/P/LPC/110/21-22', 'CFEES/22ERG021/P/LPC/110/21-22 DT 22/09/21', 4, 132750, 1, 4, 1, 9, 1, 'Supply Order vetted', 1, '2022-01-07 15:48:09', NULL, '2022-01-07 10:16:45'),
-(87, 96, 'Network Video Recorder', 'MS&ESRG/2021-2022/87', 'CFEES/22ERG028/BU/GEM/172/21-22 dated 14/12/2021', 'CFEES/22ERG028/BU/GEM/172/21-22  dt 14 DEC 2021', 1, 16123, 2, 1, 1, 8, 1, 'Inspection done ', 1, '2022-01-07 15:55:59', NULL, '2022-01-07 10:24:42'),
-(88, 200, 'Charge Amplifier for dust explosion chamber', 'EnSG/2021-2022/88', 'CFEES/21FCP026/BU/PAC/098/20-21', '', 1, 190050, 2, 1, 2, 1, 1, 'The file is being returned after completion of inspection. ', 1, '2022-01-07 17:17:17', NULL, '2022-01-07 11:46:33'),
-(91, 217, 'Coconut Broom', 'WORKS/2021-2022/91', 'CFEES/22WRK015/MISC/GEM/189/21-22', '', 100, 12000, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:22:33', NULL, '2022-01-10 10:42:44'),
-(92, 217, 'Duster Cotton', 'WORKS/2021-2022/92', 'CFEES/22WRK013/MISC/GEM/186/21-22', '', 100, 5000, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:21:44', NULL, '2022-01-10 10:44:33'),
-(93, 217, 'Colin Spray', 'WORKS/2021-2022/93', 'CFEES/22WRK019/MISC/GEM/191/21-22 12.1.22', '', 100, 6000, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:21:28', NULL, '2022-01-10 10:45:15'),
-(94, 217, 'Duster Yellow', 'WORKS/2021-2022/94', 'CFEES/22WRK013/MISC/GEM/186/21-22', '', 100, 6600, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:21:02', NULL, '2022-01-10 10:45:56'),
-(95, 217, 'Cobweb Brush', 'WORKS/2021-2022/95', 'CFEES/22WRK018/MISC/GEM/193/21-22', '', 30, 3360, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:20:38', NULL, '2022-01-10 10:46:30'),
-(96, 217, 'Detergent Surfacta', 'WORKS/2021-2022/96', 'CFEES/22WRK020/MISC/GEM/192/21-22', '', 60, 3000, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:19:59', NULL, '2022-01-10 10:47:46'),
-(97, 217, 'Toilet Brush', 'WORKS/2021-2022/97', 'CFEES/22WRK012/MIsc/GeM/187/21-22', '', 50, 6250, 2, 1, 1, 7, 1, '', 1, '2022-01-10 16:19:36', NULL, '2022-01-10 10:48:27'),
-(98, 71, 'Five Year CMC (2021-2026) for LC-MS/MS Instrument', 'QRS&IT/2021-2022/98', 'CFEES/22QAG028/BU/ST/200/21-22', '', 1, 5041668, 2, 1, 2, 2, 1, '', 1, '2022-01-10 16:42:48', NULL, '2022-01-10 11:09:08'),
-(99, 73, 'Procurement of Double Distillation Water Unit', 'EnSG/2021-2022/99', 'CFEES/22EVS033/B/GEM/195/21-22 DATED 13/1/22', '', 1, 26500, 1, 7, 1, 7, 1, '', 1, '2022-01-11 11:54:02', NULL, '2022-01-11 06:22:49'),
-(100, 124, 'UPS 3 KVA', 'MMG/2021-2022/100', 'CFEES/22MMG007/BU/GeM/076/21-22', '', 1, 93000, 2, 1, 1, 8, 1, 'File Put up to Head MMG for after Inspection', 1, '2022-01-11 11:54:42', NULL, '2022-01-11 06:24:10'),
-(101, 200, 'Single Stage Pressure Regulator', 'EnSG/2021-2022/101', 'CFEES/22EVS040/BU/GEM/201/21-22', 'Case for GeM procurement ', 1, 28000, 2, 1, 1, 7, 1, 'This regulator of 20kg/cm2 output pressure is required for use in experiments of dust explosion chamber.', 1, '2022-01-11 16:08:06', NULL, '2022-01-11 10:21:30'),
-(102, 75, 'Xenon Weather Test Chamber', 'EnSG/2021-2022/102', 'CFEES/22EVS014/C/OT/111/21-22', 'During various R&D activities, the developed materials need to be tested for alteration in their physico-chemical properties and stability after exposure to environmental conditions of light, temperature and humidity. In laboratory these real time environmental conditions can be achieved using a Xenon Arc based Weather Test Chamber as it uses premium sunlight simulation (according to CIE85 Reference Sun), proper temperature & humidity control and spray system.', 1, 7704930, 2, 1, 2, 5, 1, '', 1, '2022-01-11 16:00:26', NULL, '2022-01-11 10:27:26'),
-(103, 39, 'Gas chromatography Syringe ', 'FC&HB/2021-2022/103', 'CFEES/22FCP069/P/GEM/198/21-22', 'Demand No. 22FCP069', 7, 19732, 1, 6, 1, 7, 1, '', 1, '2022-01-11 16:45:54', NULL, '2022-01-11 11:14:46'),
-(104, 250, 'Carbon Paper', 'MMG/2021-2022/104', 'CFEES/22MMG050/Misc/GeM/170/21-22 dt. 13-12-21', '', 40, 8800, 2, 1, 1, 7, 1, 'Put up for Head MMG for Inspection Committee ', 1, '2022-01-12 10:45:04', NULL, '2022-01-12 05:13:33'),
-(105, 24, 'Internet leased line to CFEES site, Borkhedi Nagpur', 'MS&ESRG/2021-2022/105', 'CFEES/22ERG49/BU/ST/199/21-22', 'File initiated on 03/12/2021', 1, 601800, 2, 1, 2, 2, 1, 'DSC held on 15 Dec 2021. DSC recommendation has been incorporated & sent to Head MMG  on 12 Jan 2022 for further necessary action.', 1, '2022-01-12 12:33:00', NULL, '2022-01-12 07:00:32'),
-(106, 82, 'Hiring of Skilled (02)/unskilled (02) manpower for the Project DEMIL', 'SARC/2021-2022/106', 'CFEES/22SRC005/P/GEM/179/21-22', '', 24, 2645000, 1, 9, 1, 5, 1, '', 1, '2022-01-12 14:38:02', NULL, '2022-01-12 09:03:16'),
-(107, 48, 'Linear Thermal Detector', 'FSEG/2021-2022/107', 'CFEES/22FAS010/BU/ST/242/21-22', '', 10, 283500, 2, 1, 2, 2, 1, '', 1, '2022-01-12 17:01:47', NULL, '2022-01-12 11:30:51'),
-(108, 79, 'Procurement of nanometer aerosole sampler ', 'EnSG/2021-2022/108', 'CFEES/21EVS024/P/07/193/20-21 03.02.21', '', 1, 1514786, 1, 7, 2, 5, 1, '', 1, '2022-01-12 17:22:51', NULL, '2022-01-12 11:52:34'),
-(109, 79, 'Procurement of single channel micropipette throgh gem', 'EnSG/2021-2022/109', 'CFEES/22EVS036/P/GeM/204/21-22', '', 1, 33795, 1, 7, 1, 1, 1, '', 1, '2022-01-13 10:30:30', NULL, '2022-01-13 04:59:57'),
-(110, 250, 'Glass Tumblers', 'MMG/2021-2022/110', 'CFEES/22MMG054/MISC/GEM/166/21-22', '', 400, 7797, 2, 1, 1, 7, 1, 'File put for Inspection ', 1, '2022-01-13 15:41:39', NULL, '2022-01-13 10:03:22'),
-(111, 72, 'Fire Detection and Actiation System', 'FC&HB/2021-2022/111', 'CFEES/22FCP034/P/OT/085/21-22 26.8.21', 'CFEES/22FCP034/P/OT/085/21-22', 1, 1850560, 1, 8, 2, 5, 1, 'Draft TCEC minutes (Re-tender)', 1, '2022-01-13 16:29:28', NULL, '2022-01-13 10:52:12'),
-(112, 72, 'Insulation tester', 'FC&HB/2021-2022/112', 'CFEES/21FCP124/P/GEM/224/20-21 08.03.21', 'CFEES/21FCP/24/P/GeM/224/20-21', 1, 70000, 1, 8, 3, 9, 1, '', 1, '2022-01-13 16:28:50', NULL, '2022-01-13 10:54:46'),
-(113, 72, 'Water quality nalyzer', 'FC&HB/2021-2022/113', 'CFEES/22FCP003/BU/GEM/004/21-22 12.04.21', 'CFEES/22FCP003/BU/Gem/004/21-22', 1, 294531, 1, 1, 3, 9, 1, '', 1, '2022-01-13 16:28:03', NULL, '2022-01-13 10:56:21'),
-(114, 250, 'Single Punch', 'MMG/2021-2022/114', 'CFEES/22MMG049/Misc/GEM/164/21-22', '', 200, 15167, 2, 1, 1, 7, 1, '', 1, '2022-01-14 10:38:42', NULL, '2022-01-14 05:08:15'),
-(115, 96, 'Portable Sand Bore Hole Drilling Machine ', 'MS&ESRG/2021-2022/115', 'CFEES/22ERG036/P/LPC/147/21-22', 'CFEES/22ERG036/P/LPC/147/21-22 dt 15/11/21', 1, 116560, 1, 4, 3, 9, 1, 'LPC recommendations Prepared and put up for further neccessry action', 1, '2022-01-14 10:46:32', NULL, '2022-01-14 05:15:51'),
-(116, 224, 'PROCUREMENT OF UPS SYSTEM FOR SDC PILKHUWA UNDER THE PROJECT', 'TFA/2021-2022/116', 'CFEES/22TFA019/P/GEM/160/21-22', '', 4, 18200, 1, 3, 1, 7, 1, '', 1, '2022-01-14 15:51:31', NULL, '2022-01-14 10:20:36'),
-(117, 224, 'PROCUREMENT OF DESKTOP COMPUTER SYSTEM FOR SDC PILUKHWA, UNDER THE PROJECT', 'TFA/2021-2022/117', 'CFEES/22TFA007/P/GEM/73/21-22', '', 6, 432000, 1, 3, 1, 5, 1, '', 1, '2022-01-14 15:58:14', NULL, '2022-01-14 10:27:44'),
-(118, 224, 'SETTING OF DOOR', 'TFA/2021-2022/118', NULL, '', 1, 1000, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-01-14 10:29:53'),
-(119, 60, 'Hiring of Unskillid Manpower', 'FC&HB/2021-2022/119', 'CFEES/22FCP056/P/GEM/148/21-22', 'File No. CFEES.22FCP056/P/GeM/148/21-22', 4, 1688472, 1, 6, 1, 5, 1, 'CSB and Draft TCEC Min. Prepared, Submitted for TCEC', 1, '2022-01-17 10:39:51', NULL, '2022-01-14 12:23:50'),
-(120, 79, 'Benchtop Multiparameter pH meter with fluroide ion selective electrode', 'EnSG/2021-2022/120', 'CFEES/22EVS037/P/GEM/135/22-23', '', 1, 280000, 1, 7, 1, 8, 1, '', 1, '2022-01-17 14:39:52', NULL, '2022-01-17 09:07:25'),
-(121, 60, 'Karl Fischer Titrator', 'FC&HB/2021-2022/121', 'CFEES/23FCP045/BU/OBM/075/22-23', '', 1, 2029505, 2, 1, 1, 5, 1, '', 1, '2022-01-21 16:53:02', NULL, '2022-01-17 09:48:03'),
-(122, 42, 'Oscilloscope-500 MHz, 4 Channel', 'MS&ESRG/2021-2022/122', 'CFEES/22ERG001/P/GeM/21-22', '', 5, 6318900, 1, 4, 1, 5, 1, 'TCEC was held on 26-08-2021', 1, '2022-01-17 15:35:10', NULL, '2022-01-17 10:00:00'),
-(123, 42, 'Oscilloscope-500 MHz, 4 Channel', 'MS&ESRG/2021-2022/123', NULL, '', 5, 4588647, 1, 4, 1, 5, 1, '', 0, NULL, NULL, '2022-01-17 10:03:43'),
-(124, 42, 'Online UPS 5 KVA', 'MS&ESRG/2021-2022/124', 'CFEES/22ERG017/BU/GEM/074/21-22 DTD 12.8.21', '', 2, 310000, 1, 4, 1, 5, 1, '', 1, '2022-01-18 11:31:13', NULL, '2022-01-18 06:00:36'),
-(125, 124, 'Multifunction Machine', 'MMG/2021-2022/125', 'CFEES/22MMG063/B/GEM/196/21-22', '', 1, 48097, 2, 1, 1, 8, 1, '', 1, '2022-01-18 11:48:21', NULL, '2022-01-18 06:17:09'),
-(126, 77, 'Design and Development of Fire Entry Suit and Structural Fire fighting Suit', 'PC&M/2021-2022/126', 'CFEES/21PCM001/BU/ST/DB/009/20-21', 'Development contract for developing fire entry suits ( 6 Nos) and structural fire fighting suit (4 Nos).  ', 10, 7800000, 2, 1, 2, 2, 1, '', 1, '2022-01-18 12:48:24', NULL, '2022-01-18 07:16:46'),
-(127, 75, 'AMC for DRIFT Spectrometer', 'EnSG/2021-2022/127', 'CFEES/19EVS/B/AMC/050/18-19', 'CFEES has procured a Diffuse Reflectance Infra-red Spectrometer with Fourier Transform (i.e. DRIFT spectrometer) costing US$ 126819.00 (INR approximately Rs. 70 lakhs) vide CFEES Supply Order no. CFEES/ESG/P/GT/07/11-12 dated 23/01/2012. The equipment is being utilized for detailed characterization of different solid/liquid chemical compounds by scanning the vibrational spectra of these compounds. In order to properly maintain the instrument regularly by factory trained engineers, an AMC of DRIF', 3, 720745, 2, 1, 2, 1, 1, 'As the present AMC is being completed on 31st July, 2022 and to smoothly run and utilize the instrument it is proposed to take up a fresh Annual Maintenance Contract of the DRIFT spectrometer from the Indian representative of its OEM. ', 1, '2022-01-18 12:55:06', NULL, '2022-01-18 07:22:00'),
-(128, 72, 'Simulated Squib ', 'FC&HB/2021-2022/128', 'CFEES/22FCP017/P/SWOD/045/21-22', 'Simulated Squib\r\nFile No. CFEES/22FCP017/P/SWOD/045/21-22 dated 28/06/2021\r\nDemand No. 22FCP017 dated 25th June 2021', 800, 342816, 1, 8, 4, 2, 1, 'Inspection has been completed. Put up to Head MMG for further necessary action please.', 1, '2022-01-19 09:44:42', NULL, '2022-01-19 04:13:20'),
-(129, 196, 'Sophos Firewall License Renewal', 'QRS&IT/2021-2022/129', 'CFEES/22QAG010/BU/GEM/064/21-22', 'Sophos Firewall License Renewal for 03 years', 1, 779990, 2, 1, 1, 1, 1, 'for review of final TCEC minutes and CST', 1, '2022-01-19 10:44:01', NULL, '2022-01-19 05:13:41'),
-(130, 97, 'Fine Dust aerosol Spectrometer ', 'FC&HB/2021-2022/130', 'CFEES/22FCP014/P/0T/034/21-22', 'Fine Dust Aerosol Spectrometer \r\nFile No. :CFEES/22FCP014/P/OT/034/21-22\r\nDemand No. 22FCP014 dated 9 June 2021', 1, 2833342, 1, 8, 2, 5, 1, 'TCEC Minutes approved by Chairman TCEC. File is with Head MMG for further necessary action. ', 1, '2022-01-19 10:55:19', NULL, '2022-01-19 05:21:52'),
-(131, 72, 'Development contract on CAFES', 'FC&HB/2021-2022/131', 'CFEES/21FCP132/P/OT/234/20-21', 'CFEES/21FCP132/P/OT/234/20-21', 1, 2899850, 1, 8, 2, 5, 1, '', 1, '2022-01-19 17:25:12', NULL, '2022-01-19 11:54:29'),
-(132, 80, 'Tensiometer', 'FC&HB/2021-2022/132', 'CFEES/22FCP050/CC/O&M/152/21-22 ', 'CFEES/22FCP050/GC/OBM/152/21-22 dt 23/11/21', 1, 4712920, 2, 1, 2, 5, 1, 'at DSC stage (for retendering)', 1, '2022-01-19 17:39:26', NULL, '2022-01-19 12:08:54'),
-(133, 250, 'NYLON LAPTOP BAG', 'MMG/2021-2022/133', 'CFEES/22TFA023/BU/GeM/163/21-22', '', 45, 22455, 2, 1, 1, 7, 1, 'CARC, GEMC BILL & CRV Action taken put for Bill control Sh Shubhash', 1, '2022-01-20 15:54:41', NULL, '2022-01-20 10:23:26'),
-(134, 250, 'Double Punch', 'MMG/2021-2022/134', 'CFEES/22MMG048/Misc/GeM/165/21-22', '', 125, 13069, 2, 1, 1, 7, 1, 'For Inspection', 1, '2022-01-20 16:58:58', NULL, '2022-01-20 10:34:13'),
-(135, 250, 'Dustbin', 'MMG/2021-2022/135', 'CFEES/22MMG055/Misc/GeM/167/21-22', '', 90, 5850, 2, 1, 1, 7, 1, 'For Inspection', 1, '2022-01-20 16:58:46', NULL, '2022-01-20 10:35:23'),
-(136, 70, 'Hiring of Transport at CFEES Project Site Borkhedi in Nagpur', 'MS&ESRG/2021-2022/136', 'CFEES/22ERG055/BU/GEM/210/21-22', '', 2, 1000000, 1, 4, 1, 5, 1, 'case is put up for further necessary action', 1, '2022-01-20 16:48:40', NULL, '2022-01-20 11:17:47'),
-(137, 250, 'Towel', 'MMG/2021-2022/137', 'CFEES/22MMG051/Misc/GeM/168/21-22', '', 35, 12232, 2, 1, 1, 7, 1, 'For Inspection', 1, '2022-01-20 16:58:36', NULL, '2022-01-20 11:28:06'),
-(138, 77, 'Refrigator', 'PC&M/2021-2022/138', 'CFEES/21PCM017/BU/GEM/135/20-21', '', 2, 56000, 1, 1, 1, 5, 1, '', 1, '2022-01-21 09:37:48', NULL, '2022-01-21 04:07:26'),
-(139, 77, 'Development of Moisture Barrier Laminates for Structural Fire Fighting Suit', 'PC&M/2021-2022/139', 'CFEES/21PCM026/BU/OT/196/20-21', '', 6, 1776788, 2, 1, 2, 5, 1, '', 1, '2022-01-21 09:41:59', NULL, '2022-01-21 04:11:08'),
-(140, 158, 'Emergency Rescue Tender', 'TFA/2021-2022/140', NULL, '', 1, 10350000, 1, 3, 1, 5, 1, '', 1, '2022-01-21 10:33:07', NULL, '2022-01-21 05:01:53'),
-(141, 158, 'EPBAX', 'TFA/2021-2022/141', 'CFEES/22TFA017/GEM/137/21-22', '', 2, 908408, 2, 3, 1, 8, 1, '', 1, '2022-01-21 10:42:59', NULL, '2022-01-21 05:08:04'),
-(142, 158, 'Fire Training Simulator', 'TFA/2021-2022/142', 'CFEES/18TFA047/P/OT/BU/103/18-19', '', 1, 10675000, 1, 3, 1, 8, 1, '', 1, '2022-01-21 10:42:36', NULL, '2022-01-21 05:10:13'),
-(143, 253, 'Procurement of Scanner', 'MMG/2021-2022/143', 'CFEES/22MMG045/B/GEM/149/21-22', '', 1, 23999, 2, 1, 1, 7, 1, '', 1, '2022-01-21 14:23:15', NULL, '2022-01-21 08:52:26'),
-(144, 249, '10 X BINOCULAR', 'SECURITY/2021-2022/144', NULL, 'GEM DEMAND  ', 3, 21969, 2, 1, 1, 8, 1, 'FOR FURTHER NA', 1, '2022-01-28 09:42:30', NULL, '2022-01-21 09:33:53'),
-(145, 191, '10 X BINOCULAR', NULL, NULL, '', 3, 21969, 2, 1, 1, 8, 1, '', 0, NULL, NULL, '2022-01-21 10:08:14'),
-(146, 191, '10 X BINOCULAR', 'SECURITY/2021-2022/146', NULL, '', 3, 21969, 1, 1, 1, 1, 1, '', 1, '2022-01-21 15:39:18', NULL, '2022-01-21 10:08:47'),
-(147, 87, 'xyz', NULL, NULL, 'abc', 1, 2, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-01-21 10:19:11'),
-(148, 87, 'fchb/cfees/bpds/01', NULL, NULL, '', 1, 2, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-01-21 10:19:55'),
-(149, 87, 'xyz', NULL, NULL, 'abc', 1, 2, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-01-21 10:20:27'),
-(150, 60, 'Procurement of Labwares', 'FC&HB/2021-2022/150', NULL, 'Demand no. 22FCP067, Dated: 30 Dec 2021', 49, 387620, 1, 6, 1, 5, 1, '', 1, '2022-01-24 15:30:36', NULL, '2022-01-21 11:19:38'),
-(151, 60, 'Procurement of Glasswares', 'FC&HB/2021-2022/151', NULL, 'Demand No. 22FCP068, Dated: 30 Dec 2021', 83, 473917, 1, 6, 1, 5, 1, '', 1, '2022-01-24 15:30:25', NULL, '2022-01-21 11:22:02'),
-(152, 158, 'LAN Infrastructure for SDC Pilkhuwa', 'TFA/2021-2022/152', 'CFEES/22TFA020/GC/GEM/159/21-22', '', 1, 5878551, 2, 1, 1, 8, 1, '', 1, '2022-01-21 17:48:06', NULL, '2022-01-21 12:17:31'),
-(153, 250, 'Electronic Weighing Scale (Load Capacity 2000kg)', 'MMG/2021-2022/153', 'CFEES/21FCP108/BU/GEM/029/21-22', '', 2, 97200, 2, 1, 1, 8, 1, 'For Inspection Of Store (Gem)', 1, '2022-01-24 10:42:28', NULL, '2022-01-24 05:11:46'),
-(154, 124, 'FSMA of Xerox Machine Model B 7035', 'MMG/2021-2022/154', 'CFEES/22MMG064/BU/ST/203/21-22', '1 year FSMA of 3 Nos (Qty). of Xerox Machine', 1, 53100, 2, 1, 2, 2, 1, '', 1, '2022-01-24 12:01:48', NULL, '2022-01-24 06:31:25'),
-(155, 250, 'Service Book', 'MMG/2021-2022/155', 'CFEES/22MMG037/Misc/GEM/131/21-22', '', 100, 15000, 2, 1, 1, 7, 1, 'RIN Document Complete File put up for Inspection ', 1, '2022-01-24 12:03:26', NULL, '2022-01-24 06:33:07'),
-(156, 250, 'SOAP', 'MMG/2021-2022/156', 'CFEES/22MMG066/Misc/GeM/205/21-22', '', 500, 15000, 2, 1, 1, 7, 1, 'File put for Demand Approval and Financial Sanction Approval ', 1, '2022-01-24 14:35:15', NULL, '2022-01-24 08:54:37'),
-(157, 250, 'Liquid Vaporizer Inscticide for Mosquitoes', 'MMG/2021-2022/157', 'CFEES/22MMG069/Misc/GeM/208/21-22', '', 200, 20000, 2, 1, 1, 7, 1, 'Fire Put for Demand Approval and Financial Approval ', 1, '2022-01-24 14:35:05', NULL, '2022-01-24 08:56:36'),
-(158, 250, 'Soap Case', 'MMG/2021-2022/158', 'CFEES/22MMG067/Misc/GeM/206//21-22', '', 200, 19800, 2, 1, 1, 7, 1, 'File put for Demand Approval and Financial Approval ', 1, '2022-01-24 14:34:54', NULL, '2022-01-24 08:57:50'),
-(159, 250, 'Insecticidal Space Spray ', 'MMG/2021-2022/159', 'CFEES/22MMG068/Misc/GeM/207/21-22', '', 200, 24000, 2, 1, 1, 7, 1, 'File put for Demand Approval and Financial Approval ', 1, '2022-01-24 14:34:42', NULL, '2022-01-24 08:59:22'),
-(160, 80, 'MAGNETIC STIRRER', 'FC&HB/2021-2022/160', 'CFEES/22FCP073/P/GEM/272/21-22', '', 4, 323000, 1, 6, 1, 8, 1, '', 1, '2022-01-24 15:30:42', NULL, '2022-01-24 10:00:11'),
-(161, 196, 'AMC for operational cum technical support for DRONA, Internet LAN and network infrastructure', 'QRS&IT/2021-2022/161', 'CFEES/22QAG030/BU/LT/241/21-22', 'AMC for operational cum technical support for DRONA, Internet LAN and network infrastructure', 1, 1278176, 2, 1, 2, 6, 1, 'for necessary action', 1, '2022-01-24 15:37:11', NULL, '2022-01-24 10:06:49'),
-(162, 254, 'Printer', 'ADMIN/2021-2022/162', NULL, 'CFEES/22ADM007/BU/GeM/178/21-22', 5, 150000, 2, 1, 1, 1, 1, 'MMG DISPATCH', 0, NULL, NULL, '2022-01-24 10:47:22'),
-(163, 254, 'CFEES/22ADM007/BU/GeM/178/21-22', 'ADMIN/2021-2022/163', 'CFEES/22ADM007/BU/GEM/178/21-22', 'Printer', 5, 150000, 2, 1, 1, 8, 1, 'MMG DISPATCH', 1, '2022-01-24 16:20:07', NULL, '2022-01-24 10:48:38'),
-(164, 75, 'AMC for Gas Chromatograph', 'EnSG/2021-2022/164', 'CFEES/19EVS019/B/ST/104/18-19', 'S. O. was placed on 26-12-2018 for 03 years AMC period starting from 01-01-2019 to 31-12-2021.', 3, 159300, 2, 1, 2, 1, 1, 'Job completion certificate for the period 01-07-2021 to 31-12-2021 has been attached with the file.', 1, '2022-01-25 10:23:31', NULL, '2022-01-25 04:53:07'),
-(165, 250, 'Envelope', 'MMG/2021-2022/165', 'CFEES/22MMG053/Misc/GeM/171/21-22', '', 25, 12375, 2, 1, 1, 7, 1, 'File put up for CRV posted ledger.', 1, '2022-01-25 10:52:23', NULL, '2022-01-25 05:19:21'),
-(166, 51, 'FSEG', 'FSEG/2021-2022/166', NULL, '', 1, 2612, 2, 1, 1, 7, 1, '', 0, NULL, NULL, '2022-01-25 05:43:29'),
-(167, 51, 'HP Officejet CC656AA Cartridge', 'FSEG/2021-2022/167', 'CFEES/22FAS011/B/GeM/183/21-22', '', 1, 2612, 1, 1, 1, 1, 1, '', 1, '2022-01-25 11:17:12', NULL, '2022-01-25 05:45:25'),
-(168, 224, 'repair of fire tender', 'TFA/2021-2022/168', 'CFEES/22TFA016/BU/LPC/98/21-22', '', 1, 100466, 2, 1, 3, 9, 1, 'vendors letter for DP extension is attached.  ', 1, '2022-01-25 12:02:25', NULL, '2022-01-25 06:31:35'),
-(169, 218, 'Statement of case for sanction of additional amount for payment of arrears due to revision of wages of cleaning staff', NULL, NULL, '', 1, 5621220, 2, 1, 1, 5, 1, '', 0, NULL, NULL, '2022-01-25 06:35:54'),
-(170, 217, 'Statement of case for sanction of additional amount for payment of arrears due to revision of wages to cleaning staff', 'WORKS/2021-2022/170', NULL, '', 1, 5621220, 2, 1, 1, 5, 1, '', 1, '2022-01-25 12:16:16', NULL, '2022-01-25 06:45:02'),
-(171, 224, 'PROCUREMENT OF 48 V E-RICKSHAWS FOR CARRYING GOODS', 'TFA/2021-2022/171', 'CFEES/22TFA021/GC/GEM/161/21-22', '', 1, 230000, 2, 1, 1, 5, 1, '', 1, '2022-01-25 12:17:26', NULL, '2022-01-25 06:46:09'),
-(172, 224, 'HIRING OF ECURITY STAFF AT SDC', 'TFA/2021-2022/172', 'CFEES/21TFA017/Misc/LBM/132/20-21/Extension', '', 45, 39123354, 2, 1, 1, 5, 1, '', 1, '2022-01-25 12:20:17', NULL, '2022-01-25 06:48:55'),
-(173, 191, 'SMART CARD RE-TRANSFER PRINTER', 'SECURITY/2021-2022/173', 'CFEES/21SEC015/BU/GEM/211/20-21', '', 1, 499000, 2, 1, 1, 2, 1, 'TCEC', 1, '2022-01-25 13:06:51', NULL, '2022-01-25 07:30:28'),
-(174, 191, 'DISPLAY UNIT (SMART TELEVISION 65 INCH LED)', 'SECURITY/2021-2022/174', 'CFEES/22SEC002/B/GEM/275/21-22', '', 1, 164490, 2, 1, 1, 2, 1, 'TCEC', 1, '2022-01-25 13:06:33', NULL, '2022-01-25 07:33:08'),
-(175, 84, 'Printer Cartridge', 'FSEG/2021-2022/175', 'CFEES/22FAS009/BU/GEM/177/21-22', 'Procurement of Printer Cartride', 2, 13298, 2, 1, 1, 7, 1, '', 1, '2022-01-25 15:22:17', NULL, '2022-01-25 09:51:26'),
-(176, 77, 'Laboratory Items', 'PC&M/2021-2022/176', NULL, '', 6, 41563, 2, 1, 1, 5, 1, '', 1, '2022-01-25 16:24:18', NULL, '2022-01-25 10:53:44'),
-(177, 250, 'Procurement of UPS system for SDC PILKHUWA', 'MMG/2021-2022/177', 'CFEES/22TFA019/P/GeM/160/21-22', '', 4, 18200, 1, 3, 1, 7, 1, 'CRAC, Gem Bill & CRV Action taken put for Bill control Sh Subhash ', 1, '2022-01-27 10:31:59', NULL, '2022-01-27 05:01:17'),
-(178, 196, 'EPABX extension', 'QRS&IT/2021-2022/178', NULL, 'EPABX extension from 1st march 2022 to 31st august 2022', 1, 76526, 2, 1, 2, 2, 1, 'for necessary action', 1, '2022-01-27 12:07:57', NULL, '2022-01-27 06:37:40'),
-(179, 57, 'Propane Gas Cylinders', 'QRS&IT/2021-2022/179', 'CFEES/22QAG019/P/LPC/142/21-22', 'Propane Gas Cylinders', 7, 184270, 1, 2, 3, 9, 1, '', 1, '2022-01-27 12:22:36', NULL, '2022-01-27 06:49:17'),
-(180, 163, 'Extension of Hiring of Manpower under FIRSTE Project', 'QRS&IT/2021-2022/180', NULL, '', 3, 83298, 1, 2, 1, 5, 1, 'Hiring of Manpower', 1, '2022-01-27 12:19:56', NULL, '2022-01-27 06:49:24'),
-(181, 80, 'CFEES/21FCP085/P/GeM/186/20-21', 'FC&HB/2021-2022/181', NULL, 'Electronic Weighing Balance', 1, 220500, 1, 6, 1, 5, 1, 'TCEC approval stage', 1, '2022-01-27 12:50:10', NULL, '2022-01-27 07:19:45'),
-(182, 77, 'Refill of Nitrogen gas through GEM', 'PC&M/2021-2022/182', 'CFEES/22PCM018/BU/GeM/154/21-22', '', 35, 14700, 2, 1, 1, 1, 1, '', 1, '2022-01-27 14:12:00', NULL, '2022-01-27 08:41:42'),
-(183, 32, 'Fire Test Chamber 10 m3', 'FC&HB/2021-2022/183', 'CFEES/22FCP002/P/LPC/009/21-22', '', 1, 238875, 1, 8, 3, 9, 1, '', 1, '2022-01-27 15:06:09', NULL, '2022-01-27 09:26:37'),
-(184, 125, 'Procurement of Toner cartidgefor Xerox Versalink B7035', 'TCP&HR/2021-2022/184', 'CFEES/24TCP001/BU/GEM/013/23-24', '', 1, 9380, 2, 1, 1, 1, 1, '', 1, '2022-01-27 15:07:26', NULL, '2022-01-27 09:33:38'),
-(185, 79, 'Procurement of High Quality water purification system (type1 & type 2) ', 'EnSG/2021-2022/185', 'CFEES/22EVS043/P/GEM/243/21-22', '', 1, 855000, 1, 7, 1, 5, 1, '', 1, '2022-01-27 15:42:13', NULL, '2022-01-27 10:08:27'),
-(186, 224, 'Servicing of Hydraulic platform chasis', 'TFA/2021-2022/186', NULL, '', 1, 128131, 1, 3, 3, 1, 1, '', 1, '2022-01-28 15:04:43', NULL, '2022-01-28 09:34:13'),
-(187, 224, 'HIRING OF CLEANING STAFF FOR SDC ', 'TFA/2021-2022/187', 'CFEES/21TFA014/MISC/GEM/133/20-21', '', 23, 4126023, 1, 3, 1, 1, 1, '', 1, '2022-01-28 15:17:42', NULL, '2022-01-28 09:46:35'),
-(188, 224, 'soc of conservancy services', 'TFA/2021-2022/188', 'CFEES/22TFA024/MISC/GEM/209/21-22', '', 24, 3925866, 2, 1, 1, 5, 1, '', 1, '2022-01-28 15:55:42', NULL, '2022-01-28 10:25:11'),
-(189, 233, 'Procurement of 305 GSM 100 % Cotton Fabrics Suits and 230 GSM 93 % mAramid/5%pAramid/2% Anti-stat fabric Suit', 'QRS&IT/2021-2022/189', 'CFEES/QAG013/P/ST/125/21-22', 'Procurement of Fire Suits for FTMS Testing', 1, 171423, 1, 2, 1, 2, 1, '', 1, '2022-01-31 10:36:16', NULL, '2022-01-31 05:03:38'),
-(190, 233, 'Flame Test Manikin System', 'QRS&IT/2021-2022/190', 'CFEES/QAG/P/ST/DB/80/17-18', '', 1, 63291547, 1, 2, 2, 5, 1, '', 1, '2022-01-31 11:33:11', NULL, '2022-01-31 05:58:18'),
-(191, 75, 'Annual Maintenance Contract (AMC) for Gas Chromatograph (GC) ', 'EnSG/2021-2022/191', 'CFEES/22EVS026/BU/PAC/090/22-23', '03 Years AMC of Gas Chromatograph (GC) is required for smooth functioning of the instrument.', 3, 180540, 2, 1, 2, 1, 1, 'Putup for necessary action and approval pleaee..', 1, '2022-01-31 14:52:04', NULL, '2022-01-31 05:59:19'),
-(192, 217, 'Bamboo Broom - sweeping broom with bamboo strips ', 'WORKS/2021-2022/192', 'CFEES/22WRK023/MISC/GEM/274/21-22', '', 100, 16000, 2, 1, 1, 7, 1, '', 1, '2022-01-31 12:18:43', NULL, '2022-01-31 06:43:26'),
-(193, 217, 'Toilet Cleaner', 'WORKS/2021-2022/193', 'CFEES/22WRK021/MISC/GEM/233/21-22', '', 100, 11000, 2, 1, 1, 7, 1, '', 1, '2022-01-31 12:18:19', NULL, '2022-01-31 06:44:30'),
-(194, 217, 'Floor Cleaner', 'WORKS/2021-2022/194', NULL, '', 60, 27000, 2, 1, 1, 7, 1, '', 1, '2022-01-31 12:17:57', NULL, '2022-01-31 06:45:22'),
-(195, 217, 'Naphthalene Balls', 'WORKS/2021-2022/195', NULL, '', 100, 15000, 2, 1, 1, 7, 1, '', 1, '2022-01-31 12:17:22', NULL, '2022-01-31 06:46:02'),
-(196, 97, 'Temperature Measurement with data storage falicity ', 'FC&HB/2021-2022/196', 'CFEES/22FCP020/P/LPC/059/21-22', 'File No. CFEES/22FCP020/P/LPC/059/21-22 dated 20/07/2021', 1, 65000, 1, 8, 3, 9, 1, 'Item Received, Inspection Required', 1, '2022-01-31 14:30:17', NULL, '2022-01-31 08:59:27'),
-(197, 80, 'Solvents', 'FC&HB/2021-2022/197', 'CFEES/22FCP027/P/GEM/072/21-22', 'CFEES/22FCP027/P/GeM/072/21-22 dt 09 Aug 2021\r\nBOQ mode (open Bid)', 10, 543909, 1, 6, 1, 5, 1, 'Draft TCEC prepared, TCEC to be done', 1, '2022-01-31 15:57:15', NULL, '2022-01-31 10:26:19'),
-(198, 250, 'Keyboard', 'MMG/2021-2022/198', 'CFEES/22MMG057/BU/GEM/175/21-22', '', 30, 18089, 2, 1, 1, 7, 1, 'For Bill control', 1, '2022-02-01 12:43:37', NULL, '2022-02-01 07:12:42'),
-(199, 79, 'Procurement of Aluminium Foil through Gem under project (ERAF)', 'EnSG/2021-2022/199', 'CFEES/22EVS045/P/GEM/254/21-22', '', 30, 24000, 1, 7, 1, 7, 1, '', 1, '2022-02-01 12:50:34', NULL, '2022-02-01 07:19:47'),
-(200, 70, 'Hiring of Transport at Borkhedi Nagpur upto 31 jan 2022', 'MS&ESRG/2021-2022/200', 'CFEES/ESRG/P/OT/DB/17/17-18', '', 1, 1148614, 1, 4, 2, 5, 1, '', 1, '2022-02-01 14:48:21', NULL, '2022-02-01 09:17:35'),
-(201, 217, 'Hiring of Cleaning Staff for CFEES', 'WORKS/2021-2022/201', 'CFEES/22WRK09/BU/GEM/158/21-22', '', 1, 5400768, 2, 1, 1, 8, 1, '', 1, '2022-02-01 14:50:46', NULL, '2022-02-01 09:19:43'),
-(202, 217, 'Bathroom Cleaning Brush ', 'WORKS/2021-2022/202', NULL, '', 50, 6250, 1, 1, 1, 7, 1, '', 1, '2022-02-01 14:52:05', NULL, '2022-02-01 09:21:38'),
-(203, 61, 'centifugal water pump (2 nos.)', 'FSEG/2021-2022/203', 'CFEES/22ATG024/BU/GEM/176/21-22', 'CFEES/22/ATG024/BU/GEM/176/21-22/22/12/2021', 2, 11701, 2, 1, 1, 2, 1, '', 1, '2022-02-01 15:05:04', NULL, '2022-02-01 09:34:19'),
-(204, 250, 'Transparents Tape', 'MMG/2021-2022/204', 'CFEES/22MMG052/MISC/GEM/169/21-22', '', 300, 6000, 2, 1, 1, 7, 1, 'For Gem Inspection ', 1, '2022-02-01 15:04:44', NULL, '2022-02-01 09:34:20'),
-(205, 163, 'ANSYS HPC PACK TECS/AMC with upgrade', 'QRS&IT/2021-2022/205', 'CFEES/21QAG032/P/PAC/228/20-21', 'AMC of ANSYS HPC pack', 1, 1150500, 1, 2, 2, 1, 1, '', 1, '2022-02-01 15:50:38', NULL, '2022-02-01 10:20:12'),
-(206, 80, 'Electronic Weighing Scale', 'FC&HB/2021-2022/206', 'CFEES/21FCP085/P/GEM/186/20-21', 'CFEES/21FCP085/P/GeM/186/20-21 dated 25/01/2021', 1, 220500, 1, 6, 1, 5, 1, 'Final TCEC minutes & CSB submitted for approval', 1, '2022-02-02 17:37:43', NULL, '2022-02-02 12:07:23'),
-(207, 80, 'Development contract for Fluorosurfactant and AFFF formulations ', 'FC&HB/2021-2022/207', 'CFEES/22FCP076/P/OT/230/21-22', 'Scope of work attached', 1, 10970460, 1, 6, 2, 5, 1, 'DSC sheet & RFP to be issued', 1, '2022-02-03 10:25:20', NULL, '2022-02-03 04:54:56'),
-(208, 244, 'Black Cartridge(Q2613A)', NULL, NULL, '', 1, 4480, 2, 1, 1, 7, 1, '', 0, NULL, NULL, '2022-02-03 04:57:47'),
-(209, 244, 'Black Cartridge(Q2613A)', NULL, NULL, '', 1, 4480, 2, 1, 1, 7, 1, '', 0, NULL, NULL, '2022-02-03 04:58:18'),
-(210, 244, 'Black Cartridge(Q2613A)', NULL, NULL, '', 1, 4480, 2, 1, 1, 7, 1, '', 0, NULL, NULL, '2022-02-03 05:00:58'),
-(211, 244, 'Black Cartridge(Q2613A)', 'FSEG/2021-2022/211', 'CFEES/22FAS012/BU/GEM/213/21-22', '', 1, 4480, 2, 1, 1, 7, 1, '', 1, '2022-02-03 10:32:03', NULL, '2022-02-03 05:01:30'),
-(212, 32, 'Cutting of Halon cylinders for disposal as Scrap', 'FC&HB/2021-2022/212', 'CFEES/22FCP075/BU/LPC/08/22-23', '', 125, 147500, 2, 1, 3, 9, 1, '', 1, '2022-02-03 14:53:18', NULL, '2022-02-03 09:22:12'),
-(213, 77, 'GST concession Certificate', 'PC&M/2021-2022/213', NULL, '', 2, 2938, 2, 1, 2, 1, 1, '', 1, '2022-02-03 15:12:29', NULL, '2022-02-03 09:42:09'),
-(214, 87, 'Gas Analyzer System (Lab mass spectrometer for fire supression analysis)', 'FC&HB/2021-2022/214', NULL, 'CFEES/FCP/081/BU/OT/DB/259/18-19 dated 22/02/2019\r\nSO No.  CFEES/21AT0033/FCP/20-21/CMS-II/070 dated 3/11/20', 1, 21420000, 1, 1, 2, 5, 1, 'Inspection completed & submitted to MMG', 1, '2022-02-03 15:26:56', NULL, '2022-02-03 09:56:24'),
-(215, 79, 'Hindi workshop', 'EnSG/2021-2022/215', 'CFEES/22HCL003/Misc/GeM/220/21-22', '', 40, 10000, 2, 1, 1, 7, 1, '', 1, '2022-02-03 16:24:13', NULL, '2022-02-03 10:53:57'),
-(216, 250, 'FILE COVER', 'MMG/2021-2022/216', 'CFEES/22MMG074/MISC/GEM/217/21-22', '', 1000, 20000, 2, 1, 1, 7, 1, '', 1, '2022-02-03 16:45:21', NULL, '2022-02-03 11:14:59'),
-(217, 250, 'Permanent Marker', 'MMG/2021-2022/217', 'CFEES/22MMG070/MISC/GEM/216/21-22', '', 500, 10000, 2, 1, 1, 7, 1, '', 1, '2022-02-03 16:46:18', NULL, '2022-02-03 11:16:01'),
-(218, 250, 'Photocopy Paper A4 Size', 'MMG/2021-2022/218', 'CFEES/22MMG072/BU/GEM/219/21-22', '', 570, 176700, 2, 1, 1, 8, 1, '', 1, '2022-02-03 16:47:30', NULL, '2022-02-03 11:17:16'),
-(219, 250, 'Rubber Stamp', 'MMG/2021-2022/219', 'CFEES/22MMG073/MISC/GEM/218/21-22', '', 12, 4560, 2, 1, 1, 7, 1, '', 1, '2022-02-03 16:48:37', NULL, '2022-02-03 11:18:08'),
-(220, 224, 'LOGBOOK FOR VEHICLE', 'TFA/2021-2022/220', 'CFEES/22TFA026/MISC/GEM/12/21-22', '', 20, 4600, 2, 1, 1, 1, 1, '', 1, '2022-02-04 10:20:17', NULL, '2022-02-04 04:49:53'),
-(221, 77, '5 KVA and 3 KVA online UPS', 'PC&M/2021-2022/221', 'CFEES/22PCM034/BU/GEM/229/21-22', '', 2, 265000, 2, 1, 1, 6, 1, '', 1, '2022-02-04 11:24:08', NULL, '2022-02-04 05:53:44'),
-(222, 80, 'Chemicals (13 Nos.)', 'FC&HB/2021-2022/222', 'CFEES/21FCP091/P/GEM/243/21-22', 'GEM Bid No. GeM/2021/B/1804382', 13, 72493, 1, 6, 1, 5, 1, 'Final TCEC Minutes', 1, '2022-02-04 14:23:09', NULL, '2022-02-04 08:52:42'),
-(223, 61, '40 cubic meter nitrogen gas', 'FSEG/2021-2022/223', NULL, '', 40, 22000, 2, 1, 1, 2, 1, 'Reprocess case on direct purchase through GEM', 1, '2022-02-07 10:35:29', NULL, '2022-02-07 05:04:41'),
-(224, 104, 'Release of Instalment for CARS awarded to Andhra University', 'FC&HB/2021-2022/224', 'CFEES/FCP/B/CAR/008/18-19', 'For release of second instalment of CARS', 1, 2504250, 2, 1, 5, 11, 1, '', 1, '2022-02-07 15:33:48', NULL, '2022-02-07 10:03:17'),
-(226, 80, 'Bubble Pressure Tensiometer', 'FC&HB/2021-2022/226', 'CFEES/22FCP045/P/OT/99/21-22', 'CFEES/22FCP045/P/OT/99/21-22 dated 16/09/21', 1, 3600000, 1, 6, 2, 5, 1, 'Draft TCEC &CSB submitted', 1, '2022-02-08 11:51:30', NULL, '2022-02-08 06:21:02'),
-(227, 80, 'Deep Freezer', 'FC&HB/2021-2022/227', 'CFEES/22FCP018/P/GEM/55/21-22', 'CFEES/22FCP018/P/GeM/55/21-22', 1, 355585, 1, 6, 1, 8, 1, 'Recommended for DP extension up to 20 Feb 2022 (Initial DP 22 Jan 2022)', 1, '2022-02-08 11:58:06', NULL, '2022-02-08 06:27:39'),
-(228, 77, 'Servicing ,Lubrication and calibration of textile equipments', 'PC&M/2021-2022/228', 'CFEES/22PCM023/BU/ST/234/21-22', '', 20, 581769, 1, 1, 2, 2, 1, '', 1, '2022-02-08 12:00:40', NULL, '2022-02-08 06:29:58'),
-(229, 250, 'Cartridge 388', 'MMG/2021-2022/229', 'CFEES/22MMG077/BU/Gem/221/21-22', '', 46, 250884, 2, 1, 1, 8, 1, 'For Approval ', 1, '2022-02-08 15:34:42', NULL, '2022-02-08 10:03:48'),
-(230, 224, 'HIRING OF TRANSPORT FOR SKILL DEVELOPMENT CENTRE PILKHUWA', 'TFA/2021-2022/230', NULL, '', 1, 660000, 1, 1, 1, 5, 1, '', 1, '2022-02-08 16:07:38', NULL, '2022-02-08 10:35:36'),
-(231, 88, 'BRASS COATED MICRO STEEL FIBRE', 'MS&ESRG/2021-2022/231', 'CFEES/22ERG032/P/LPC/132/21-22', 'CFEES/22ERG032/P/LPC/132/21-22 dt:26/10/2021', 2001, 430500, 1, 4, 3, 9, 1, '', 1, '2022-02-09 09:54:05', NULL, '2022-02-08 11:26:44'),
-(232, 250, 'Requirement of Laptop', 'MMG/2021-2022/232', NULL, '', 1, 1, 2, 1, 1, 2, 1, '', 1, '2022-02-09 10:27:07', NULL, '2022-02-09 04:56:28'),
-(233, 217, 'Naphthalene Balls', 'WORKS/2021-2022/233', 'CFEES/22WRK024/MISC/GEM/269/21-22', '', 90, 23400, 2, 1, 1, 7, 1, '', 1, '2022-02-09 11:42:36', NULL, '2022-02-09 06:11:40'),
-(234, 217, 'Cartridge for HP office Jet Pro 8600', 'WORKS/2021-2022/234', 'CFEES/22WRK025/MISC/GEM/267/21-22', '', 4, 16287, 2, 1, 1, 7, 1, '', 1, '2022-02-09 11:44:00', NULL, '2022-02-09 06:13:38'),
-(235, 77, 'SCAN COIL Assy EVO EX PCBA EO', 'PC&M/2021-2022/235', 'CFEES/22PCM009/BU/PAC/96/21-22', '', 3, 678544, 2, 1, 2, 3, 1, '', 1, '2022-02-10 12:17:19', NULL, '2022-02-10 06:46:06'),
-(236, 250, 'Telephone Instrument', 'MMG/2021-2022/236', NULL, '', 15, 23985, 2, 1, 1, 7, 1, '', 1, '2022-02-11 10:41:43', NULL, '2022-02-11 05:10:41'),
-(237, 250, 'Mouse', 'MMG/2021-2022/237', NULL, '', 55, 24750, 2, 1, 1, 7, 1, '', 1, '2022-02-11 10:41:33', NULL, '2022-02-11 05:11:14'),
-(238, 191, '10X BINOCULAR', 'SECURITY/2021-2022/238', NULL, '', 3, 21969, 2, 1, 1, 2, 1, '', 2, '2022-02-11 12:01:46', NULL, '2022-02-11 06:30:28'),
-(239, 124, 'Hiring of Staff for  Wet Canteen Services at CFEES', 'MMG/2021-2022/239', 'CFEES/21MSG001/Misc/Gem/214/20-21', '', 1, 2816977, 2, 1, 1, 1, 1, 'Put up for Sanction of Additional Amount fro payment of arrears', 1, '2022-02-11 12:07:34', NULL, '2022-02-11 06:37:07'),
-(240, 124, 'Hiring of Data Entry Operator', 'MMG/2021-2022/240', 'CFEES/21MMG095/Misc/Gem/219/20-21', '', 1, 7157419, 2, 1, 1, 1, 1, 'Put up for Financial Concurrence for additional amount due to revision of minimum wages', 1, '2022-02-11 12:10:25', NULL, '2022-02-11 06:40:06'),
-(241, 110, 'Sweating Guarded Hot Plate (SGHP)', 'PC&M/2021-2022/241', 'CFEES/FCPC/B/ST/DB/73/16-17', '', 1, 7442571, 2, 1, 2, 5, 1, '', 1, '2022-02-11 12:12:13', NULL, '2022-02-11 06:41:14');
-INSERT INTO `files` (`f_id`, `e_id`, `file_name`, `docket_no`, `file_num`, `description`, `quantity`, `total_cost`, `cat_id`, `proj_id`, `port_id`, `bid_id`, `fin_id`, `f_remark`, `f_status`, `mark_to_ad`, `mark_to_mmg`, `is_created`) VALUES
-(242, 250, 'Reimbursement of expenditure for purchase of brief case/ Hand Bag/ Official Bag/ Ladies Purse', 'MMG/2021-2022/242', NULL, '', 1, 94400, 2, 1, 1, 7, 1, '', 1, '2022-02-11 16:01:00', NULL, '2022-02-11 10:30:46'),
-(243, 224, 'major repair work: TFFL MK-IV', 'TFA/2021-2022/243', NULL, '', 1, 1237230, 2, 1, 2, 6, 1, '', 1, '2022-02-14 10:25:49', NULL, '2022-02-14 04:54:56'),
-(244, 79, 'Procurement of Hydrogen Peroxide ', 'EnSG/2021-2022/244', 'CFEES/22EVS049/P/GEM/266/21-22', '', 30, 12600, 1, 7, 1, 7, 1, '', 1, '2022-02-15 10:28:41', NULL, '2022-02-15 04:58:12'),
-(245, 124, 'Multifunction Machine', 'MMG/2021-2022/245', 'CFEES/22MMG076/BU/GEM/215/21-22', '', 5, 339350, 2, 1, 1, 8, 1, '', 1, '2022-02-15 11:29:23', NULL, '2022-02-15 05:57:54'),
-(246, 125, 'Approval & Sanction for slogan & Poster competition in CFEES in the occasion of National Safety week 2022', 'TCP&HR/2021-2022/246', NULL, '', 0, 10200, 1, 1, 4, 1, 1, '', 1, '2022-02-15 16:53:40', NULL, '2022-02-15 10:14:24'),
-(247, 250, 'Laptop Reimbursement Bill ', 'MMG/2021-2022/247', NULL, '', 1, 94400, 2, 1, 1, 7, 1, '', 1, '2022-02-15 16:27:44', NULL, '2022-02-15 10:57:27'),
-(248, 191, 'X-RAY BAGGAGE SCANNER ', 'SECURITY/2021-2022/248', 'CFEES/22SEC005/BU/GEM/060/21-22', '', 1, 2000000, 2, 1, 1, 1, 1, '', 1, '2022-02-16 11:15:37', NULL, '2022-02-16 05:44:53'),
-(249, 32, 'Fire test chamber of 100m3', NULL, NULL, '', 1, 924000, 1, 8, 2, 5, 1, '', 0, NULL, NULL, '2022-02-17 09:49:58'),
-(250, 32, 'Fire test chamber of 100m3', 'FC&HB/2021-2022/250', 'CFEES/21FCP053/P/OBM/131/20-21', '', 1, 924000, 1, 8, 2, 5, 1, '', 1, '2022-02-17 15:30:55', NULL, '2022-02-17 09:59:34'),
-(251, 97, 'Manual Aerosol Fire Extinguisher, SEAARA make, 1000 g AFC (2 Nos. )', 'FC&HB/2021-2022/251', 'CFEES/21FCHB/P/PAC/065/20-21', 'Manual Aerosol Fire Extinguisher, SEAARA make, 1000 g AFC (2 Nos.) ', 2, 139227, 1, 8, 1, 1, 1, 'Validity extended by vendor till 31-03-2022, put up for further action please', 2, '2022-02-18 17:33:06', NULL, '2022-02-18 12:02:36'),
-(252, 80, 'REFRACTOMETER', 'FC&HB/2021-2022/252', NULL, '', 1, 32000, 1, 6, 1, 7, 1, 'Duly filled Demand submitted for further processing', 1, '2022-02-22 12:40:41', NULL, '2022-02-22 07:10:05'),
-(253, 80, 'Rotary Evaporator', 'FC&HB/2021-2022/253', 'CFEES/22FCP038/P/GEM/092/21-22', 'CFEES/22FCP038/P/Gem/092/21-22 dated 3 Sep 2021', 2, 1494000, 1, 6, 1, 5, 1, 'Draft TCEC & CSB prepared', 1, '2022-02-22 14:34:28', NULL, '2022-02-22 09:04:04'),
-(254, 224, 'AIR CRASH FIRE TENDER ', 'TFA/2021-2022/254', NULL, '', 1, 35577500, 1, 3, 1, 5, 1, '', 1, '2022-02-23 10:45:54', NULL, '2022-02-23 05:14:36'),
-(255, 206, 'PROCUREMENT OF TOC & TNb ANALYZER', 'QRS&IT/2021-2022/255', 'CFEES/QAG009/GC/OT/35/22-23', '', 1, 4800000, 2, 1, 2, 5, 1, '', 1, '2022-02-23 15:08:52', NULL, '2022-02-23 09:37:06'),
-(256, 191, 'CAMC of X - Ray Baggage Systum', 'SECURITY/2021-2022/256', 'CFEES/23SEC009/BU/PAC/052/22-23', 'For Demand creation', 1, 782753, 2, 1, 2, 2, 1, 'for demand creation ', 1, '2022-02-25 17:04:07', NULL, '2022-02-25 11:33:40'),
-(257, 250, 'Paper Weight', 'MMG/2021-2022/257', NULL, '', 200, 9800, 2, 1, 1, 7, 1, '', 1, '2022-02-28 15:29:52', NULL, '2022-02-28 09:49:21'),
-(258, 250, 'Toner NPG-51', 'MMG/2021-2022/258', NULL, '', 5, 15441, 2, 1, 1, 7, 1, '', 1, '2022-02-28 15:29:40', NULL, '2022-02-28 09:59:06'),
-(259, 192, 'Autoclave', NULL, NULL, '', 2, 500000, 2, 1, 1, 8, 1, '', 0, NULL, NULL, '2022-03-02 05:56:27'),
-(260, 192, 'Autoclave', 'QRS&IT/2021-2022/260', 'CFEES/23QAG026/P/GEM/115/22-23', '', 2, 500000, 2, 1, 1, 8, 1, '', 1, '2022-03-02 11:28:10', NULL, '2022-03-02 05:56:55'),
-(261, 232, 'Refurbisment of high Pressure Air Compressor', NULL, NULL, '', 1, 985094, 2, 1, 2, 3, 1, '', 0, NULL, NULL, '2022-03-02 11:06:19'),
-(262, 40, 'AMC for operational cum technical support for DRONA Internet LANs and Network infrastructure (Extension)', 'QRS&IT/2021-2022/262', 'CFEES/21QAG/035/BYU/LT/189/20-21', '', 1, 73465, 2, 1, 3, 6, 1, '', 1, '2022-03-02 17:14:12', NULL, '2022-03-02 11:43:19'),
-(263, 200, 'Procurement of Chemical', 'EnSG/2021-2022/263', 'CFEES/21FCP130/P/GEM/031/21-22', 'Procurement of Chemical on Cash Purchase through GeM', 24, 11640, 2, 1, 1, 5, 1, 'The chemical is required for work planned in task.', 1, '2022-03-03 16:02:39', NULL, '2022-03-03 10:31:19'),
-(264, 80, 'Sodium Sulphide, 500g', 'FC&HB/2021-2022/264', 'CFEES/22FCP086/P/GEM/247/21-22', '', 20, 13740, 1, 6, 1, 7, 1, '', 1, '2022-03-03 16:56:30', NULL, '2022-03-03 11:25:41'),
-(265, 77, 'Firefite Lithex Fire extinguisher of 2 liter capacity ', 'PC&M/2021-2022/265', 'CFEES/22PCM037/B/GEM/273/22-23', '', 2, 21000, 2, 1, 1, 2, 1, '', 1, '2022-03-11 15:32:54', NULL, '2022-03-04 07:09:07'),
-(266, 199, 'E- book (vasudha)', 'HINDI CELL/2021-2022/266', NULL, '', 1, 25000, 2, 1, 1, 7, 1, '', 1, '2022-03-04 14:55:29', NULL, '2022-03-04 09:25:03'),
-(267, 217, 'Statement of case for extension of contract: Hiring of cleaning staff at CFEES complex Delhi', 'WORKS/2021-2022/267', 'CFEES/21WRK013/MISC/GEM/194/20-21', '', 19, 1350192, 2, 1, 1, 7, 1, '', 1, '2022-03-04 17:11:37', NULL, '2022-03-04 11:41:00'),
-(268, 250, 'FEVICOL', 'MMG/2021-2022/268', NULL, '', 350, 6230, 2, 1, 1, 7, 1, '', 1, '2022-03-07 11:03:41', NULL, '2022-03-07 05:33:25'),
-(269, 250, 'STAPLER PIN ', 'MMG/2021-2022/269', 'CFEES/22MMG082/MISC/GEM/224/21-22', '', 1000, 13750, 2, 1, 1, 7, 1, '', 1, '2022-03-07 11:25:05', NULL, '2022-03-07 05:54:49'),
-(270, 61, 'Job work of unskilled manpower ( 03 nos.)', 'FSEG/2021-2022/270', NULL, 'Under Gaganyaan Activity No. (DW-19310140023)', 1, 947520, 1, 12, 1, 1, 1, '', 1, '2022-03-07 12:00:57', NULL, '2022-03-07 06:29:56'),
-(271, 250, 'Laboratory Items Part-IInd', 'MMG/2021-2022/271', 'CFEES/22PCM025,029, 030,032/BU/GEM/236,238,239,240/21-22', '', 200, 50000, 2, 1, 1, 7, 1, '', 1, '2022-03-07 12:40:33', NULL, '2022-03-07 07:10:02'),
-(272, 84, 'Procurement of LCD Monitor Through GeM', 'FSEG/2021-2022/272', NULL, '', 1, 22450, 2, 1, 1, 7, 1, '', 1, '2022-03-07 14:32:22', NULL, '2022-03-07 09:01:27'),
-(273, 72, 'Laptop', 'FC&HB/2021-2022/273', 'CFEES/21FCP/109/B/GEM/210/20-21', 'Laptop ', 1, 48000, 1, 1, 1, 5, 1, '', 1, '2022-03-07 17:35:00', NULL, '2022-03-07 12:04:02'),
-(274, 249, '10X BINOCULAR', 'SECURITY/2021-2022/274', NULL, '', 3, 21969, 2, 1, 1, 2, 1, '', 1, '2022-03-09 11:10:42', NULL, '2022-03-09 05:40:08'),
-(275, 250, 'Green tag', 'MMG/2021-2022/275', NULL, '', 160, 10400, 2, 1, 1, 7, 1, '', 1, '2022-03-10 12:47:51', NULL, '2022-03-10 07:17:20'),
-(276, 250, 'Green tag', 'MMG/2021-2022/276', NULL, '', 160, 10400, 2, 1, 1, 7, 1, '', 1, '2022-03-10 12:50:34', NULL, '2022-03-10 07:20:19'),
-(277, 250, 'Laptop Reimbursement (Mrs. Monika Grover, SPS)', 'MMG/2021-2022/277', NULL, 'Laptop Bill (Mrs. Monika Grover, SPS)', 1, 94400, 2, 1, 1, 7, 1, '', 1, '2022-03-10 14:45:16', NULL, '2022-03-10 09:14:07'),
-(278, 250, 'LAPTOP BILL', 'MMG/2021-2022/278', NULL, '', 1, 97000, 2, 1, 1, 7, 1, '', 2, '2022-03-10 15:09:50', NULL, '2022-03-10 09:39:18'),
-(279, 238, 'Cancellation of Supply order no. CFEES/22AT0048/ATG/21-22/CMS-II/051 dated 26 Nov 21', 'FSEG/2021-2022/279', NULL, 'Cancellation of Supply order no. CFEES/22AT0048/ATG/21-22/CMS-II/051 dated 26 Nov 21 placed on M/s Kingsway Service Station ', 18000, 1617660, 2, 1, 1, 2, 1, '', 1, '2022-03-11 16:04:54', NULL, '2022-03-11 10:34:17'),
-(280, 75, 'Annual Maintenance Contract (AMC) for DRIFT (Spectrometer) ', 'EnSG/2021-2022/280', 'CFEES/23ENS042/BU/PAC/212/22-23', 'CFEES has procured a Diffuse Reflectance Infra-red Spectrometer with Fourier Transform (i.e. DRIFT spectrometer) costing US$ 126819.00 (INR approximately Rs. 70 lakhs) vide S.O. dated 23/01/2012 to meet the requirements of MoD establishments and MoD users for characterisation of samples generated during various R&D activities. The equipment is being utilized for detailed characterization of different solid/liquid chemical compounds by scanning the vibrational spectra of these compounds. As the p', 3, 551792, 2, 1, 2, 1, 1, 'Minutes ofCERC of the case has been signed on 10-03-2022. ', 1, '2022-03-14 11:55:22', NULL, '2022-03-14 05:21:12'),
-(281, 125, 'CFEES/ESRG/BR/CARS/Reapprtn/20-21', 'TCP&HR/2021-2022/281', NULL, '', 1, 0, 1, 1, 5, 11, 1, '', 1, '2022-03-14 15:38:03', NULL, '2022-03-14 10:06:30'),
-(282, 250, 'Stapler Pin (Small)', 'MMG/2021-2022/282', NULL, '', 1600, 9600, 2, 1, 1, 7, 1, '', 1, '2022-03-15 12:24:46', NULL, '2022-03-15 06:54:24'),
-(283, 77, 'Fabrication of Economical Emergency Escape chute', 'PC&M/2021-2022/283', NULL, '', 1, 1108800, 2, 1, 2, 2, 1, '', 1, '2022-03-15 16:16:29', NULL, '2022-03-15 10:46:04'),
-(284, 157, 'Refurbishment and re-commissioning of compressor', 'FSEG/2021-2022/284', 'CFEES/22ATG026/BU/PAC/249/21-22', '', 1, 1162411, 2, 1, 2, 1, 1, '', 1, '2022-03-21 11:34:18', NULL, '2022-03-21 06:02:54'),
-(285, 259, 'UPS', 'AIR FORCE CELL/2021-2022/285', 'CFEES/22SRC008/BU/GEM/256/21-22', 'CFEES/22SRC008/BU/GeM/256/21-22', 1, 24320, 2, 1, 1, 7, 1, '', 1, '2022-03-21 16:35:34', NULL, '2022-03-21 11:04:51'),
-(286, 259, 'Printer', 'AIR FORCE CELL/2021-2022/286', 'CFEES/22SRC007/BU/GEM/257/21-22', 'CFEES/22SRC007/BU/GeM/257/21-22', 1, 27997, 2, 1, 1, 7, 1, '', 1, '2022-03-21 16:37:19', NULL, '2022-03-21 11:06:52'),
-(287, 259, 'Paper shredding ', 'AIR FORCE CELL/2021-2022/287', 'CFEES/22SRC006/BU/Gem/258/21-22', 'CFEES/22SRC010/BU/GeM/258/21-22', 2, 19780, 2, 1, 1, 7, 1, '', 1, '2022-03-21 16:39:26', NULL, '2022-03-21 11:09:10'),
-(288, 259, 'Desktop Computer', 'AIR FORCE CELL/2021-2022/288', 'CFEES/22SRC006/BU/GEM/255/21-22', 'CFEES/22SRC006/BU/GeM/255/21-22', 1, 91641, 2, 1, 1, 8, 1, '', 1, '2022-03-21 16:41:12', NULL, '2022-03-21 11:10:59'),
-(289, 259, 'Mouse pad', 'AIR FORCE CELL/2021-2022/289', 'CFEES/22SRC009/VU/GEM/259/21-22', 'CFEES/22SRC009/BU/GeM/259/21-22', 4, 400, 2, 1, 1, 7, 1, '', 1, '2022-03-21 16:42:34', NULL, '2022-03-21 11:12:20'),
-(290, 40, 'Renewal of Cyberoam CR100iNG Upgrade to XGS2100 with 3Yrs. License', 'QRS&IT/2021-2022/290', 'CFEES/23QAG004/BU/GEM/025/22-23', 'Renewal of Cyberoam CR100iNG Upgrade to XGS2100 with 3Yrs. License', 1, 655586, 2, 1, 1, 3, 1, '', 1, '2022-03-22 17:06:54', NULL, '2022-03-22 11:32:49'),
-(291, 40, 'Polycom Wired Omni-Directional Microphone', 'QRS&IT/2021-2022/291', 'CFEES/22QAG017/BU/GEM/101/22-23', 'Polycom Wired Omni-Directional Microphone', 1, 60000, 2, 1, 1, 1, 1, '', 1, '2022-03-22 17:06:36', NULL, '2022-03-22 11:35:41'),
-(292, 249, 'CAMC OF X-RAY BAGGAGE SYSTEM', 'SECURITY/2021-2022/292', 'CFEES/22SEC005/BU/GEM/060/21-22', '', 1, 782753, 2, 1, 1, 2, 1, '', 1, '2022-03-23 09:45:18', NULL, '2022-03-23 04:14:31'),
-(293, 250, 'CDEC AND EDEC RECORD', 'MMG/2021-2022/293', NULL, '', 1, 1, 2, 1, 1, 7, 1, '', 1, '2022-03-23 11:02:25', NULL, '2022-03-23 05:31:17'),
-(294, 79, 'Procurement of Lyophiliser System on Repeat order Basis', 'EnSG/2021-2022/294', NULL, '', 1, 1074000, 2, 1, 2, 5, 1, '', 1, '2022-03-23 11:35:07', NULL, '2022-03-23 06:04:07'),
-(295, 77, 'HP 126A color toner cartridges (Through GeM)', 'PC&M/2021-2022/295', 'CFEES/22PCM041/BU/GEM/270/21-22', 'HP 126A color toner cartridges (cyan, yellow, magenta and black)', 1, 20281, 2, 1, 1, 7, 1, '', 1, '2022-03-24 11:54:51', NULL, '2022-03-24 06:21:41'),
-(296, 77, 'Memento for Fire Entry suit', 'PC&M/2021-2022/296', 'CFEES/22PCM040/BU/LPC/265/21-22', 'Memento of Fire Entry suit for handing over by Secretary ', 5, 73577, 2, 1, 3, 9, 1, '', 1, '2022-03-25 10:51:41', NULL, '2022-03-25 05:20:33'),
-(297, 70, 'Black Cartridge (Drum Make and Model No.: RICOH and MP 3554 S)', 'MS&ESRG/2021-2022/297', 'CFEES/22ERG062/BU/GEM/271/21-22', '', 1, 8367, 2, 1, 1, 8, 1, '', 1, '2022-03-30 12:42:04', NULL, '2022-03-30 07:10:47'),
-(298, 96, 'CCTV Camera', 'MS&ESRG/2021-2022/298', NULL, '', 10, 46000, 1, 4, 1, 8, 1, '', 1, '2022-03-31 14:52:25', NULL, '2022-03-31 09:21:45'),
-(299, 96, 'Paper/ Abstract for HEMCE', 'MS&ESRG/2021-2022/299', NULL, '', 1, 1, 1, 1, 1, 1, 1, '', 1, '2022-03-31 15:15:46', NULL, '2022-03-31 09:45:22'),
-(300, 250, 'Keyboard ', 'MMG/2021-2022/300', 'CFEES/22MMG088/BU/GEM/251/21-22', '', 30, 23310, 2, 1, 1, 7, 1, '', 1, '2022-04-01 10:46:36', NULL, '2022-04-01 05:15:59'),
-(301, 77, 'memto for fire entry suit', 'PC&M/2021-2022/301', NULL, '', 5, 62345, 2, 1, 3, 9, 1, '', 1, '2022-04-01 12:01:33', NULL, '2022-04-01 06:29:54'),
-(302, 80, 'WATER QUALITY ANALYZER', 'FC&HB/2021-2022/302', 'CFEES/21FCP023/P/GEM/095/20-21', 'CFEES/21FCP023/P/GEM/095/20-21', 1, 280000, 1, 6, 1, 5, 1, '', 1, '2022-04-01 15:59:06', NULL, '2022-04-01 10:28:28'),
-(303, 157, 'OXYGEN ENRICHMENT TEST FACILITY', 'FSEG/2021-2022/303', NULL, 'OXYGEN ENRICHMENT TEST FACILITY', 1, 855750, 1, 12, 3, 9, 1, '', 1, '2022-04-01 16:07:24', NULL, '2022-04-01 10:36:23'),
-(304, 24, 'TNT (Serviceable)', 'MS&ESRG/2021-2022/304', 'CFEES/23ERG024/BU/ST/058/22-23', '', 5000, 1722800, 1, 4, 2, 2, 1, 'put up for further necessary action .', 1, '2022-04-04 15:43:39', NULL, '2022-04-04 10:12:44'),
-(305, 125, 'Proposal for Re-approval & Re-sanction of Specal Course on ', 'TCP&HR/2022-2023/305', NULL, '', -1, 70000, 1, 1, 1, 1, 2, '', 1, '2022-04-06 11:46:16', NULL, '2022-04-06 05:35:38'),
-(306, 253, 'Registration of firm in r/o M/s Saitech System PVt Ltd.', NULL, NULL, '', 1, 0, 2, 1, 2, 6, 2, '', 0, NULL, NULL, '2022-04-06 08:56:05'),
-(307, 253, 'Registration of firm in r/o M/s Saitech System PVt Ltd.', NULL, NULL, '', 1, 0, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-04-06 08:56:48'),
-(308, 250, 'Water Jug', 'MMG/2022-2023/308', 'CFEES/22MMG085/MISC/GEM/264/21-22', '', 25, 22250, 2, 1, 1, 7, 2, '', 1, '2022-04-06 15:50:52', NULL, '2022-04-06 10:20:28'),
-(309, 224, 'Stored Pressure Portable Fire Extinguisher', 'TFA/2021-2022/309', 'CFEES/21TFA028/P/GEM/35/21-22', '', 1, 929841, 1, 3, 1, 1, 1, '', 1, '2022-04-07 16:23:03', NULL, '2022-04-07 10:48:38'),
-(310, 224, 'Stored Pressure Portable Fire Extinguisher', 'TFA/2021-2022/310', NULL, '', 1, 929841, 1, 3, 1, 1, 1, '', 0, NULL, NULL, '2022-04-07 10:52:12'),
-(311, 28, 'Laboratory Items Part-IInd', 'MMG/2021-2022/311', 'CFEES/22PCM030/BU/GEM/239/21-22', '', 10, 548, 2, 1, 1, 7, 1, '', 1, '2022-04-08 15:41:18', NULL, '2022-04-08 10:10:54'),
-(312, 206, 'Procurement of LC-MS/MS ION Trap', 'QRS&IT/2021-2022/312', NULL, '', 1, 14562992, 1, 1, 1, 4, 1, '', 1, '2022-04-13 11:49:01', NULL, '2022-04-13 06:18:15'),
-(313, 248, 'data centre establishment', 'QRS&IT/2022-2023/313', 'CFEES/23QAG020/GC/GEM/18/22-23', '', 1, 4850000, 2, 1, 1, 5, 2, '', 1, '2022-04-18 17:16:11', NULL, '2022-04-18 11:45:17'),
-(314, 60, 'Procurement of UPS Battries ', 'FC&HB/2022-2023/314', 'CFEES/23FCP010/BU/GEM/07/22-23', 'Demand No. 23FCP010, Dated 11-April-2022', 15, 39975, 2, 1, 1, 8, 2, '', 1, '2022-04-20 13:57:11', NULL, '2022-04-20 08:26:26'),
-(315, 250, 'Register', 'MMG/2021-2022/315', 'CFEES/22MMG090/MISC/GEM/252/21-22', '', 80, 11200, 2, 1, 1, 7, 1, '', 1, '2022-04-21 11:31:18', NULL, '2022-04-21 06:00:43'),
-(316, 250, 'Sharpner', 'MMG/2021-2022/316', 'CFEES/22MMG092/MISC/GEM/261/21-22', '', 2000, 6960, 2, 1, 1, 7, 1, '', 1, '2022-04-21 11:32:49', NULL, '2022-04-21 06:02:30'),
-(317, 250, 'GEL PEN', 'MMG/2021-2022/317', 'CFEES/22MMG089/MISC/GEM/253/21-22', '', 400, 18225, 2, 1, 1, 7, 1, '', 1, '2022-04-21 16:30:43', NULL, '2022-04-21 11:00:14'),
-(318, 224, 'Procurement of Batteries for Hydraulic Platform', NULL, NULL, '', 2, 28314, 2, 1, 1, 8, 1, '', 0, NULL, NULL, '2022-04-21 11:24:50'),
-(319, 158, 'Procurement of Batteries for Hydraulic Platform', 'TFA/2021-2022/319', 'CFEES/23TFA001/BU/GEM/03/22-23', '', 2, 28314, 2, 1, 1, 8, 1, '', 1, '2022-04-21 16:58:01', NULL, '2022-04-21 11:27:36'),
-(320, 80, 'CFEES/19FCP079/BU/OBM/DB/80/19-20 dt 10.07.19', 'FC&HB/2021-2022/320', NULL, 'Toxicity determination in r/o NOAEL & LOAEL study of compounds CFE-HA-3FI & CFE-HA-5FI', 1, 29440000, 2, 1, 2, 5, 1, 'Note submitted for closure', 1, '2022-04-26 16:55:46', NULL, '2022-04-26 11:25:17'),
-(321, 60, 'Procurement of Nitrogen gas ( 42 Cubic meter )', NULL, NULL, '', 42, 12588, 1, 6, 1, 2, 1, 'NO', 0, NULL, NULL, '2022-04-26 11:57:36'),
-(322, 60, 'Procurement of Nitrogen Gas', 'FC&HB/2022-2023/322', 'CFEES/23FCP014/P/GEM/06/22-23', '', 42, 12588, 1, 6, 1, 7, 2, '', 1, '2022-04-27 10:50:06', NULL, '2022-04-27 05:19:18'),
-(323, 45, 'Demand for purchase of Digital Signature Certificate ', 'ADMIN/2022-2023/323', 'CFEES/22ADM002/BU/GeM/04/22-23', 'Demand for purchase of Digital Signature Certificate ', 1, 1750, 2, 1, 1, 2, 2, 'Demand for purchase of Digital Signature Certificate ', 1, '2022-04-27 14:48:54', NULL, '2022-04-27 09:17:58'),
-(324, 260, 'Motherboard repair HP INA601WTC6', 'ADMIN/2021-2022/324', NULL, '', 1, 3363, 2, 1, 3, 9, 1, 'Submitted for persual.', 1, '2022-04-28 16:13:13', NULL, '2022-04-28 10:41:00'),
-(325, 260, 'Motherboard repair HP INA601WTC6Motherboard repair HP INA601WTC6', NULL, NULL, '', 1, 3363, 2, 1, 3, 9, 2, '', 0, NULL, NULL, '2022-04-28 10:44:42'),
-(326, 260, 'Motherboard repair HP INA601WTC6', NULL, NULL, '', 1, 3363, 2, 1, 3, 9, 2, '', 0, NULL, NULL, '2022-04-28 10:45:16'),
-(327, 60, 'Procurement of Labware and Consumables', 'FC&HB/2022-2023/327', 'CFEES/23FACP012/P/GEM047/22-23', 'Demand No : 23FCP012, Date : 25 April 2022', 49, 530450, 1, 6, 1, 5, 2, '', 1, '2022-04-28 16:39:32', NULL, '2022-04-28 11:08:40'),
-(328, 250, 'Soap', 'MMG/2022-2023/328', 'CFEES/22MMG066/MISC/GEM/205/21-22', '', 200, 9000, 2, 1, 1, 7, 2, 'Approval for re-order on gem', 1, '2022-04-29 14:43:02', NULL, '2022-04-29 09:12:42'),
-(329, 250, 'Highlighter', 'MMG/2021-2022/329', 'CFEES/22MMG091/MISC/GEM/263/21-22', '', 700, 8769, 2, 1, 1, 7, 1, '', 1, '2022-05-04 16:02:35', NULL, '2022-05-04 10:32:02'),
-(330, 183, '2000 lb Bomb Casing Assembly', 'MS&ESRG/2021-2022/330', 'CFEES/20ERG044/P/OBM/DB/155/19-20', '', 6, 10994778, 1, 4, 2, 5, 1, '', 1, '2022-05-09 10:48:09', NULL, '2022-05-09 05:17:33'),
-(331, 80, 'Glass Screw Cap Laboratory vials', 'FC&HB/2022-2023/331', 'CFEES/23FCP016/P/GEM/22/22-23', '', 15, 27750, 1, 6, 1, 7, 2, '', 1, '2022-05-12 09:56:48', NULL, '2022-05-12 04:26:22'),
-(332, 84, 'Procurement of Lead Acid Batteries Through GeM', 'FSEG/2022-2023/332', 'CFEES/23FAS003/BU/GEM/05/22-23', '', 2, 19550, 2, 1, 1, 7, 2, '', 1, '2022-05-17 14:48:41', NULL, '2022-05-17 09:17:59'),
-(333, 250, 'Glass Cleaner', 'MMG/2022-2023/333', 'CFEES/23MMG002/MISC/GEM/02/22-23', '', 190, 24700, 2, 1, 1, 7, 2, '', 1, '2022-05-17 15:16:53', NULL, '2022-05-17 09:46:26'),
-(334, 250, 'FE Allocation', 'MMG/2021-2022/334', 'CFEES/06229/FEALLOC/MMG', '', 1, 4043105, 1, 1, 3, 1, 1, '', 1, '2022-05-18 10:36:43', NULL, '2022-05-18 05:06:29'),
-(335, 191, 'SOC: SANCTION FOR HIRING OF DGR (MoD)  ', 'SECURITY/2021-2022/335', 'CFEES/20SEC026/MISC/CBM/DB/265/19-20', '', 12, 15372616, 2, 1, 2, 6, 1, '', 1, '2022-05-19 16:40:43', NULL, '2022-05-19 11:09:43'),
-(336, 250, 'REUMBURSEMENT OF LAPTOP', 'MMG/2022-2023/336', NULL, '', 1, 97970, 2, 1, 1, 7, 2, '', 1, '2022-05-24 11:37:34', NULL, '2022-05-24 06:06:57'),
-(337, 250, 'Cartridge 278', 'MMG/2022-2023/337', 'CFEES/23MMG001/MISC/GEM/01/22-23', '', 13, 97032, 2, 1, 1, 8, 2, '', 2, '2022-05-25 11:53:27', NULL, '2022-05-25 06:23:00'),
-(338, 80, 'Laser Printer', 'FC&HB/2022-2023/338', 'CFEES/23FCP019/P/GEM/032/22-23', 'MFM', 1, 18007, 1, 6, 1, 7, 2, '', 1, '2022-05-25 15:54:06', NULL, '2022-05-25 10:23:36'),
-(339, 190, '6 Nos of 2000 lb Bomb Casing (PART FILE)', 'MMG/2021-2022/339', 'CFEES/20ERG044/P/OBM/DB/155/19-20/PART FILE', '', 6, 10994778, 1, 4, 2, 5, 1, '', 1, '2022-05-27 14:57:24', NULL, '2022-05-27 09:26:52'),
-(340, 191, 'PROCUREMENT OF WORK STATION', 'SECURITY/2021-2022/340', 'CFEES/23SEC010/BU/GEM/057/22-23', '', 2, 320820, 2, 1, 1, 5, 1, '', 1, '2022-05-27 16:20:57', NULL, '2022-05-27 10:50:10'),
-(341, 96, 'CCTV Camera (IP Camera)', 'MS&ESRG/2022-2023/341', 'CFEES/23ERG013/P/GEM/26/22-23', '', 4, 48800, 1, 4, 1, 5, 2, 'Put up for further necessary action', 1, '2022-05-31 12:16:31', NULL, '2022-05-31 06:43:46'),
-(342, 191, 'READJUSTMENT CCTV NETWORK UPGRADATION ', 'SECURITY/2021-2022/342', 'CFEES/22SEC013/BU/OT/145/21-22', '', 1, 2580837, 2, 1, 1, 5, 1, '', 1, '2022-05-31 16:22:50', NULL, '2022-05-31 10:51:23'),
-(343, 253, 'Industry Partner Registration (M/s Choupari System (I) Pvt Ltd)', 'MMG/2022-2023/343', 'CFEES/06205/VRC/MMG/22-23(m/s Technowares system ', 'Registration in respect of Choupari System (I) Pvt Ltd.', 1, -2, 1, 1, 1, 1, 2, '', 1, '2022-06-02 16:52:25', NULL, '2022-06-02 09:35:58'),
-(344, 253, 'CFEES/06205/VRC/MMG/22-23', 'MMG/2021-2022/344', 'CFEES/06205/VRC/MMG/22-23 ', 'Registration in respect of M/s Technoware System India Pvt Ltd. ', 1, 1, 1, 1, 1, 1, 1, '', 1, '2022-06-02 16:52:12', NULL, '2022-06-02 09:37:32'),
-(345, 253, 'CFEES/06205/VRC/MMG/22-23/CWI', 'MMG/2022-2023/345', 'CFEES/06205/VRC/MMG/22-23 ', 'Registration in r/o M/s Computer Ware India Pvt Ltd', 1, -3, 1, 1, 1, 1, 2, '', 1, '2022-06-02 16:51:56', NULL, '2022-06-02 09:43:31'),
-(346, 250, 'Cartridge 278', 'MMG/2022-2023/346', 'CFEES/23MMG001/MISC/GEM/01/22-23', '', 13, 97032, 2, 1, 1, 2, 2, '', 1, '2022-06-03 14:28:13', NULL, '2022-06-03 08:57:57'),
-(347, 79, 'PROCUREMENT OF ULTRA-SONIC BATH SONICATER', 'EnSG/2021-2022/347', 'CFEES/23ENS011/P/GEM/038/22-23', '', 1, 156500, 1, 7, 1, 9, 1, '', 1, '2022-06-07 11:54:02', NULL, '2022-06-07 06:22:08'),
-(348, 183, 'Hiring of Cleaning Staff at CFEES Blast Test Range, Borkhedi, Nagpur', 'MS&ESRG/2022-2023/348', 'CFEES/23ERG015/MISC/GEM/23/22-23', '', 1, 3212874, 2, 1, 1, 5, 2, '', 1, '2022-06-08 11:34:39', NULL, '2022-06-08 06:03:52'),
-(349, 32, 'High Temperature pressure sensors', 'FC&HB/2022-2023/349', 'CFEES/23FCP020/P/ST/040/ DT 13-07-2022', '', 4, 1098504, 1, 8, 2, 3, 2, '', 1, '2022-06-08 15:47:51', NULL, '2022-06-08 10:09:01'),
-(350, 72, 'procurement of Enviromental Chamber ', 'FC&HB/2022-2023/350', 'CFEES/23FCP023/P/GEM/071/22-23', 'Procurement of Environmental Chamber ', 1, 400000, 1, 8, 1, 8, 2, '', 1, '2022-06-10 12:52:05', NULL, '2022-06-10 07:20:47'),
-(351, 72, 'procurement of Gas analyser', 'FC&HB/2022-2023/351', 'CFEES/23FCP022/P/GEM/103/22-23', 'procurement of Gas analyser', 1, 300000, 1, 8, 1, 8, 2, '', 1, '2022-06-10 12:53:33', NULL, '2022-06-10 07:23:18'),
-(352, 217, 'Laser printer (Multifunction Machine)', 'WORKS/2021-2022/352', 'CFEES/23WRK003/BU/GEM/24/22-23', '', 1, 64852, 1, 1, 1, 7, 1, '', 1, '2022-06-10 16:31:51', NULL, '2022-06-10 11:01:27'),
-(353, 124, 'Onsite Technical support ( IMMS)', 'MMG/2022-2023/353', 'CFEES/23MMG004/BU/ST/13/22-23', '', 12, 992970, 2, 1, 2, 2, 2, '', 1, '2022-06-13 09:58:24', NULL, '2022-06-13 04:20:00'),
-(354, 250, 'Air Freshener', 'MMG/2022-2023/354', 'CFEES/23MMG005/MISC/GEM/11/22-23', '', 125, 24875, 2, 1, 1, 7, 2, '', 1, '2022-06-20 11:33:40', NULL, '2022-06-20 06:03:16'),
-(355, 250, 'Pencil', 'MMG/2022-2023/355', 'CFEES/23MMG006/Misc/GeM/10/22-23', '', 3000, 21000, 2, 1, 1, 7, 2, '', 1, '2022-06-20 11:34:48', NULL, '2022-06-20 06:04:33'),
-(356, 250, 'Flag Tri Colour', 'MMG/2022-2023/356', 'CFEES/23MMG07/MISC/GEM/09/22-23', '', 500, 45, 2, 1, 1, 7, 2, '', 1, '2022-06-20 11:35:43', NULL, '2022-06-20 06:05:28'),
-(357, 250, 'Damper', 'MMG/2022-2023/357', NULL, '', 300, 24000, 2, 1, 1, 7, 2, '', 1, '2022-06-20 11:36:34', NULL, '2022-06-20 06:06:17'),
-(358, 250, 'Eraser', 'MMG/2022-2023/358', 'CFEES/23MMG011/MISC/GEM/16/22-23', '', 3000, 21000, 2, 1, 1, 7, 2, '', 1, '2022-06-20 11:37:32', NULL, '2022-06-20 06:07:11'),
-(359, 250, 'Noting Sheet Pad', 'MMG/2022-2023/359', 'CFEES/23MMG010/MISC/GEM/15/22-23', '', 100, 25000, 2, 1, 1, 7, 2, '', 1, '2022-06-20 11:38:23', NULL, '2022-06-20 06:08:11'),
-(360, 60, 'Glasswares', 'FC&HB/2022-2023/360', 'CFEES/23FCP030/P/GEM/028/22-23', 'Demand No. 23FCP030, Dated: 20 Jun 2022', 83, 507367, 1, 6, 1, 5, 2, '', 1, '2022-06-22 15:36:21', NULL, '2022-06-22 10:05:09'),
-(361, 191, 'CCTV SURVEILANCE SYSTEM FOR PILKHUWA', 'SECURITY/2021-2022/361', NULL, '', 1, 16450750, 2, 1, 1, 5, 1, '', 1, '2022-06-22 15:56:31', NULL, '2022-06-22 10:26:03'),
-(362, 191, 'ACCESS CONTROL SYSTEM FOR P[ILKHUWA', 'SECURITY/2021-2022/362', NULL, '', 1, 11336567, 2, 1, 1, 5, 1, '', 1, '2022-06-22 15:59:31', NULL, '2022-06-22 10:29:05'),
-(363, 163, 'TONER (FIRSTE)', 'QRS&IT/2022-2023/363', 'CFEES/23QAG011/B/GEM/026/22-23', 'Toner for TOSHIBA estudio3018A', 2, 27560, 1, 2, 1, 8, 2, '', 1, '2022-06-22 16:51:56', NULL, '2022-06-22 11:21:23'),
-(364, 96, 'CCTV Camera (Non IP Camera)', 'MS&ESRG/2022-2023/364', 'CFEES/23ERG014/P/GEM/027/22-23', '', 5, 22123, 1, 4, 1, 5, 2, 'For further necessary action', 1, '2022-06-27 14:57:48', NULL, '2022-06-27 09:27:00'),
-(365, 217, 'SoC for extension of contract: Hiring of Cleaning Staff at CFEES Complex, Delhi', 'WORKS/2021-2022/365', 'CFEES/21WRK013/MISC/GEM/194/20-21', '', 1, 1452975, 2, 1, 1, 7, 1, '', 1, '2022-06-27 16:09:57', NULL, '2022-06-27 10:38:41'),
-(366, 28, 'Banner with HD printing', 'PC&M/2022-2023/366', 'CFEES/PCM003/BU/GEM/21/22-23', 'Banner printing for Dehradun exhibition', 4, 10177, 2, 1, 1, 7, 2, '', 1, '2022-06-28 16:34:18', NULL, '2022-06-28 11:03:32'),
-(367, 80, 'CMC for 400MHz NMR for five years', 'FC&HB/2022-2023/367', 'CFEES/20FCP122/BU/ST/266/19-20', 'CFEES/20FCP122/BU/ST/266/19-20 dt 02/03/2020\r\nTotal SO Cost: Rs12809891/- (for 5 Years)', 1, 2561978, 2, 1, 2, 2, 2, 'Half yearly payment', 1, '2022-06-30 09:31:23', NULL, '2022-06-30 04:00:54'),
-(368, 79, 'Procurement of Chemical Oxygen Demand (COD) digesting Unit thorugh GeM', 'EnSG/2021-2022/368', 'CFEES/ENS015/P/GEM/033/22-23', '', 1, 160000, 1, 7, 1, 8, 1, '', 1, '2022-07-05 15:55:07', NULL, '2022-07-05 10:24:45'),
-(369, 80, 'Contract for supply of high purity liquid nitrogen (LN2)', 'FC&HB/2022-2023/369', 'CFEES/23FCP031/BU/GEM/066/22-23', 'supply of high purity liquid nitrogen (LN2) For 400MHz NMR for 3 years', 1, 1188000, 2, 1, 1, 5, 2, '', 1, '2022-07-05 17:44:59', NULL, '2022-07-05 12:14:29'),
-(370, 250, 'Pencil Cell', 'MMG/2022-2023/370', NULL, '', 1300, 23400, 2, 1, 1, 7, 2, '', 1, '2022-07-06 11:36:40', NULL, '2022-07-06 06:05:11'),
-(371, 77, 'KELL Wooden Cribs', 'PC&M/2022-2023/371', 'CFEES/23PCM006/B/LPC/029/22-23', '', 10, 112100, 2, 1, 2, 9, 2, '', 1, '2022-07-06 12:07:55', NULL, '2022-07-06 06:37:20'),
-(372, 158, 'CCTV SURVEILLANCE & ACCESS CONTROL SYSTEM FOR SDC PILKHUWA', 'TFA/2021-2022/372', 'CFEES/23TFA011/GC/LT/062/22-23', '', 2, 46685915, 2, 1, 3, 6, 1, '', 1, '2022-07-06 14:22:16', NULL, '2022-07-06 08:51:52'),
-(373, 259, '1000 GB SATA HD HARD DISK DRIVE (DEMAND NO. CFEES/23SRC003/B/GEM/031/22-23 DT 8 JUL 22', NULL, NULL, 'HARD DISK DRIVE (PROCUREMENT THROUGH GEM) ', -1, 7499, 2, 1, 1, 9, 2, '', 0, NULL, NULL, '2022-07-08 06:24:15'),
-(374, 77, ' 3.7 V Rechargeable Lithium-ion battery through GEM', 'PC&M/2022-2023/374', 'CFEES/23PCM011/BU/GEM/036/22-23', '', 60, 21600, 2, 1, 1, 7, 2, '', 1, '2022-07-08 12:13:27', NULL, '2022-07-08 06:42:26'),
-(375, 76, 'Chemical Oxygen Demand  (COD) Digesting Unit through GeM', NULL, NULL, '', 1, 160000, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-07-08 07:41:29'),
-(376, 76, 'Chemical Oxygen Demand  (COD) Digesting Unit through GeM', NULL, NULL, '', 1, 160000, 1, 1, 1, 1, 1, 'Director secretary', 0, NULL, NULL, '2022-07-08 11:29:08'),
-(377, 76, 'Chemical Oxygen Demand  (COD) Digesting Unit through GeM', NULL, NULL, '', 1, 160000, 1, 1, 1, 1, 1, 'Director\r\n', 0, NULL, NULL, '2022-07-08 11:31:56'),
-(378, 76, 'Chemical Oxygen Demand  (COD) Digesting Unit through GeM', NULL, NULL, '', 1, 160000, 1, 1, 1, 1, 1, '', 0, NULL, NULL, '2022-07-08 11:34:26'),
-(379, 259, '1000 GB SATA HD HARD DISK DRIVE (DEMAND NO. CFEES/23SRC003/B/GEM/031/22-23 DT 8 JUL 22', NULL, NULL, '', 1, 7500, 1, 1, 1, 1, 2, '', 0, NULL, NULL, '2022-07-11 05:18:09'),
-(380, 77, 'Hydrogen peroxide(30%) solution', 'PC&M/2021-2022/380', 'CFEES/23PCM013/BU/GEM/045/22-23', '', 35, 22400, 2, 1, 1, 7, 1, '', 1, '2022-07-12 15:14:56', NULL, '2022-07-12 09:44:29'),
-(381, 250, 'Emporium Trophy', 'MMG/2022-2023/381', 'CFEES/23MMG017/MISC/GEM/034/22-23', '', 20, 40000, 2, 1, 1, 8, 2, '', 1, '2022-07-12 16:19:24', NULL, '2022-07-12 10:49:05'),
-(382, 250, 'Duster', 'MMG/2021-2022/382', 'CFEES/23MMG015/Misc/GeM/032/22-23', '', 400, 24000, 2, 1, 1, 7, 2, '', 1, '2022-07-13 16:13:45', NULL, '2022-07-13 10:43:15'),
-(384, 244, 'CMRC of Development Fabrication and Testing of AIFDSS', 'FSEG/2022-2023/384', NULL, 'CMRC of Development Fabrication and Testing of AIFDSS', 1, 38703952, 1, 11, 2, 2, 2, '', 1, '2022-07-13 16:48:50', NULL, '2022-07-13 11:06:42'),
-(385, 110, 'CMRC for Devlopment contract for moisture barrier laminates for structural fire fighting suits', 'PC&M/2022-2023/385', NULL, '', 1, 1950002, 2, 1, 2, 5, 2, '', 1, '2022-07-14 09:59:33', NULL, '2022-07-13 11:55:49'),
-(386, 77, 'Fire fite Lithex Fire Extinguisher', 'PC&M/2022-2023/386', NULL, '', 6, 192000, 2, 1, 1, 1, 2, '', 2, '2022-07-14 14:41:53', NULL, '2022-07-14 09:07:50'),
-(387, 77, 'Developmental contract for Aqueous Clay Mineral Dispersion (ACD)', 'PC&M/2022-2023/387', 'CFEES/23PCM007/BU/OBM/064/22-23', '', 1, 1516300, 2, 1, 2, 5, 2, '', 1, '2022-07-14 14:41:38', NULL, '2022-07-14 09:10:11'),
-(388, 79, 'UPS', 'EnSG/2021-2022/388', 'CFEES/23ENS018/P/GEM/082/22-23', '', 4, 99200, 1, 7, 1, 8, 1, '', 1, '2022-07-15 11:39:07', NULL, '2022-07-15 06:08:43'),
-(389, 71, 'procurement of Safety Goggles', 'QRS&IT/2021-2022/389', 'CFEES/23QAG031/BU/GEM/044/22-233', '', 20, 8000, 2, 1, 1, 8, 1, '', 1, '2022-07-18 09:51:08', NULL, '2022-07-18 04:20:29'),
-(390, 71, 'Procurement of Hand Gloves', 'QRS&IT/2021-2022/390', 'CFEES/23QAG032/BU/GEM/046/22-23', '', 200, 15000, 2, 1, 1, 8, 1, '', 1, '2022-07-18 09:53:56', NULL, '2022-07-18 04:23:31'),
-(391, 192, 'First Aid Box', 'QRS&IT/2022-2023/391', 'CFEES/22QAG028/B/GEM/048', '', 15, 22500, 2, 1, 1, 8, 2, '', 1, '2022-07-18 10:25:28', NULL, '2022-07-18 04:37:22'),
-(392, 192, 'orbital shaker', 'QRS&IT/2022-2023/392', 'CFEES/23QAG029/P/GEM/120/22-23', '', 1, 392400, 2, 1, 1, 8, 2, '', 1, '2022-07-18 11:00:42', NULL, '2022-07-18 05:30:18'),
-(393, 191, '10 PORT Gigabit Smart Managed PoE Switch', 'SECURITY/2022-2023/393', 'CFEES/23SEC014/B/LPC/049/22-23', '', 6, 176400, 2, 1, 3, 1, 2, '', 1, '2022-07-18 12:01:44', NULL, '2022-07-18 06:30:26'),
-(394, 200, 'Job work for Modification and Reactivation of Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System', 'EnSG/2022-2023/394', NULL, 'It is proposed to undertake a development work of with M/s Cease fire Industries Pvt. Ltd. who developed and installed the existing system in 2020', 1, 97885, 2, 1, 1, 2, 2, '', 1, '2022-07-18 17:03:38', NULL, '2022-07-18 11:33:05'),
-(395, 77, 'Developmental contract for Aqueous Clay Mineral Dispersion (ACD)', NULL, NULL, '', 1, 1516300, 2, 1, 2, 5, 2, '', 0, NULL, NULL, '2022-07-20 05:44:47'),
-(396, 77, 'Acrylic Acid', 'PC&M/2022-2023/396', 'CFEES/23PCM014/BU/Gem/059/22-23 ', '', 10, 11180, 2, 1, 1, 5, 2, '', 1, '2022-07-20 15:35:47', NULL, '2022-07-20 06:38:30'),
-(397, 77, 'Acrylic Acid', NULL, NULL, '', 10, 11180, 2, 1, 1, 7, 2, '', 0, NULL, NULL, '2022-07-20 10:04:02'),
-(398, 250, 'Cartridge 278', 'MMG/2022-2023/398', 'CFEES/23MMG016/B/GEM/043/22-23', '', 4, 22000, 2, 1, 1, 7, 2, '', 1, '2022-07-20 15:38:26', NULL, '2022-07-20 10:08:13'),
-(399, 96, 'Ethernet PoE Switch with 2 Gigabiy UPlink', 'MS&ESRG/2022-2023/399', 'CFEES/23ERG022/P/GEM/050/22-23', '', 2, 19600, 1, 4, 1, 7, 2, '', 1, '2022-07-22 10:28:53', NULL, '2022-07-22 04:58:16'),
-(400, 191, 'NATIONAL FLAG', 'SECURITY/2022-2023/400', 'CFEES/23SEC012/BU/GEM/051/22-23', '', 5, 14240, 2, 1, 1, 5, 2, '', 1, '2022-07-25 12:56:16', NULL, '2022-07-25 07:25:27'),
-(401, 80, 'BOD Incubator', 'FC&HB/2022-2023/401', 'CFEES/23FCP042/P//GEM/061/22-23', '', 1, 261000, 1, 6, 1, 8, 2, '', 1, '2022-07-28 09:59:13', NULL, '2022-07-28 04:26:57'),
-(402, 80, 'Deuterated Solvents', 'FC&HB/2022-2023/402', 'CFEES/23FCP033/P/LPC/056/22-23', '', 3, 246148, 1, 6, 3, 9, 2, '', 1, '2022-07-28 09:59:02', NULL, '2022-07-28 04:27:45'),
-(403, 80, 'Digital Conductivity Meter', 'FC&HB/2022-2023/403', 'CFEES/23FCP040/P/GEM/053/22-23', '', 1, 75000, 1, 6, 1, 8, 2, '', 1, '2022-07-28 09:58:50', NULL, '2022-07-28 04:28:28'),
-(404, 191, 'soc SANCTION FOR EXTENSION OF CONTRACT M/S NARINDER PAL SINGH TAPRIAL SECURITY AGENCY', 'SECURITY/2022-2023/404', 'CFEES/22SEC003/MISC/LT/068/21-22', '', 1, 15372924, 2, 1, 2, 7, 2, '', 1, '2022-07-28 11:36:48', NULL, '2022-07-28 06:06:15'),
-(405, 200, 'Job work on Refurbishement of  Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System', 'EnSG/2021-2022/405', NULL, '', 1, 97885, 2, 1, 1, 1, 1, '', 1, '2022-07-28 15:14:40', NULL, '2022-07-28 09:44:16'),
-(406, 200, 'Job work on Refurbishement of Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System', 'EnSG/2022-2023/406', NULL, 'Job work on Refurbishement of Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System', 1, 97885, 2, 1, 3, 7, 2, 'Job work on Refurbishement of Bus Passenger Compartment Fire Detection & Water Mist Fire Suppression System required for demostration and fire studies at Pilkhuwa', 1, '2022-07-28 15:23:16', NULL, '2022-07-28 09:52:45'),
-(407, 39, 'Procurement of Double Distilation Water Apparatus', 'FC&HB/2022-2023/407', 'CFEES/23FCP037/P/GEM/081/22-23', '23FCP037', 1, 140380, 1, 6, 1, 8, 2, 'Process the case', 1, '2022-07-29 10:54:23', NULL, '2022-07-29 05:10:50'),
-(408, 224, 'procurement of Refilling of LPG Gas Cylinder for Simulator ', 'TFA/2021-2022/408', NULL, '', 3, 241920, 2, 1, 1, 9, 2, '', 1, '2022-08-01 17:42:27', NULL, '2022-08-01 11:47:36'),
-(409, 224, 'CNC of Hazmat Vehicle ', 'TFA/2022-2023/409', 'CFEES/23TFA013/BU/ST/159/22-23', '', 1, 11400000, 2, 1, 2, 2, 2, '', 1, '2022-08-01 17:42:44', NULL, '2022-08-01 11:57:21'),
-(410, 224, 'Procurement of AMC for Fire Training Simulator at SDC Pilkhuwa', 'TFA/2021-2022/410', NULL, '', 1, 11728180, 2, 1, 2, 2, 1, '', 1, '2022-08-01 17:43:01', NULL, '2022-08-01 12:03:14'),
-(411, 224, 'Hydraulic Platform', 'TFA/2021-2022/411', 'CFEES/23TFA008/BU/ST/130/22-23', '', 1, 15198400, 2, 1, 2, 2, 1, '', 1, '2022-08-01 17:43:57', NULL, '2022-08-01 12:07:12'),
-(412, 224, 'Emergency Rescue Tender ', 'TFA/2022-2023/412', NULL, '', 1, 450000, 2, 1, 2, 2, 2, '', 1, '2022-08-01 17:44:12', NULL, '2022-08-01 12:10:12'),
-(413, 217, 'Approval for Re-Imbursement of Residential Mobile Bill', 'WORKS/2021-2022/413', NULL, '', 1, 0, 2, 1, 1, 7, 1, '', 1, '2022-08-02 15:46:25', NULL, '2022-08-02 10:16:03'),
-(414, 40, 'EPABX CAMC', 'QRS&IT/2022-2023/414', 'CFEES/23QAG007/BU/ST/068/22-23', '', 1, 153052, 2, 1, 2, 2, 2, '', 1, '2022-08-02 16:06:44', NULL, '2022-08-02 10:34:54'),
-(415, 28, 'N,N-Dimethylformamide anhydrous, 500ml', 'PC&M/2021-2022/415', NULL, '', 8, 453, 1, 1, 1, 1, 1, '', 1, '2022-10-28 10:32:51', NULL, '2022-08-03 06:18:42'),
-(416, 261, 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI', 'MT/2022-2023/416', NULL, 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI as replacement of Maruti Gypsy BA No. 03B086225W authorised against vehicles authorised under RE', 1, 993398, 2, 1, 1, 7, 2, '', 1, '2022-08-03 16:31:22', NULL, '2022-08-03 10:58:24'),
-(417, 250, 'NOTE PAD', 'MMG/2021-2022/417', 'CFEES/22MMG022/MISC/GEM/055/22-23', ' ', 600, 24000, 1, 1, 1, 7, 1, '', 1, '2022-08-04 11:36:24', NULL, '2022-08-04 06:05:54'),
-(418, 250, 'STALER BIG ', 'MMG/2021-2022/418', 'CFEES/23MMG024/MISC/GEM/054/22-23', '', 50, 14450, 2, 1, 1, 7, 1, '', 1, '2022-08-04 16:02:22', NULL, '2022-08-04 10:31:59'),
-(419, 261, 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI', 'MT/2022-2023/419', 'CFEES/23MTG001/GC/GEM/102/22-23', 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI as replacement of Maruti Gypsy BA No. 03B086225W authorised against vehicles authorised under RE ', 1, 993398, 2, 1, 1, 1, 2, '', 1, '2022-08-05 11:50:58', NULL, '2022-08-05 06:20:06'),
-(420, 261, 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI', 'MT/2022-2023/420', 'CFEES/23MTG001/GC/GEM/102/22-23', 'Procurement of one Maruti Suzuki Ertiga Smart Hybrid ZXI+1.5L, BS-VI as replacement of Maruti Gypsy BA No. 03B086225W authorised against vehicles authorised under RE ', 1, 993398, 2, 1, 1, 7, 2, '', 1, '2022-08-08 10:29:42', NULL, '2022-08-08 04:58:14'),
-(421, 77, 'Refill of Nitrogen gas', 'PC&M/2021-2022/421', 'CFEES/23PCM016/BU/GEM/060/22-23', '', 7, 20580, 2, 1, 1, 7, 1, '', 2, '2022-08-10 10:12:52', NULL, '2022-08-10 04:42:27'),
-(422, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', NULL, NULL, '', 1, 304405, 1, 7, 1, 8, 2, '', 0, NULL, NULL, '2022-08-12 04:28:03'),
-(423, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', NULL, NULL, '', 1, 304405, 1, 7, 1, 8, 2, '', 0, NULL, NULL, '2022-08-12 04:43:22'),
-(424, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', NULL, NULL, '', 1, 304405, 1, 7, 1, 8, 2, '', 0, NULL, NULL, '2022-08-12 04:45:02'),
-(425, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', NULL, NULL, '', 1, 304405, 1, 7, 1, 8, 2, '', 0, NULL, NULL, '2022-08-12 04:46:35'),
-(426, 79, 'procurement of refriherated centrifuge thrpugh GeM under project', 'EnSG/2022-2023/426', 'CFEES/23ENS024/P/GEM/063/22-23', '', 1, 304405, 1, 7, 1, 8, 2, '', 1, '2022-08-12 10:24:16', NULL, '2022-08-12 04:52:29'),
-(427, 77, 'AVD FIRE EXTINGUISHER', 'PC&M/2021-2022/427', 'CFEES/23PCM017/BU/LPC/065/22-23', '', 6, 191400, 2, 1, 3, 9, 1, '', 1, '2022-08-17 09:39:29', NULL, '2022-08-17 04:09:03'),
-(428, 261, 'Procurement of Diesel and Unleaded Petrol for MT vehicles', 'MT/2022-2023/428', 'CFEES/23MTG007/BU/ST/069/22-23', '', 1, 999136, 2, 1, 3, 2, 2, '', 1, '2022-08-22 10:35:51', NULL, '2022-08-22 05:04:55'),
-(429, 224, 'procurement of Photo Frames for SDC Pilkhuwa', 'TFA/2022-2023/429', NULL, '', 15, 33000, 2, 1, 1, 2, 2, '', 1, '2022-08-24 11:42:50', NULL, '2022-08-24 06:11:58'),
-(430, 158, 'BOREWELL RESCUE SYSTEM', 'TFA/2022-2023/430', NULL, '', 1, 4508272, 2, 1, 2, 2, 2, '', 1, '2022-08-24 15:52:44', NULL, '2022-08-24 10:22:19'),
-(431, 32, 'Halon Tonners Stacking system', 'FC&HB/2022-2023/431', NULL, '', 1, 2808750, 2, 1, 2, 5, 2, '', 1, '2022-09-09 15:54:46', NULL, '2022-08-26 05:11:50'),
-(432, 32, 'Halon Tonners Stacking system', 'FC&HB/2022-2023/432', 'CFEES/23FCP028/GC/DBM/123/22-23', '', 1, 2808750, 2, 1, 2, 5, 2, '', 1, '2022-08-26 10:50:32', NULL, '2022-08-26 05:19:23'),
-(433, 80, 'Ethyl Acetate', 'FC&HB/2022-2023/433', 'CFEES/22FCP026/P/GEM/070/21-22', '', 20, 70600, 1, 6, 1, 8, 2, 'For processing through GeM', 1, '2022-08-29 10:55:47', NULL, '2022-08-29 05:25:00'),
-(434, 250, 'Scanner', 'MMG/2022-2023/434', 'CFEES/23MMG028/BU/GEM/067/22-23', '', 1, 24006, 2, 1, 1, 7, 2, '', 1, '2022-08-30 12:19:59', NULL, '2022-08-30 06:49:42'),
-(435, 80, 'Fluorochemicals (Raw Materials)', 'FC&HB/2022-2023/435', 'CFEES/23FCP054/P/LPC/072/22-23', '', 2, 249268, 1, 6, 3, 9, 2, '', 1, '2022-09-02 10:40:33', NULL, '2022-09-02 05:10:12'),
-(436, 259, '1000 GB SATA HD HARD DISK DRIVE (DEMAND NO. CFEES/23SRC003/B/GEM/031/22-23 DT 8 JUL 22', 'AIR FORCE CELL/2022-2023/436', 'CFEES/23SRC003/B/GEM/031/22-23', 'DEMAND 1000 GB SATA HD DISK DRIVE', 1, 7500, 2, 1, 1, 7, 2, 'DEMAND ', 1, '2022-09-05 15:22:44', NULL, '2022-09-05 09:52:04'),
-(437, 250, 'PEN STAND', 'MMG/2022-2023/437', 'CFEES/23MMG027/MISC/GEM/070/22-23', '', 16, 24880, 2, 1, 1, 7, 2, '', 1, '2022-09-06 10:14:57', NULL, '2022-09-06 04:44:32'),
-(438, 32, 'Fabrication of portable polycarbonate chamber 1m3 and cylindrical test vessel 0.49m3', 'FC&HB/2022-2023/438', 'CFEES/23FCP049/P/LPC/083/22-23', '', 1, 216530, 2, 1, 3, 9, 2, '', 1, '2022-09-09 15:52:48', NULL, '2022-09-09 10:21:20'),
-(439, 250, 'GEL PEN', 'MMG/2022-2023/439', 'CFEES/23MMG033/MISC/GEM/074/22-23', '', 350, 22750, 2, 1, 1, 7, 2, '', 1, '2022-09-12 12:48:54', NULL, '2022-09-12 07:17:43'),
-(440, 250, 'File Cover', 'MMG/2022-2023/440', 'CFEES/23MMG032/MISC/GEM/073/22-23', '', 800, 20000, 2, 1, 1, 7, 2, '', 1, '2022-09-12 12:49:50', NULL, '2022-09-12 07:19:37'),
-(441, 196, 'Antivirus (420 Nos. Licences) by repeat order', 'QRS&IT/2022-2023/441', NULL, 'Centralized procurement of Antivirus licences through repeat order ', 420, 0, 2, 1, 1, 1, 2, '', 1, '2022-09-14 16:51:45', NULL, '2022-09-14 11:18:45'),
-(442, 80, 'Supply of High Purity Liquid Nitrogen ', 'FC&HB/2022-2023/442', 'CFEES/23FCP060/BU/GEM/088/22-23', 'Supply of High Purity Liquid Nitrogen (Direct purchase through geM)', 166, 24900, 2, 1, 1, 7, 2, '', 1, '2022-09-15 09:51:08', NULL, '2022-09-15 04:20:46'),
-(443, 60, 'Recirculating Chiller', 'FC&HB/2022-2023/443', 'CFEES/23FCP061/P/GEM/095/22-23', 'Demand No.: 23FCP061, Dated:14 Sep 2022', 1, 335405, 1, 6, 1, 8, 2, '', 1, '2022-09-15 12:20:25', NULL, '2022-09-15 06:49:39'),
-(444, 217, 'Polypropylene Waste Container & Accessories', 'WORKS/2022-2023/444', 'CFEES/23WRK007/MISC/GEM/087/22-23', '', 10, 15000, 2, 1, 1, 7, 2, '', 1, '2022-09-15 12:43:30', NULL, '2022-09-15 07:13:04'),
-(445, 110, 'Servicing and calibration', 'PC&M/2022-2023/445', 'CFEES/23PCM020/BU/LPC/125/22-23', 'Servicing and calibration of textile equipment', 1, 60888, 2, 1, 3, 9, 2, '', 1, '2022-09-15 17:21:48', NULL, '2022-09-15 11:51:18'),
-(446, 162, 'brass Coated Micro Steel fibre', 'MS&ESRG/2022-2023/446', 'CFEES/23ERG029/P/LPC/086/22-23', '', 600, 145140, 1, 4, 3, 9, 2, '', 1, '2022-09-19 10:43:20', NULL, '2022-09-19 05:12:31'),
-(447, 94, 'A5 Pamphlets', 'FSEG/2022-2023/447', 'CFEES/23FAS013/MISC/GEM/085/22-23', '', 45, 15750, 2, 1, 1, 7, 2, 'Required for Def Expo 2022', 1, '2022-09-19 12:22:43', NULL, '2022-09-19 06:50:36'),
-(448, 249, 'SOC: SANCTION FOR HIRING OF DGR (MoD)', 'SECURITY/2022-2023/448', 'CFEES/23SEC022/MISC/LT/DGR/107/22-23', '', 12, 15372616, 2, 1, 2, 6, 2, 'Case initiated on 18/05/2022 and put for  clarification of procurement mode ', 1, '2022-09-19 17:01:00', NULL, '2022-09-19 11:30:32'),
-(449, 217, 'Shifting of store and equipment', 'WORKS/2022-2023/449', NULL, '', 1, 4200, 2, 1, 1, 7, 2, '', 1, '2022-09-20 15:11:06', NULL, '2022-09-20 09:40:50'),
-(450, 250, 'A4 Photocopy Paper', 'MMG/2022-2023/450', 'CCFEES/23MMG037/BU/GEM/104/22-23', '', 600, 213000, 2, 1, 1, 8, 2, '', 1, '2022-09-23 12:48:51', NULL, '2022-09-23 07:14:32'),
-(451, 250, 'Mouse', 'MMG/2022-2023/451', 'CFEES/23MMG040/BU/GEM/092/22-23', '', 41, 24559, 2, 1, 1, 7, 2, '', 1, '2022-09-23 12:48:41', NULL, '2022-09-23 07:15:07'),
-(452, 250, 'Extension Board ', 'MMG/2022-2023/452', 'CFEES/23MMG038/BU/GEM/084/22-23', '', 50, 72500, 2, 1, 1, 8, 2, '', 1, '2022-09-23 12:48:31', NULL, '2022-09-23 07:15:57'),
-(453, 250, 'Telephone Instrument ', 'MMG/2022-2023/453', 'CFEES/23MMG039/BU/GEM/091/22-23', '', 14, 24486, 2, 1, 1, 7, 2, '', 1, '2022-09-23 12:48:21', NULL, '2022-09-23 07:16:41'),
-(454, 250, 'SCANNER', 'MMG/2021-2022/454', NULL, '', 1, 24006, 2, 1, 1, 7, 1, '', 1, '2022-09-23 16:30:59', NULL, '2022-09-23 10:52:26'),
-(455, 217, 'Statement of caser for sanction of additional amount for payment of arrears due to revision of wages to cleaning staff', 'WORKS/2022-2023/455', NULL, '', 1, 62489, 2, 1, 1, 7, 2, '', 1, '2022-09-26 11:15:37', NULL, '2022-09-26 05:44:50'),
-(456, 213, 'Laserjet Printer', 'FSEG/2022-2023/456', 'CFEES/23FAS012/BU/GEM/099/22-23', '', 1, 33000, 2, 1, 1, 7, 2, '', 1, '2022-09-26 12:36:06', NULL, '2022-09-26 07:02:29'),
-(457, 32, 'Fabrication of fire pan and wood crib etc.', NULL, NULL, '', 1, 217120, 1, 8, 3, 9, 2, '', 0, NULL, NULL, '2022-09-26 09:59:56'),
-(458, 32, 'Fabrication of fire pan and wood crib etc.', 'FC&HB/2022-2023/458', 'CFEES/23FCP052/P/LPC/112/22-23', '', 1, 217120, 1, 8, 3, 9, 2, '', 1, '2022-09-26 15:31:38', NULL, '2022-09-26 09:59:57'),
-(459, 247, 'Extension of AMC for DRONA internet LAN and Network Infrastructure', 'QRS&IT/2021-2022/459', 'CFEES/21QAG/035/BU/LT/189/20-21', '3 months Extension of AMC for DRONA internet LAN and Network Infrastructure', 1, 220395, 2, 1, 2, 6, 1, '', 1, '2022-09-27 15:30:12', NULL, '2022-09-27 09:59:36'),
-(460, 174, 'Anti personnel Mine Cable (Firing Cable)', 'MS&ESRG/2021-2022/460', 'CFEES/23ERG028/P/ST/106/22-23', '', 5, 221840, 1, 4, 2, 2, 1, 'Case for procurement of Anti Personnel Mine Cable (firing cable) is placed opposite for FNA.\r\n\r\n\r\n', 1, '2022-09-28 10:34:53', NULL, '2022-09-28 05:02:15'),
-(461, 192, 'job contract for solid waste recycling program ', 'QRS&IT/2022-2023/461', 'CFEES/23QAG040/BU/LPC/110/22-23', 'solid waste recycling program', 12, 254880, 2, 1, 3, 9, 2, '', 1, '2022-09-28 11:28:58', NULL, '2022-09-28 05:10:00'),
-(462, 192, 'job contract for solid waste recycling program ', 'QRS&IT/2022-2023/462', NULL, 'solid waste recycling program', 12, 254878, 2, 1, 3, 9, 2, '', 1, '2022-09-28 10:41:03', NULL, '2022-09-28 05:10:01'),
-(463, 57, 'Toner T-5018P', 'QRS&IT/2022-2023/463', 'CFEES/23QAG041/BU/GEM/100/22-23', 'Toner T-5018P for 3018A Machine', 2, 27560, 2, 1, 1, 7, 2, '', 1, '2022-09-28 12:31:12', NULL, '2022-09-28 06:59:17'),
-(464, 60, 'Servicing of Karl Fischer Titrator', 'FC&HB/2021-2022/464', NULL, '', 1, 40710, 2, 1, 2, 2, 1, '', 1, '2022-09-29 11:25:06', NULL, '2022-09-29 05:54:35'),
-(465, 250, 'Fan Heater', 'MMG/2022-2023/465', 'CFEES/23MMG043/BU/GEM/094/22-23', '', 50, 144400, 2, 1, 1, 8, 2, '', 1, '2022-09-29 15:25:55', NULL, '2022-09-29 09:55:22'),
-(466, 192, 'HP Laserjet Printer 1320 Cartridge Q5949A', 'QRS&IT/2022-2023/466', 'CFEES/23QAG043/BU/GEM/105/22-23', '', 2, 19030, 2, 1, 1, 7, 2, '', 1, '2022-10-03 10:36:05', NULL, '2022-10-03 05:05:44'),
-(467, 80, 'testing instruments (Viscometers and specific gravity bottle) for AFFF', 'FC&HB/2022-2023/467', 'CFEES/23FCP064/P/LPC/111/22-23', '', 3, 190050, 1, 6, 3, 9, 2, '', 1, '2022-10-03 11:14:51', NULL, '2022-10-03 05:42:27'),
-(468, 80, 'testing instruments (Viscometers and specific gravity bottle) for AFFF', 'FC&HB/2022-2023/468', 'CFEES/23FCP064/P/LPC/111/22-23', '', 3, 190050, 1, 1, 1, 1, 2, 'Cancelled because case initiated in project EKO-FOAM', 1, '2022-11-23 11:51:52', NULL, '2022-10-03 05:42:59'),
-(469, 200, 'Hand Held digitalmulti meter', 'EnSG/2021-2022/469', NULL, '', 1, 43000, 2, 1, 1, 8, 1, '', 1, '2022-10-04 12:25:40', NULL, '2022-10-04 06:53:49'),
-(470, 60, 'Hexane', 'FC&HB/2021-2022/470', 'CFEES/23FCP065/P/GEM/109/22-23', 'Demand No. 23FCP065, dated: 04/10/2022', 4, 51300, 1, 6, 1, 8, 1, '', 1, '2022-10-06 10:37:53', NULL, '2022-10-06 05:07:34'),
-(471, 40, 'Procurement of Printer Cartridge of HP LaserJet Pro M202DW(CC388AC)', 'QRS&IT/2021-2022/471', 'CFEES/23QAG045/BU/GEM/117/22-23', '', 4, 21564, 2, 1, 1, 5, 1, '', 2, '2022-10-07 12:47:40', NULL, '2022-10-07 07:16:43'),
-(472, 261, 'Procurement of Tyres (Tubeless) for Veh BA No. 15B117265L', 'MT/2022-2023/472', 'CFEES/23MTG010/BU/GEM/108/22-23', '', 4, 31960, 2, 1, 1, 2, 2, '', 1, '2022-10-10 13:49:37', NULL, '2022-10-10 08:17:25'),
-(473, 192, 'Laminar Air Flow Cabinet', 'QRS&IT/2022-2023/473', 'CFEES/23QAG046/P/GEM/122/22-23 ', '', 1, 290000, 1, 13, 1, 8, 2, '', 1, '2022-10-17 15:07:38', NULL, '2022-10-17 09:37:05'),
-(474, 200, 'Hand Held Digital Multimeter', 'EnSG/2022-2023/474', 'CFEES/23ENS037/BU/GEM/119/22-23', '', 1, 43000, 2, 1, 1, 8, 2, '', 1, '2022-10-19 14:23:39', NULL, '2022-10-19 08:52:55'),
-(475, 192, 'Ziplock Bags', 'QRS&IT/2022-2023/475', 'CFEES/23QAG047/P/GEM/113/22-23', '', 5, 5000, 1, 13, 1, 7, 2, '', 1, '2022-10-21 12:21:34', NULL, '2022-10-21 06:51:13'),
-(476, 192, 'Khurpi', 'QRS&IT/2022-2023/476', 'CFEES/23QAG048/P/GEM/114/22-23', '', 5, 2250, 1, 13, 1, 7, 2, '', 1, '2022-10-21 12:23:18', NULL, '2022-10-21 06:52:56'),
-(477, 250, 'Certridge 278AC 23MMG044', 'MMG/2021-2022/477', 'CFEES/23MMG044/BU/GEM/097/22-23', '', 4, 20881, 2, 1, 1, 7, 1, '', 1, '2022-10-21 15:29:50', NULL, '2022-10-21 09:59:16'),
-(478, 250, 'Tissue Paper 23MMG045', 'MMG/2021-2022/478', 'CFEES/23MMG045/MISC/GEM/116/22-23', '', 300, 22500, 2, 1, 1, 7, 1, '', 1, '2022-10-28 10:04:10', NULL, '2022-10-28 04:33:53'),
-(479, 28, '500GB Hard Disk Drive', 'PC&M/2022-2023/479', 'CFEES/23PCM022/BU/GEM/118/22-23', '', 1, 8500, 2, 1, 1, 8, 2, '', 1, '2022-10-28 10:32:34', NULL, '2022-10-28 05:00:33'),
-(480, 265, 'UPS', 'AIR FORCE CELL/2021-2022/480', 'CFEES/22SRC008/BU/GEM/256/21-22', 'CFEES/22SRC008/BU/GeM/256/21-22', 1, 25750, 2, 1, 1, 7, 1, '', 1, '2022-10-31 16:01:25', NULL, '2022-10-31 10:30:38'),
-(481, 250, '23MMG041 Toner Q2612AC', 'MMG/2022-2023/481', NULL, '', 4, 19177, 2, 1, 1, 7, 2, '', 1, '2022-11-01 11:09:00', NULL, '2022-11-01 05:38:40'),
-(482, 192, 'Aluminum Foil', 'QRS&IT/2022-2023/482', 'CFEES/23QAG049/P/GEM/121/22-23', '', 30, 15750, 1, 13, 1, 7, 2, '', 1, '2022-11-01 12:29:42', NULL, '2022-11-01 06:59:14'),
-(483, 191, 'CAMC of Access Control System ', 'SECURITY/2022-2023/483', 'CFEES/20SEC024/BU/ST/180/19-20', '', 1, 1385674, 2, 1, 2, 1, 2, '', 1, '2022-11-02 09:56:52', NULL, '2022-11-02 04:26:19'),
-(484, 250, 'Cartridge 388AC 23MMG042', 'MMG/2022-2023/484', 'CFEES/23MMG042/BU/GEM/096/22-23', '', 30, 114960, 2, 1, 1, 8, 2, '', 1, '2022-11-04 09:57:13', NULL, '2022-11-04 04:26:55'),
-(485, 261, 'Procurement of Tyres (Tubeless) for vehicle BA No. 15B117265L', 'MT/2022-2023/485', NULL, '', 4, 31960, 2, 1, 1, 2, 2, '', 1, '2022-11-04 10:14:03', NULL, '2022-11-04 04:38:29'),
-(486, 261, 'Procurement of Tyres (Tubeless) for vehicle BA No. 15B117266H', 'MT/2022-2023/486', NULL, '', 4, 31960, 2, 1, 1, 2, 2, '', 1, '2022-11-04 10:32:29', NULL, '2022-11-04 05:01:39'),
-(487, 261, 'Procurement of Battery 12V/35Ah for vehicle BA No. 17B125314Y', 'MT/2022-2023/487', NULL, '', 1, 3000, 2, 1, 1, 2, 2, '', 1, '2022-11-04 15:23:34', NULL, '2022-11-04 09:14:34'),
-(488, 115, 'Multifunction Machine', 'MS&ESRG/2022-2023/488', 'CFEES/23MMG030/BU/GEM/076/22-23', '', 3, 95475, 2, 1, 1, 5, 2, '', 1, '2022-11-07 12:17:17', NULL, '2022-11-07 06:46:01'),
-(489, 192, 'Tissue Paper  Roll ', 'QRS&IT/2022-2023/489', 'CFEES/23QAG053/P/GEM/127/22-23', '', 125, 10625, 1, 13, 1, 7, 2, '', 1, '2022-11-09 09:18:02', NULL, '2022-11-09 03:47:32'),
-(490, 192, 'Labels', 'QRS&IT/2022-2023/490', 'CFEES/23QAG054/P/GEM/128/22-23', '', 50, 4000, 1, 13, 1, 7, 2, '', 1, '2022-11-09 09:19:34', NULL, '2022-11-09 03:49:05');
-INSERT INTO `files` (`f_id`, `e_id`, `file_name`, `docket_no`, `file_num`, `description`, `quantity`, `total_cost`, `cat_id`, `proj_id`, `port_id`, `bid_id`, `fin_id`, `f_remark`, `f_status`, `mark_to_ad`, `mark_to_mmg`, `is_created`) VALUES
-(491, 192, 'Ultrapure Water Purification System', 'QRS&IT/2022-2023/491', 'CFEES/23QAG052/P/GEM/126/22-23', '', 1, 500000, 1, 13, 1, 8, 2, '', 1, '2022-11-09 09:21:14', NULL, '2022-11-09 03:50:58'),
-(492, 234, 'Desktop Computer with UPS', 'QRS&IT/2022-2023/492', 'CFEES/23QAG056/NBU/GEM/173/22-23', '', 136, 15508600, 2, 1, 1, 5, 2, '', 1, '2022-11-09 15:29:22', NULL, '2022-11-09 09:56:56'),
-(493, 79, 'CASE FOR EXTENSION OF HUMAN RESOURCE OUTSOURCHING SERVICE ( MTS) FOR A PERIOD OF 06 MONTHS', 'EnSG/2022-2023/493', NULL, '', 3, 1632515, 1, 7, 1, 5, 2, '', 1, '2022-11-09 16:12:37', NULL, '2022-11-09 10:42:12'),
-(494, 174, 'Local Area Networking for N/W Devices', 'MS&ESRG/2022-2023/494', NULL, '', 1, 54010, 2, 1, 3, 9, 2, '', 1, '2022-11-10 10:07:27', NULL, '2022-11-10 04:36:52'),
-(495, 124, 'DEMAND FOR TONNER 23MMG036', 'MMG/2022-2023/495', NULL, 'CARTRIDGE HP CC388AC', 2, 10782, 2, 1, 1, 7, 2, '', 1, '2022-11-10 15:55:09', NULL, '2022-11-10 10:23:42'),
-(496, 261, 'Procurement of Battery 12V/35Ah for vehicle BA No. 17B125314Y', 'MT/2022-2023/496', 'CFEES/23MTG017/BU/GEM/202/22-23', '', 1, 3000, 2, 1, 3, 2, 2, '', 1, '2022-11-10 16:51:28', NULL, '2022-11-10 11:18:39'),
-(497, 261, 'Procurement of Tyres (Tubeless) for vehicle BA No. 15B117265L', 'MT/2022-2023/497', NULL, '', 4, 31960, 2, 1, 1, 2, 2, '', 1, '2022-11-11 10:59:12', NULL, '2022-11-11 05:28:29'),
-(498, 261, 'Procurement of Tyres (Tubeless) for vehicle BA No. 15B117266H', 'MT/2022-2023/498', 'CFEES/23MTG012/BU/GEM/129/22-23', '', 4, 31960, 2, 1, 1, 2, 2, '', 1, '2022-11-14 11:01:41', NULL, '2022-11-14 05:31:19'),
-(499, 249, 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY GUARD FEMALE (LADY SEARCHER) EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 'SECURITY/2021-2022/499', 'CFEES/23SEC029/MISC/GEM/139/22-23', 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY GUARD FEMALE (LADY SEARCHER) EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 2, 692367, 1, 1, 1, 6, 1, '', 1, '2022-11-15 16:35:02', NULL, '2022-11-15 11:04:35'),
-(500, 249, 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY PERSONNEL EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 'SECURITY/2021-2022/500', 'CFEES/22/SEC003/MISC/LT/068/21-22', 'SOC FOR SANTION OF ADDITIONAL AMOUNT FOR PAYMENT OF ARREARS DUE TO REVISION OF WAGES TO SECURITY PERSONNEL EMPLOYED FOR SECURITY SERVICE AT CFEES CAMPUS', 1, 30533828, 1, 1, 1, 6, 1, '', 1, '2022-11-15 16:37:59', NULL, '2022-11-15 11:07:42'),
-(501, 249, 'SOC FOR SANTION FOR HIRING OF SERVICES OF TWO (02) LADY SEARCHER (SECURITY GUARD FEMALE) FOR SECURITY AND SURVEILLANCE AT CFEES CAMPUS', 'SECURITY/2021-2022/501', 'CFEES/23SEC029/MISC/GEM/136/22-23', 'SOC FOR SANTION FOR HIRING OF SERVICES OF TWO (02) LADY SEARCHER (SECURITY GUARD FEMALE) FOR SECURITY AND SURVEILLANCE AT CFEES CAMPUS', 1, 698496, 1, 1, 1, 6, 1, '', 1, '2022-11-16 11:52:31', NULL, '2022-11-16 06:22:10'),
-(502, 32, 'Desktop LCD monitor', NULL, NULL, '', 2, 19200, 2, 1, 1, 7, 2, '', 0, NULL, NULL, '2022-11-16 09:55:49'),
-(503, 32, 'Desktop LCD monitor', 'FC&HB/2021-2022/503', 'CFEES/23FCP067/BU/GEM/133/22-23', '', 2, 19200, 2, 1, 1, 7, 1, '', 1, '2022-11-16 15:29:33', NULL, '2022-11-16 09:58:30'),
-(504, 87, 'Electronic Weighing Scale, Capacity 30 Kg', 'FC&HB/2021-2022/504', 'CFEES/23FCP069/BU/GEM/132/22-23', '', 3, 17370, 2, 1, 1, 7, 1, '', 1, '2022-11-16 15:42:10', NULL, '2022-11-16 10:10:33'),
-(505, 250, 'A3 photo copier Paper', 'MMG/2022-2023/505', 'CFEES/23MMG021/MISC/GEM/124/22-23', '', 15, 10500, 2, 1, 1, 7, 2, '', 1, '2022-11-18 12:33:07', NULL, '2022-11-18 07:02:36'),
-(506, 76, 'procurement of alumina tube, alumina boat, alumina tray & quartz plate through LPG under project ERAF (Project no. ST/ 19-20/CFE-38)', 'EnSG/2022-2023/506', 'CFEES/23ENS033/P/LPC/140/22-23', '', 1, 66021, 1, 7, 3, 9, 2, '', 1, '2022-11-18 16:23:03', NULL, '2022-11-18 10:52:01'),
-(507, 79, 'Procurement of glass petri plates through GeM', 'EnSG/2022-2023/507', 'CFEES/23ENS045/P/GEM/138/22-23', '', 1, 24840, 1, 7, 1, 5, 2, '', 1, '2022-11-18 16:44:11', NULL, '2022-11-18 11:09:26'),
-(508, 250, 'Cartridge 278AC 23MMG044', 'MMG/2022-2023/508', NULL, '', 4, 20881, 2, 1, 1, 7, 2, '', 1, '2022-11-21 12:30:23', NULL, '2022-11-21 06:58:15'),
-(509, 250, 'Cartridge 388AC 23MMG036', 'MMG/2022-2023/509', 'CFEES/23MMG036/BU/GEM/089/22-23', '', 2, 7657, 2, 1, 1, 7, 2, '', 1, '2022-11-21 12:30:14', NULL, '2022-11-21 06:59:11'),
-(510, 124, 'Multifunction Machine Demand No 23MMG046', 'MMG/2022-2023/510', 'CFEES/23MMG046/BU/GEM/137/22-23', 'Multifunction Machine', 4, 499254, 2, 1, 1, 8, 2, '', 1, '2022-11-22 14:48:49', NULL, '2022-11-22 09:18:34'),
-(511, 261, 'Procurement of Multifunctional Machine', 'MT/2022-2023/511', NULL, '', 1, 160232, 2, 1, 1, 2, 2, '', 1, '2022-11-22 16:52:14', NULL, '2022-11-22 11:21:32'),
-(512, 80, 'Supply of High Purity Liquid Nitrogen ', 'FC&HB/2022-2023/512', 'CFEES/23FCP070/BU/GEM/171/22-23', '', 166, 24900, 2, 1, 1, 7, 2, '', 2, '2022-11-23 11:52:04', NULL, '2022-11-23 06:21:10'),
-(513, 249, 'Procurement for Digital Signature Certificate Token (DSC)', NULL, NULL, 'For Approval of Demand ', 1, 3500, 2, 1, 1, 1, 2, 'OC Troops, CFEES is required for DSC publication of Part - II', 0, NULL, NULL, '2022-11-23 11:26:11'),
-(514, 249, 'Procurement for Digital Signature Certificate Token (DSC)', 'SECURITY/2022-2023/514', 'CFEES/23SEC027/BU/GEM/160/22-23', 'Procurement for Digital Signature Certificate Token (DSC)', 1, 3500, 2, 1, 1, 1, 2, '', 1, '2022-11-24 10:26:55', NULL, '2022-11-24 04:56:19'),
-(515, 60, 'Dichloromethane', 'FC&HB/2022-2023/515', 'CFEES/23FCP078/P/GEM/151/22-23', 'Demand No. 23FCP078, Dated: 23Nov22', 20, 22960, 1, 6, 1, 7, 2, '', 1, '2022-11-24 12:01:03', NULL, '2022-11-24 06:27:13'),
-(516, 60, 'Statement of case for revision of minimum wages', 'FC&HB/2022-2023/516', 'CFEES/22FCP056/P/GEM/148/21-22', '', 4, 48871, 1, 6, 1, 5, 2, '', 1, '2022-11-24 12:00:39', NULL, '2022-11-24 06:30:06'),
-(517, 196, 'Renewal of Antivirus', 'QRS&IT/2022-2023/517', 'CFEES/23QAG058/BU/GEM/253/22-23', 'Renewal of Escan antivirus through GeM', 400, 128000, 2, 1, 1, 1, 2, '', 1, '2022-11-25 10:32:58', NULL, '2022-11-25 05:02:29'),
-(518, 192, 'Micropipette (10-100)', 'QRS&IT/2022-2023/518', 'CFEES/23QAG060/P/GEM/153/22-23', '', 1, 17110, 1, 13, 1, 7, 2, '', 1, '2022-11-28 10:28:24', NULL, '2022-11-28 04:57:57'),
-(519, 192, 'Micropipete (100-1000)', 'QRS&IT/2022-2023/519', 'CFEES/23QAG061/P/GEM/174/22-23', '', 1, 20000, 1, 13, 1, 7, 2, '', 1, '2022-11-28 10:30:08', NULL, '2022-11-28 04:59:26'),
-(520, 192, 'Micropipette (0.5-5mL)', 'QRS&IT/2022-2023/520', 'CFEES/23QAG063/P/GEM/148/22-23', '', 1, 17000, 1, 13, 1, 7, 2, '', 1, '2022-11-28 10:35:28', NULL, '2022-11-28 05:00:58'),
-(521, 192, 'Analytical Semi Micro Balance', 'QRS&IT/2022-2023/521', 'CFEES/23QAG064/P/GEM/146/22-23', '', 1, 307000, 1, 13, 1, 8, 2, '', 1, '2022-11-28 10:35:41', NULL, '2022-11-28 05:03:09'),
-(522, 192, 'Vortex Mixer', 'QRS&IT/2022-2023/522', 'CFEES/23QAG066/P/GEM/147/22-23', '', 1, 11692, 1, 13, 1, 7, 2, '', 1, '2022-11-28 10:35:52', NULL, '2022-11-28 05:03:59'),
-(523, 250, 'Cartridge 278 23MMG051', 'MMG/2022-2023/523', 'CFEES/23MMG051/BU/GEM/144/22-23', '', 3, 19395, 2, 1, 1, 7, 2, '', 1, '2022-11-29 13:01:22', NULL, '2022-11-29 07:26:42'),
-(524, 250, 'Ball Pen 23MMG052', 'MMG/2022-2023/524', NULL, '', 1900, 24700, 2, 1, 1, 7, 2, '', 1, '2022-11-29 13:01:13', NULL, '2022-11-29 07:27:32'),
-(525, 250, 'Envelope 23MMG050', 'MMG/2022-2023/525', 'CFEES/23MMG050/MISC/GEM/143/22-23', '', 85, 22355, 2, 1, 1, 7, 2, '', 1, '2022-11-29 13:00:32', NULL, '2022-11-29 07:28:25'),
-(526, 250, 'RUBBER STAMP 23MMG049', 'MMG/2022-2023/526', 'CFEES/23MMG049/MISC/GEM/142/22-23', '', 10, 3730, 2, 1, 1, 7, 2, '', 1, '2022-11-29 13:00:22', NULL, '2022-11-29 07:29:08'),
-(527, 250, 'NAME PLATE 23MMG048', 'MMG/2022-2023/527', 'CFEES/23MMG048/MISC/GEM/141/22-23', '', 10, 14690, 2, 1, 1, 7, 2, '', 1, '2022-11-29 13:00:12', NULL, '2022-11-29 07:29:50'),
-(528, 80, 'Dissolved Oxygen Meter', 'FC&HB/2022-2023/528', 'CFEES/23FCP080/P/GEM/189/22-23', '', 1, 150000, 1, 6, 1, 8, 2, '', 1, '2022-11-29 14:35:38', NULL, '2022-11-29 09:03:52'),
-(529, 80, 'Multifunction Machine', 'FC&HB/2022-2023/529', 'CFEES/23FCP079/P/GEM/255/22-23', '', 1, 258843, 1, 6, 1, 8, 2, '', 1, '2022-11-29 14:35:26', NULL, '2022-11-29 09:05:06'),
-(530, 73, 'Procurement of spare Parts of Gas Chromatograph (GC) Brand-N6659680 Clarus 680, on proprietary through buildup', 'EnSG/2021-2022/530', 'CFEES/23ENS041/B/PAC/243/22-23', '', 5, 406174, 1, 1, 4, 1, 1, '', 1, '2022-11-29 14:57:18', NULL, '2022-11-29 09:27:01'),
-(531, 79, 'Procurement of Multifunction machine/ Printer', 'EnSG/2021-2022/531', NULL, '', 3, 165000, 1, 7, 1, 5, 1, '', 1, '2022-12-02 12:37:38', NULL, '2022-12-02 06:38:44'),
-(532, 192, 'Wash Bottle', 'QRS&IT/2022-2023/532', 'CFEES/23QAG067/P/GEM/149/22-23', '', 15, 1200, 1, 13, 1, 7, 2, '', 1, '2022-12-02 12:40:11', NULL, '2022-12-02 07:08:40'),
-(533, 192, 'Ultrasonicator', 'QRS&IT/2022-2023/533', 'CFEES/23QAG068/P/GEM/152/22-23', '', 1, 50000, 1, 13, 1, 8, 2, '', 1, '2022-12-02 12:41:52', NULL, '2022-12-02 07:11:36'),
-(534, 124, 'Digital Copier Machine', 'MMG/2022-2023/534', 'CFEES/23MMG046/BU/GEM/137/22-23', '', 4, 500000, 2, 1, 1, 8, 2, '', 1, '2022-12-02 15:23:15', NULL, '2022-12-02 09:52:22'),
-(535, 79, 'procurement of refrigerated Micro  Centrifuge through GeM', 'EnSG/2022-2023/535', 'CFEES/23ENS048/P/GEM/162/22-23', '', 1, 22116, 1, 7, 1, 5, 2, '', 1, '2022-12-05 10:25:32', NULL, '2022-12-05 04:54:12'),
-(536, 192, 'Hot Air Oven', 'QRS&IT/2021-2022/536', 'CFEES/23QAG069/P/GEM/165/22-23', '', 1, 55000, 1, 13, 1, 8, 2, '', 1, '2022-12-06 12:12:27', NULL, '2022-12-06 06:41:06'),
-(537, 192, 'Magnetic Stirrer', 'QRS&IT/2022-2023/537', 'CFEES/23QAG071/P/GEM/166/22-23', '', 1, 10266, 1, 13, 1, 8, 2, '', 1, '2022-12-06 12:12:40', NULL, '2022-12-06 06:41:57'),
-(538, 84, 'HP LaserJet Toner Cartridge 30A', NULL, NULL, '', 2, 12932, 2, 1, 1, 7, 1, '', 0, NULL, NULL, '2022-12-06 10:18:48'),
-(539, 84, 'HP LaserJet Toner Cartridge 30A', 'FSEG/2021-2022/539', 'CFEES/23FAS025/BU/GEM/168/22-23', '', 2, 12932, 1, 1, 1, 7, 1, '', 1, '2022-12-06 15:49:52', NULL, '2022-12-06 10:19:22'),
-(540, 261, 'Procurement of Motor Cycle Hero Super Splendor DISC Self CAST BS6', 'MT/2022-2023/540', 'CFEES/23MTG014/BU/GEM/167/22-23', '', 1, 73366, 2, 1, 1, 7, 2, '', 1, '2022-12-06 16:01:13', NULL, '2022-12-06 10:30:04'),
-(541, 79, 'Procurement of Potassium Dichromate through gem', 'EnSG/2021-2022/541', 'CFEES/23ENS050/P/GEM/170/22-23', '', 10, 12100, 1, 7, 1, 5, 1, '', 1, '2022-12-07 15:43:21', NULL, '2022-12-07 10:12:57'),
-(542, 79, 'Silver sulphate', 'EnSG/2021-2022/542', 'CFEES/23ENS049/P/GEM/169/22-23', '', 3, 20130, 1, 7, 1, 5, 1, '', 1, '2022-12-08 15:21:22', NULL, '2022-12-08 09:49:24'),
-(543, 61, 'Shifting and Refurbishment of atomizer and sprinkler characterization facility', 'FSEG/2022-2023/543', NULL, '', 1, 188800, 2, 1, 3, 9, 2, '', 1, '2022-12-08 15:24:36', NULL, '2022-12-08 09:53:35'),
-(544, 234, 'Extension of AMC for DRONA internet LAN & Network infrastructure 2022-2023', 'QRS&IT/2022-2023/544', NULL, '', 1, 220397, 2, 1, 2, 6, 2, '', 1, '2022-12-09 10:31:51', NULL, '2022-12-09 05:00:48'),
-(545, 248, 'Smart rack solution with relocation of existing servers and networking items(as per annexure 2,3,4,5,7)', 'QRS&IT/2022-2023/545', 'CFEES/23QAG020/GC/GEM/18/22-23', 'for establishment of data center in CFEES', 1, 4661000, 2, 1, 1, 5, 2, '', 1, '2022-12-09 11:30:48', NULL, '2022-12-09 06:00:24'),
-(546, 79, 'Laboratory Refrigerator', 'EnSG/2022-2023/546', 'CFEES/23ENS056/P/GEM/172/22-23', '', 1, 435800, 1, 7, 1, 5, 2, '', 1, '2022-12-14 16:29:28', NULL, '2022-12-14 10:57:36'),
-(547, 224, 'Procurement of Qty - 04 Work Computer Work Stations for SDC Pilkhuwa', 'TFA/2021-2022/547', 'CFEES/23TFA018/BU/GEM/232/22-23', '', 4, 357800, 2, 1, 1, 5, 1, '', 1, '2022-12-15 10:40:54', NULL, '2022-12-15 05:08:41'),
-(548, 249, 'SOC FOR EXTENTION OF CONTRACT FOR SERVICES OF TWO SECURITY GUARD FEMALE AT CFEES CAMPUS DELHI', 'SECURITY/2022-2023/548', NULL, 'SOC FOR EXTENTION OF CONTRACT FOR SERVICES OF TWO SECURITY GUARD FEMALE AT CFEES CAMPUS DELHI', 2, 350736, 2, 1, 1, 1, 2, '', 1, '2022-12-15 12:54:53', NULL, '2022-12-15 07:24:19'),
-(549, 79, 'Printers', 'EnSG/2021-2022/549', 'CFEES/23ENS055/P/GEM/175/22-23', '', 3, 74370, 1, 7, 1, 5, 1, '', 1, '2022-12-16 11:12:16', NULL, '2022-12-16 05:42:02'),
-(550, 77, 'Tissue roll', 'PC&M/2021-2022/550', 'CFEES/23PCM027/BU/GEM/177/22-23', '', 100, 5000, 2, 1, 1, 7, 1, '', 1, '2022-12-16 15:09:18', NULL, '2022-12-16 09:38:57'),
-(551, 77, 'Anhydrous Denatured Ethanol', 'PC&M/2021-2022/551', 'CFEES/23PCM026/BU/GEM/176/22-23', '', 20, 6000, 2, 1, 1, 7, 1, '', 1, '2022-12-16 15:11:20', NULL, '2022-12-16 09:40:37'),
-(552, 224, 'Job work on refurbishment of bus passenger compartment fire detection & water mist fire suppression system', 'TFA/2021-2022/552', 'CFEES/23TFA019/BU/LPC/183/22-23', '', 1, 134520, 1, 1, 3, 2, 1, '', 1, '2022-12-19 11:09:20', NULL, '2022-12-19 05:38:19'),
-(553, 77, '50 kg load cell and NX controller', 'PC&M/2021-2022/553', 'CFEES/23PCM025/BU/LPC/238/22-23', '', 2, 174635, 2, 1, 2, 2, 1, '', 1, '2022-12-20 14:49:58', NULL, '2022-12-20 09:18:58'),
-(554, 217, '400ml Spray insecticide for Mosquitoes & 400ml Spray insecticide for cockroaches', 'WORKS/2022-2023/554', 'CFEES/23WRK010/MISC/GEM/192/22-23', '', 200, 47400, 2, 1, 1, 7, 2, '', 1, '2022-12-22 16:49:38', NULL, '2022-12-22 11:17:43'),
-(555, 217, 'Dustbin 10 liter foot operated and disposable bag', 'WORKS/2022-2023/555', 'CFEES/23WRK009/MISC/GEM/185/22-23', '', 150, 53000, 2, 1, 1, 7, 2, '', 1, '2022-12-22 16:55:49', NULL, '2022-12-22 11:25:34'),
-(556, 174, 'Networking Devices', 'MS&ESRG/2022-2023/556', 'CFEES/23ERG037/BU/GEM/182/22-23', '', 6, 83150, 2, 1, 1, 8, 2, '', 1, '2022-12-23 10:34:38', NULL, '2022-12-23 05:04:09'),
-(557, 249, '(03) DISPLAY UNIT (SMART TELEVISION 108CM LED)', 'SECURITY/2021-2022/557', 'CFEES/23SEC031/BU/GEM/241/22-23', '(03) DISPLAY UNIT (SMART TELEVISION 108CM LED)', 3, 186000, 2, 1, 1, 1, 1, '', 1, '2022-12-23 12:43:11', NULL, '2022-12-23 07:12:51'),
-(558, 192, 'Solvents and Chemicals LCMS Grade', 'QRS&IT/2022-2023/558', 'CFEES/23QAG073/P/LPC/181/22-23', '', 8, 481610, 1, 13, 3, 9, 2, '', 1, '2022-12-23 16:02:01', NULL, '2022-12-23 08:40:41'),
-(559, 79, 'Ferroin Indicator solution ', 'EnSG/2021-2022/559', 'CFEES/23EVS058/P/GEM/187/22-23', '', 1, 1060, 1, 7, 1, 5, 1, '', 1, '2022-12-26 15:40:12', NULL, '2022-12-26 10:03:36'),
-(560, 79, 'Mercuric sulphate (0.25kg)', 'EnSG/2021-2022/560', 'CFEES/23ENS057/P/GEM/186/22-23', '', 1, 15250, 1, 7, 1, 5, 1, '', 1, '2022-12-26 15:40:06', NULL, '2022-12-26 10:06:54'),
-(561, 79, 'wash bottles', 'EnSG/2021-2022/561', 'CFEES/23ENS059/P/GEM/190/22-23', '', 25, 3025, 1, 1, 1, 5, 1, '', 1, '2022-12-26 15:39:57', NULL, '2022-12-26 10:09:34'),
-(562, 40, 'CAMC for Operational cum technical support for DRONA, Internet LANs and Network Infrastructure', 'QRS&IT/2021-2022/562', 'CFEES/23QAG072/BU/GEM/218/22-23', 'AMC for LAN Infrastructure', 1, 2183236, 2, 1, 1, 5, 2, '', 1, '2022-12-28 15:07:19', NULL, '2022-12-28 09:36:52'),
-(563, 224, 'CAMC OF ACFT', 'TFA/2022-2023/563', NULL, '', 1, 4165800, 2, 1, 3, 1, 2, '', 1, '2022-12-29 11:44:02', NULL, '2022-12-29 06:12:45'),
-(564, 76, 'Procurement of 20-Litre Twin Compartment Trolley mounted Sol Gel Delivery System with Air Compressor', 'EnSG/2022-2023/564', 'CFEES/23ENS061/BU/LPC/188/22-23', '', 1, 118000, 2, 1, 3, 9, 2, '', 1, '2022-12-30 10:44:51', NULL, '2022-12-30 05:14:06'),
-(565, 249, 'AMC OF SHARP DIGITAL PHOTOCOPIER MACHINE MODEL- SHARP AR-5620V', 'SECURITY/2022-2023/565', NULL, 'AMC OF SHARP DIGITAL PHOTOCOPIER MACHINE MODEL- SHARP AR-5620V INSTALLED IN SECURITY', 3, 135000, 2, 1, 1, 5, 2, '', 1, '2023-01-02 11:04:28', NULL, '2023-01-02 05:34:05'),
-(566, 162, 'Ultra High Performance Fibres Reinforcement Concrete Slab', 'MS&ESRG/2021-2022/566', NULL, '', 1, 5402338, 1, 4, 2, 2, 1, '', 1, '2023-01-03 16:56:22', NULL, '2023-01-03 11:26:11'),
-(567, 161, 'Benchtop LCR meter', 'FSEG/2021-2022/567', NULL, '', 1, 785372, 1, 10, 1, 8, 1, 'The item is required for testing in the project', 1, '2023-01-05 11:44:38', NULL, '2023-01-05 06:14:03'),
-(568, 124, 'Desktop Computer', 'MMG/2021-2022/568', 'CFEES/23MMG034/BU/GEM/077/22-23', '', 5, 467500, 2, 1, 1, 8, 1, '', 1, '2023-01-06 11:19:09', NULL, '2023-01-06 05:48:15'),
-(569, 124, 'Desktop Computer', NULL, NULL, '', 5, 467500, 2, 1, 1, 8, 2, '', 0, NULL, NULL, '2023-01-06 05:48:49'),
-(570, 217, 'AMC of Sharp Digital Photocopier Machine Model Sharp AR-5620V Serial No. 3301489Y', 'WORKS/2022-2023/570', NULL, '', 1, 135000, 2, 1, 1, 7, 2, '', 1, '2023-01-10 10:54:51', NULL, '2023-01-10 05:23:52'),
-(571, 192, 'Muffle Furnace', 'QRS&IT/2022-2023/571', 'CFEES/23QAG070/P/GEM/197/22-23', '', 1, 99998, 1, 13, 1, 1, 2, '', 1, '2023-01-10 11:44:13', NULL, '2023-01-10 06:13:26'),
-(572, 192, 'Autoclave Bags', 'QRS&IT/2022-2023/572', 'CFEES/23QAG075/P/GEM/200/22-23', '', 260, 14560, 1, 13, 1, 7, 2, '', 1, '2023-01-10 14:56:02', NULL, '2023-01-10 09:25:55'),
-(573, 79, 'aluminium foil', 'EnSG/2022-2023/573', 'CFEES/23QAG049/P/GEM/121/22-23', '', 55, 24750, 1, 7, 1, 5, 2, '', 1, '2023-01-10 16:08:48', NULL, '2023-01-10 10:37:19'),
-(574, 79, 'procurement of surgical face mask through GeM under project -ERAF', NULL, NULL, '', 3000, 24000, 1, 7, 1, 5, 2, '', 0, NULL, NULL, '2023-01-11 06:53:58'),
-(575, 79, 'procurement of surgical face mask through GeM under project -ERAF', 'EnSG/2022-2023/575', 'CFEES/23ENS062/P/GEM/214/22-23', '', 3000, 24000, 1, 7, 1, 5, 2, '', 1, '2023-01-11 12:28:40', NULL, '2023-01-11 06:58:20'),
-(576, 79, 'Laboratory glassware bottels', 'EnSG/2022-2023/576', 'CFEES/23ENS067/P/GEM/216/22-23', '', 148, 22500, 1, 7, 1, 5, 2, '', 1, '2023-01-11 16:40:36', NULL, '2023-01-11 11:10:21'),
-(577, 217, 'Conservancy Items Demand No. 23WRK012', 'WORKS/2022-2023/577', 'CFEES/23WRK012/MISC/GEM/210/22-23', '', 5, 109925, 2, 1, 1, 7, 2, '', 1, '2023-01-12 16:24:23', NULL, '2023-01-12 10:54:08'),
-(578, 192, 'Non Woven Disposable Wipes', 'QRS&IT/2022-2023/578', 'CFEES/23QAG077/P/GEM/203/22-23', '', 50, 5000, 1, 13, 1, 7, 2, '', 1, '2023-01-13 12:16:12', NULL, '2023-01-13 06:45:45'),
-(579, 79, 'procurement of N95 Face Mask (without valve) through GeM under project ERAF', 'EnSG/2022-2023/579', 'CFEES/23ENS064/P/GEM/217/22-23', '', 250, 24750, 1, 7, 1, 5, 2, '', 1, '2023-01-16 11:50:00', NULL, '2023-01-16 06:19:07'),
-(580, 250, 'Toner Cartridge CE278AC', 'MMG/2022-2023/580', 'CFEES/23MMG072/BU/GEM/198/22-23', '', 3, 19128, 2, 1, 1, 7, 2, '', 1, '2023-01-16 12:00:53', NULL, '2023-01-16 06:30:41'),
-(581, 250, 'Toner Catridge CC388', 'MMG/2022-2023/581', 'CFEES/23MMG064/BU/GEM/179/22-23', '', 6, 24498, 1, 1, 1, 7, 2, '', 1, '2023-01-16 12:02:49', NULL, '2023-01-16 06:32:38'),
-(582, 250, 'Toner Cartridge HP Q2612AC', 'MMG/2022-2023/582', 'CFEES/23MMG073/BU/GEM/199/22-23', '', 4, 22680, 2, 1, 1, 7, 2, '', 1, '2023-01-16 12:04:40', NULL, '2023-01-16 06:34:25'),
-(583, 80, 'Microprocessor Controlled Magnetic Stirrer (1000ml)', 'FC&HB/2022-2023/583', 'CFEES/23FCP088/P/GEM/262/22-23', '', 1, 24800, 1, 6, 1, 7, 2, '', 1, '2023-01-16 15:04:18', NULL, '2023-01-16 09:33:59'),
-(584, 251, 'Purchase of 500GB Hard Disc Drive', NULL, NULL, '', 1, 2499, 2, 1, 1, 8, 2, '', 0, NULL, NULL, '2023-01-17 04:41:00'),
-(585, 251, 'Purchase of 500GB Hard Disc Drive', 'EnSG/2022-2023/585', 'CFEES/23ENS066/BU/GEM/244/22-23', '', 1, 2499, 2, 1, 1, 8, 2, '', 1, '2023-01-17 10:25:29', NULL, '2023-01-17 04:51:38'),
-(586, 250, 'Scale 23MMG069', 'MMG/2022-2023/586', NULL, '', 240, 24000, 2, 1, 1, 7, 2, '', 1, '2023-01-17 12:17:47', NULL, '2023-01-17 06:47:24'),
-(587, 250, 'Note Pad 23MMG068', 'MMG/2022-2023/587', 'CFEES/23MMG068/MISC/GEM/194/22-23', '', 250, 22500, 2, 1, 1, 7, 2, '', 1, '2023-01-17 12:19:32', NULL, '2023-01-17 06:49:19'),
-(588, 250, 'Register 23MMG070', 'MMG/2022-2023/588', 'CFEES/23MMG070/MISC/GEM/196/22-23', '', 300, 75000, 2, 1, 1, 7, 2, '', 1, '2023-01-17 12:20:43', NULL, '2023-01-17 06:50:32'),
-(589, 250, 'Green Tag 23MMG066', 'MMG/2022-2023/589', 'CFEES/23MMG066/MISC/GEM/193/22-23', '', 250, 22500, 2, 1, 1, 7, 2, '', 1, '2023-01-17 12:21:35', NULL, '2023-01-17 06:51:28'),
-(590, 79, 'autoclave', 'EnSG/2022-2023/590', 'CFEES/23ENS065/P/GEM/204/22-23', '', 1, 185000, 1, 7, 1, 5, 2, '', 1, '2023-01-17 16:04:31', NULL, '2023-01-17 10:26:15'),
-(591, 79, 'Weighing Balance with Licensed Software', 'EnSG/2022-2023/591', 'CFEES/23ENS070/P/GEM/205/22-23', '', -1, 390000, 1, 7, 1, 5, 2, '', 1, '2023-01-17 16:03:14', NULL, '2023-01-17 10:30:08'),
-(592, 79, 'Glass Burettes', 'EnSG/2022-2023/592', 'CFEES/23ENS068/P/GEM/209/22-23', '', 15, 22020, 1, 7, 1, 5, 2, '', 1, '2023-01-17 16:43:09', NULL, '2023-01-17 11:09:14'),
-(593, 79, 'Burettes stand', 'EnSG/2021-2022/593', 'CFEES/23ENS069/P/GEM/208/22-23', '', 15, 6750, 1, 7, 1, 5, 1, '', 1, '2023-01-17 16:43:03', NULL, '2023-01-17 11:12:44'),
-(594, 80, 'Acetone, 2.5 Ltr.', 'FC&HB/2022-2023/594', 'CFEES/23FCP090/P/GEM/206/22-23', '', 40, 62120, 1, 6, 1, 7, 2, '', 1, '2023-01-17 17:25:30', NULL, '2023-01-17 11:53:34'),
-(595, 80, 'HPLC Grade Methanol, 2.5L Pack Size', 'FC&HB/2022-2023/595', 'CFEES/23FCP089/P/GEM/207/22-23', '', 20, 20000, 1, 6, 1, 7, 2, '', 1, '2023-01-17 17:25:14', NULL, '2023-01-17 11:54:59'),
-(596, 217, 'Cleaning Items (Demand No. WRK013', 'WORKS/2022-2023/596', 'CFEES/23WRK013/MISC/GEM/234/22-23', '', 8, 76610, 2, 1, 1, 7, 2, '', 1, '2023-01-19 10:48:18', NULL, '2023-01-19 05:10:13'),
-(597, 125, 'Procurement of Xerox Versalink Tober Cartridge', 'TCP&HR/2021-2022/597', 'CFEES/23TCP009/BU/GEM/231/22-33', '', 1, 24000, 2, 1, 1, 1, 1, '', 1, '2023-01-23 12:36:42', NULL, '2023-01-23 07:03:47'),
-(598, 125, 'Procurement of Pribter cartidge 388AC', 'TCP&HR/2021-2022/598', NULL, '', 1, 7500, 2, 1, 1, 1, 1, '', 1, '2023-01-23 12:36:34', NULL, '2023-01-23 07:05:44'),
-(599, 57, 'Photo frame with printout', 'QRS&IT/2022-2023/599', NULL, '', 14, 5808, 2, 1, 1, 7, 2, '', 1, '2023-01-24 12:33:15', NULL, '2023-01-24 07:02:23'),
-(600, 60, 'AMC for Gas chromatograph', 'FC&HB/2021-2022/600', 'CFEES/FCPCE/BU/ST/132/17-18', 'Demand No 18FCP064, dated 19 Dec 2017', 1, 84000, 2, 1, 2, 2, 1, 'Pre FTS file', 1, '2023-01-24 16:10:57', NULL, '2023-01-24 10:40:28'),
-(601, 71, 'Refrigerated Incubator Shaker', 'QRS&IT/2022-2023/601', NULL, '', 1, 537100, 1, 13, 1, 8, 2, '', 1, '2023-01-24 16:55:22', NULL, '2023-01-24 11:25:02'),
-(602, 39, 'Procurement of Refilling Nitrogen gas cylindrs, 7c.M.( 10 Nos.)', 'FC&HB/2022-2023/602', 'CFEES/23FCP093/P/GEM/226/22-23', '', 70, 24500, 1, 6, 1, 1, 2, '', 1, '2023-01-25 11:17:13', NULL, '2023-01-25 05:41:56'),
-(603, 60, 'Digital Density Meter', 'FC&HB/2022-2023/603', 'CFEES/23FCP110/P/GEM/272/22-23', '', 1, 2957200, 1, 14, 1, 5, 2, '', 1, '2023-01-25 11:58:54', NULL, '2023-01-25 06:28:30'),
-(604, 79, 'Microwave oven', 'EnSG/2022-2023/604', 'CFEES/23ENS072/P/GEM/222/22-23', '', 1, 23999, 1, 7, 1, 5, 2, '', 1, '2023-01-30 10:21:17', NULL, '2023-01-30 04:50:25'),
-(605, 60, 'Desktop Computer', 'FC&HB/2022-2023/605', 'CFEES/23FCP094/P/GEM/242/22-23', 'Demand No 23FCP094', 1, 109606, 1, 6, 1, 7, 2, '', 1, '2023-02-03 11:43:37', NULL, '2023-02-03 06:13:24'),
-(606, 161, 'workstation', 'FSEG/2021-2022/606', 'CFEES/23FAS033/P/GEM/004/23-24', '', 2, 1049506, 1, 11, 1, 8, 1, '', 1, '2023-02-06 17:29:26', NULL, '2023-02-06 11:49:12'),
-(607, 125, 'CFEES/TCP/SoC/Cartridge CF277A', 'TCP&HR/2021-2022/607', NULL, 'Procurement of Toner cartridge CF277A', 2, 20000, 2, 1, 1, 1, 1, '', 1, '2023-02-07 12:28:26', NULL, '2023-02-07 06:58:05'),
-(608, 79, 'Chemical Stronge Cabinet', 'EnSG/2022-2023/608', 'CFEES/23ENS074/P/GEM/251/22-23', '', 6, 150000, 1, 7, 1, 8, 2, '', 1, '2023-02-08 10:19:41', NULL, '2023-02-08 04:49:27'),
-(609, 253, 'CFEES/23MMG077/MISC/GeM/219/22-23', 'MMG/2022-2023/609', '	CFEES/23MMG077/MISC/GeM/219/22-23', 'File Cover', 1000, 25000, 2, 1, 1, 7, 2, '', 1, '2023-02-08 14:32:50', NULL, '2023-02-08 09:01:59'),
-(610, 253, 'CFEES/23MMG076/MISC/GeM/220/22-23', 'MMG/2022-2023/610', 'CFEES/23MMG076/MISC/GeM/220/22-23', 'Hand Towel', 100, 24900, 2, 1, 1, 7, 2, '', 1, '2023-02-08 14:35:06', NULL, '2023-02-08 09:04:13'),
-(611, 80, 'Cloud and Pour Point apparatus', 'FC&HB/2022-2023/611', 'CFEES/23FCP092/P/GEM/223/22-23', '', 1, 198000, 1, 6, 1, 8, 2, '', 1, '2023-02-09 10:37:36', NULL, '2023-02-09 05:07:22'),
-(612, 87, 'Glass Reactor System', 'FC&HB/2022-2023/612', 'CFEES/23FCP096/P/OT/265/22-23', 'Demand No. 23FCP096 dated 27/01/2023', 1, 19400000, 1, 14, 2, 5, 2, '', 1, '2023-02-09 16:09:13', NULL, '2023-02-09 10:37:53'),
-(613, 217, 'Tricycle or Rickshaw', 'WORKS/2022-2023/613', 'CFEES/23WRK014/MISC/GEM/246/22-23', '', 1, 24500, 2, 1, 1, 7, 2, '', 1, '2023-02-10 15:33:02', NULL, '2023-02-10 10:02:42'),
-(614, 224, 'CAMC OF AIR CRASH FIRE TENDER', 'TFA/2021-2022/614', NULL, '', 1, 4346000, 2, 1, 2, 2, 1, '', 1, '2023-02-13 15:15:41', NULL, '2023-02-13 09:45:20'),
-(615, 250, 'Electric Kettle 23MMG075', 'MMG/2022-2023/615', NULL, '', 15, 27750, 2, 1, 1, 7, 2, '', 1, '2023-02-14 10:10:19', NULL, '2023-02-14 04:39:51'),
-(616, 249, 'CAMC of Access Control System', 'SECURITY/2022-2023/616', NULL, 'CAMC of Access Control System file put up ', 3, 1872795, 2, 1, 1, 1, 2, 'MMG', 1, '2023-02-15 14:36:12', NULL, '2023-02-15 09:05:55'),
-(617, 161, 'Multi Function Machine', 'FSEG/2022-2023/617', 'CFEES/23FAS032/P/GEM/002/23-24', '', 1, 346092, 1, 10, 1, 8, 2, '', 1, '2023-02-16 11:04:25', NULL, '2023-02-16 05:33:19'),
-(618, 77, 'Polyurea coating for Fuel tanks', 'PC&M/2022-2023/618', NULL, '', 2, 49560, 2, 1, 2, 2, 2, '', 1, '2023-02-16 11:53:28', NULL, '2023-02-16 06:23:13'),
-(619, 79, 'Online UPS (10KVA) with Battery Buckup', 'EnSG/2022-2023/619', 'CFEES/23ENS075/P/GEM/233/22-23', '', 1, 280000, 1, 7, 1, 5, 2, '', 1, '2023-02-17 12:19:23', NULL, '2023-02-17 06:48:53'),
-(620, 174, 'Transportation of Explosives from Khadki to borkhedi Nagpur', 'MS&ESRG/2022-2023/620', 'CFEES/23ERG042/P/GEM/254/22-23', '', 1, 75000, 1, 4, 1, 7, 2, 'Put up for further necessary action.', 1, '2023-02-17 14:27:49', NULL, '2023-02-17 08:57:07'),
-(621, 75, 'Gas Sampling Manifold', 'EnSG/2022-2023/621', 'CFEES/23ENS073/BU/LPC/247/22-23', 'There is an imperative requirement of a Gas Sampling Manifold for sampling and collection of different components of fire effluents. Such sampling is crucial to study (both qualitatively & quantitatively) the fire parameters and effluents of different kind of materials being used by services so that the impact of such effluents on environment can be estimated. ', 1, 496780, 2, 1, 3, 9, 2, 'Put up for approval please.', 1, '2023-02-17 14:39:19', NULL, '2023-02-17 09:08:49'),
-(622, 192, 'Chemicals (NaClO and KNO3)', 'QRS&IT/2022-2023/622', 'CFEES/23QAG084/P/GEM/245/22-23', '', 7, 5755, 1, 13, 1, 1, 2, '', 1, '2023-02-21 15:54:13', NULL, '2023-02-21 10:23:53'),
-(623, 265, 'DEMAND SRC017/2023 REPAIR OF HP PRODESK COMPUTER SL. NO. INA815XLOD', NULL, NULL, 'DEMAND SRC017/2023 REPAIR OF HP PRODESK COMPUTER SL. NO. INA815XLOD', 1, 4850, 2, 1, 3, 1, 2, '', 0, NULL, NULL, '2023-03-02 04:16:17'),
-(624, 265, 'DEMAND SRC017/2023 REPAIR OF HP PRODESK COMPUTER SL. NO. INA815XLOD', 'AIR FORCE CELL/2022-2023/624', NULL, 'DEMAND SRC017/2023 REPAIR OF HP PRODESK COMPUTER SL. NO. INA815XLOD', 1, 4850, 2, 1, 3, 9, 2, 'Forwarded for approval', 1, '2023-03-06 11:15:16', NULL, '2023-03-02 04:19:36'),
-(625, 75, 'Standard Solutions of Fire Effluents ', 'EnSG/2021-2022/625', 'CFEES/23ENS0833/BU/LPC/252/22-23', 'Standards are required for qualitative & quantitative determination of fire effluents. The items may be procured as revenue items in INR, under Build Up through LPC (Major Head 2080, Minor Head 110 and Head Code 856/01). ', 4, 241421, 2, 1, 3, 9, 1, 'Necessary documents have been placed in file. Put up for approval please.', 1, '2023-03-02 10:17:17', NULL, '2023-03-02 04:46:48'),
-(626, 247, '24 Port Managed Network Switch', 'QRS&IT/2022-2023/626', NULL, '', 3, 494999, 2, 1, 1, 5, 2, '', 1, '2023-03-02 16:09:00', NULL, '2023-03-02 10:37:51'),
-(627, 192, 'Plastic Sampling Bottle (1000 & 250 ml)', 'QRS&IT/2022-2023/627', 'CFEES/223QAG088/P/GEM/248/22-23', '', 100, 10750, 1, 13, 1, 7, 2, '', 1, '2023-03-03 10:22:18', NULL, '2023-03-03 04:51:49'),
-(628, 79, 'laboratory incubator', 'EnSG/2022-2023/628', 'CFEES/23ENS079/P/GEM/267/22-23', '', 1, 300000, 1, 7, 1, 5, 2, '', 1, '2023-03-03 11:20:33', NULL, '2023-03-03 05:40:17'),
-(629, 79, 'Multifuction Machine', 'EnSG/2022-2023/629', 'CFEES/23ENS084/P/GEM/263/22-23', '', 2, 494404, 1, 7, 1, 5, 2, '', 1, '2023-03-03 11:20:27', NULL, '2023-03-03 05:42:28'),
-(630, 79, 'Shaker Incubator', 'EnSG/2022-2023/630', 'CFEES/23ENS078/P/GEM/249/22-23', '', 2, 400000, 1, 7, 1, 5, 2, '', 1, '2023-03-03 11:20:20', NULL, '2023-03-03 05:44:22'),
-(631, 79, 'Spreader', 'EnSG/2022-2023/631', NULL, '', 100, 4602, 1, 7, 1, 5, 2, '', 1, '2023-03-03 11:20:14', NULL, '2023-03-03 05:48:16'),
-(632, 250, 'Toner Cartridge Q2612AC 23MMG080', 'MMG/2022-2023/632', 'CFEES/23MMG080/MISC/GEM/237/22-23', '', 10, 4240, 2, 1, 1, 7, 2, '', 1, '2023-03-03 12:12:40', NULL, '2023-03-03 06:39:17'),
-(633, 250, 'Toner Cartridge 278AC 23MMG079', 'MMG/2022-2023/633', 'CFEES/23MMG079/MISC/GEM/236/22-23', '', 10, 4340, 2, 1, 1, 7, 2, '', 1, '2023-03-03 12:12:36', NULL, '2023-03-03 06:40:24'),
-(634, 250, 'Toner Cartridge 388AC 23MMG078', 'MMG/2022-2023/634', 'CFEES/23MMG078/MISC/GEM/235/22-23', '', 50, 21800, 2, 1, 1, 7, 2, '', 1, '2023-03-03 12:12:31', NULL, '2023-03-03 06:42:15'),
-(635, 79, 'Disposal surgical rubber gloves', 'EnSG/2022-2023/635', 'CFEES/23ENS082/P/GEM/250/22-23', '', 2900, 24360, 1, 7, 1, 5, 2, '', 1, '2023-03-06 15:03:07', NULL, '2023-03-06 09:32:42'),
-(636, 79, 'Paraflim Rolls (12nos)', 'EnSG/2022-2023/636', 'CFEES/23ENS085/P/GEM/261/22-23', '', 12, 24024, 1, 7, 1, 5, 2, '', 1, '2023-03-06 15:10:57', NULL, '2023-03-06 09:40:42'),
-(637, 71, 'Development Contract for Bioformulation for remediation of explosives', 'QRS&IT/2022-2023/637', 'CFEES/23QAG087/P/OT/012/23-24', '', 1, 9000000, 1, 13, 3, 5, 2, '', 1, '2023-03-13 12:09:50', NULL, '2023-03-13 06:39:25'),
-(638, 224, 'REPAIR OF HP 406 G1 MT BUSINESS PC MOTHER BOARD (INA601WTFW)', NULL, NULL, '', 1, 13629, 2, 1, 1, 1, 2, '', 0, NULL, NULL, '2023-03-13 06:55:45'),
-(639, 224, 'REPAIR OF HP 406 G1 MT BUSINESS PC MOTHER BOARD (INA601WTFW)', 'TFA/2022-2023/639', NULL, 'REPAIR OF HP 406 G1 MT BUSINESS PC MOTHER BOARD (INA601WTFW)', 1, 13629, 2, 1, 3, 7, 2, '', 1, '2023-03-13 12:29:42', NULL, '2023-03-13 06:59:09'),
-(640, 174, 'PSU along with Hocl', NULL, NULL, '', 12, 3825560, 2, 1, 2, 2, 1, '', 0, NULL, NULL, '2023-03-14 06:12:03'),
-(641, 233, 'Photo Frame', 'QRS&IT/2022-2023/641', NULL, '', 6, 6584, 2, 1, 1, 7, 2, '', 1, '2023-03-15 10:18:12', NULL, '2023-03-15 04:47:09'),
-(642, 96, 'Photo Frames', 'MS&ESRG/2022-2023/642', 'CFEES/23ERG043/P/GEM/264/22-23', '', 11, 24200, 1, 4, 1, 7, 2, '', 1, '2023-03-17 11:10:08', NULL, '2023-03-17 05:39:43'),
-(643, 71, 'Incubated and Refrigerated Stackable Shaker', 'QRS&IT/2022-2023/643', NULL, '', 1, 1591819, 1, 13, 1, 2, 2, '', 1, '2023-03-17 17:11:23', NULL, '2023-03-17 11:41:16'),
-(644, 79, 'Borosile glass beaker', 'EnSG/2022-2023/644', 'CFEES/23ENS086/P/GEM/269/22-23', '', 50, 20000, 1, 7, 1, 5, 2, '', 1, '2023-03-21 10:26:10', NULL, '2023-03-21 04:55:55'),
-(645, 250, 'Toner Cartridge CF277A 23MMG086', 'MMG/2022-2023/645', 'CFEES/23MMG086/MISC/GEM/259/22-23', '', 15, 15750, 2, 1, 1, 7, 2, '', 1, '2023-03-21 16:10:21', NULL, '2023-03-21 10:39:46'),
-(646, 250, 'Xerox Paper A4', 'MMG/2022-2023/646', 'CFEES/23MMG084/MISC/GEM/258/22-23', '', 600, 189000, 2, 1, 1, 7, 2, '', 1, '2023-03-21 16:11:37', NULL, '2023-03-21 10:41:23'),
-(647, 250, 'Stamp Pad 23MMG083', 'MMG/2022-2023/647', 'CFEES/23MMG083/MISC/GEM/257/22-23', '', 40, 2520, 2, 1, 1, 7, 2, '', 1, '2023-03-21 16:12:35', NULL, '2023-03-21 10:42:27'),
-(648, 250, 'GLUE STICK 23MMG082', 'MMG/2022-2023/648', 'CFEES/23MMG082/MISC/GEM/256/22-23', '', 300, 7500, 2, 1, 1, 7, 2, '', 1, '2023-03-21 16:13:33', NULL, '2023-03-21 10:43:26'),
-(649, 79, 'Motor vortex Mixrers', 'EnSG/2022-2023/649', 'CFEES/23ENS080/P/GEM/271/22-23', '', 1, 38500, 1, 7, 1, 5, 2, '', 1, '2023-03-21 17:07:36', NULL, '2023-03-21 11:34:45'),
-(650, 79, 'self adhesive Label ', 'EnSG/2022-2023/650', NULL, '', 50, 15000, 1, 7, 1, 5, 2, '', 1, '2023-03-21 17:07:13', NULL, '2023-03-21 11:36:07'),
-(651, 125, 'Procurement DRUM Cartridge of Xerox Versalink B7035', 'TCP&HR/2022-2023/651', 'CFEES/23TCP009/BU/GEM/231/22-23', '', 1, 39576, 2, 1, 1, 1, 2, '', 1, '2023-03-28 12:16:09', NULL, '2023-03-28 06:44:38'),
-(652, 80, 'Procurement of Chemicals (tetrabromobisphenol etc.)', 'FC&HB/2022-2023/652', 'CFEES/23FCP08/P/LPC/270/22-23', '', 16, 175396, 1, 14, 3, 9, 2, '', 1, '2023-03-31 11:07:16', NULL, '2023-03-31 05:37:01'),
-(653, 60, 'Hiring of Unskilled Manpower (NGHA)', 'FC&HB/2022-2023/653', 'CFEES/23FCP109/P/GEM/007/23-24', '23FCP109', 4, 3723552, 1, 14, 1, 5, 2, '', 1, '2023-04-03 11:19:37', NULL, '2023-04-03 05:49:07'),
-(654, 250, 'Toner Cartridge NGP - 51 23MMG087', 'MMG/2022-2023/654', 'CFEES/23MMG087/MISC/GEM/266/22-23', '', 5, 16700, 2, 1, 1, 7, 2, '', 1, '2023-04-03 12:19:19', NULL, '2023-04-03 06:49:09'),
-(655, 61, 'Multifunction (Photocopier) Machine', 'FSEG/2022-2023/655', NULL, '', 1, 247169, 2, 1, 1, 8, 2, '', 1, '2023-04-05 13:36:23', NULL, '2023-04-05 08:05:31'),
-(656, 80, 'Toxicity Determination in r/o NOAEL & LOAEL Study', 'FC&HB/2022-2023/656', NULL, '', 2, 33200000, 1, 14, 2, 2, 2, '', 1, '2023-04-05 15:49:01', NULL, '2023-04-05 10:18:44'),
-(657, 79, 'Payment of Arrears of unskilled manpower of EnSG', 'EnSG/2021-2022/657', NULL, '', 3, 68141, 1, 7, 1, 1, 1, '', 1, '2023-04-13 12:32:25', NULL, '2023-04-13 07:02:16'),
-(658, 192, 'LCMS Grade Solvent/Chemicals', 'QRS&IT/2021-2022/658', 'CFEES/23QAG073/P/LPC/23-24', '', 8, 270455, 1, 13, 3, 9, 2, '', 1, '2023-04-13 15:49:54', NULL, '2023-04-13 10:19:17'),
-(659, 192, 'LCMS Grade Solvent/Chemicals', NULL, NULL, '', 8, 270455, 1, 13, 3, 9, 2, '', 0, NULL, NULL, '2023-04-13 10:22:30'),
-(660, 250, 'Hand Towel 23MMG076', 'MMG/2022-2023/660', 'CFEES/23MMG076/MISC/GEM/220/22-23', '', 100, 12000, 2, 1, 1, 8, 2, '', 1, '2023-04-17 15:19:11', NULL, '2023-04-17 09:48:56'),
-(661, 124, 'CFEES/24MMG001/BU/GeM/001/23-24', NULL, NULL, 'HARD DISK', 1, 21500, 2, 1, 1, 7, 1, '', 0, NULL, NULL, '2023-04-17 09:50:13'),
-(662, 124, 'CFEES/24MMG001/BU/GeM/001/23-24', 'MMG/2021-2022/662', 'CFEES/24MMG001/BU/GEM/001/23-24', 'HARD DISK', 1, 21500, 2, 1, 1, 7, 1, '', 1, '2023-04-17 15:23:38', NULL, '2023-04-17 09:53:11'),
-(663, 77, 'Refill Of Nitrogen Gas through GeM', 'PC&M/2021-2022/663', 'CFEES/24PCM001/BU/GEM/006/23-24', '', 6, 17640, 2, 1, 1, 7, 1, '', 1, '2023-04-17 16:55:50', NULL, '2023-04-17 11:25:39'),
-(664, 60, 'Procurement of Fourier Transform Infrared ( FTIR ) Spectrophotometer', 'FC&HB/2022-2023/664', NULL, 'Demand no  23FCP104 dated 20 Feb 2023', 1, 3688680, 1, 14, 1, 5, 2, '', 1, '2023-04-18 12:14:20', NULL, '2023-04-18 06:42:59'),
-(665, 75, 'Online UPS (10 KVA) with Battery Backup', 'EnSG/2021-2022/665', NULL, 'Online UPS (10 KVA) with Battery Backup is required for uninterrupted and stabilized power supply to different instruments in Room No. 10 (N.B.)', 1, 575000, 2, 1, 1, 8, 1, 'Put up for approval please.', 1, '2023-04-24 10:50:08', NULL, '2023-04-24 05:19:47'),
-(666, 163, 'Deep freezer', 'QRS&IT/2022-2023/666', NULL, '', 1, 1050000, 1, 13, 1, 5, 2, '', 1, '2023-04-24 11:40:24', NULL, '2023-04-24 06:09:57'),
-(667, 250, 'File Cover ', 'MMG/2022-2023/667', 'CFEES/23MMG077/MISC/GEM/219/22-23', '', 1000, 25000, 1, 1, 1, 7, 2, '', 1, '2023-04-24 12:27:15', NULL, '2023-04-24 06:57:04'),
-(668, 224, 'Procurement of Name Plates ', 'TFA/2022-2023/668', NULL, '', 20, 24960, 2, 1, 1, 6, 2, '', 1, '2023-04-24 14:49:23', NULL, '2023-04-24 09:18:53'),
-(669, 124, 'Hiring of Data Entry Operator', 'MMG/2021-2022/669', 'CFEES/22MMG007/MISC/GEM/181', 'Hiring of Data Entry Operator 2022 to 2023', 21, 7091746, 2, 1, 1, 5, 1, '', 1, '2023-04-25 11:06:39', NULL, '2023-04-25 05:35:17'),
-(670, 77, 'AMC of Scanning Electron Microscope', 'PC&M/2021-2022/670', 'CFEES/20EVS048/BU/ST/206/19-20', '', 1, 885000, 2, 1, 2, 2, 1, '', 1, '2023-04-25 12:16:35', NULL, '2023-04-25 06:46:05'),
-(671, 249, 'SoC: Sanction for Hiring of Services of Two (02) Security Guard Female (Lady Searcher) For Security and Surveillance at CFEES Campus', NULL, NULL, 'Bill Processing ', 1, 116913, 2, 1, 1, 6, 1, 'Forwarding Bills from  01/02/2023 to 31/03/2023', 0, NULL, NULL, '2023-04-25 06:47:53'),
-(672, 249, 'SOC FOR SANTION FOR HIRING OF SERVICES OF TWO (02) LADY SEARCHER (SECURITY GUARD FEMALE) FOR SECURITY AND SURVEILLANCE AT CFEES CAMPUS', 'SECURITY/2022-2023/672', 'CFEES/22SEC008/MISC/GEM/079/21-22', 'Forwarding Bill', 1, 116913, 2, 1, 1, 5, 2, 'Forwarding Bill from 01/02/2023 to 31/03/2023', 1, '2023-04-25 12:23:25', NULL, '2023-04-25 06:52:33'),
-(673, 84, 'CMRC for Fire Extinguishing System of AFPS for Aircraft', 'FSEG/2021-2022/673', NULL, '', 1, 13098000, 1, 10, 2, 5, 1, '', 1, '2023-04-26 10:12:16', NULL, '2023-04-26 04:41:37'),
-(674, 218, 'CAMC for photo Copier Machine (Works Division + Security Division)', 'WORKS/2022-2023/674', NULL, 'CFEES/23WRK011/Misc/GeM/260/22-23 dt. 22/03/2023', 2, 270000, 2, 1, 1, 7, 2, '', 1, '2023-04-26 11:48:02', NULL, '2023-04-26 06:16:54'),
-(675, 249, 'DIGITAL PHOTOCOPIER MACHINE', 'SECURITY/2022-2023/675', NULL, 'DIGITAL PHOTOCOPIER MACHINE', 1, 183000, 2, 1, 1, 5, 2, '', 1, '2023-04-27 11:34:27', NULL, '2023-04-27 06:03:50'),
-(676, 251, 'Procurement of 8 No of Kel Wooden Crib (500mm x 500mm x500mm)', 'EnSG/2022-2023/676', NULL, '', 8, 94400, 2, 1, 3, 9, 2, '', 1, '2023-04-27 15:21:30', NULL, '2023-04-27 09:08:18'),
-(677, 79, 'Hiring of Manpower MTS  (Part-2)', 'EnSG/2022-2023/677', 'CFEES/20EVS077/P/GEM/258/19-20', '', 3, 2178696, 1, 7, 1, 5, 2, '', 1, '2023-05-03 10:20:56', NULL, '2023-05-03 04:50:34'),
-(678, 244, 'Multi function machine', 'FSEG/2022-2023/678', 'CFEES/24FAS001/P/GEM/005/23-24', '', 2, 380242, 1, 11, 1, 7, 2, '', 1, '2023-05-03 12:30:41', NULL, '2023-05-03 06:59:43'),
-(679, 251, 'Purchase of Chemicals', 'EnSG/2022-2023/679', 'CFEES/24ENS007/BU/GEM/014/23-24', '', 3, 21550, 2, 1, 1, 9, 2, '', 1, '2023-05-03 12:37:47', NULL, '2023-05-03 07:06:39'),
-(680, 192, 'Crucible (15 mL)', 'QRS&IT/2022-2023/680', 'CFEES/24QAG001/P/GEM/009/23-24', '', 12, 9600, 1, 13, 1, 7, 2, '', 1, '2023-05-03 14:34:37', NULL, '2023-05-03 08:02:04'),
-(681, 192, 'Solid Phase Extraction Unit', 'QRS&IT/2022-2023/681', 'CFEES/24QAG002/P/GEM/022/23-24', '', 1, 64998, 1, 13, 1, 8, 2, '', 1, '2023-05-03 14:34:32', NULL, '2023-05-03 08:02:52'),
-(682, 192, 'Test Tubes', 'QRS&IT/2022-2023/682', 'CFEES/24QAG003/P//GEM/015/23-24', '', 100, 5000, 1, 13, 1, 7, 2, '', 1, '2023-05-03 14:34:28', NULL, '2023-05-03 08:03:27'),
-(683, 192, 'Petri Dish (Glass)', 'QRS&IT/2022-2023/683', 'CFEES/24QAG004/P/GEM/010/23-24', '', 100, 4500, 1, 13, 1, 7, 2, '', 1, '2023-05-03 14:34:23', NULL, '2023-05-03 08:04:14'),
-(684, 192, 'Agar', 'QRS&IT/2022-2023/684', 'CFEES/24QAG005/P/GEM/018/23-24', '', 9, 39600, 1, 13, 1, 7, 2, '', 1, '2023-05-03 14:34:18', NULL, '2023-05-03 08:04:52'),
-(685, 124, 'Hiring of Wet Canteen Services Based on Employee Welfare Model', 'MMG/2021-2022/685', 'CFEES/24WET001/MISC/GEM/003/23-24', 'Hiring of Wet Canteen Services Based on Employee Welfare Model for Two Year', 1, 7660570, 2, 1, 1, 5, 1, '', 1, '2023-05-03 15:00:02', NULL, '2023-05-03 09:28:57'),
-(686, 84, 'CMRC for Fire Detection & Control System of AFPS for Aircraft', 'FSEG/2021-2022/686', 'CFEES/21FAS006/P/OT/195/20-21', '', 1, 18656980, 1, 10, 2, 5, 1, '', 1, '2023-05-08 11:12:40', NULL, '2023-05-08 05:41:52'),
-(687, 192, 'Hiring of unskilled manpower 02 nos.', 'QRS&IT/2022-2023/687', NULL, '', 24, 1231488, 1, 13, 1, 8, 2, '', 1, '2023-05-08 16:23:43', NULL, '2023-05-08 10:52:58'),
-(688, 32, 'Calibration gases', 'FC&HB/2022-2023/688', NULL, '', 8, 133340, 2, 1, 3, 9, 2, '', 1, '2023-05-10 16:54:05', NULL, '2023-05-10 11:17:55'),
-(689, 192, 'Orbital Shaker', 'QRS&IT/2022-2023/689', 'CFEES/24QAG009/P/GEM/017/23-24', '', 2, 360000, 1, 13, 1, 8, 2, '', 1, '2023-05-11 10:05:23', NULL, '2023-05-11 04:35:00'),
-(690, 192, 'Syringe Filter 0.22 micrometer', 'QRS&IT/2022-2023/690', NULL, '', 5, 25125, 1, 13, 1, 8, 2, '', 1, '2023-05-11 10:23:43', NULL, '2023-05-11 04:53:22'),
-(691, 250, 'Plastic Sampling Bottle 250ML Duplicate File ', 'MMG/2021-2022/691', 'CFEES/23QAG088/P/GEM/248/22-23', '', 50, 2124, 2, 1, 1, 7, 1, '', 1, '2023-05-12 14:52:40', NULL, '2023-05-12 09:22:21'),
-(692, 79, 'Cartridge', 'EnSG/2022-2023/692', NULL, '', 3, 15000, 1, 7, 1, 5, 2, '', 1, '2023-05-16 14:43:13', NULL, '2023-05-16 09:12:42'),
-(693, 72, 'Unskilled manpower', 'FC&HB/2022-2023/693', 'CFEES/21FCP009/P/DB/GEM/80/20-21', '', 2, 1085794, 1, 8, 1, 5, 2, 'Final bill submission to DCDA', 1, '2023-05-16 15:47:01', NULL, '2023-05-16 10:15:53'),
-(694, 218, 'Cleaning White Floor Duster ', 'WORKS/2021-2022/694', 'CFEES/23WRK013/MISC/GEM/027/23-24', '', 200, 2180, 2, 1, 1, 7, 2, '', 1, '2023-05-24 10:45:21', NULL, '2023-05-24 05:14:17'),
-(695, 250, 'Toner cartridge 388A 24MMG004', 'MMG/2022-2023/695', 'CFEES/24MMG004/MISC/GEM/016/23-24', '', 80, 64000, 2, 1, 1, 7, 2, '', 1, '2023-05-24 14:41:11', NULL, '2023-05-24 09:10:46'),
-(696, 250, 'Networking Devices Duplicate File (Ethernet Patch Cord 3mtr)', 'MMG/2022-2023/696', NULL, '', 20, 2280, 2, 1, 1, 7, 2, '', 1, '2023-05-25 11:55:02', NULL, '2023-05-25 06:24:49'),
-(697, 250, 'Pen Stand 24MMG006', 'MMG/2022-2023/697', NULL, '', 20, 23100, 2, 1, 1, 7, 2, '', 1, '2023-05-25 16:41:56', NULL, '2023-05-25 11:11:50'),
-(698, 250, 'Noting Sheet 24MMG005', 'MMG/2022-2023/698', NULL, '', 100, 13500, 2, 1, 1, 7, 2, '', 1, '2023-05-25 16:42:45', NULL, '2023-05-25 11:12:40'),
-(699, 218, 'Statement of case for sanction of additional amount for payment of arreas due to revision of wages to cleaning staff', 'WORKS/2022-2023/699', 'CFEES/21WRK013/MISC/GEM/194/20-21', '', 1, 56494, 2, 1, 1, 7, 2, '', 1, '2023-05-26 11:58:34', NULL, '2023-05-26 06:26:17'),
-(700, 218, 'Statement of case for hiring of cleaning staff at CFEES (06-10-2023 to 05-10-2024)', 'WORKS/2022-2023/700', NULL, '', 1, 6673070, 2, 1, 1, 7, 2, '', 1, '2023-05-26 15:12:37', NULL, '2023-05-26 09:41:59'),
-(701, 250, 'Duster 100 Nos Duplicate File 23WRK013', 'MMG/2022-2023/701', 'CFEES/23WRK013/MISC/GEM/026/23-24', '', 100, 850, 2, 1, 1, 7, 2, '', 1, '2023-05-29 11:55:56', NULL, '2023-05-29 06:25:47'),
-(702, 250, 'TONER NPG-51 23MMG087', 'MMG/2022-2023/702', NULL, '', 5, 15900, 2, 1, 1, 7, 2, '', 1, '2023-05-31 11:34:17', NULL, '2023-05-31 06:04:10'),
-(703, 192, 'Web Camera', 'QRS&IT/2022-2023/703', 'CFEES/24QAG010/BU/GEM/025/23-24', '', 8, 59960, 2, 1, 1, 7, 2, '', 1, '2023-06-01 16:41:26', NULL, '2023-06-01 11:11:04'),
-(704, 39, 'Procurement of HOT air oven through GeM under the project NGHA', 'FC&HB/2022-2023/704', NULL, ' Project no:  S &  T(A) 22-23/CFE-44', 1, 130000, 1, 14, 1, 8, 2, 'Correct Financial year should be 2023-24', 1, '2023-06-02 15:41:04', NULL, '2023-06-02 10:09:46'),
-(705, 261, 'Procurement of Diesel & Petrol for MT vehicles', 'MT/2022-2023/705', NULL, '', 9500, 1286630, 2, 1, 3, 2, 2, '', 1, '2023-06-02 16:11:15', NULL, '2023-06-02 10:34:41'),
-(706, 77, 'Thermal Protective Performance Tseter', 'PC&M/2022-2023/706', NULL, '', 1, 7500000, 2, 1, 2, 5, 2, '', 1, '2023-06-05 11:34:39', NULL, '2023-06-05 06:00:45'),
-(707, 77, 'Simultaneous Thermogravimetric Analyser', 'PC&M/2022-2023/707', NULL, '', 1, 7500000, 2, 1, 2, 5, 2, '', 1, '2023-06-05 11:33:06', NULL, '2023-06-05 06:02:17'),
-(708, 79, 'Blotting Paper', 'EnSG/2022-2023/708', NULL, '', 10, 30000, 1, 7, 1, 5, 2, '', 1, '2023-06-07 15:55:11', NULL, '2023-06-07 10:22:10'),
-(709, 249, 'RFID Based Vehicle Sticker', 'SECURITY/2022-2023/709', NULL, 'RFID Based Vehicle Sticker', 700, 14455, 2, 1, 3, 9, 2, 'Cash Purchase', 1, '2023-06-08 11:28:12', NULL, '2023-06-08 05:57:31'),
-(710, 174, 'Multifunction Machine', 'MS&ESRG/2022-2023/710', NULL, '', 2, 477420, 1, 4, 1, 8, 2, 'File placed opposite to process the case on GeM', 1, '2023-06-08 15:53:35', NULL, '2023-06-08 10:21:26'),
-(711, 250, 'Napthelene Balls Duplicate File 23WRK013', 'MMG/2022-2023/711', NULL, '', 100, 3500, 2, 1, 1, 7, 2, '', 1, '2023-06-08 16:02:05', NULL, '2023-06-08 10:31:56'),
-(712, 250, 'Cartridge 278 24MMG007', 'MMG/2022-2023/712', 'CFEES/24MMG007/MISC/GEM/024/23-24', '', 30, 45000, 2, 1, 1, 8, 2, '', 1, '2023-06-09 11:35:14', NULL, '2023-06-09 06:04:56'),
-(713, 250, 'Chemical (Naclo & KNo3) 23QAG084 Duplicate File ', 'MMG/2022-2023/713', NULL, '', 5, 7535, 2, 1, 1, 7, 2, '', 1, '2023-06-12 10:59:15', NULL, '2023-06-12 05:29:05'),
-(714, 206, 'CARS-Studies on microbial community Dynamics during Pilot/Field Scale Bioremediation o Explosive-VIT Bill 15L', 'QRS&IT/2022-2023/714', NULL, 'VIT Bill 15L', 1, 1500000, 1, 13, 5, 11, 2, 'Payment of CARS (15 Lakh)', 1, '2023-06-13 11:55:29', NULL, '2023-06-13 06:24:43'),
-(715, 261, 'Procurement of Loaders ( E-Rickshaw for carrying Goods)', 'MT/2022-2023/715', NULL, '', 4, 580000, 2, 1, 1, 5, 2, '', 1, '2023-06-14 13:00:28', NULL, '2023-06-14 07:29:55'),
-(716, 192, 'Parafilm', 'QRS&IT/2022-2023/716', NULL, '', 5, 23500, 1, 13, 1, 7, 2, '', 1, '2023-06-15 10:30:12', NULL, '2023-06-15 04:59:59');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `file_track`
 --
 
-CREATE TABLE IF NOT EXISTS `file_track` (
-  `ft_id` int(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `file_track` (
+  `ft_id` int(20) NOT NULL,
   `f_id` int(11) NOT NULL,
   `sender_id` varchar(50) NOT NULL,
-  `sender_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `sender_timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `receiver_id` varchar(50) NOT NULL,
   `receiver_timestamp` datetime DEFAULT NULL,
-  `ft_status` int(11) NOT NULL DEFAULT '0',
+  `ft_status` int(11) NOT NULL DEFAULT 0,
   `ft_remarks` varchar(1024) NOT NULL,
-  `ft_action` int(11) NOT NULL DEFAULT '0',
-  `date_diff` int(5) DEFAULT NULL,
-  PRIMARY KEY (`ft_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18468 ;
+  `ft_action` int(11) NOT NULL DEFAULT 0,
+  `date_diff` int(5) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `file_track`
@@ -5041,9 +5050,9 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (3817, 71, '18', '2022-03-29 10:31:34', '178', '2022-03-29 16:09:48', 1, '', 1, 1),
 (3818, 119, '18', '2022-03-29 10:32:24', '178', '2022-03-29 16:09:44', 1, '', 1, 1),
 (3819, 228, '18', '2022-03-29 10:33:15', '178', '2022-03-29 16:09:37', 1, '', 1, 1),
-(3820, 71, '178', '2022-03-30 04:02:08', '252', '2022-03-30 09:34:08', 1, '', 1, 0);
+(3820, 71, '178', '2022-03-30 04:02:08', '252', '2022-03-30 09:34:08', 1, '', 1, 0),
+(3821, 119, '178', '2022-03-30 04:02:44', '252', '2022-03-30 09:33:48', 1, '', 1, 0);
 INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
-(3821, 119, '178', '2022-03-30 04:02:44', '252', '2022-03-30 09:33:48', 1, '', 1, 0),
 (3822, 228, '178', '2022-03-30 04:03:00', '252', '2022-03-30 09:33:10', 1, '', 1, 0),
 (3823, 228, '252', '2022-03-30 04:03:42', '1', '2022-03-30 14:33:33', 1, 'For Head MMG', 1, 0),
 (3824, 119, '252', '2022-03-30 04:04:03', '1', '2022-03-30 14:25:27', 1, 'For Head MMG', 1, 0),
@@ -5541,9 +5550,9 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (4316, 302, '252', '2022-04-12 05:42:52', '1', '2022-04-12 11:13:16', 1, 'For Head MMG', 1, 1),
 (4317, 37, '124', '2022-04-12 06:12:26', '1', '2022-04-12 11:44:08', 1, '', 1, 1),
 (4318, 311, '252', '2022-04-12 06:33:34', '1', '2022-04-12 12:03:54', 1, '', 1, 0),
-(4319, 311, '1', '2022-04-12 06:56:04', '252', '2022-04-12 12:26:23', 1, '', 1, 0);
+(4319, 311, '1', '2022-04-12 06:56:04', '252', '2022-04-12 12:26:23', 1, '', 1, 0),
+(4320, 311, '252', '2022-04-12 06:56:34', '74', '2022-04-27 12:09:19', 1, '', 1, 0);
 INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
-(4320, 311, '252', '2022-04-12 06:56:34', '74', '2022-04-27 12:09:19', 1, '', 1, 0),
 (4321, 57, '121', '2022-04-12 07:23:48', '124', '2022-04-12 16:42:30', 1, 'DP letter has been prepared', 1, 0),
 (4322, 98, '18', '2022-04-12 09:15:11', '252', '2022-04-12 16:06:09', 1, '', 1, 0),
 (4323, 103, '18', '2022-04-12 10:17:31', '252', '2022-04-12 16:07:06', 1, '', 1, 0),
@@ -6049,9 +6058,9 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (4823, 323, '252', '2022-04-27 09:55:16', '1', '2022-04-27 15:25:39', 1, '', 1, 2),
 (4824, 49, '124', '2022-04-27 10:02:19', '250', '2022-07-05 10:31:43', 1, 'Put up for RIN section', 1, 0),
 (4825, 63, '124', '2022-04-27 10:03:21', '252', '2022-04-27 15:37:01', 1, '', 1, 0),
-(4826, 63, '252', '2022-04-27 10:07:19', '1', '2022-04-27 15:37:47', 1, '', 1, 13);
+(4826, 63, '252', '2022-04-27 10:07:19', '1', '2022-04-27 15:37:47', 1, '', 1, 13),
+(4827, 317, '11', '2022-04-27 10:22:43', '252', '2022-04-27 15:54:28', 1, '', 1, 0);
 INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
-(4827, 317, '11', '2022-04-27 10:22:43', '252', '2022-04-27 15:54:28', 1, '', 1, 0),
 (4828, 317, '252', '2022-04-27 10:24:41', '1', '2022-04-27 15:55:12', 1, '', 1, 1),
 (4829, 126, '250', '2022-04-27 11:10:30', '1', '2022-04-28 15:30:07', 1, 'RIN document complete', 1, 0),
 (4830, 163, '250', '2022-04-27 11:13:08', '1', '2022-04-28 15:35:32', 1, 'RIN document complete', 1, 0),
@@ -9088,10 +9097,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (7860, 418, '250', '2022-08-04 10:32:22', '190', '2022-08-04 16:02:43', 1, '', 1, 0),
 (7861, 418, '190', '2022-08-04 10:32:54', '252', '2022-08-04 16:28:42', 1, '', 1, 0),
 (7862, 371, '1', '2022-08-04 10:55:45', '250', '2022-08-05 10:35:19', 1, 'For CRV action ', 1, 3),
-(7863, 66, '1', '2022-08-04 10:56:55', '252', '2022-08-04 16:28:12', 1, 'Bid life cycle ended on GEM portal on 26.01.22 ', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(7863, 66, '1', '2022-08-04 10:56:55', '252', '2022-08-04 16:28:12', 1, 'Bid life cycle ended on GEM portal on 26.01.22 ', 1, 0),
 (7864, 341, '1', '2022-08-04 10:57:43', '250', '2022-08-05 10:35:20', 1, 'Copy to user for RIN section ', 1, 3),
-(7865, 66, '252', '2022-08-04 10:58:37', '18', '2022-08-04 16:41:00', 1, 'Bid life cycle ended on GEM portal on 26.01.22', 1, 8),
+(7865, 66, '252', '2022-08-04 10:58:37', '18', '2022-08-04 16:41:00', 1, 'Bid life cycle ended on GEM portal on 26.01.22', 1, 8);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (7866, 418, '252', '2022-08-04 10:59:11', '1', '2022-08-04 16:29:32', 1, '', 1, 0),
 (7867, 418, '1', '2022-08-04 11:00:41', '252', '2022-08-04 16:31:01', 1, '', 1, 0),
 (7868, 418, '252', '2022-08-04 11:01:18', '18', '2022-08-04 16:40:55', 1, '', 1, 14),
@@ -9598,10 +9607,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (8369, 369, '174', '2022-08-24 06:27:23', '252', '2022-08-24 12:11:36', 1, 'DSC sheet & RFP to be issued', 1, 0),
 (8370, 346, '253', '2022-08-24 06:42:44', '252', '2022-08-24 12:13:27', 1, '', 1, 0),
 (8371, 369, '252', '2022-08-24 06:43:01', '1', '2022-08-30 10:05:59', 1, '', 1, 0),
-(8372, 346, '252', '2022-08-24 06:43:49', '1', '2022-08-24 12:14:18', 1, '', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(8372, 346, '252', '2022-08-24 06:43:49', '1', '2022-08-24 12:14:18', 1, '', 1, 0),
 (8373, 160, '250', '2022-08-24 06:43:52', '252', '2022-08-24 12:22:22', 1, 'For control bill', 1, 0),
-(8374, 346, '1', '2022-08-24 06:44:38', '250', '2022-08-24 12:34:38', 1, '', 1, 0),
+(8374, 346, '1', '2022-08-24 06:44:38', '250', '2022-08-24 12:34:38', 1, '', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (8375, 160, '252', '2022-08-24 06:52:42', '18', '2022-08-24 14:42:10', 1, '', 1, 1),
 (8376, 346, '250', '2022-08-24 07:04:58', '1', '2022-08-24 16:46:17', 1, '', 1, 6),
 (8377, 171, '250', '2022-08-24 07:14:25', '148', '2022-08-25 15:51:22', 1, '', 1, 0),
@@ -10093,10 +10102,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (8863, 387, '74', '2022-09-09 03:54:33', '252', '2022-09-09 10:21:37', 1, '', 1, 0),
 (8864, 388, '1', '2022-09-09 04:15:54', '250', '2022-09-14 15:43:02', 1, 'Put up for Comparison on GeM and Financial Sanction', 1, 0),
 (8865, 327, '1', '2022-09-09 04:16:56', '252', '2022-09-09 10:22:26', 1, 'Put up for nomination of Expert member and QA Rep for TCEC', 1, 0),
-(8866, 70, '1', '2022-09-09 04:32:22', '236', '2022-09-14 16:20:53', 1, 'Put up for Tender to opened', 1, 5);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(8866, 70, '1', '2022-09-09 04:32:22', '236', '2022-09-14 16:20:53', 1, 'Put up for Tender to opened', 1, 5),
 (8867, 381, '1', '2022-09-09 04:38:55', '252', '2022-09-09 10:25:43', 1, 'put up for approval for DP extension till 15.09.22 without LD(expost facto)', 1, 0),
-(8868, 98, '1', '2022-09-09 04:39:40', '121', '2022-09-12 12:16:30', 1, '', 1, 22),
+(8868, 98, '1', '2022-09-09 04:39:40', '121', '2022-09-12 12:16:30', 1, '', 1, 22);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (8869, 171, '1', '2022-09-09 04:40:35', '252', '2022-09-09 10:25:12', 1, 'put up for nomination of expert member &QA rep for TCEC', 1, 0),
 (8870, 48, '1', '2022-09-09 04:42:23', '250', '2022-09-13 11:18:34', 1, 'put up for uploading of TCEC minutes on GEM portal and the re after opening of price bid. ', 1, 0),
 (8871, 360, '1', '2022-09-09 04:43:27', '250', '2022-09-13 11:19:09', 1, 'Noted please bid on 28.09.22 in opening. ', 1, 0),
@@ -10600,10 +10609,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (9369, 26, '18', '2022-09-28 04:40:28', '252', '2022-09-28 10:13:35', 1, '', 1, 0),
 (9370, 26, '252', '2022-09-28 04:44:38', '124', '2023-01-09 11:04:52', 1, '', 1, 0),
 (9371, 304, '1', '2022-09-28 04:53:51', '252', '2022-09-28 10:24:12', 1, 'Defproc ID ', 1, 0),
-(9372, 304, '252', '2022-09-28 04:54:33', '174', '2022-09-28 11:27:53', 1, '	Defproc ID', 1, 1);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(9372, 304, '252', '2022-09-28 04:54:33', '174', '2022-09-28 11:27:53', 1, '	Defproc ID', 1, 1),
 (9373, 460, '174', '2022-09-28 05:04:53', '252', '2022-09-28 10:40:35', 1, 'Case for procurement of Anti Personnel Mine Cable (firing cable) is placed opposite for FNA.\r\n\r\n\r\n', 1, 5),
-(9374, 462, '192', '2022-09-28 05:11:03', '257', NULL, 0, '', 0, NULL),
+(9374, 462, '192', '2022-09-28 05:11:03', '257', NULL, 0, '', 0, NULL);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (9375, 57, '67', '2022-09-28 05:36:11', '250', '2022-09-28 11:12:12', 1, '', 1, 0),
 (9376, 57, '250', '2022-09-28 05:42:26', '1', '2022-09-28 11:20:42', 1, '', 1, 0),
 (9377, 443, '250', '2022-09-28 05:43:01', '1', '2022-09-28 11:19:28', 1, '', 1, 1),
@@ -11095,11 +11104,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (9863, 340, '1', '2022-10-17 04:32:37', '250', '2022-10-27 15:58:42', 1, 'For CRAC& CRV action', 1, 0),
 (9864, 445, '1', '2022-10-17 04:33:21', '252', '2022-10-17 10:03:39', 1, 'Kindly modify demand for S.NO 19& justification ', 1, 0),
 (9865, 445, '252', '2022-10-17 04:33:54', '74', '2022-10-19 12:10:20', 1, '	Kindly modify demand for S.NO 19& justification', 1, 0),
-(9866, 446, '174', '2022-10-17 04:43:51', '252', '2022-10-17 10:16:49', 1, 'Inspection done put up for f/n/a.', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(9866, 446, '174', '2022-10-17 04:43:51', '252', '2022-10-17 10:16:49', 1, 'Inspection done put up for f/n/a.', 1, 0),
 (9867, 446, '252', '2022-10-17 04:47:16', '1', '2022-10-17 10:17:37', 1, '', 1, 0),
 (9868, 388, '18', '2022-10-17 05:02:56', '178', '2022-10-17 10:45:11', 1, '', 1, 0),
-(9869, 349, '18', '2022-10-17 05:23:09', '178', '2022-10-17 16:07:42', 1, '', 1, 0),
+(9869, 349, '18', '2022-10-17 05:23:09', '178', '2022-10-17 16:07:42', 1, '', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (9870, 443, '174', '2022-10-17 06:17:28', '252', '2022-10-17 12:13:36', 1, '', 1, 0),
 (9871, 443, '252', '2022-10-17 06:44:31', '1', '2022-10-17 12:14:59', 1, '', 1, 0),
 (9872, 289, '18', '2022-10-17 07:07:48', '252', '2022-10-17 12:42:33', 1, '', 1, 1),
@@ -11624,11 +11633,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (10391, 403, '252', '2022-11-04 09:49:43', '1', '2022-11-07 10:31:04', 1, '', 1, 0),
 (10392, 132, '252', '2022-11-04 09:50:00', '1', '2022-11-07 10:37:44', 1, '', 1, 0),
 (10393, 396, '252', '2022-11-04 09:51:31', '1', '2022-11-07 10:33:48', 1, '', 1, 0),
-(10394, 284, '124', '2022-11-04 09:52:24', '250', '2022-12-29 15:49:12', 1, '', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(10394, 284, '124', '2022-11-04 09:52:24', '250', '2022-12-29 15:49:12', 1, '', 1, 0),
 (10395, 487, '261', '2022-11-04 09:53:34', '264', '2022-11-04 15:43:02', 1, '', 1, 0),
 (10396, 253, '252', '2022-11-04 09:58:24', '1', '2022-11-07 10:34:45', 1, '', 1, 0),
-(10397, 487, '264', '2022-11-04 10:14:04', '252', NULL, 0, '', 0, NULL),
+(10397, 487, '264', '2022-11-04 10:14:04', '252', NULL, 0, '', 0, NULL);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (10398, 461, '18', '2022-11-04 11:04:16', '178', '2022-11-04 16:46:26', 1, '', 1, 3),
 (10399, 444, '18', '2022-11-04 11:05:13', '258', '2022-11-07 09:20:46', 1, '', 1, 0),
 (10400, 481, '250', '2022-11-04 11:11:00', '148', '2022-11-07 14:49:58', 1, 'for gem bill process', 1, 0),
@@ -12144,11 +12153,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (10910, 290, '252', '2022-11-22 07:34:01', '18', '2022-11-22 16:37:24', 1, 'CREC minutes (pg no 59 to 60) are placed in the file for director approval pls', 1, 8),
 (10911, 481, '1', '2022-11-22 07:48:22', '18', '2022-11-22 16:36:18', 1, 'Please control the Bill', 1, 9),
 (10912, 381, '1', '2022-11-22 07:48:50', '18', '2022-11-22 16:35:54', 1, 'Please control the Bill', 1, 9),
-(10913, 450, '1', '2022-11-22 07:49:58', '18', '2022-11-22 16:34:57', 1, 'Please control the Bill', 1, 9);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(10913, 450, '1', '2022-11-22 07:49:58', '18', '2022-11-22 16:34:57', 1, 'Please control the Bill', 1, 9),
 (10914, 509, '1', '2022-11-22 07:50:37', '18', '2022-11-22 16:42:10', 1, 'Please control the Bill', 1, 9),
 (10915, 508, '1', '2022-11-22 07:51:11', '18', '2022-11-22 16:41:29', 1, 'Please control the Bill', 0, NULL),
-(10916, 492, '1', '2022-11-22 07:55:00', '252', '2022-11-22 14:37:22', 1, '', 1, 0),
+(10916, 492, '1', '2022-11-22 07:55:00', '252', '2022-11-22 14:37:22', 1, '', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (10917, 442, '1', '2022-11-22 07:57:19', '252', '2022-11-22 14:36:40', 1, 'Please control the Bill', 1, 0),
 (10918, 493, '1', '2022-11-22 09:01:02', '250', '2022-11-23 14:41:37', 1, '', 1, 0),
 (10919, 248, '236', '2022-11-22 09:05:23', '252', '2022-11-22 14:44:01', 1, 'TCEC minutes updated', 1, 0),
@@ -12669,11 +12678,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (11434, 545, '252', '2022-12-09 06:16:12', '1', '2022-12-09 15:05:47', 1, '', 1, 10),
 (11435, 111, '252', '2022-12-09 06:28:03', '1', '2022-12-09 12:07:01', 1, '', 1, 0),
 (11436, 235, '252', '2022-12-09 06:28:16', '1', '2022-12-09 12:07:00', 1, '', 1, 0),
-(11437, 304, '252', '2022-12-09 06:28:28', '1', '2022-12-09 12:06:59', 1, '', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(11437, 304, '252', '2022-12-09 06:28:28', '1', '2022-12-09 12:06:59', 1, '', 1, 0),
 (11438, 388, '252', '2022-12-09 06:28:41', '1', '2022-12-09 12:06:59', 1, '', 1, 0),
 (11439, 360, '1', '2022-12-09 06:30:45', '252', '2022-12-09 12:05:09', 1, 'for compliance ', 1, 0),
-(11440, 506, '1', '2022-12-09 06:31:30', '253', '2022-12-12 16:40:16', 1, 'For LPC action ', 1, 2),
+(11440, 506, '1', '2022-12-09 06:31:30', '253', '2022-12-12 16:40:16', 1, 'For LPC action ', 1, 2);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (11441, 251, '1', '2022-12-09 06:32:05', '250', '2022-12-14 16:00:36', 1, 'For CRAC &CRV action ', 1, 0),
 (11442, 66, '1', '2022-12-09 06:32:29', '252', '2022-12-09 12:04:53', 1, '', 1, 0),
 (11443, 17, '1', '2022-12-09 06:33:20', '252', '2022-12-09 12:04:37', 1, '', 1, 0),
@@ -12816,7 +12825,7 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (11580, 25, '18', '2022-12-14 06:36:25', '178', '2022-12-15 11:14:50', 1, '', 1, 4),
 (11581, 534, '252', '2022-12-14 07:02:58', '250', '2023-02-17 14:54:30', 1, 'For placement of SO on GEM on priority ', 1, 0),
 (11582, 437, '250', '2022-12-14 07:06:19', '1', '2022-12-14 12:36:40', 1, '', 1, 1),
-(11583, 536, '253', '2022-12-14 07:09:45', '250', '2022-12-15 10:39:49', 1, 'Clerfication for user''s specification. ', 1, 0),
+(11583, 536, '253', '2022-12-14 07:09:45', '250', '2022-12-15 10:39:49', 1, 'Clerfication for user\'s specification. ', 1, 0),
 (11584, 351, '252', '2022-12-14 10:05:39', '1', '2022-12-14 15:36:29', 1, '', 1, 48),
 (11585, 351, '252', '2022-12-14 10:05:55', '1', '2022-12-14 15:36:29', 1, '', 1, 6),
 (11586, 443, '252', '2022-12-14 10:06:06', '1', '2022-12-14 15:36:28', 1, '', 1, 6),
@@ -13188,11 +13197,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (11952, 533, '252', '2022-12-26 06:29:58', '18', '2022-12-26 12:17:33', 1, '	Put up for approval Demand AON Justification Financial Sanction approval', 1, 15),
 (11953, 520, '252', '2022-12-26 06:30:08', '18', '2022-12-26 12:15:32', 1, '	Put up for approval Demand AON Justification Financial Sanction approval', 1, 15),
 (11954, 185, '252', '2022-12-26 06:30:18', '18', '2022-12-26 12:14:09', 1, '', 1, 15),
-(11955, 539, '178', '2022-12-26 06:51:15', '252', '2022-12-26 15:11:47', 1, '', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(11955, 539, '178', '2022-12-26 06:51:15', '252', '2022-12-26 15:11:47', 1, '', 1, 0),
 (11956, 503, '1', '2022-12-26 09:21:38', '250', '2022-12-26 14:52:50', 1, '', 1, 0),
 (11957, 558, '1', '2022-12-26 09:22:20', '250', '2022-12-27 15:03:31', 1, '', 1, 0),
-(11958, 503, '250', '2022-12-26 09:23:04', '148', '2022-12-28 14:57:23', 1, 'for order on Gem', 1, 0),
+(11958, 503, '250', '2022-12-26 09:23:04', '148', '2022-12-28 14:57:23', 1, 'for order on Gem', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (11959, 551, '1', '2022-12-26 09:24:38', '252', '2022-12-26 14:54:49', 1, '', 1, 0),
 (11960, 551, '252', '2022-12-26 09:24:58', '74', '2022-12-27 10:36:07', 1, '', 1, 0),
 (11961, 539, '252', '2022-12-26 09:42:36', '1', '2022-12-27 15:49:51', 1, '', 1, 0),
@@ -13709,11 +13718,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (12472, 537, '148', '2023-01-09 09:56:18', '250', '2023-01-13 15:25:02', 1, '', 1, 0),
 (12473, 392, '148', '2023-01-09 09:56:29', '250', '2023-02-08 16:38:14', 1, '', 1, 0),
 (12474, 564, '76', '2023-01-09 09:57:41', '252', '2023-01-09 15:57:52', 1, '', 1, 1),
-(12475, 498, '264', '2023-01-09 10:01:54', '252', '2023-01-09 15:42:43', 1, '', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(12475, 498, '264', '2023-01-09 10:01:54', '252', '2023-01-09 15:42:43', 1, '', 1, 0),
 (12476, 66, '250', '2023-01-09 10:06:21', '252', '2023-01-10 10:09:40', 1, 'CRV action complete ', 1, 0),
 (12477, 461, '252', '2023-01-09 10:11:29', '1', '2023-01-09 16:46:52', 1, '', 1, 0),
-(12478, 498, '252', '2023-01-09 10:13:00', '1', '2023-01-09 16:24:00', 1, '', 1, 0),
+(12478, 498, '252', '2023-01-09 10:13:00', '1', '2023-01-09 16:24:00', 1, '', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (12479, 260, '1', '2023-01-09 10:26:42', '250', '2023-01-10 12:10:46', 1, 'Put up for RIN and  CRV', 1, 0),
 (12480, 498, '1', '2023-01-09 10:54:20', '250', '2023-01-09 16:47:08', 1, 'For CRV action ', 1, 0),
 (12481, 23, '18', '2023-01-09 10:58:18', '178', '2023-01-09 16:52:34', 1, '', 1, 10),
@@ -14256,11 +14265,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (13018, 537, '148', '2023-01-19 09:56:01', '250', '2023-01-23 10:28:41', 1, '', 1, 0),
 (13019, 572, '148', '2023-01-19 09:56:18', '250', '2023-01-20 15:59:01', 1, '', 1, 0),
 (13020, 291, '253', '2023-01-19 10:18:33', '1', '2023-01-19 16:03:49', 1, 'Fresh bid prepared', 1, 1),
-(13021, 185, '253', '2023-01-19 10:19:03', '250', '2023-01-20 11:35:23', 1, 'TCEC minutes updated', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(13021, 185, '253', '2023-01-19 10:19:03', '250', '2023-01-20 11:35:23', 1, 'TCEC minutes updated', 1, 0),
 (13022, 456, '253', '2023-01-19 10:19:35', '250', '2023-01-20 11:34:22', 1, 'Comparison for vetting.', 1, 0),
 (13023, 372, '4', '2023-01-19 10:22:58', '252', '2023-01-19 16:01:33', 1, '', 1, 0),
-(13024, 372, '252', '2023-01-19 10:31:40', '200', '2023-01-19 17:47:47', 1, '', 1, 1),
+(13024, 372, '252', '2023-01-19 10:31:40', '200', '2023-01-19 17:47:47', 1, '', 1, 1);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (13025, 23, '178', '2023-01-19 12:03:50', '252', '2023-01-20 09:54:49', 1, '', 1, 0),
 (13026, 18, '178', '2023-01-19 12:04:30', '252', '2023-01-20 09:54:54', 1, '', 1, 0),
 (13027, 18, '252', '2023-01-20 04:25:46', '1', '2023-01-20 09:56:06', 1, '', 1, 0),
@@ -14774,10 +14783,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (13535, 605, '60', '2023-02-03 06:13:37', '174', '2023-02-03 11:44:06', 1, '', 1, 0),
 (13536, 605, '174', '2023-02-03 06:14:25', '252', '2023-02-03 12:06:20', 1, '', 1, 0),
 (13537, 562, '59', '2023-02-03 06:23:18', '252', '2023-02-03 15:14:53', 1, 'DSC sheet placed in file', 1, 0),
-(13538, 438, '59', '2023-02-03 06:25:10', '252', '2023-02-03 15:19:47', 1, 'Final SO placed in file', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(13538, 438, '59', '2023-02-03 06:25:10', '252', '2023-02-03 15:19:47', 1, 'Final SO placed in file', 1, 0),
 (13539, 583, '174', '2023-02-03 06:27:06', '252', '2023-02-03 12:06:28', 1, 'modified demand attached for further processing through GeM', 1, 0),
-(13540, 605, '252', '2023-02-03 06:36:50', '1', '2023-02-03 12:07:08', 1, '', 1, 13),
+(13540, 605, '252', '2023-02-03 06:36:50', '1', '2023-02-03 12:07:08', 1, '', 1, 13);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (13541, 583, '252', '2023-02-03 06:36:57', '1', '2023-02-03 12:07:07', 1, '', 1, 4),
 (13542, 292, '249', '2023-02-03 07:03:39', '252', '2023-02-03 12:40:13', 1, '', 1, 0),
 (13543, 292, '252', '2023-02-03 07:28:15', '1', '2023-02-03 12:58:24', 1, '', 1, 24),
@@ -15313,11 +15322,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (14073, 594, '252', '2023-02-16 04:54:16', '174', '2023-02-16 16:17:33', 1, '', 1, 0),
 (14074, 602, '252', '2023-02-16 04:54:30', '174', '2023-02-16 15:01:37', 1, '', 1, 0),
 (14075, 605, '252', '2023-02-16 04:54:49', '174', '2023-02-22 11:02:41', 1, '', 1, 0),
-(14076, 475, '250', '2023-02-16 05:00:39', '252', '2023-02-16 10:43:44', 1, 'RIN document Complete', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(14076, 475, '250', '2023-02-16 05:00:39', '252', '2023-02-16 10:43:44', 1, 'RIN document Complete', 1, 0),
 (14077, 475, '252', '2023-02-16 05:14:16', '247', '2023-02-20 15:22:16', 1, '', 1, 0),
 (14078, 617, '161', '2023-02-16 05:34:25', '117', '2023-02-20 11:42:55', 1, '', 1, 0),
-(14079, 492, '16', '2023-02-16 05:43:07', '252', '2023-02-16 11:17:13', 1, '', 1, 0),
+(14079, 492, '16', '2023-02-16 05:43:07', '252', '2023-02-16 11:17:13', 1, '', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (14080, 492, '252', '2023-02-16 05:47:35', '1', '2023-02-16 11:44:24', 1, '', 1, 0),
 (14081, 482, '250', '2023-02-16 06:04:28', '253', '2023-02-16 15:13:04', 1, '', 1, 6),
 (14082, 578, '250', '2023-02-16 06:04:55', '253', '2023-02-16 15:13:02', 1, '', 1, 4),
@@ -15842,10 +15851,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (14601, 591, '250', '2023-02-27 06:42:19', '148', '2023-03-01 14:53:41', 1, '', 1, 0),
 (14602, 594, '252', '2023-02-27 06:46:04', '1', '2023-02-27 12:43:05', 1, '', 1, 1),
 (14603, 496, '264', '2023-02-27 10:16:40', '252', '2023-02-27 15:46:47', 1, '', 1, 0),
-(14604, 496, '252', '2023-02-27 10:17:13', '1', '2023-02-27 15:47:31', 1, '', 1, 1);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(14604, 496, '252', '2023-02-27 10:17:13', '1', '2023-02-27 15:47:31', 1, '', 1, 1),
 (14605, 520, '252', '2023-02-27 10:17:22', '1', '2023-02-27 15:47:30', 1, '', 1, 1),
-(14606, 622, '1', '2023-02-27 10:29:17', '250', '2023-03-03 16:28:08', 1, 'Kindly Prepare Financial Sanction', 1, 0),
+(14606, 622, '1', '2023-02-27 10:29:17', '250', '2023-03-03 16:28:08', 1, 'Kindly Prepare Financial Sanction', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (14607, 533, '1', '2023-02-27 10:29:41', '250', '2023-03-07 11:35:18', 1, 'For placement of SO on GEM', 1, 0),
 (14608, 292, '1', '2023-02-27 10:30:24', '252', '2023-02-27 16:04:49', 1, 'User is req to prepare final CNC minutes ', 1, 0),
 (14609, 122, '67', '2023-02-27 10:31:35', '59', '2023-03-03 15:16:25', 1, 'For SO amendment letter for GST amount', 1, 0),
@@ -16384,11 +16393,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (15142, 468, '174', '2023-03-15 09:05:27', '252', '2023-03-15 16:33:06', 1, 'put up for further processing', 1, 0),
 (15143, 387, '77', '2023-03-15 09:40:59', '252', '2023-03-17 10:01:29', 1, '', 1, 0),
 (15144, 528, '252', '2023-03-15 10:12:29', '1', '2023-03-15 16:35:32', 1, '', 1, 2),
-(15145, 595, '252', '2023-03-15 10:12:52', '1', '2023-03-15 16:35:30', 1, '', 1, 2);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(15145, 595, '252', '2023-03-15 10:12:52', '1', '2023-03-15 16:35:30', 1, '', 1, 2),
 (15146, 557, '249', '2023-03-15 10:49:39', '252', '2023-03-15 16:45:50', 1, '', 1, 0),
 (15147, 468, '252', '2023-03-15 11:03:16', '1', '2023-03-15 16:35:27', 1, '', 1, 2),
-(15148, 435, '252', '2023-03-15 11:04:04', '1', '2023-03-15 16:35:25', 1, '', 1, 2),
+(15148, 435, '252', '2023-03-15 11:04:04', '1', '2023-03-15 16:35:25', 1, '', 1, 2);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (15149, 634, '148', '2023-03-15 11:13:08', '250', '2023-03-21 14:42:27', 1, '', 1, 0),
 (15150, 627, '148', '2023-03-15 11:13:17', '250', '2023-03-17 10:04:52', 1, '', 1, 0),
 (15151, 533, '148', '2023-03-15 11:13:26', '250', '2023-03-23 10:25:37', 1, '', 1, 0),
@@ -16934,10 +16943,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (15691, 38, '252', '2023-03-27 05:32:27', '76', '2023-03-27 11:50:13', 1, '', 0, NULL),
 (15692, 643, '252', '2023-03-27 05:33:06', '247', '2023-03-27 11:09:37', 1, '	Comment received from Chairman DSC. Put up for User action please', 1, 10),
 (15693, 637, '252', '2023-03-27 05:33:34', '247', '2023-03-27 11:09:29', 1, 'Comments recieved from chairman DSC. Put up for User Action', 1, 10),
-(15694, 255, '247', '2023-03-27 05:40:13', '252', '2023-03-27 13:08:24', 1, '', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(15694, 255, '247', '2023-03-27 05:40:13', '252', '2023-03-27 13:08:24', 1, '', 1, 0),
 (15695, 612, '124', '2023-03-27 05:43:59', '59', '2023-03-28 11:44:18', 1, 'Kindly issue DSC Sheet ', 1, 0),
-(15696, 553, '252', '2023-03-27 05:47:33', '121', '2023-03-28 11:10:25', 1, 'Kindly Prepare Financial Sanction & Scrutiny of LPC recommendation ', 1, 13),
+(15696, 553, '252', '2023-03-27 05:47:33', '121', '2023-03-28 11:10:25', 1, 'Kindly Prepare Financial Sanction & Scrutiny of LPC recommendation ', 1, 13);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (15697, 573, '76', '2023-03-27 06:20:24', '252', '2023-03-27 12:26:51', 1, '', 1, 0),
 (15698, 624, '258', '2023-03-27 06:47:23', '252', '2023-03-27 12:27:39', 1, '', 1, 0),
 (15699, 573, '252', '2023-03-27 06:57:14', '1', '2023-03-27 12:38:21', 1, '', 1, 1),
@@ -17477,11 +17486,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (16233, 657, '79', '2023-04-13 07:02:25', '76', '2023-04-13 12:32:38', 1, '', 1, 0),
 (16234, 657, '76', '2023-04-13 07:02:46', '252', '2023-04-13 12:37:11', 1, '', 1, 0),
 (16235, 657, '252', '2023-04-13 07:07:16', '1', '2023-04-13 12:37:24', 1, '', 1, 8),
-(16236, 501, '250', '2023-04-13 07:25:19', '252', '2023-04-13 15:02:09', 1, '', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(16236, 501, '250', '2023-04-13 07:25:19', '252', '2023-04-13 15:02:09', 1, '', 1, 0),
 (16237, 554, '250', '2023-04-13 07:26:16', '252', '2023-04-13 15:02:55', 1, '', 1, 0),
 (16238, 561, '250', '2023-04-13 07:26:42', '252', '2023-04-13 15:05:25', 1, '', 1, 0),
-(16239, 620, '250', '2023-04-13 07:28:05', '1', '2023-04-13 15:07:42', 1, '', 1, 8),
+(16239, 620, '250', '2023-04-13 07:28:05', '1', '2023-04-13 15:07:42', 1, '', 1, 8);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (16240, 594, '250', '2023-04-13 07:28:28', '252', '2023-04-13 15:03:32', 1, '', 1, 0),
 (16241, 290, '250', '2023-04-13 07:29:55', '252', '2023-04-13 15:03:06', 1, '', 1, 0),
 (16242, 650, '124', '2023-04-13 09:02:15', '252', '2023-04-13 14:52:21', 1, '', 1, 0),
@@ -17950,7 +17959,7 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (16705, 613, '148', '2023-04-26 10:13:18', '250', '2023-04-27 11:09:22', 1, '', 1, 0),
 (16706, 652, '18', '2023-04-26 10:26:31', '178', '2023-04-26 16:03:08', 1, '', 1, 8),
 (16707, 512, '18', '2023-04-26 10:27:05', '178', '2023-04-26 16:03:01', 1, '', 1, 1),
-(16708, 501, '253', '2023-04-26 10:43:31', '1', '2023-04-26 16:16:29', 1, 'Clerfication from  user''s. ', 1, 12),
+(16708, 501, '253', '2023-04-26 10:43:31', '1', '2023-04-26 16:16:29', 1, 'Clerfication from  user\'s. ', 1, 12),
 (16709, 651, '18', '2023-04-26 10:47:53', '252', '2023-04-26 16:46:44', 1, '', 1, 0),
 (16710, 456, '18', '2023-04-26 10:48:28', '252', '2023-04-26 16:46:42', 1, '', 1, 0),
 (16711, 662, '18', '2023-04-26 10:50:44', '252', '2023-04-26 16:46:41', 1, '', 1, 0),
@@ -18010,11 +18019,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (16765, 593, '1', '2023-04-27 06:44:08', '252', '2023-04-27 12:36:06', 1, 'for carriying out inspection', 1, 0),
 (16766, 514, '1', '2023-04-27 06:47:58', '252', '2023-04-27 12:35:23', 1, 'for carriying out inspection', 1, 0),
 (16767, 627, '1', '2023-04-27 06:48:17', '252', '2023-04-27 12:35:04', 1, 'for inspection', 1, 0),
-(16768, 482, '1', '2023-04-27 06:48:45', '250', '2023-04-28 10:41:49', 1, 'For n.a further', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(16768, 482, '1', '2023-04-27 06:48:45', '250', '2023-04-28 10:41:49', 1, 'For n.a further', 1, 0),
 (16769, 571, '1', '2023-04-27 06:49:08', '250', '2023-04-28 10:45:20', 1, 'For n.a further', 1, 0),
 (16770, 537, '1', '2023-04-27 06:49:32', '250', '2023-04-28 10:44:31', 1, 'for n.a', 1, 0),
-(16771, 664, '1', '2023-04-27 06:50:29', '124', '2023-05-12 12:25:12', 1, '', 1, 0),
+(16771, 664, '1', '2023-04-27 06:50:29', '124', '2023-05-12 12:25:12', 1, '', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (16772, 504, '1', '2023-04-27 06:50:54', '250', '2023-04-28 10:50:51', 1, 'For n.a further', 1, 0),
 (16773, 556, '1', '2023-04-27 06:51:26', '250', '2023-04-28 10:46:39', 1, 'For n.a further', 1, 0),
 (16774, 576, '1', '2023-04-27 06:51:44', '250', '2023-04-28 10:50:06', 1, 'For n.a further', 1, 0),
@@ -18529,10 +18538,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (17283, 689, '192', '2023-05-11 04:35:23', '247', '2023-05-11 10:05:39', 1, '', 1, 0),
 (17284, 689, '247', '2023-05-11 04:35:48', '252', '2023-05-11 10:40:06', 1, '', 1, 0),
 (17285, 36, '1', '2023-05-11 04:44:17', '124', '2023-05-11 10:14:38', 1, 'for ECP Concurrence', 1, 0),
-(17286, 36, '124', '2023-05-11 04:46:02', '252', '2023-05-11 10:25:44', 1, 'EPC Concurrence put up for CFA approval', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(17286, 36, '124', '2023-05-11 04:46:02', '252', '2023-05-11 10:25:44', 1, 'EPC Concurrence put up for CFA approval', 1, 0),
 (17287, 676, '124', '2023-05-11 04:47:36', '252', '2023-05-11 10:18:29', 1, 'scrutiny done case may be processed further', 1, 0),
-(17288, 683, '124', '2023-05-11 04:48:23', '252', '2023-05-11 10:18:30', 1, 'scrutiny done case may be processed further', 1, 0),
+(17288, 683, '124', '2023-05-11 04:48:23', '252', '2023-05-11 10:18:30', 1, 'scrutiny done case may be processed further', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (17289, 690, '192', '2023-05-11 04:53:43', '247', '2023-05-11 10:23:53', 1, '', 1, 0),
 (17290, 690, '247', '2023-05-11 04:53:59', '252', '2023-05-11 10:39:44', 1, '', 1, 0),
 (17291, 683, '252', '2023-05-11 04:54:59', '250', '2023-05-11 15:40:49', 1, 'Put up for FInancial Sanction ', 1, 0),
@@ -19040,10 +19049,10 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (17793, 131, '252', '2023-05-23 09:11:28', '1', '2023-05-23 14:41:49', 1, '', 1, 0),
 (17794, 253, '174', '2023-05-23 09:52:55', '252', '2023-05-23 15:36:44', 1, '', 1, 0),
 (17795, 253, '252', '2023-05-23 10:08:02', '1', '2023-05-23 15:38:16', 1, '', 1, 2),
-(17796, 689, '1', '2023-05-23 10:26:07', '252', '2023-05-23 16:02:23', 1, 'For vetting of shopping cart', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(17796, 689, '1', '2023-05-23 10:26:07', '252', '2023-05-23 16:02:23', 1, 'For vetting of shopping cart', 1, 0),
 (17797, 622, '1', '2023-05-23 10:26:34', '252', '2023-05-23 16:02:46', 1, 'For carrying out inspection and file return to MMG after inspection', 1, 0),
-(17798, 514, '1', '2023-05-23 10:27:09', '67', NULL, 0, 'For record and bill section ', 0, NULL),
+(17798, 514, '1', '2023-05-23 10:27:09', '67', NULL, 0, 'For record and bill section ', 0, NULL);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (17799, 588, '1', '2023-05-23 10:27:45', '67', NULL, 0, 'For records and bill detail entries', 0, NULL),
 (17800, 593, '1', '2023-05-23 10:28:13', '67', NULL, 0, 'For records and bill', 0, NULL),
 (17801, 572, '1', '2023-05-23 10:28:52', '67', NULL, 0, 'For records and bill entry', 0, NULL),
@@ -19558,11 +19567,11 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 (18310, 713, '190', '2023-06-12 05:29:55', '250', '2023-06-12 11:00:23', 1, '', 1, 0),
 (18311, 702, '190', '2023-06-12 05:30:05', '252', NULL, 0, '', 0, NULL),
 (18312, 517, '250', '2023-06-12 05:30:08', '253', '2023-06-13 11:28:29', 1, '', 1, 0),
-(18313, 713, '250', '2023-06-12 05:31:23', '252', '2023-06-12 11:35:54', 1, 'for Complaint on GeM ', 1, 0);
-INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
+(18313, 713, '250', '2023-06-12 05:31:23', '252', '2023-06-12 11:35:54', 1, 'for Complaint on GeM ', 1, 0),
 (18314, 602, '252', '2023-06-12 05:35:25', '174', '2023-06-14 09:59:57', 1, '', 1, 0),
 (18315, 713, '252', '2023-06-12 06:06:13', '148', NULL, 0, '', 0, NULL),
-(18316, 420, '18', '2023-06-12 06:07:26', '252', '2023-06-12 11:43:06', 1, '', 1, 0),
+(18316, 420, '18', '2023-06-12 06:07:26', '252', '2023-06-12 11:43:06', 1, '', 1, 0);
+INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `receiver_id`, `receiver_timestamp`, `ft_status`, `ft_remarks`, `ft_action`, `date_diff`) VALUES
 (18317, 420, '252', '2023-06-12 06:13:12', '1', '2023-06-12 11:43:21', 1, '', 1, 1),
 (18318, 706, '124', '2023-06-12 09:31:12', '252', '2023-06-12 15:48:46', 1, '', 1, 0),
 (18319, 139, '124', '2023-06-12 09:31:39', '252', '2023-06-12 15:51:12', 1, '', 1, 0),
@@ -19719,46 +19728,22 @@ INSERT INTO `file_track` (`ft_id`, `f_id`, `sender_id`, `sender_timestamp`, `rec
 
 --
 -- Stand-in structure for view `file_view`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `file_view` (
-`initiator` varchar(50)
-,`group_name` varchar(15)
-,`f_id` int(6)
-,`e_id` int(6)
-,`file_name` varchar(500)
-,`docket_no` varchar(100)
-,`file_num` varchar(200)
-,`description` varchar(500)
-,`quantity` int(20)
-,`total_cost` int(20)
-,`cat_id` int(6)
-,`proj_id` int(6)
-,`port_id` int(6)
-,`bid_id` int(6)
-,`fin_id` int(6)
-,`f_remark` varchar(1024)
-,`f_status` int(1)
-,`mark_to_ad` datetime
-,`mark_to_mmg` datetime
-,`is_created` timestamp
-,`cat_name` varchar(20)
-,`proj_name` varchar(500)
-,`portal_name` varchar(100)
-,`bid_mode` varchar(500)
-,`fin_year` varchar(20)
+CREATE TABLE `file_view` (
 );
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `financial_year`
 --
 
-CREATE TABLE IF NOT EXISTS `financial_year` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `financial_year` (
+  `id` int(6) NOT NULL,
   `fin_year` varchar(20) DEFAULT NULL,
-  `status` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `status` int(1) NOT NULL DEFAULT 1
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `financial_year`
@@ -19775,11 +19760,10 @@ INSERT INTO `financial_year` (`id`, `fin_year`, `status`) VALUES
 -- Table structure for table `portal`
 --
 
-CREATE TABLE IF NOT EXISTS `portal` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `portal_name` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+CREATE TABLE `portal` (
+  `id` int(6) NOT NULL,
+  `portal_name` varchar(100) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `portal`
@@ -19798,14 +19782,13 @@ INSERT INTO `portal` (`id`, `portal_name`) VALUES
 -- Table structure for table `project`
 --
 
-CREATE TABLE IF NOT EXISTS `project` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `project` (
+  `id` int(6) NOT NULL,
   `proj_name` varchar(500) DEFAULT NULL,
   `proj_no` varchar(500) DEFAULT NULL,
   `proj_code` varchar(100) DEFAULT NULL,
-  `cat_id` int(6) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `cat_id` int(6) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `project`
@@ -19833,12 +19816,11 @@ INSERT INTO `project` (`id`, `proj_name`, `proj_no`, `proj_code`, `cat_id`) VALU
 -- Table structure for table `role`
 --
 
-CREATE TABLE IF NOT EXISTS `role` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `role` (
+  `id` int(6) NOT NULL,
   `role_name` varchar(50) DEFAULT NULL,
-  `short_name` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+  `short_name` varchar(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `role`
@@ -19876,27 +19858,27 @@ INSERT INTO `role` (`id`, `role_name`, `short_name`) VALUES
 
 --
 -- Stand-in structure for view `total_files`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `total_files` (
-`group_name` varchar(15)
-,`Total` bigint(21)
+CREATE TABLE `total_files` (
 );
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `total_files_group_wise`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `total_files_group_wise` (
-`emp_name` varchar(50)
-,`group_name` varchar(15)
-,`Nos-of-files` bigint(21)
+CREATE TABLE `total_files_group_wise` (
 );
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `v_group`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `v_group` (
+CREATE TABLE `v_group` (
 `id` tinyint(4)
 ,`g_name` varchar(15)
 ,`ad_id` int(5)
@@ -19904,6 +19886,7 @@ CREATE TABLE IF NOT EXISTS `v_group` (
 ,`gh_id` int(6)
 ,`ghname` varchar(50)
 );
+
 -- --------------------------------------------------------
 
 --
@@ -19911,7 +19894,7 @@ CREATE TABLE IF NOT EXISTS `v_group` (
 --
 DROP TABLE IF EXISTS `file_view`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `file_view` AS select `employee`.`name` AS `initiator`,`e_group`.`g_name` AS `group_name`,`files`.`f_id` AS `f_id`,`files`.`e_id` AS `e_id`,`files`.`file_name` AS `file_name`,`files`.`docket_no` AS `docket_no`,`files`.`file_num` AS `file_num`,`files`.`description` AS `description`,`files`.`quantity` AS `quantity`,`files`.`total_cost` AS `total_cost`,`files`.`cat_id` AS `cat_id`,`files`.`proj_id` AS `proj_id`,`files`.`port_id` AS `port_id`,`files`.`bid_id` AS `bid_id`,`files`.`fin_id` AS `fin_id`,`files`.`f_remark` AS `f_remark`,`files`.`f_status` AS `f_status`,`files`.`mark_to_ad` AS `mark_to_ad`,`files`.`mark_to_mmg` AS `mark_to_mmg`,`files`.`is_created` AS `is_created`,`category`.`cat_name` AS `cat_name`,`project`.`proj_name` AS `proj_name`,`portal`.`portal_name` AS `portal_name`,`bidding_mode`.`bid_mode` AS `bid_mode`,`financial_year`.`fin_year` AS `fin_year` from (((((((`files` left join `employee` on((`files`.`e_id` = `employee`.`e_id`))) left join `e_group` on((`employee`.`group_id` = `e_group`.`id`))) left join `category` on((`files`.`cat_id` = `category`.`id`))) left join `project` on((`files`.`proj_id` = `project`.`id`))) left join `portal` on((`files`.`port_id` = `portal`.`id`))) left join `bidding_mode` on((`files`.`bid_id` = `bidding_mode`.`id`))) left join `financial_year` on((`files`.`fin_id` = `financial_year`.`id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `file_view`  AS SELECT `employee`.`name` AS `initiator`, `e_group`.`g_name` AS `group_name`, `files`.`f_id` AS `f_id`, `files`.`e_id` AS `e_id`, `files`.`file_name` AS `file_name`, `files`.`docket_no` AS `docket_no`, `files`.`file_num` AS `file_num`, `files`.`description` AS `description`, `files`.`quantity` AS `quantity`, `files`.`total_cost` AS `total_cost`, `files`.`cat_id` AS `cat_id`, `files`.`proj_id` AS `proj_id`, `files`.`port_id` AS `port_id`, `files`.`bid_id` AS `bid_id`, `files`.`fin_id` AS `fin_id`, `files`.`f_remark` AS `f_remark`, `files`.`f_status` AS `f_status`, `files`.`mark_to_ad` AS `mark_to_ad`, `files`.`mark_to_mmg` AS `mark_to_mmg`, `files`.`is_created` AS `is_created`, `category`.`cat_name` AS `cat_name`, `project`.`proj_name` AS `proj_name`, `portal`.`portal_name` AS `portal_name`, `bidding_mode`.`bid_mode` AS `bid_mode`, `financial_year`.`fin_year` AS `fin_year` FROM (((((((`files` left join `employee` on(`files`.`e_id` = `employee`.`e_id`)) left join `e_group` on(`employee`.`group_id` = `e_group`.`id`)) left join `category` on(`files`.`cat_id` = `category`.`id`)) left join `project` on(`files`.`proj_id` = `project`.`id`)) left join `portal` on(`files`.`port_id` = `portal`.`id`)) left join `bidding_mode` on(`files`.`bid_id` = `bidding_mode`.`id`)) left join `financial_year` on(`files`.`fin_id` = `financial_year`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -19920,7 +19903,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `total_files`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_files` AS select `e_group`.`g_name` AS `group_name`,count(0) AS `Total` from ((`files` left join `employee` on((`files`.`e_id` = `employee`.`e_id`))) left join `e_group` on((`employee`.`group_id` = `e_group`.`id`))) group by `employee`.`group_id` order by `employee`.`group_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_files`  AS SELECT `e_group`.`g_name` AS `group_name`, count(0) AS `Total` FROM ((`files` left join `employee` on(`files`.`e_id` = `employee`.`e_id`)) left join `e_group` on(`employee`.`group_id` = `e_group`.`id`)) GROUP BY `employee`.`group_id` ORDER BY `employee`.`group_id` ASC ;
 
 -- --------------------------------------------------------
 
@@ -19929,7 +19912,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `total_files_group_wise`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_files_group_wise` AS select `employee`.`name` AS `emp_name`,`e_group`.`g_name` AS `group_name`,count(0) AS `Nos-of-files` from ((`files` left join `employee` on((`files`.`e_id` = `employee`.`e_id`))) left join `e_group` on((`employee`.`group_id` = `e_group`.`id`))) group by `employee`.`e_id` order by `employee`.`group_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `total_files_group_wise`  AS SELECT `employee`.`name` AS `emp_name`, `e_group`.`g_name` AS `group_name`, count(0) AS `Nos-of-files` FROM ((`files` left join `employee` on(`files`.`e_id` = `employee`.`e_id`)) left join `e_group` on(`employee`.`group_id` = `e_group`.`id`)) GROUP BY `employee`.`e_id` ORDER BY `employee`.`group_id` ASC ;
 
 -- --------------------------------------------------------
 
@@ -19938,7 +19921,148 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `v_group`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_group` AS select `e_group`.`id` AS `id`,`e_group`.`g_name` AS `g_name`,`e_group`.`ad_id` AS `ad_id`,`ad`.`name` AS `adname`,`e_group`.`gh_id` AS `gh_id`,`gh`.`name` AS `ghname` from ((`e_group` left join `employee` `ad` on((`e_group`.`ad_id` = `ad`.`e_id`))) left join `employee` `gh` on((`e_group`.`gh_id` = `gh`.`e_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_group`  AS SELECT `e_group`.`id` AS `id`, `e_group`.`g_name` AS `g_name`, `e_group`.`ad_id` AS `ad_id`, `ad`.`name` AS `adname`, `e_group`.`gh_id` AS `gh_id`, `gh`.`name` AS `ghname` FROM ((`e_group` left join `employee` `ad` on(`e_group`.`ad_id` = `ad`.`e_id`)) left join `employee` `gh` on(`e_group`.`gh_id` = `gh`.`e_id`)) ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bidding_mode`
+--
+ALTER TABLE `bidding_mode`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `daks`
+--
+ALTER TABLE `daks`
+  ADD PRIMARY KEY (`dak_id`);
+
+--
+-- Indexes for table `desig`
+--
+ALTER TABLE `desig`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`e_id`);
+
+--
+-- Indexes for table `e_group`
+--
+ALTER TABLE `e_group`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `file_track`
+--
+ALTER TABLE `file_track`
+  ADD PRIMARY KEY (`ft_id`);
+
+--
+-- Indexes for table `financial_year`
+--
+ALTER TABLE `financial_year`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `portal`
+--
+ALTER TABLE `portal`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `project`
+--
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bidding_mode`
+--
+ALTER TABLE `bidding_mode`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `daks`
+--
+ALTER TABLE `daks`
+  MODIFY `dak_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=748;
+
+--
+-- AUTO_INCREMENT for table `desig`
+--
+ALTER TABLE `desig`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT for table `employee`
+--
+ALTER TABLE `employee`
+  MODIFY `e_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=268;
+
+--
+-- AUTO_INCREMENT for table `e_group`
+--
+ALTER TABLE `e_group`
+  MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `file_track`
+--
+ALTER TABLE `file_track`
+  MODIFY `ft_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18468;
+
+--
+-- AUTO_INCREMENT for table `financial_year`
+--
+ALTER TABLE `financial_year`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `portal`
+--
+ALTER TABLE `portal`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `project`
+--
+ALTER TABLE `project`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
