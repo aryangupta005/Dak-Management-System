@@ -155,8 +155,7 @@ class="opt">( Optional )</abc>--></label>
 <?php if($_SESSION['rolename'] == "USER")
 { ?>
  <button type="submit" name="update" class="btn btn-primary">UPDATE </button>&emsp;&emsp;
-<button type="submit" id="mark_ad" name="mark_ad" onClick="return confirm('Are You Sure to Mark this
-File?');" class="btn btn-primary">MARK TO AD </button>
+<button type="submit" id="mark_ad" name="mark_ad" onClick="return confirm('Are You Sure to Mark this File?');" class="btn btn-primary">MARK TO AD </button>
  <button type="submit" id="mark_su" name="mark_su" style="display:none;" onClick="return confirm('Are You Sure to Mark this File?');" class="btn btn-primary">MARK TO SU </button>&emsp;&emsp;
 <input type="button" class="btn btn-primary" onClick="location='draft.php'" name="backbtn" value="Back" />
 <?php }

@@ -27,7 +27,7 @@ $g_name;
 <link rel="stylesheet" href="includes/style2.css" >
  <title>FTS | Home</title>
  </head>
- <body class="welcome-bg">
+ <body class="welcome-bg" background="/image/bgg20.jpg">
  <?php include 'includes/header.php';
  include 'includes/nav.php'; ?>
 
