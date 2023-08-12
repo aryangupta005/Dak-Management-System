@@ -23,11 +23,11 @@ $g_name;
  <meta>
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="includes/style.css" >
-<link rel="stylesheet" href="includes/style2.css" >
+ <link rel="stylesheet" href="style.css" >
+<link rel="stylesheet" href="style2.css" >
  <title>FTS | Home</title>
  </head>
- <body class="welcome-bg" background="/image/bgg20.jpg">
+ <body class="welcome-bg">
  <?php include 'includes/header.php';
  include 'includes/nav.php'; ?>
 

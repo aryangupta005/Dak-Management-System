@@ -3,8 +3,8 @@
  ?>
 <html>
  <head>
- <link rel="stylesheet" href="includes/style.css" >
-<link rel="stylesheet" href="includes/style2.css" >
+ <link rel="stylesheet" href="style.css" >
+<link rel="stylesheet" href="style2.css" >
 <script src="includes/filter.js"></script>
  <!-- Required meta tags -->
  <meta charset="utf-8">

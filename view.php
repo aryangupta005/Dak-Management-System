@@ -13,8 +13,8 @@ $id = $_GET['fileid'];
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="includes/style.css" >
-<link rel="stylesheet" href="includes/style2.css" >
+ <link rel="stylesheet" href="style.css" >
+<link rel="stylesheet" href="style2.css" >
 <title>FTS | View File</title>
 </head>
 <body class='view-bg'>
@@ -29,10 +29,10 @@ FILE INFORMATION
 <p>&nbsp;</p>
 <p align="center">
  <?php
-$sql1="SELECT files.*, initr.name as initiator_name, initr.group_id, e_group.g_name as initrgroup , e_group.ad_id,
+$sql1="SELECT daks.*, initr.name as initiator_name, initr.group_id, e_group.g_name as initrgroup , e_group.ad_id,
 e_group.gh_id, desig.name as designame, project.proj_name, category.cat_name, bidding_mode.bid_mode,
-financial_year.fin_year, portal.portal_name FROM (( ( ( ( ( ( ( files left JOIN employee as initr ON files.e_id = initr.e_id ) left JOIN desig ON initr.desig_id = desig.id ) left JOIN project ON files.proj_id = project.id ) left join category on
-files.cat_id = category.id) left join bidding_mode on files.bid_id = bidding_mode.id) left join financial_year on files.fin_id = financial_year.id) left join portal on files.port_id = portal.id) LEFT JOIN e_group ON initr.group_id = e_group.id) where f_id='$id'";
+financial_year.fin_year, portal.portal_name FROM (( ( ( ( ( ( ( daks left JOIN employee as initr ON daks.e_id = initr.e_id ) left JOIN desig ON initr.desig_id = desig.id ) left JOIN project ON daks.proj_id = project.id ) left join category on
+daks.cat_id = category.id) left join bidding_mode on daks.bid_id = bidding_mode.id) left join financial_year on daks.fin_id = financial_year.id) left join portal on daks.port_id = portal.id) LEFT JOIN e_group ON initr.group_id = e_group.id) where dak_id='$id'";
  $result1 = mysqli_query($conn, $sql1);
 while($row1= mysqli_fetch_array($result1))
 extract($row1);
@@ -131,7 +131,7 @@ $sql="SELECT file_track.*, empS.name as sendername, empR.name as receivername
 FROM (((file_track
 left JOIN employee as empS on file_track.sender_id = empS.e_id)
 LEFT JOIN employee as empR on file_track.receiver_id = empR.e_id)
- LEFT JOIN files on file_track.f_id = files.f_id) WHERE files.f_id='$id' ORDER BY(file_track.sender_timestamp) ";
+ LEFT JOIN daks on file_track.f_id = daks.dak_id) WHERE daks.dak_id='$id' ORDER BY(file_track.sender_timestamp) ";
 $result = mysqli_query($conn, $sql);
 $i=1;
 while($row = mysqli_fetch_array($result))

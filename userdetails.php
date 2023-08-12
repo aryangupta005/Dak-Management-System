@@ -43,8 +43,8 @@ else
 {
 echo "<script type = 'text/javascript'> window.onload = function() {alert('!! Invalid Password !!'); } </script>" ;
 } // old password end
-/*}*/
-}
+
+
 ?>
 <html>
  <head>
@@ -52,8 +52,8 @@ echo "<script type = 'text/javascript'> window.onload = function() {alert('!! In
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="includes/style.css" >
-<link rel="stylesheet" href="includes/style2.css" >
+ <link rel="stylesheet" href="style.css" >
+<link rel="stylesheet" href="style2.css" >
 <title>FTS | User Details</title>
 </head>
 <body class='close-bg'>
@@ -87,7 +87,7 @@ extract($row);
 </tr>
 </table>
 </p>
-<p align="center" class="font36"> <img src="image/changepass3.png" width="70" height="70">Change Password<img src="image/changepass3.png" width="70" height="70"></p>
+<p align="center" class="font36"> <img src="image/changepass.png" width="70" height="70">Change Password<img src="image/changepass.png" width="70" height="70"></p>
 <p align="center">
 <form method="post">
 <table align="center" class="table2">

@@ -42,7 +42,7 @@ $showError = "Invalid Credentials";
  <!-- Required meta tags -->
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="includes/style2.css" rel="stylesheet" type="text/css" />
+<link href="style2.css" rel="stylesheet" type="text/css" />
 <title>FTS | Login</title>
 </head>
 <body class="login-bg">

@@ -10,8 +10,8 @@ $showError = false;
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="includes/style.css" >
- <link rel="stylesheet" href="includes/style2.css" >
+ <link rel="stylesheet" href="style.css" >
+ <link rel="stylesheet" href="style2.css" >
  <script src="includes/filter.js"></script>
  <title>FTS | Mark File</title>
  </head>
