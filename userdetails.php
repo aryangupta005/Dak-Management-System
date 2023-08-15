@@ -60,8 +60,8 @@ echo "<script type = 'text/javascript'> window.onload = function() {alert('!! In
  <?php include 'includes/header.php';
  include 'includes/nav.php'; ?>
 <p>&nbsp;</p>
-<p align="center" class="font36"> <img src="image/userdet2.png" width="80" height="80">User Details<img
-src="image/userdet2.png" width="80" height="80"></p>
+<p align="center" class="font36"> <img src="image/userdet2.jpg" width="80" height="80">User Details<img
+src="image/userdet2.jpg" width="80" height="80"></p>
 <p>&nbsp;</p>
 <?php $sql = "SELECT employee.*, e_group.g_name, desig.name as designame, role.role_name
 FROM ( ( ( employee left join e_group on employee.group_id = e_group.id )
@@ -87,7 +87,7 @@ extract($row);
 </tr>
 </table>
 </p>
-<p align="center" class="font36"> <img src="image/changepass.png" width="70" height="70">Change Password<img src="image/changepass.png" width="70" height="70"></p>
+<p align="center" class="font36"> <img src="image/changepass.jpg" width="70" height="70">Change Password<img src="image/changepass.jpg" width="70" height="70"></p>
 <p align="center">
 <form method="post">
 <table align="center" class="table2">
