@@ -114,7 +114,7 @@ else
                 <td> MARKED TO </td>
                 <td> REMARK TYPE </td>
                 <td> REPLY TYPE</td>
-                <td> REPLIED(Yes/No) </td>
+                <td> REPLIED (Yes/No) </td>
                 <td> REPLY </td>
                 <td> VIEW </td>
             </tr>
