@@ -29,54 +29,54 @@ else
     <?php include 'includes/header.php';
     include 'includes/nav.php'; ?>
     <p>&nbsp;</p>
-    <p align="center" class="font36"><strong><img src="image/inbox1.png" alt="da" width="80" height="80"></strong>
+    <p align="center"class="font36"><strong><img src="image/inbox1.png" alt="da" width="80" height="80"></strong>
         INBOX <strong><strong><img src="image/inbox1.png" alt="da" width="80" height="80"></strong></strong></p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <!-- Filtering and searching options -->
-    <input type="radio" id="searchBySubject" value="searchBySubject" onclick="$('#search1').show();">
+    <form class="searchbar">
+    <input type="radio" id="searchBySubject" value="searchBySubject" onclick="document.getElementById('search1').style.display='grid';" name="searchfilter">
     <label for="searchBySubject">Search by Subject</label>
     <div id="search1" style="display:none;">
-        <p align="left">
-            Search by subject:
+        <p>
             <input id="myInput" type="text" onKeyUp="myFunction()" placeholder="Search .." title="Type">
         </p>
     </div>
-    <input type="radio" id="searchByLetterDate" value="searchByLetterDate" onclick="$('#search2').show();"><label for="searchByLetterDate">Search by Letter Date</label>
+    <input type="radio" id="searchByLetterDate" value="searchByLetterDate" onclick="document.getElementById('search2').style.display='grid';" name="searchfilter"><label for="searchByLetterDate">Search by Letter Date</label>
     <div id="search2" style="display:none;">
-        <p align="right">
-            Search by letter date: Between <input id="fromdate" type="date" name="fromdate"> and <input id="todate" type="date" name="todate">
+        <p>
+            :Between <input id="fromdate" type="date" name="fromdate"> and <input id="todate" type="date" name="todate">
         </p>
-        <input type="button" onKeyUp="filterByLetterDate()" </div>
-        <input type="radio" id="searchByLetterNo" value="searchByLetterNo" onclick="$('#search3').show();">
+        <button onKeyUp="filterByLetterDate()">Search</button>
+    </div>
+        <input type="radio" id="searchByLetterNo" value="searchByLetterNo" onclick="document.getElementById('search3').style.display='grid';" name="searchfilter">
         <label for="searchByLetterNo">Search by Letter Number</label>
         <div id="search3" style="display:none;">
-            <p align="left">
-                Search by letter number:
+            <p>
                 <input id="letterno" type="text" onKeyUp="filterByLetterno" placeholder="Search" name="letterno">
             </p>
         </div>
-        <input type="radio" id="searchByDocketDate" value="searchByDocketDate" onclick="$('#search4').show();"><label for="searchByDocketDate">Search by Docket date</label>
+        <input type="radio" id="searchByDocketDate" value="searchByDocketDate" onclick="document.getElementById('search4').style.display='grid';" name="searchfilter"><label for="searchByDocketDate">Search by Docket date</label>
         <div id="search4" style="display:none;">
-            <p align="right">
-                Search by docket date: Between <input id="fromdate" type="date" name="fromdate"> and <input id="todate" type="date" name="todate">
+            <p>
+            : Between <input id="fromdate" type="date" name="fromdate"> and <input id="todate" type="date" name="todate">
             </p>
+            <button onKeyUp="filterByDocketDate()">Search</button>
         </div>
-        <input type="radio" id="searchByReply" value="searchByReply" onclick="$('#search5').show();">
+        <input type="radio" id="searchByReply" value="searchByReply" onclick="document.getElementById('search5').style.display='grid';" name="searchfilter">
         <label for="searchByReply">Search by reply</label>
         <div id="search5" style="display:none;">
-            <p align="left">
-                Search by reply(YES/NO):
+            <p>
                 <input type="radio" id="yesreplied" name="yesreplied" value="yes">
                 <label for="yesreplied">YES</label>
                 <input type="radio" id="noreplied" name="noreplied" value="no">
                 <label for="noreplied">NO</label>
             </p>
         </div>
-        <input type="radio" id="searchByReplyType" value="searchByReplyType" onclick="$('search6').show();">
+        <input type="radio" id="searchByReplyType" value="searchByReplyType" onclick="document.getElementById('search6').style.display='grid';" name="searchfilter">
         <label for="searchByReplyType">Search by reply type</label>
-        <div id="search6" style="display:none">
-            <p align="right">
+        <div id="search6" style="display:none;">
+            <p>
                 <select name="replytypes" id="replytypes">
                     <option value="Search by reply type" disabled selected hidden>
                     <option value="NFA">NFA</option>
@@ -85,18 +85,20 @@ else
                 </select>
             </p>
         </div>
-        <input type="radio" id="searchByLetterMode" value="searchByLetterMode" onclick="$('search7').show();"><label for="searchByLetterMode">Search by Letter mode</label>
-        <p align="left">
+        <input type="radio" id="searchByLetterMode" value="searchByLetterMode" onclick="document.getElementById('search7').style.display='grid';" name="searchfilter"><label for="searchByLetterMode">Search by Letter mode</label>
+        <div id="search7" style="display:none;">
+        <p>
             <select name="lettermodes" id="lettermodes">
                 <option value="Search by letter mode" disabled selected hidden>
-                <option value="letter">letter</option>
+                <option value="letter">Letter</option>
                 <option value="FAX">FAX</option>
-                <option value="email">email</option>
+                <option value="email">E-mail</option>
             </select>
         </p>
     </div>
-    <input type="radio" id="searchByMeMarkedLetters" value="searchByMeMarkedLetters" onclick="$('search8').show(); showMeMarkedLetters(<?php echo $_SESSION['username']; ?>);">
+    <input type="radio" id="searchByMeMarkedLetters" value="searchByMeMarkedLetters" onclick="$('search8').show(); showMeMarkedLetters(<?php echo $_SESSION['username']; ?>);" name="searchfilter">
     <label for="searchByMeMarkedLetters">Search Letters marked for me</label>
+    </form>
     <p align="center">
     <table class="table1">
         <thead>
