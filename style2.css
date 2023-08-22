@@ -124,14 +124,19 @@ body {
 }
 
 .login-fields {
+    display: flex;
+    align-items: center;
     padding: 20px;
     font-size: 24px;
 }
 
 .login-fields label {
     width: 150px;
-    text-align: left;
     font-family: 'Verdana';
+    font-weight: 500;
+    font-size: 20px;
+    flex: 0 0 150px;
+    margin-right: 20px;
 }
 
 .login-fields input {
