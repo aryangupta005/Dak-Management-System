@@ -71,11 +71,11 @@ password='$password' AND status = 1 ";
             ?>
             <form method="post">
                 <div class="login-fields">
-                    <label style="font-weight: 500; font-size: 20px;">Username</label> &nbsp;
+                    <label style="font-weight: 500; font-size: 20px;">Username:</label> &nbsp;
                     <input type="text" id="username" name="username" placeholder="Enter Username" required>
                 </div>
                 <div class="login-fields">
-                    <label style="font-weight: 500; font-size: 20px;">Password</label> &nbsp;
+                    <label style="font-weight: 500; font-size: 20px;">Password:</label> &nbsp;
                     <input type="password" id="password" name="password" placeholder="Enter Password" required>
                 </div>
                 <button type="submit" class="login-button">Login</button> <br><br>
